@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Clock, Star, Users, TrendingUp, ArrowUpRight } from "lucide-react";
+import { Clock, Star, Users, TrendingUp } from "lucide-react";
 
 // ── Intersection Observer hook ───────────────────────────────
 function useInView(threshold = 0.06) {
@@ -39,10 +39,10 @@ function useCounter(target, duration = 1600, active = false) {
 
 // ── Data ─────────────────────────────────────────────────────
 const STATS = [
-  { num: 15,  suffix: "+", label: "Years of Experience", Icon: Clock,      color: "orange" },
-  { num: 4.8, suffix: "★", label: "Google Rating",       Icon: Star,       color: "yellow" },
-  { num: 500, suffix: "+", label: "Students Placed",     Icon: Users,      color: "green"  },
-  { num: 94,  suffix: "%", label: "Placement Rate",      Icon: TrendingUp, color: "green"  },
+  { num: 15, suffix: "+", label: "Years of Experience", Icon: Clock, color: "orange" },
+  { num: 4.8, suffix: "★", label: "Google Rating", Icon: Star, color: "yellow" },
+  { num: 500, suffix: "+", label: "Students Placed", Icon: Users, color: "green" },
+  { num: 94, suffix: "%", label: "Placement Rate", Icon: TrendingUp, color: "green" },
 ];
 
 const FEATURES = [
@@ -102,54 +102,33 @@ function StatCard({ stat, inView, index }) {
   const counted = useCounter(stat.num, 1500 + index * 150, inView);
 
   const colors = {
-    orange: {
-      wrap:   "border-orange-100 hover:border-orange-300",
-      icon:   "bg-orange-50 text-orange-500",
-      num:    "text-orange-500",
-      glow:   "from-orange-50",
-    },
-    yellow: {
-      wrap:   "border-yellow-100 hover:border-yellow-300",
-      icon:   "bg-yellow-50 text-yellow-500",
-      num:    "text-yellow-500",
-      glow:   "from-yellow-50",
-    },
-    green: {
-      wrap:   "border-green-100 hover:border-green-300",
-      icon:   "bg-green-50 text-green-500",
-      num:    "text-green-500",
-      glow:   "from-green-50",
-    },
+    orange: { wrap: "border-orange-100 hover:border-orange-300", icon: "bg-orange-50 text-orange-500", num: "#F97316", glow: "from-orange-50" },
+    yellow: { wrap: "border-yellow-100 hover:border-yellow-300", icon: "bg-yellow-50 text-yellow-500", num: "#EAB308", glow: "from-yellow-50" },
+    green: { wrap: "border-green-100 hover:border-green-300", icon: "bg-green-50 text-green-500", num: "#22C55E", glow: "from-green-50" },
   };
 
   const c = colors[stat.color];
 
   return (
     <div
-      className={`
-        group relative overflow-hidden flex flex-col items-center text-center
-        rounded-2xl border bg-white p-6 sm:p-7
-        hover:shadow-xl transition-all duration-500 cursor-default
-        ${c.wrap}
-        ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}
-      `}
-      style={{ transitionDelay: `${index * 100 + 150}ms`, transitionDuration: "700ms" }}
+      className={`group relative overflow-hidden flex flex-col items-center text-center rounded-2xl border bg-white p-6 sm:p-7 hover:shadow-xl transition-all duration-500 cursor-default ${c.wrap} ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      style={{ transitionDelay: `${index * 100 + 150}ms`, transitionDuration: "700ms", fontFamily: "'Satoshi', sans-serif" }}
     >
       {/* Corner glow */}
       <div className={`absolute top-0 right-0 w-20 h-20 rounded-bl-full bg-gradient-to-bl ${c.glow} to-transparent opacity-70`} />
 
       {/* Icon */}
       <div className={`relative w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${c.icon} group-hover:scale-110 transition-transform duration-300`}>
-        <stat.Icon size={20} strokeWidth={1.8} />
+        <stat.Icon size={22} strokeWidth={1.8} />
       </div>
 
-      {/* Number — Inter 800, 44px responsive */}
-      <p className={`relative font-inter font-extrabold text-4xl lg:text-[44px] leading-none tracking-tight mb-2 ${c.num}`}>
+      {/* Number */}
+      <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 800, fontSize: "50px", lineHeight: 1, letterSpacing: "-0.02em", color: c.num, marginBottom: "10px" }}>
         {inView ? counted : 0}{stat.suffix}
       </p>
 
-      {/* Label — Inter 700, 11px uppercase */}
-      <p className="font-inter text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 leading-snug">
+      {/* Label */}
+      <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.14em", color: "#9CA3AF", lineHeight: 1.3 }}>
         {stat.label}
       </p>
     </div>
@@ -161,39 +140,27 @@ function FeatureCard({ emoji, title, desc, accent, inView, delay }) {
   const isYellow = accent === "yellow";
   return (
     <div
-      className={`
-        group flex items-start gap-4 rounded-2xl p-5 bg-white
-        border transition-all duration-300 cursor-default
-        hover:shadow-[0_6px_24px_rgba(0,0,0,0.07)]
-        ${isYellow
-          ? "border-yellow-100 hover:border-yellow-300"
-          : "border-orange-100 hover:border-orange-300"}
-        ${inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}
-      `}
-      style={{ transitionDelay: `${delay}ms`, transitionDuration: "600ms" }}
+      className={`group flex items-start gap-4 rounded-2xl p-5 bg-white border transition-all duration-300 cursor-default hover:shadow-[0_6px_24px_rgba(0,0,0,0.07)] ${isYellow ? "border-yellow-100 hover:border-yellow-300" : "border-orange-100 hover:border-orange-300"} ${inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-6"}`}
+      style={{ transitionDelay: `${delay}ms`, transitionDuration: "600ms", fontFamily: "'Satoshi', sans-serif" }}
     >
-      <div className={`
-        w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0
-        group-hover:scale-110 transition-transform duration-200
-        ${isYellow ? "bg-yellow-50" : "bg-orange-50"}
-      `}>
+      {/* Emoji icon */}
+      <div
+        className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-200 ${isYellow ? "bg-yellow-50" : "bg-orange-50"}`}
+        style={{ fontSize: "24px", lineHeight: 1 }}
+      >
         {emoji}
       </div>
 
       <div className="flex-1 min-w-0">
-        <h4 className="font-inter font-bold text-[14px] leading-snug tracking-tight text-gray-950 mb-1">
+        <h4 style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "16px", lineHeight: 1.4, letterSpacing: "-0.01em", color: "#030712", marginBottom: "5px" }}>
           {title}
         </h4>
-        <p className="font-inter font-normal text-[12px] leading-relaxed text-gray-500">
+        <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 400, fontSize: "14.5px", lineHeight: 1.6, color: "#6B7280" }}>
           {desc}
         </p>
       </div>
 
-      <div className={`
-        shrink-0 mt-0.5 transition-all duration-200
-        group-hover:translate-x-0.5 group-hover:-translate-y-0.5
-        ${isYellow ? "text-yellow-200 group-hover:text-yellow-500" : "text-orange-200 group-hover:text-orange-500"}
-      `}>
+      <div className={`shrink-0 mt-0.5 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isYellow ? "text-yellow-200 group-hover:text-yellow-500" : "text-orange-200 group-hover:text-orange-500"}`}>
         <IconArrow />
       </div>
     </div>
@@ -204,16 +171,25 @@ function FeatureCard({ emoji, title, desc, accent, inView, delay }) {
 export default function AboutSection() {
   const [rootRef, inView] = useInView(0.04);
 
-  // Tailwind reveal class builder
+  // Inject Satoshi font
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
   const fadeUp = (delay = "") =>
-    `transition-all duration-700 ease-out ${delay} ${
-      inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"
-    }`;
+    `transition-all duration-700 ease-out ${delay} ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-7"}`;
 
   return (
     <section
       ref={rootRef}
-      className="relative w-full bg-white overflow-hidden font-inter"
+      className="relative w-full bg-white overflow-hidden"
+      style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
 
       {/* ── Soft ambient glows ── */}
@@ -233,19 +209,22 @@ export default function AboutSection() {
 
             {/* Eyebrow pill */}
             <div className={fadeUp("delay-75")}>
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-bold tracking-[0.14em] uppercase bg-orange-50 text-orange-600 border border-orange-200">
+              <span
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-200 bg-orange-50"
+                style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "#EA580C" }}
+              >
                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
                 About Operating Media
               </span>
             </div>
 
-            {/* H2 — Inter 800, -0.03em, lh 1.08 */}
+            {/* H2 */}
             <div className={fadeUp("delay-100")}>
-              <h2 className="font-inter font-extrabold text-4xl sm:text-5xl lg:text-[3.5rem] leading-[1.06] tracking-[-0.03em] text-gray-950">
+              <h2 style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 800, fontSize: "clamp(2.4rem, 4.5vw, 3.7rem)", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#030712" }}>
                 India's Best
                 <br />
                 <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent">
+                  <span style={{ background: "linear-gradient(90deg, #F97316, #FBBF24)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                     Digital Marketing
                   </span>
                   {/* Animated underline */}
@@ -258,27 +237,34 @@ export default function AboutSection() {
               </h2>
             </div>
 
-            {/* Body — Inter 400, 16px, lh 1.85 */}
-            <p className={`font-inter font-normal text-[16px] leading-[1.85] text-gray-500 max-w-[500px] ${fadeUp("delay-150")}`}>
+            {/* Body */}
+            <p
+              className={fadeUp("delay-150")}
+              style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 400, fontSize: "17.5px", lineHeight: 1.85, color: "#4B5563", maxWidth: "500px" }}
+            >
               Operating Media bridges the gap between{" "}
-              <strong className="font-semibold text-gray-900">textbook knowledge</strong>{" "}
+              <strong style={{ fontWeight: 600, color: "#111827" }}>textbook knowledge</strong>{" "}
               and real industry demands. Built by{" "}
-              <strong className="font-semibold text-gray-900">agency professionals</strong>{" "}
+              <strong style={{ fontWeight: 600, color: "#111827" }}>agency professionals</strong>{" "}
               to make you job-ready from Day&nbsp;1 — whether you're a student,
               fresher, or a business owner scaling online.
             </p>
 
             {/* CTA buttons */}
             <div className={`flex flex-wrap items-center gap-3 ${fadeUp("delay-200")}`}>
-              {/* Primary — orange */}
-              <button className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-[15px] font-bold shadow-[0_6px_22px_rgba(249,115,22,0.38)] hover:shadow-[0_10px_32px_rgba(249,115,22,0.46)] active:scale-[0.97] transition-all duration-200">
+              <button
+                className="group relative overflow-hidden inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-orange-500 hover:bg-orange-600 text-white shadow-[0_6px_22px_rgba(249,115,22,0.38)] hover:shadow-[0_10px_32px_rgba(249,115,22,0.46)] active:scale-[0.97] transition-all duration-200"
+                style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "16px" }}
+              >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
                 <span className="relative">Explore Courses</span>
                 <span className="relative"><IconArrow /></span>
               </button>
 
-              {/* Ghost */}
-              <button className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white border border-gray-200 hover:border-orange-300 text-[15px] font-bold text-gray-800 hover:text-orange-600 shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200">
+              <button
+                className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-white border border-gray-200 hover:border-orange-300 hover:text-orange-600 shadow-sm hover:shadow-md active:scale-[0.97] transition-all duration-200"
+                style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "16px", color: "#1F2937" }}
+              >
                 <span className="w-7 h-7 rounded-full flex items-center justify-center bg-orange-50 group-hover:bg-orange-100 shrink-0 transition-colors">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="#F97316">
                     <polygon points="5 3 19 12 5 21 5 3" />
@@ -288,22 +274,22 @@ export default function AboutSection() {
               </button>
             </div>
 
-            {/* Trust checklist — 2-col sm: 3-col */}
+            {/* Trust checklist */}
             <div className={`grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2.5 ${fadeUp("delay-300")}`}>
               {TRUST.map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <IconCheck />
-                  <span className="font-inter font-medium text-[13px] leading-snug text-gray-600">
+                  <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 500, fontSize: "14.5px", lineHeight: 1.4, color: "#4B5563" }}>
                     {item}
                   </span>
                 </div>
               ))}
             </div>
 
-            {/* ── Yellow highlight callout ── */}
+            {/* Yellow highlight callout */}
             <div className={`rounded-2xl bg-yellow-50 border border-yellow-200 px-5 py-4 flex items-start gap-3 ${fadeUp("delay-[380ms]")}`}>
-              <span className="text-xl shrink-0">🏆</span>
-              <p className="font-inter font-semibold text-[13px] leading-[1.6] text-yellow-900">
+              <span style={{ fontSize: "22px", lineHeight: 1, flexShrink: 0 }}>🏆</span>
+              <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: "14.5px", lineHeight: 1.6, color: "#713F12" }}>
                 Ranked among India's top digital marketing institutes — trusted by
                 500+ placed professionals across leading brands.
               </p>
@@ -315,10 +301,8 @@ export default function AboutSection() {
           {/* ════ RIGHT ════ */}
           <div className="flex flex-col gap-4">
 
-            {/* ── Classroom image card ── */}
+            {/* Classroom image card */}
             <div className={`relative ${fadeUp("delay-100")}`}>
-
-              {/* Offset shadow layer */}
               <div className="absolute top-3 left-3 right-[-6px] bottom-[-6px] rounded-2xl -z-10 bg-gradient-to-br from-orange-200/50 to-yellow-200/30" />
 
               <div className="relative rounded-2xl overflow-hidden ring-1 ring-black/[0.06] shadow-[0_16px_48px_rgba(0,0,0,0.10)]">
@@ -326,7 +310,6 @@ export default function AboutSection() {
                 <div className="absolute top-3 left-3 w-7 h-7 z-20 border-t-[2.5px] border-l-[2.5px] border-orange-500 rounded-tl-lg pointer-events-none" />
                 <div className="absolute bottom-3 right-3 w-7 h-7 z-20 border-b-[2.5px] border-r-[2.5px] border-orange-500 rounded-br-lg pointer-events-none" />
 
-                {/* Image */}
                 <div className="aspect-[16/10] overflow-hidden group">
                   <img
                     src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=85"
@@ -339,24 +322,24 @@ export default function AboutSection() {
                 {/* Bottom overlay */}
                 <div className="absolute bottom-0 left-0 right-0 px-5 py-4 flex items-end justify-between gap-3">
                   <div>
-                    <p className="font-inter font-bold text-[14px] text-white leading-snug mb-0.5 drop-shadow">
+                    <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "16px", color: "#fff", lineHeight: 1.3, marginBottom: "3px" }}>
                       Live Classroom Sessions
                     </p>
-                    <p className="font-inter font-normal text-[12px] text-white/65 drop-shadow">
+                    <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 400, fontSize: "13.5px", color: "rgba(255,255,255,0.65)" }}>
                       Hands-on training by industry experts
                     </p>
                   </div>
 
                   {/* Rating badge */}
                   <div className="shrink-0 flex items-center gap-2 bg-white rounded-xl px-3 py-2 shadow-lg">
-                    <span className="font-inter font-extrabold text-[22px] leading-none tracking-tight text-gray-900">
+                    <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 800, fontSize: "24px", lineHeight: 1, letterSpacing: "-0.02em", color: "#111827" }}>
                       4.8
                     </span>
                     <div className="flex flex-col gap-[3px]">
                       <div className="flex gap-[2px]">
                         {[...Array(5)].map((_, i) => <StarSVG key={i} />)}
                       </div>
-                      <span className="font-inter font-bold text-[8px] tracking-[0.12em] uppercase text-gray-400">
+                      <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#9CA3AF" }}>
                         Google
                       </span>
                     </div>
@@ -365,7 +348,7 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* ── Feature cards ── */}
+            {/* Feature cards */}
             <div className="flex flex-col gap-2.5">
               {FEATURES.map(({ emoji, title, desc, accent }, i) => (
                 <FeatureCard
@@ -387,13 +370,16 @@ export default function AboutSection() {
       </div>
 
       {/* ══════════════════════════════════════
-          STATS BAND — white cards on light bg
+          STATS BAND
       ══════════════════════════════════════ */}
       <div className="relative z-10 bg-gray-50/80 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-14 py-5 lg:py-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-14 py-5 lg:py-10">
 
           {/* Section label */}
-          <p className={`font-inter text-[11px] font-bold uppercase tracking-[0.18em] text-gray-600 text-center mb-8 ${fadeUp("delay-100")}`}>
+          <p
+            className={`text-center mb-8 ${fadeUp("delay-100")}`}
+            style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.18em", color: "#4B5563" }}
+          >
             Why 500+ Professionals Chose Operating Media
           </p>
 
@@ -404,29 +390,25 @@ export default function AboutSection() {
             ))}
           </div>
 
-          {/* ── CTA strip — dark ── */}
+          {/* CTA strip — dark */}
           <div
-            className={`
-              relative overflow-hidden flex flex-col sm:flex-row
-              items-center justify-between gap-5
-              rounded-2xl bg-gray-950 px-7 py-6
-              transition-all duration-700 ease-out delay-700
-              ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}
-            `}
+            className={`relative overflow-hidden flex flex-col sm:flex-row items-center justify-between gap-5 rounded-2xl bg-gray-950 px-7 py-6 transition-all duration-700 ease-out delay-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"}`}
           >
-            {/* Subtle orange glow inside */}
             <div className="absolute right-0 top-0 bottom-0 w-64 bg-gradient-to-l from-orange-500/10 to-transparent pointer-events-none" />
 
             <div className="relative">
-              <p className="font-inter font-bold text-[20px] leading-snug tracking-tight text-white">
+              <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "22px", lineHeight: 1.3, letterSpacing: "-0.02em", color: "#fff" }}>
                 Ready to start your digital marketing career?
               </p>
-              <p className="font-inter font-normal text-[14px] leading-[1.65] text-white/40 mt-1">
+              <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 400, fontSize: "15.5px", lineHeight: 1.65, color: "rgba(255,255,255,0.4)", marginTop: "4px" }}>
                 Join 500+ placed professionals. Next batch starts June&nbsp;2025.
               </p>
             </div>
 
-            <button className="group relative shrink-0 overflow-hidden inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-[15px] font-bold shadow-[0_6px_28px_rgba(249,115,22,0.50)] hover:shadow-[0_10px_36px_rgba(249,115,22,0.60)] active:scale-[0.97] transition-all duration-200 whitespace-nowrap">
+            <button
+              className="group relative shrink-0 overflow-hidden inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-orange-500 hover:bg-orange-600 text-white shadow-[0_6px_28px_rgba(249,115,22,0.50)] hover:shadow-[0_10px_36px_rgba(249,115,22,0.60)] active:scale-[0.97] transition-all duration-200 whitespace-nowrap"
+              style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: "16px" }}
+            >
               <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-600 bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
               <span className="relative">Book Free Demo</span>
               <span className="relative"><IconArrow /></span>
@@ -435,7 +417,6 @@ export default function AboutSection() {
 
         </div>
       </div>
-      {/* ══ END STATS BAND ══ */}
 
     </section>
   );

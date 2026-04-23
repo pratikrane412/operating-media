@@ -27,7 +27,7 @@ function useInView(threshold = 0.08) {
 }
 
 // ── Animation presets ────────────────────────────────────────────────────────
-const fadeUp    = (d = 0) => ({
+const fadeUp = (d = 0) => ({
   initial: { opacity: 0, y: 28 },
   whileInView: { opacity: 1, y: 0 },
   transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: d },
@@ -104,11 +104,24 @@ const REASONS = [
   },
 ];
 
+const SATOSHI = "'Satoshi', sans-serif";
+
 export default function WhyUsAuthority() {
+  // Inject Satoshi font
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
     <section
       className="relative w-full overflow-hidden bg-white py-5 lg:py-10"
-      style={{ fontFamily: "'Inter', sans-serif" }}
+      style={{ fontFamily: SATOSHI }}
     >
       {/* Background Decor */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -123,20 +136,38 @@ export default function WhyUsAuthority() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-        {/* Section header */}
+
+        {/* ── Section header ─────────────────────────────────────────────── */}
         <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
+
           <motion.div className="max-w-2xl" {...fadeRight(0)}>
             <div className="mb-5 flex items-center gap-3">
               <span className="h-px w-10 shrink-0" style={{ background: "#F26522" }} />
               <span
-                className="text-[11px] font-bold uppercase tracking-widest"
-                style={{ color: "#F26522" }}
+                style={{
+                  color: "#F26522",
+                  fontFamily: SATOSHI,
+                  fontWeight: 700,
+                  fontSize: "12px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.2em",
+                }}
               >
                 Why Operating Media Beats the Rest
               </span>
             </div>
 
-            <h2 className="mb-2 text-5xl font-extrabold leading-[0.9] tracking-[-0.04em] text-gray-950 sm:text-6xl lg:text-7xl">
+            <h2
+              style={{
+                fontFamily: SATOSHI,
+                fontWeight: 800,
+                fontSize: "clamp(2.8rem, 6vw, 4.8rem)",
+                lineHeight: 0.92,
+                letterSpacing: "-0.04em",
+                color: "#030712",
+                marginBottom: "8px",
+              }}
+            >
               The Standard
               <br />
               of{" "}
@@ -158,81 +189,277 @@ export default function WhyUsAuthority() {
             style={{ borderColor: "#F26522" }}
             {...fadeLeft(0.12)}
           >
-            <p className="text-base italic leading-[1.75] text-gray-500">
+            <p
+              style={{
+                fontFamily: SATOSHI,
+                fontWeight: 400,
+                fontSize: "16.5px",
+                fontStyle: "italic",
+                lineHeight: 1.8,
+                color: "#6B7280",
+              }}
+            >
               "We don't just teach modules — we build careers using the same AI tools
               that world-class agencies use every day."
             </p>
-            <p className="mt-3 text-[11px] font-bold uppercase tracking-widest" style={{ color: "#F26522" }}>
+            <p
+              style={{
+                fontFamily: SATOSHI,
+                fontWeight: 700,
+                fontSize: "12px",
+                textTransform: "uppercase",
+                letterSpacing: "0.18em",
+                color: "#F26522",
+                marginTop: "12px",
+              }}
+            >
               — Operating Media, Mumbai
             </p>
           </motion.div>
         </div>
 
-        {/* Main 2-col grid */}
+        {/* ── Main 2-col grid ────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+
           {/* BENTO LEFT */}
           <div className="lg:col-span-7">
             <div className="grid h-[480px] grid-cols-12 grid-rows-6 gap-3 sm:h-[580px] sm:gap-4 lg:h-[640px]">
-              <motion.div className="relative col-span-8 row-span-4 overflow-hidden rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] group" {...scaleIn(0)}>
-                <img src="/images/OM-images.jpg" alt="Classroom" className="h-full w-full object-cover transition-transform duration-[9000ms] group-hover:scale-[1.04]" />
+
+              {/* Main classroom image */}
+              <motion.div
+                className="relative col-span-8 row-span-4 overflow-hidden rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] group"
+                {...scaleIn(0)}
+              >
+                <img
+                  src="/images/OM-images.jpg"
+                  alt="Classroom"
+                  className="h-full w-full object-cover transition-transform duration-[9000ms] group-hover:scale-[1.04]"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
                 <div className="absolute bottom-6 left-6 z-10">
-                  <p className="text-xl font-black italic text-white">"Real Skills. <br />Real Results."</p>
-                  <p className="mt-1 text-[9px] font-bold uppercase tracking-widest text-white/60">Live Classroom Experience</p>
+                  <p
+                    style={{
+                      fontFamily: SATOSHI,
+                      fontWeight: 900,
+                      fontSize: "23px",
+                      fontStyle: "italic",
+                      color: "#fff",
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    "Real Skills. <br />Real Results."
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: SATOSHI,
+                      fontWeight: 700,
+                      fontSize: "10px",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      color: "rgba(255,255,255,0.6)",
+                      marginTop: "6px",
+                    }}
+                  >
+                    Live Classroom Experience
+                  </p>
                 </div>
               </motion.div>
 
-              <motion.div className="col-span-4 row-span-3 flex flex-col items-center justify-center rounded-3xl p-5 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, #FFB81C 0%, #F26522 100%)" }} {...scaleIn(0.08)}>
-                <p className="relative z-10 text-5xl font-black text-white lg:text-6xl">89%</p>
-                <p className="relative z-10 text-[9px] font-bold uppercase tracking-widest text-white/75">Placement Rate</p>
+              {/* Placement rate badge */}
+              <motion.div
+                className="col-span-4 row-span-3 flex flex-col items-center justify-center rounded-3xl p-5 text-center relative overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #FFB81C 0%, #F26522 100%)" }}
+                {...scaleIn(0.08)}
+              >
+                <p
+                  className="relative z-10"
+                  style={{
+                    fontFamily: SATOSHI,
+                    fontWeight: 900,
+                    color: "#fff",
+                    fontSize: "clamp(2.8rem, 5vw, 3.75rem)",
+                    lineHeight: 1,
+                  }}
+                >
+                  89%
+                </p>
+                <p
+                  className="relative z-10"
+                  style={{
+                    fontFamily: SATOSHI,
+                    fontWeight: 700,
+                    fontSize: "11px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "rgba(255,255,255,0.75)",
+                    marginTop: "8px",
+                  }}
+                >
+                  Placement Rate
+                </p>
               </motion.div>
 
-              <motion.div className="relative col-span-4 row-span-3 overflow-hidden rounded-3xl shadow-[0_12px_32px_rgba(0,0,0,0.10)]" {...scaleIn(0.14)}>
-                <img src="/images/OM-images2.jpg" alt="Student" className="h-full w-full object-cover" />
+              {/* Student image */}
+              <motion.div
+                className="relative col-span-4 row-span-3 overflow-hidden rounded-3xl shadow-[0_12px_32px_rgba(0,0,0,0.10)]"
+                {...scaleIn(0.14)}
+              >
+                <img
+                  src="/images/OM-images2.jpg"
+                  alt="Student"
+                  className="h-full w-full object-cover"
+                />
               </motion.div>
 
-              <motion.a href="#brochure" className="relative col-span-8 row-span-2 flex cursor-pointer items-center justify-between gap-4 overflow-hidden rounded-3xl p-5 sm:p-6 group" style={{ background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)", boxShadow: "0 8px 28px rgba(242,101,34,0.35)" }} {...scaleIn(0.18)}>
+              {/* CTA strip */}
+              <motion.a
+                href="#brochure"
+                className="relative col-span-8 row-span-2 flex cursor-pointer items-center justify-between gap-4 overflow-hidden rounded-3xl p-5 sm:p-6 group"
+                style={{
+                  background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
+                  boxShadow: "0 8px 28px rgba(242,101,34,0.35)",
+                }}
+                {...scaleIn(0.18)}
+              >
                 <div className="relative z-10">
-                  <h3 className="text-base font-black text-white sm:text-lg">Ready to Start?</h3>
-                  <p className="text-xs text-white/80">Download our 2026 Master Syllabus</p>
+                  <h3
+                    style={{
+                      fontFamily: SATOSHI,
+                      fontWeight: 900,
+                      fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
+                      color: "#fff",
+                    }}
+                  >
+                    Ready to Start?
+                  </h3>
+                  <p
+                    style={{
+                      fontFamily: SATOSHI,
+                      fontWeight: 400,
+                      fontSize: "13.5px",
+                      color: "rgba(255,255,255,0.8)",
+                      marginTop: "2px",
+                    }}
+                  >
+                    Download our 2026 Master Syllabus
+                  </p>
                 </div>
                 <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white transition-all group-hover:scale-110">
                   <ArrowUpRight size={20} style={{ color: "#F26522" }} />
                 </span>
               </motion.a>
+
             </div>
           </div>
 
           {/* RIGHT: REASON CARDS */}
           <div className="flex flex-col justify-center gap-3 lg:col-span-5">
+
             {REASONS.map((item, idx) => (
-              <motion.div key={idx} initial={{ opacity: 0, x: 28 }} whileInView={{ opacity: 1, x: 0 }} transition={{ delay: idx * 0.08 }} viewport={{ once: true }} className={`group flex cursor-default items-start gap-4 rounded-2xl border border-gray-100 bg-white p-5 transition-all duration-300 ${item.hoverBorder} ${item.hoverShadow}`}>
-                <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-all group-hover:scale-110 ${item.iconBg}`}>
-                  <item.Icon size={22} style={{ color: item.iconColor }} />
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, x: 28 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                viewport={{ once: true }}
+                className={`group flex cursor-default items-start gap-4 rounded-2xl border border-gray-100 bg-white p-5 transition-all duration-300 ${item.hoverBorder} ${item.hoverShadow}`}
+              >
+                <div
+                  className={`flex shrink-0 items-center justify-center rounded-2xl transition-all group-hover:scale-110 ${item.iconBg}`}
+                  style={{ width: "52px", height: "52px" }}
+                >
+                  <item.Icon size={24} style={{ color: item.iconColor }} />
                 </div>
                 <div className="flex-1">
-                  <div className="mb-1 flex items-start justify-between">
-                    <h4 className={`text-[15px] font-bold text-gray-950 transition-colors ${item.hoverTitle}`}>{item.title}</h4>
-                    <span className="text-sm font-black" style={{ color: item.statColor }}>{item.stat}</span>
+                  <div className="mb-1.5 flex items-start justify-between gap-2">
+                    <h4
+                      className={`transition-colors leading-snug ${item.hoverTitle}`}
+                      style={{
+                        fontFamily: SATOSHI,
+                        fontWeight: 700,
+                        fontSize: "16px",
+                        color: "#030712",
+                      }}
+                    >
+                      {item.title}
+                    </h4>
+                    <span
+                      style={{
+                        fontFamily: SATOSHI,
+                        fontWeight: 900,
+                        fontSize: "15px",
+                        color: item.statColor,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {item.stat}
+                    </span>
                   </div>
-                  <p className="text-[13px] text-gray-500">{item.desc}</p>
+                  <p
+                    style={{
+                      fontFamily: SATOSHI,
+                      fontWeight: 400,
+                      fontSize: "14px",
+                      lineHeight: 1.65,
+                      color: "#6B7280",
+                    }}
+                  >
+                    {item.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
 
-            <motion.div {...fadeUp(0.36)} className="flex items-center gap-3 rounded-2xl border px-5 py-3.5" style={{ borderColor: "rgba(58,170,53,0.30)", background: "rgba(58,170,53,0.05)" }}>
-              <ShieldCheck size={18} style={{ color: "#3AAA35" }} />
+            {/* ISO badge */}
+            <motion.div
+              {...fadeUp(0.36)}
+              className="flex items-center gap-3 rounded-2xl border px-5 py-4"
+              style={{ borderColor: "rgba(58,170,53,0.30)", background: "rgba(58,170,53,0.05)" }}
+            >
+              <ShieldCheck size={20} style={{ color: "#3AAA35" }} />
               <div className="flex-1">
-                <p className="text-[13px] font-bold text-[#1a5c17]">ISO 9001:2015 Certified Training</p>
-                <p className="text-[11px] text-[#3AAA35]">Govt. of India · MSME Registered</p>
+                <p
+                  style={{
+                    fontFamily: SATOSHI,
+                    fontWeight: 700,
+                    fontSize: "14px",
+                    color: "#1a5c17",
+                  }}
+                >
+                  ISO 9001:2015 Certified Training
+                </p>
+                <p
+                  style={{
+                    fontFamily: SATOSHI,
+                    fontWeight: 500,
+                    fontSize: "12px",
+                    color: "#3AAA35",
+                    marginTop: "2px",
+                  }}
+                >
+                  Govt. of India · MSME Registered
+                </p>
               </div>
             </motion.div>
 
-            <motion.a href="#courses" {...fadeUp(0.44)} className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl px-7 py-4 text-[15px] font-bold text-white" style={{ background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)", boxShadow: "0 8px 28px rgba(242,101,34,0.38)" }}>
-              <Sparkles size={16} className="text-white/70" />
+            {/* CTA button */}
+            <motion.a
+              href="#courses"
+              {...fadeUp(0.44)}
+              className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl px-7 py-4 text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(242,101,34,0.44)]"
+              style={{
+                fontFamily: SATOSHI,
+                fontWeight: 700,
+                fontSize: "16px",
+                background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
+                boxShadow: "0 8px 28px rgba(242,101,34,0.38)",
+              }}
+            >
+              <Sparkles size={17} className="text-white/70" />
               Explore All Courses
-              <ArrowUpRight size={15} />
+              <ArrowUpRight size={16} />
             </motion.a>
+
           </div>
         </div>
       </div>

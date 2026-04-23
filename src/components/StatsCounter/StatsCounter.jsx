@@ -12,12 +12,14 @@ import {
   CheckCircle, Zap,
 } from "lucide-react";
 
+const SATOSHI = "'Satoshi', sans-serif";
+
 /* ── Animated Counter ── */
 const CounterValue = ({ value, isDecimal = false }) => {
-  const ref         = useRef(null);
+  const ref = useRef(null);
   const motionValue = useMotionValue(0);
   const springValue = useSpring(motionValue, { damping: 55, stiffness: 90 });
-  const isInView    = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   useEffect(() => {
     if (isInView) motionValue.set(value);
@@ -56,10 +58,10 @@ const STATS = [
 ];
 
 const TRUST = [
-  { Icon: ShieldCheck, text: "ISO 9001 Certified"      },
-  { Icon: CheckCircle, text: "Google Partner"           },
-  { Icon: Zap,         text: "100% Placement Support"  },
-  { Icon: TrendingUp,  text: "94% Placement Rate"      },
+  { Icon: ShieldCheck, text: "ISO 9001 Certified" },
+  { Icon: CheckCircle, text: "Google Partner" },
+  { Icon: Zap, text: "100% Placement Support" },
+  { Icon: TrendingUp, text: "94% Placement Rate" },
 ];
 
 /* ── Stat Card ── */
@@ -71,31 +73,39 @@ const StatCard = ({ stat, index }) => (
     transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
     className="group relative flex flex-col items-center justify-center text-center
       overflow-hidden rounded-2xl border border-gray-100 bg-white
-      px-5 py-7 shadow-sm hover:shadow-md hover:border-orange-200
+      px-5 py-8 shadow-sm hover:shadow-md hover:border-orange-200
       transition-all duration-300 cursor-default"
+    style={{ fontFamily: SATOSHI }}
   >
     {/* Orange top bar */}
     <div className="absolute top-0 left-0 right-0 h-[3px] bg-orange-500 rounded-t-2xl" />
 
     {/* Icon */}
-    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl
+    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl
       bg-orange-50 group-hover:bg-orange-100 transition-colors duration-300">
-      <stat.Icon size={20} strokeWidth={1.6} className="text-orange-500" />
+      <stat.Icon size={22} strokeWidth={1.6} className="text-orange-500" />
     </div>
 
     {/* Number */}
-    <div className="mb-1.5 flex items-baseline gap-0.5 font-black leading-none
-      tracking-tighter text-gray-950"
-      style={{ fontSize: "clamp(28px, 3.5vw, 42px)" }}>
+    <div
+      className="mb-2 flex items-baseline gap-0.5 leading-none tracking-tighter text-gray-950"
+      style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: "clamp(30px, 3.5vw, 44px)" }}
+    >
       <CounterValue value={stat.num} isDecimal={stat.isDecimal} />
-      <span className="text-orange-500 text-[0.55em] ml-0.5">{stat.suffix}</span>
+      <span className="text-orange-500 ml-0.5" style={{ fontSize: "0.55em" }}>{stat.suffix}</span>
     </div>
 
     {/* Labels */}
-    <p className="text-[11px] font-black uppercase tracking-[0.16em] text-gray-800 leading-tight">
+    <p
+      className="text-gray-800 leading-tight"
+      style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.16em" }}
+    >
       {stat.label}
     </p>
-    <p className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.1em] text-gray-400">
+    <p
+      className="mt-1 text-gray-400"
+      style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em" }}
+    >
       {stat.sub}
     </p>
   </motion.div>
@@ -103,8 +113,22 @@ const StatCard = ({ stat, index }) => (
 
 /* ── Main Section ── */
 export default function StatsSection() {
+  // Inject Satoshi font
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
-    <section className="w-full bg-white px-4 py-12 relative">
+    <section
+      className="w-full bg-white px-4 py-12 relative"
+      style={{ fontFamily: SATOSHI }}
+    >
 
       {/* Dot grid bg */}
       <div
@@ -131,7 +155,9 @@ export default function StatsSection() {
           className="mb-8 flex items-center justify-center gap-3"
         >
           <span className="h-px w-8 bg-orange-300 rounded-full" />
-          <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-orange-500">
+          <span
+            style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#F97316" }}
+          >
             Trusted by 11,000+ Professionals Across India
           </span>
           <span className="h-px w-8 bg-orange-300 rounded-full" />
@@ -151,32 +177,39 @@ export default function StatsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.55, delay: 0.22 }}
           className="flex flex-col items-center gap-5 rounded-2xl
-            border border-gray-100 bg-gray-50/60 px-6 py-4
+            border border-gray-100 bg-gray-50/60 px-6 py-5
             lg:flex-row lg:justify-between"
         >
           {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 lg:justify-start">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
             {TRUST.map(({ Icon, text }) => (
-              <div key={text} className="flex items-center gap-1.5">
-                <Icon size={13} strokeWidth={1.9} className="shrink-0 text-orange-500" />
-                <span className="text-[12px] font-semibold text-gray-500">{text}</span>
+              <div key={text} className="flex items-center gap-2">
+                <Icon size={14} strokeWidth={1.9} className="shrink-0 text-orange-500" />
+                <span
+                  style={{ fontFamily: SATOSHI, fontWeight: 600, fontSize: "13px", color: "#6B7280" }}
+                >
+                  {text}
+                </span>
               </div>
             ))}
           </div>
 
           {/* CTA */}
-          <button className="group relative overflow-hidden inline-flex shrink-0 items-center
-            gap-2 rounded-xl bg-orange-500 hover:bg-orange-600
-            px-6 py-3 text-[13px] font-extrabold text-white
-            shadow-[0_4px_16px_rgba(249,115,22,0.3)]
-            hover:shadow-[0_8px_24px_rgba(249,115,22,0.4)]
-            active:scale-[0.97] transition-all duration-200 cursor-pointer border-none">
+          <button
+            className="group relative overflow-hidden inline-flex shrink-0 items-center
+              gap-2 rounded-xl bg-orange-500 hover:bg-orange-600
+              px-7 py-3.5
+              shadow-[0_4px_16px_rgba(249,115,22,0.3)]
+              hover:shadow-[0_8px_24px_rgba(249,115,22,0.4)]
+              active:scale-[0.97] transition-all duration-200 cursor-pointer border-none"
+            style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "14px", color: "#fff" }}
+          >
             {/* Shimmer */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full
               bg-gradient-to-r from-transparent via-white/20 to-transparent
               transition-transform duration-500 ease-in-out" />
             <span className="relative z-10">See Our Placements</span>
-            <ArrowUpRight size={14} className="relative z-10 group-hover:-translate-y-0.5
+            <ArrowUpRight size={15} className="relative z-10 group-hover:-translate-y-0.5
               group-hover:translate-x-0.5 transition-transform duration-200" />
           </button>
         </motion.div>
