@@ -5,6 +5,7 @@ import TopHeader from './components/TopHeader/TopHeader';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import LocationsSection from './components/LocationsSection/LocationsSection.jsx';
+import AdvanceProgram from './pages/AdvanceProgram/AdvanceProgram.jsx';
 
 import Homepage from './pages/Homepage/Homepage.jsx';
 import MastersProgram from './pages/MastersProgram/MastersProgram.jsx';
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         
         <Route path="/masters-program" element={<MastersProgram />} />
+        <Route path="/advance-diploma" element={<AdvanceProgram />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
         <Route path="/reviews" element={<Reviewspage />} />
