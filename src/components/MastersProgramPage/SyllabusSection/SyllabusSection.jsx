@@ -5,6 +5,14 @@ import {
   Search, X, BookOpen,
 } from 'lucide-react';
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SETUP REQUIRED IN YOUR PROJECT:
+// index.html <head>:
+// <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
+// ─────────────────────────────────────────────────────────────────────────────
+
+const satoshi = { fontFamily: "'Satoshi', sans-serif" };
+
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const categories = [
   {
@@ -106,12 +114,13 @@ function ModuleRow({ module, catIdx, modIdx, isOpen, onToggle, searchQuery }) {
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-4 py-3.5 text-left"
+        className="w-full flex items-center justify-between px-4 py-4 text-left"
       >
         <div className="flex items-center gap-2.5 min-w-0">
           <span
-            className="shrink-0 text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest"
+            className="shrink-0 text-[11px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest"
             style={{
+              ...satoshi,
               background: isOpen ? '#FF5A1F' : 'rgba(255,90,31,0.08)',
               color: isOpen ? '#fff' : '#FF5A1F',
             }}
@@ -119,9 +128,9 @@ function ModuleRow({ module, catIdx, modIdx, isOpen, onToggle, searchQuery }) {
             {catIdx + 1}.{modIdx + 1}
           </span>
           <h4
-            className="text-[13px] font-semibold truncate transition-colors"
+            className="text-[15px] font-semibold truncate transition-colors"
             style={{
-              fontFamily: 'Inter, sans-serif',
+              ...satoshi,
               color: isOpen ? '#FF5A1F' : '#111111',
             }}
           >
@@ -129,7 +138,10 @@ function ModuleRow({ module, catIdx, modIdx, isOpen, onToggle, searchQuery }) {
           </h4>
         </div>
         <div className="flex items-center gap-2 shrink-0 ml-2">
-          <span className="hidden sm:inline text-[11px] text-gray-400" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <span
+            className="hidden sm:inline text-[13px] text-gray-400"
+            style={satoshi}
+          >
             {module.topics.length} topics
           </span>
           <div
@@ -154,9 +166,9 @@ function ModuleRow({ module, catIdx, modIdx, isOpen, onToggle, searchQuery }) {
               {module.topics.map((topic, i) => (
                 <span
                   key={i}
-                  className="text-[11px] px-2.5 py-1 rounded-lg border font-medium"
+                  className="text-[13px] px-3 py-1.5 rounded-lg border font-medium"
                   style={{
-                    fontFamily: 'Inter, sans-serif',
+                    ...satoshi,
                     borderColor: searchQuery && topic.toLowerCase().includes(searchQuery.toLowerCase())
                       ? '#fdba74' : '#f3f4f6',
                     background: searchQuery && topic.toLowerCase().includes(searchQuery.toLowerCase())
@@ -223,7 +235,10 @@ export default function SyllabusSection() {
   }, [searchQuery]);
 
   return (
-    <section className="py-11 md:py-10 bg-white overflow-x-hidden" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <section
+      className="py-11 md:py-10 bg-white overflow-x-hidden"
+      style={satoshi}
+    >
       <style>{`
         .hide-scroll::-webkit-scrollbar { display: none; }
         .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
@@ -244,8 +259,8 @@ export default function SyllabusSection() {
           <div className="flex items-center justify-center gap-2.5 mb-3">
             <span className="h-px w-6 bg-[#FF5A1F]" />
             <span
-              className="text-[#FF5A1F] uppercase text-[10px] font-black tracking-[0.3em]"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              className="text-[#FF5A1F] uppercase text-[13px] font-black tracking-[0.3em]"
+              style={satoshi}
             >
               {totalModules} Modules · 300+ Topics
             </span>
@@ -254,7 +269,7 @@ export default function SyllabusSection() {
 
           <h2
             className="text-[#111111] leading-[1.05] tracking-tight"
-            style={{ fontWeight: 800, fontSize: 'clamp(26px, 5vw, 46px)' }}
+            style={{ ...satoshi, fontWeight: 900, fontSize: 'clamp(30px, 5vw, 54px)' }}
           >
             Masters Program{' '}
             <span className="relative inline-block text-[#FF5A1F]">
@@ -266,8 +281,8 @@ export default function SyllabusSection() {
           </h2>
 
           <p
-            className="text-[#111111]/50 max-w-lg mx-auto mt-4 leading-relaxed text-[14px] md:text-[15px]"
-            style={{ fontWeight: 400 }}
+            className="text-[#111111]/50 max-w-lg mx-auto mt-4 leading-relaxed"
+            style={{ ...satoshi, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 18px)' }}
           >
             From SEO foundations to advanced AI-driven performance strategies — every skill you need.
           </p>
@@ -283,7 +298,8 @@ export default function SyllabusSection() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search e.g. SEO, Google Ads, AI..."
-            className="w-full pl-10 pr-9 py-3 rounded-xl border border-gray-200 bg-[#FAFAF9] text-[13px] outline-none focus:border-[#FF5A1F] focus:ring-2 focus:ring-[#FF5A1F]/10 transition-all text-gray-800 placeholder-gray-400"
+            className="w-full pl-10 pr-9 py-3 rounded-xl border border-gray-200 bg-[#FAFAF9] text-[15px] outline-none focus:border-[#FF5A1F] focus:ring-2 focus:ring-[#FF5A1F]/10 transition-all text-gray-800 placeholder-gray-400"
+            style={satoshi}
           />
           {searchQuery && (
             <button
@@ -307,8 +323,9 @@ export default function SyllabusSection() {
                 <button
                   key={idx}
                   onClick={() => setActiveTab(idx)}
-                  className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full border text-[12px] font-semibold transition-all duration-200"
+                  className="shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full border text-[14px] font-semibold transition-all duration-200"
                   style={{
+                    ...satoshi,
                     background: active ? '#FF5A1F' : '#fff',
                     borderColor: active ? '#FF5A1F' : '#e5e7eb',
                     color: active ? '#fff' : '#374151',
@@ -337,6 +354,7 @@ export default function SyllabusSection() {
                     onClick={() => setActiveTab(idx)}
                     className="w-full text-left px-4 py-4 rounded-2xl flex items-center justify-between border transition-all duration-200"
                     style={{
+                      ...satoshi,
                       background: active ? '#FF5A1F' : '#fff',
                       borderColor: active ? '#FF5A1F' : '#f3f4f6',
                       color: active ? '#fff' : '#111111',
@@ -354,8 +372,8 @@ export default function SyllabusSection() {
                         {cat.icon}
                       </div>
                       <div className="text-left">
-                        <p style={{ fontWeight: 700, fontSize: 14 }}>{cat.label}</p>
-                        <p style={{ fontWeight: 400, fontSize: 11, color: active ? 'rgba(255,255,255,0.6)' : '#9ca3af' }}>
+                        <p style={{ ...satoshi, fontWeight: 700, fontSize: 16 }}>{cat.label}</p>
+                        <p style={{ ...satoshi, fontWeight: 400, fontSize: 13, color: active ? 'rgba(255,255,255,0.6)' : '#9ca3af' }}>
                           {cat.modules.length} modules
                         </p>
                       </div>
@@ -373,7 +391,10 @@ export default function SyllabusSection() {
 
               {/* Stats mini-card */}
               <div className="mt-3 p-4 rounded-2xl border border-orange-100 bg-[#fff7f4]">
-                <p style={{ fontWeight: 700, fontSize: 10, letterSpacing: '0.2em' }} className="text-[#FF5A1F] uppercase mb-3">
+                <p
+                  style={{ ...satoshi, fontWeight: 800, fontSize: 12, letterSpacing: '0.2em' }}
+                  className="text-[#FF5A1F] uppercase mb-3"
+                >
                   Program at a Glance
                 </p>
                 {[
@@ -383,8 +404,8 @@ export default function SyllabusSection() {
                   { label: 'Duration', value: '7 Months' },
                 ].map((s) => (
                   <div key={s.label} className="flex justify-between items-center py-2 border-b border-orange-100/60 last:border-0">
-                    <span style={{ fontWeight: 400, fontSize: 12 }} className="text-gray-500">{s.label}</span>
-                    <span style={{ fontWeight: 700, fontSize: 13 }} className="text-[#111111]">{s.value}</span>
+                    <span style={{ ...satoshi, fontWeight: 400, fontSize: 14 }} className="text-gray-500">{s.label}</span>
+                    <span style={{ ...satoshi, fontWeight: 700, fontSize: 15 }} className="text-[#111111]">{s.value}</span>
                   </div>
                 ))}
               </div>
@@ -400,16 +421,16 @@ export default function SyllabusSection() {
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div>
-                      <h3 style={{ fontWeight: 700, fontSize: 18 }} className="text-gray-900">
+                      <h3 style={{ ...satoshi, fontWeight: 700, fontSize: 22 }} className="text-gray-900">
                         {filteredResults.length} result{filteredResults.length !== 1 ? 's' : ''} found
                       </h3>
-                      <p style={{ fontWeight: 400, fontSize: 12 }} className="text-gray-400 mt-0.5">
+                      <p style={{ ...satoshi, fontWeight: 400, fontSize: 14 }} className="text-gray-400 mt-0.5">
                         for &ldquo;{searchQuery}&rdquo;
                       </p>
                     </div>
                     <button
                       onClick={() => setSearchQuery('')}
-                      style={{ fontWeight: 600, fontSize: 12 }}
+                      style={{ ...satoshi, fontWeight: 600, fontSize: 14 }}
                       className="text-[#FF5A1F] hover:underline"
                     >
                       Clear
@@ -425,7 +446,7 @@ export default function SyllabusSection() {
                           catIdx={mod.cIdx}
                           modIdx={i}
                           isOpen
-                          onToggle={() => {}}
+                          onToggle={() => { }}
                           searchQuery={searchQuery}
                         />
                       ))}
@@ -433,7 +454,7 @@ export default function SyllabusSection() {
                   ) : (
                     <div className="flex flex-col items-center justify-center py-20 text-gray-300">
                       <BookOpen size={40} className="mb-3 opacity-30" />
-                      <p style={{ fontWeight: 500, fontSize: 14 }} className="text-gray-400">
+                      <p style={{ ...satoshi, fontWeight: 500, fontSize: 16 }} className="text-gray-400">
                         No modules match your query.
                       </p>
                     </div>
@@ -452,16 +473,23 @@ export default function SyllabusSection() {
                     {/* Tab header */}
                     <div className="flex items-start justify-between mb-5 gap-3">
                       <div>
-                        <h3 style={{ fontWeight: 800, fontSize: 20 }} className="text-[#111111] tracking-tight">
+                        <h3
+                          style={{ ...satoshi, fontWeight: 900, fontSize: 24 }}
+                          className="text-[#111111] tracking-tight"
+                        >
                           {categories[activeTab].label}
                         </h3>
-                        <p style={{ fontWeight: 400, fontSize: 13 }} className="text-gray-500 mt-1 leading-relaxed">
+                        <p
+                          style={{ ...satoshi, fontWeight: 400, fontSize: 15 }}
+                          className="text-gray-500 mt-1 leading-relaxed"
+                        >
                           {categories[activeTab].desc}
                         </p>
                       </div>
                       <span
-                        className="shrink-0 px-2.5 py-1 rounded-full text-[10px] font-bold border"
+                        className="shrink-0 px-2.5 py-1 rounded-full text-[12px] font-bold border"
                         style={{
+                          ...satoshi,
                           background: 'rgba(255,90,31,0.06)',
                           borderColor: 'rgba(255,90,31,0.2)',
                           color: '#FF5A1F',
@@ -489,15 +517,18 @@ export default function SyllabusSection() {
 
         {/* ── FOOTER ── */}
         <div className="mt-10 flex flex-col items-center text-center px-4">
-          <p style={{ fontWeight: 400, fontSize: 13 }} className="text-gray-400 mb-4">
+          <p
+            style={{ ...satoshi, fontWeight: 400, fontSize: 15 }}
+            className="text-gray-400 mb-4"
+          >
             Want to see the full list of 120+ tools covered?
           </p>
           <button
             className="flex items-center gap-2 px-6 py-3 rounded-xl text-white transition-all duration-300 shadow-sm hover:shadow-md"
             style={{
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 600,
-              fontSize: 14,
+              ...satoshi,
+              fontWeight: 700,
+              fontSize: 16,
               background: '#111111',
             }}
             onMouseEnter={e => e.currentTarget.style.background = '#FF5A1F'}

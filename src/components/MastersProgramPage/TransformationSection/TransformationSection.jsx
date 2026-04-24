@@ -8,16 +8,15 @@ import {
 // ─────────────────────────────────────────────────────────────────────────────
 // SETUP REQUIRED IN YOUR PROJECT:
 //
-// 1. index.html <head> — add Google Font:
-//    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+// 1. index.html <head> — add fonts:
+//    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
+//    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap" rel="stylesheet">
 //
-// 2. tailwind.config.js — extend fontFamily:
-//    theme: { extend: { fontFamily: { inter: ['Inter', 'sans-serif'] } } }
-//
-// 3. index.css or App.css — set base font:
-//    body { font-family: 'Inter', sans-serif; }
-//    (or use Tailwind's @layer base { body { @apply font-inter; } })
+// 2. No Tailwind font extension needed — we use inline fontFamily styles.
 // ─────────────────────────────────────────────────────────────────────────────
+
+// Shared font style objects for cleanliness
+const satoshi = { fontFamily: "'Satoshi', sans-serif" };
 
 // ── DATA (outside component — pure data, no JSX) ─────────────────────────────
 
@@ -43,15 +42,15 @@ const OUTCOMES = [
   {
     iconName: 'star',
     title: 'Placement Support',
-    desc: '200+ hiring partners across India\'s top agencies',
+    desc: "200+ hiring partners across India's top agencies",
     delay: 0.34,
   },
 ];
 
 const SPECS = [
-  { iconName: 'mappin',   label: 'Centers',    value: 'Andheri & Borivali'  },
-  { iconName: 'calendar', label: 'Batches',    value: 'Weekdays & Weekends' },
-  { iconName: 'users',    label: 'Batch Size', value: 'Max 12 Students'     },
+  { iconName: 'mappin', label: 'Centers', value: 'Andheri & Borivali' },
+  { iconName: 'calendar', label: 'Batches', value: 'Weekdays & Weekends' },
+  { iconName: 'users', label: 'Batch Size', value: 'Max 12 Students' },
 ];
 
 const CHECKLIST = [
@@ -62,16 +61,16 @@ const CHECKLIST = [
 ];
 
 const BATCH_STATS = [
-  { target: 7,   suffix: '',  label: 'Months'   },
-  { target: 200, suffix: '+', label: 'Hours'    },
-  { target: 12,  suffix: '',  label: 'Students' },
+  { target: 7, suffix: '', label: 'Months' },
+  { target: 200, suffix: '+', label: 'Hours' },
+  { target: 12, suffix: '', label: 'Students' },
 ];
 
 const PILLS = [
-  { iconName: 'zap',      text: 'Real Ad Budgets'   },
+  { iconName: 'zap', text: 'Real Ad Budgets' },
   { iconName: 'sparkles', text: 'AI Tools Included' },
-  { iconName: 'trophy',   text: '7-Month Program'   },
-  { iconName: 'users',    text: 'Max 12 Students'   },
+  { iconName: 'trophy', text: '7-Month Program' },
+  { iconName: 'users', text: 'Max 12 Students' },
 ];
 
 const AVATARS = [
@@ -82,39 +81,37 @@ const AVATARS = [
 ];
 
 // ── ICON RESOLVER ─────────────────────────────────────────────────────────────
-// Keeps data arrays clean (no JSX inside plain objects)
 function Icon({ name, size = 16, className = '' }) {
   const props = { size, className };
   switch (name) {
-    case 'zap':      return <Zap      {...props} />;
-    case 'trophy':   return <Trophy   {...props} />;
+    case 'zap': return <Zap      {...props} />;
+    case 'trophy': return <Trophy   {...props} />;
     case 'sparkles': return <Sparkles {...props} />;
-    case 'star':     return <Star     {...props} />;
-    case 'mappin':   return <MapPin   {...props} />;
+    case 'star': return <Star     {...props} />;
+    case 'mappin': return <MapPin   {...props} />;
     case 'calendar': return <Calendar {...props} />;
-    case 'users':    return <Users    {...props} />;
-    default:         return null;
+    case 'users': return <Users    {...props} />;
+    default: return null;
   }
 }
 
 // ── ANIMATED COUNTER ──────────────────────────────────────────────────────────
 function Counter({ target, suffix = '' }) {
-  const [count, setCount]   = useState(0);
-  const ref                 = useRef(null);
-  const inView              = useInView(ref, { once: true });
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
 
   useEffect(() => {
     if (!inView) return;
-    const DURATION = 900; // ms
-    const STEPS    = 50;
+    const DURATION = 900;
+    const STEPS = 50;
     const INTERVAL = DURATION / STEPS;
     let step = 0;
 
     const timer = setInterval(() => {
       step += 1;
-      // cubic ease-out: fast start → slow finish
-      const ease     = 1 - Math.pow(1 - step / STEPS, 3);
-      const current  = Math.round(ease * target);
+      const ease = 1 - Math.pow(1 - step / STEPS, 3);
+      const current = Math.round(ease * target);
       setCount(current);
       if (step >= STEPS) clearInterval(timer);
     }, INTERVAL);
@@ -131,9 +128,12 @@ function FeaturePill({ iconName, text }) {
     <div className="flex items-center gap-2.5 px-4 py-2.5 bg-white rounded-full
                     border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
       <span className="text-[#FF5A1F]" aria-hidden="true">
-        <Icon name={iconName} size={13} />
+        <Icon name={iconName} size={15} />
       </span>
-      <span className="font-inter text-[13px] font-medium text-gray-700 whitespace-nowrap">
+      <span
+        className="text-[15px] font-medium text-gray-700 whitespace-nowrap"
+        style={satoshi}
+      >
         {text}
       </span>
     </div>
@@ -153,7 +153,6 @@ function OutcomeCard({ iconName, title, desc, delay }) {
                  hover:shadow-[0_8px_32px_rgba(255,90,31,0.08)]
                  transition-all duration-300 cursor-default overflow-hidden"
     >
-      {/* subtle hover overlay — pointer-events-none so it never blocks clicks */}
       <div
         className="absolute inset-0 rounded-2xl pointer-events-none
                    bg-gradient-to-br from-transparent to-transparent
@@ -161,8 +160,6 @@ function OutcomeCard({ iconName, title, desc, delay }) {
                    transition-all duration-300"
         aria-hidden="true"
       />
-
-      {/* icon badge */}
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center
                    text-[#FF5A1F] bg-[#FF5A1F]/[0.08] mb-4
@@ -172,9 +169,18 @@ function OutcomeCard({ iconName, title, desc, delay }) {
       >
         <Icon name={iconName} size={17} />
       </div>
-
-      <p className="font-inter text-[15px] font-bold text-[#111111] mb-1">{title}</p>
-      <p className="font-inter text-[13px] font-normal text-gray-500 leading-relaxed">{desc}</p>
+      <p
+        className="text-[17px] font-bold text-[#111111] mb-1"
+        style={satoshi}
+      >
+        {title}
+      </p>
+      <p
+        className="text-[15px] font-normal text-gray-500 leading-relaxed"
+        style={satoshi}
+      >
+        {desc}
+      </p>
     </motion.div>
   );
 }
@@ -202,11 +208,18 @@ function SpecRow({ iconName, label, value, delay }) {
         <Icon name={iconName} size={16} />
       </div>
       <div>
-        <p className="font-inter text-[11px] font-medium text-gray-400
-                      uppercase tracking-[0.15em] mb-0.5">
+        <p
+          className="text-[12px] font-semibold text-gray-400 uppercase tracking-[0.15em] mb-0.5"
+          style={satoshi}
+        >
           {label}
         </p>
-        <p className="font-inter text-[14px] font-semibold text-[#111111]">{value}</p>
+        <p
+          className="text-[16px] font-semibold text-[#111111]"
+          style={satoshi}
+        >
+          {value}
+        </p>
       </div>
     </motion.div>
   );
@@ -214,7 +227,6 @@ function SpecRow({ iconName, label, value, delay }) {
 
 // ── BOOK DEMO MODAL ───────────────────────────────────────────────────────────
 function BookDemoModal({ isOpen, onClose }) {
-  // Close on Escape
   useEffect(() => {
     if (!isOpen) return;
     const handleKey = (e) => { if (e.key === 'Escape') onClose(); };
@@ -222,7 +234,6 @@ function BookDemoModal({ isOpen, onClose }) {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isOpen, onClose]);
 
-  // Prevent background scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -262,13 +273,17 @@ function BookDemoModal({ isOpen, onClose }) {
                 src="https://www.operatingmedia.com/wp-content/uploads/2025/09/WhatsApp-Image-2025-08-07-at-15.40.57.webp"
                 alt="Operating Media campus"
                 className="absolute inset-0 w-full h-full object-cover"
+                loading="lazy"
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-[#FF5A1F]/60 to-transparent"
                 aria-hidden="true"
               />
               <div className="absolute bottom-8 left-8 right-8">
-                <p className="font-inter text-[18px] font-semibold text-white leading-snug">
+                <p
+                  className="text-[18px] font-semibold text-white leading-snug"
+                  style={satoshi}
+                >
                   Visit our campus.<br />
                   <span className="font-normal text-base text-white/70">
                     Andheri &amp; Borivali
@@ -291,13 +306,18 @@ function BookDemoModal({ isOpen, onClose }) {
                 <X size={18} aria-hidden="true" />
               </button>
 
-              <p className="font-inter text-[10px] font-medium text-[#FF5A1F]
-                            tracking-[0.3em] uppercase mb-3">
+              <p
+                className="text-[12px] font-semibold text-[#FF5A1F] tracking-[0.3em] uppercase mb-3"
+                style={satoshi}
+              >
                 Book a Visit
               </p>
 
-              <h2 className="font-inter text-[40px] sm:text-[48px] font-extrabold
-                             text-[#111111] leading-tight tracking-tight mb-8">
+              <h2
+                className="text-[40px] sm:text-[48px] font-black text-[#111111]
+                           leading-tight tracking-tight mb-8"
+                style={satoshi}
+              >
                 Book a Free<br />
                 <span className="text-[#FF5A1F]">Demo Class</span>
               </h2>
@@ -318,7 +338,10 @@ function BookDemoModal({ isOpen, onClose }) {
                       alt="India flag"
                       className="w-5"
                     />
-                    <span className="font-inter text-[16px] font-semibold text-black">
+                    <span
+                      className="text-[16px] font-bold text-black"
+                      style={satoshi}
+                    >
                       +91
                     </span>
                   </div>
@@ -327,21 +350,22 @@ function BookDemoModal({ isOpen, onClose }) {
                     type="tel"
                     placeholder="Mobile Number"
                     aria-label="Mobile number"
-                    className="w-full px-4 py-3 outline-none
-                               font-inter text-[16px] font-normal
+                    className="w-full px-4 py-3 outline-none text-[16px] font-normal
                                text-black placeholder-gray-400 bg-white"
+                    style={satoshi}
                   />
                 </div>
 
-                {/* CTA — button, not submit */}
+                {/* CTA */}
                 <button
-                  onClick={() => {}}
+                  onClick={() => { }}
                   aria-label="Continue booking"
                   className="group w-full flex items-center justify-center gap-2
                              py-4 rounded-xl border-none cursor-pointer
                              bg-[#FF5A1F] hover:bg-[#111111]
-                             text-white font-inter text-[16px] font-semibold
+                             text-white text-[16px] font-bold
                              transition-all duration-300"
+                  style={satoshi}
                 >
                   Continue
                   <ArrowRight
@@ -351,8 +375,10 @@ function BookDemoModal({ isOpen, onClose }) {
                   />
                 </button>
 
-                <p className="font-inter text-[11px] font-normal text-gray-400
-                              text-center leading-relaxed">
+                <p
+                  className="text-[13px] font-normal text-gray-400 text-center leading-relaxed"
+                  style={satoshi}
+                >
                   By continuing you agree to Operating Media&apos;s{' '}
                   <span className="underline cursor-pointer">Terms</span> and{' '}
                   <span className="underline cursor-pointer">Privacy Policy</span>.
@@ -374,6 +400,7 @@ export default function TransformationSection() {
     <section
       className="relative py-10 px-6 lg:px-16 bg-[#FAFAF9] overflow-hidden"
       aria-label="Transformation Roadmap"
+      style={satoshi}
     >
       {/* ── Dot-grid background ── */}
       <div
@@ -421,8 +448,10 @@ export default function TransformationSection() {
                 className="h-[2px] w-7 bg-[#FF5A1F] rounded-full"
                 aria-hidden="true"
               />
-              <span className="font-inter text-[11px] font-medium text-[#FF5A1F]
-                               uppercase tracking-[0.32em]">
+              <span
+                className="text-[13px] font-semibold text-[#FF5A1F] uppercase tracking-[0.32em]"
+                style={satoshi}
+              >
                 Transformation Roadmap
               </span>
             </motion.div>
@@ -433,9 +462,10 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="font-inter font-extrabold text-[#111111] mb-5
+              className="font-black text-[#111111] mb-5
                          leading-[1.0] tracking-[-0.035em]
                          text-[clamp(32px,5vw,56px)]"
+              style={satoshi}
             >
               From Beginner to<br />
               <span className="text-[#FF5A1F]">Digital Manager</span><br />
@@ -448,8 +478,9 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.14 }}
-              className="font-inter text-[16px] font-normal text-[#111111]/60
+              className="text-[18px] font-normal text-[#111111]/60
                          max-w-[500px] mb-10 leading-[1.75]"
+              style={satoshi}
             >
               This isn&apos;t a theory course — it&apos;s a{' '}
               <span className="font-semibold text-[#111111]">
@@ -482,13 +513,14 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
-              className="font-inter text-[11px] font-semibold text-[#111111]/35
+              className="text-[13px] font-semibold text-[#111111]/35
                          uppercase tracking-[0.22em] mb-5"
+              style={satoshi}
             >
               What You&apos;ll Walk Away With
             </motion.p>
 
-            {/* Outcome cards — 1 col on mobile, 2 col on sm+ */}
+            {/* Outcome cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
               {OUTCOMES.map((o) => (
                 <OutcomeCard key={o.title} {...o} />
@@ -512,6 +544,7 @@ export default function TransformationSection() {
                     key={i}
                     src={src}
                     alt={`Alumni ${i + 1}`}
+                    loading="lazy"
                     className="w-9 h-9 rounded-full border-2 border-white object-cover"
                   />
                 ))}
@@ -528,13 +561,19 @@ export default function TransformationSection() {
                       aria-hidden="true"
                     />
                   ))}
-                  <span className="font-inter text-[12px] font-semibold text-gray-800 ml-1">
+                  <span
+                    className="text-[14px] font-bold text-gray-800 ml-1"
+                    style={satoshi}
+                  >
                     4.9/5
                   </span>
                 </div>
-                <p className="font-inter text-[13px] font-normal text-gray-500">
+                <p
+                  className="text-[15px] font-normal text-gray-500"
+                  style={satoshi}
+                >
                   Rated by{' '}
-                  <span className="font-semibold text-[#111111]">1,200+ alumni</span>{' '}
+                  <span className="font-bold text-[#111111]">1,200+ alumni</span>{' '}
                   across batches
                 </p>
               </div>
@@ -545,10 +584,16 @@ export default function TransformationSection() {
                 aria-hidden="true"
               />
               <div className="hidden md:block" aria-label="94% placement rate">
-                <p className="font-inter text-[22px] font-extrabold text-[#111111] leading-none">
+                <p
+                  className="text-[22px] font-black text-[#111111] leading-none"
+                  style={satoshi}
+                >
                   94%
                 </p>
-                <p className="font-inter text-[12px] font-normal text-gray-400 mt-0.5">
+                <p
+                  className="text-[14px] font-normal text-gray-400 mt-0.5"
+                  style={satoshi}
+                >
                   Placement rate
                 </p>
               </div>
@@ -556,10 +601,6 @@ export default function TransformationSection() {
           </div>
 
           {/* ════════════════ RIGHT: ENROLMENT CARD ════════════════ */}
-          {/*
-            self-start is critical here — without it, the sticky element
-            stretches to fill the grid row height and never triggers sticky.
-          */}
           <div className="lg:sticky lg:top-24 self-start">
             <motion.div
               initial={{ opacity: 0, y: 32 }}
@@ -573,7 +614,6 @@ export default function TransformationSection() {
 
               {/* ── Dark header ── */}
               <div className="bg-[#0F0F0F] px-8 pt-8 pb-6 relative overflow-hidden">
-                {/* glow */}
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
@@ -593,22 +633,30 @@ export default function TransformationSection() {
                     className="w-1.5 h-1.5 rounded-full bg-[#FF5A1F] animate-pulse"
                     aria-hidden="true"
                   />
-                  <span className="font-Inter text-[10px] font-semibold text-[#FF5A1F]
-                                   uppercase tracking-[0.1em]">
+                  <span
+                    className="text-[11px] font-bold text-[#FF5A1F] uppercase tracking-[0.1em]"
+                    style={satoshi}
+                  >
                     Enrolling Now
                   </span>
                 </div>
 
-                <p className="font-Inter text-[11px] font-medium text-[#FF5A1F]
-                              uppercase tracking-[0.28em] mb-2 relative z-10">
+                <p
+                  className="text-[12px] font-semibold text-[#FF5A1F] uppercase tracking-[0.28em] mb-2 relative z-10"
+                  style={satoshi}
+                >
                   Enrolment
                 </p>
-                <h3 className="font-Inter text-[28px] font-extrabold text-white
-                               leading-[1.1] relative z-10">
+                <h3
+                  className="text-[30px] font-black text-white leading-[1.1] relative z-10"
+                  style={satoshi}
+                >
                   Batch Details
                 </h3>
-                <p className="font-Inter text-[14px] font-normal text-white/40
-                              mt-1.5 relative z-10">
+                <p
+                  className="text-[15px] font-normal text-white/40 mt-1.5 relative z-10"
+                  style={satoshi}
+                >
                   Limited to 12 seats per batch.
                 </p>
 
@@ -620,12 +668,16 @@ export default function TransformationSection() {
                       className="bg-white/[0.07] border border-white/[0.08]
                                  rounded-2xl p-3 text-center"
                     >
-                      <span className="font-inter text-[22px] font-extrabold text-white
-                                       leading-none block">
+                      <span
+                        className="text-[24px] font-black text-white leading-none block"
+                        style={satoshi}
+                      >
                         <Counter target={s.target} suffix={s.suffix} />
                       </span>
-                      <span className="font-inter text-[10px] font-normal text-white/35
-                                       uppercase tracking-[0.08em] mt-1 block">
+                      <span
+                        className="text-[11px] font-normal text-white/35 uppercase tracking-[0.08em] mt-1 block"
+                        style={satoshi}
+                      >
                         {s.label}
                       </span>
                     </div>
@@ -655,7 +707,10 @@ export default function TransformationSection() {
                         className="text-[#FF5A1F] shrink-0"
                         aria-hidden="true"
                       />
-                      <span className="font-Inter text-[13px] font-normal text-[#111111]/65">
+                      <span
+                        className="text-[15px] font-normal text-[#111111]/65"
+                        style={satoshi}
+                      >
                         {text}
                       </span>
                     </div>
@@ -671,11 +726,12 @@ export default function TransformationSection() {
                   className="group w-full flex items-center justify-center gap-3
                              py-4 rounded-2xl border-none cursor-pointer
                              bg-[#FF5A1F] hover:bg-[#111111]
-                             text-white font-inter text-[15px] font-bold
+                             text-white text-[16px] font-bold
                              shadow-lg shadow-orange-200
                              transition-all duration-300
                              focus-visible:outline-2 focus-visible:outline-offset-2
                              focus-visible:outline-[#FF5A1F]"
+                  style={satoshi}
                 >
                   Book Free Demo Class
                   <ArrowUpRight
@@ -686,8 +742,10 @@ export default function TransformationSection() {
                   />
                 </button>
 
-                <p className="font-inter text-[12px] font-normal text-gray-400
-                              text-center mt-3">
+                <p
+                  className="text-[13px] font-normal text-gray-400 text-center mt-3"
+                  style={satoshi}
+                >
                   No commitment &middot; Free of charge
                 </p>
               </div>

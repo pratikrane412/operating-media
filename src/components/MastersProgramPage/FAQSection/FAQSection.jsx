@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, ArrowUpRight } from "lucide-react";
 
+const satoshi = { fontFamily: "'Satoshi', sans-serif" };
+
 const faqs = [
   {
     q: "What is digital marketing?",
@@ -59,29 +61,39 @@ export default function FAQSection() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        .faq-wrap * { font-family: 'Inter', sans-serif; }
         .faq-item { border-bottom: 1px solid #EBEBEB; }
         .faq-item:last-child { border-bottom: none; }
       `}</style>
 
-      <section className="faq-wrap w-full py-10 md:py-10 px-4" style={{ background: "#FAFAF8" }}>
+      <section
+        className="faq-wrap w-full py-10 md:py-10 px-4"
+        style={{ background: "#FAFAF8", ...satoshi }}
+      >
         <div className="max-w-3xl mx-auto">
 
           {/* ── Header ── */}
           <div className="mb-12 md:mb-16 text-left">
             <div className="flex items-center gap-2 mb-4">
               <span className="h-[2px] w-6 rounded-full bg-orange-500" />
-              <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-orange-500">
+              <span
+                className="text-[10px] uppercase text-orange-500"
+                style={{ ...satoshi, fontWeight: 600, letterSpacing: '0.3em' }}
+              >
                 Got questions?
               </span>
             </div>
 
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight leading-tight mb-3">
+            <h2
+              className="text-3xl md:text-4xl text-gray-900 tracking-tight leading-tight mb-3"
+              style={{ ...satoshi, fontWeight: 900 }}
+            >
               Everything you need to know
             </h2>
 
-            <p className="text-gray-400 text-[13px] md:text-[14px] leading-relaxed max-w-sm">
+            <p
+              className="text-gray-400 text-[15px] md:text-[16px] leading-relaxed max-w-sm"
+              style={{ ...satoshi, fontWeight: 400 }}
+            >
               From admissions to placement — all your questions answered in one place.
             </p>
           </div>
@@ -92,21 +104,21 @@ export default function FAQSection() {
               <div key={i} className="faq-item">
                 <button
                   onClick={() => setOpen(open === i ? -1 : i)}
-                  className="w-full flex items-start justify-between gap-2 px-3 py-2 md:px-4 md:py-4 text-left group"
+                  className="w-full flex items-start justify-between gap-2 px-3 py-2 md:px-4 md:py-4 text-left group border-none bg-transparent cursor-pointer"
+                  style={satoshi}
                 >
                   <span
-                    className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-colors duration-200 ${
-                      open === i ? "text-orange-500" : "text-gray-900 group-hover:text-orange-400"
-                    }`}
+                    className={`text-[16px] md:text-[18px] leading-snug transition-colors duration-200 ${open === i ? "text-orange-500" : "text-gray-900 group-hover:text-orange-400"
+                      }`}
+                    style={{ ...satoshi, fontWeight: 600 }}
                   >
                     {item.q}
                   </span>
                   <span
-                    className={`shrink-0 mt-0.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
-                      open === i
-                        ? "bg-orange-500 text-white rotate-0"
-                        : "bg-gray-100 text-gray-400 group-hover:bg-orange-50 group-hover:text-orange-400"
-                    }`}
+                    className={`shrink-0 mt-0.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${open === i
+                      ? "bg-orange-500 text-white rotate-0"
+                      : "bg-gray-100 text-gray-400 group-hover:bg-orange-50 group-hover:text-orange-400"
+                      }`}
                   >
                     {open === i ? <Minus size={14} /> : <Plus size={14} />}
                   </span>
@@ -122,7 +134,10 @@ export default function FAQSection() {
                       transition={{ duration: 0.28, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 md:px-8 md:pb-7 text-gray-500 text-[14px] md:text-[15px] leading-relaxed">
+                      <div
+                        className="px-6 pb-6 md:px-8 md:pb-7 text-gray-500 text-[15px] md:text-[16px] leading-relaxed"
+                        style={{ ...satoshi, fontWeight: 400 }}
+                      >
                         {item.a}
                       </div>
                     </motion.div>
@@ -135,14 +150,23 @@ export default function FAQSection() {
           {/* ── Bottom CTA ── */}
           <div className="mt-8 md:mt-10 rounded-3xl p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border border-orange-100 bg-orange-50">
             <div>
-              <p className="text-gray-900 font-bold text-[16px] md:text-[18px] mb-1">
+              <p
+                className="text-gray-900 text-[17px] md:text-[19px] mb-1"
+                style={{ ...satoshi, fontWeight: 700 }}
+              >
                 Still have questions?
               </p>
-              <p className="text-gray-400 text-[13px] md:text-[14px]">
+              <p
+                className="text-gray-400 text-[14px] md:text-[15px]"
+                style={{ ...satoshi, fontWeight: 400 }}
+              >
                 Our team is ready to help you plan your next step.
               </p>
             </div>
-            <button className="shrink-0 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-semibold text-[14px] px-6 py-3.5 rounded-2xl transition-all duration-200 shadow-md shadow-orange-200">
+            <button
+              className="shrink-0 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white text-[15px] px-7 py-4 rounded-2xl transition-all duration-200 shadow-md shadow-orange-200 border-none cursor-pointer"
+              style={{ ...satoshi, fontWeight: 600 }}
+            >
               Speak to an Expert
               <ArrowUpRight size={16} />
             </button>

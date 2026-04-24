@@ -4,6 +4,14 @@ import {
   CreditCard, Briefcase, Zap, ArrowRight,
 } from 'lucide-react';
 
+// ─────────────────────────────────────────────────────────────────────────────
+// SETUP REQUIRED IN YOUR PROJECT:
+// index.html <head>:
+// <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
+// ─────────────────────────────────────────────────────────────────────────────
+
+const satoshi = { fontFamily: "'Satoshi', sans-serif" };
+
 const FEATURES = [
   {
     Icon: Users,
@@ -46,7 +54,6 @@ function FeatureCard({ Icon, title, desc, delay }) {
       transition={{ duration: 0.5, delay }}
       className="group flex flex-col items-start"
     >
-      {/* Reduced padding from p-5 to p-3.5 and icon size from 24 to 20 */}
       <div
         className="mb-3 p-3.5 rounded-2xl
                    text-[#FF5A1F] bg-[#FF5A1F]/[0.08]
@@ -54,19 +61,21 @@ function FeatureCard({ Icon, title, desc, delay }) {
                    transition-all duration-300"
         aria-hidden="true"
       >
-        <Icon size={20} />
+        <Icon size={22} />
       </div>
 
       <h4
-        className="font-inter font-semibold text-[#111111] tracking-tight mb-1.5
-                   group-hover:text-[#FF5A1F] transition-colors duration-200
-                   text-[16px]"
+        className="font-semibold text-[#111111] tracking-tight mb-2
+                   group-hover:text-[#FF5A1F] transition-colors duration-200"
+        style={{ ...satoshi, fontSize: 17 }}
       >
         {title}
       </h4>
 
-      <p className="font-inter font-normal text-[#111111]/55 leading-relaxed
-                    text-[13.5px]">
+      <p
+        className="font-normal text-[#111111]/55 leading-relaxed"
+        style={{ ...satoshi, fontSize: 15 }}
+      >
         {desc}
       </p>
     </motion.div>
@@ -78,6 +87,7 @@ export default function WhyUsSection() {
     <section
       className="py-6 sm:py-10 bg-white antialiased"
       aria-label="Why choose Operating Media"
+      style={satoshi}
     >
       <div className="max-w-6xl mx-auto px-6">
 
@@ -91,16 +101,26 @@ export default function WhyUsSection() {
           >
             <div className="flex items-center gap-3 mb-2">
               <span className="w-8 h-[2px] bg-[#FF5A1F] flex-shrink-0 rounded-full" aria-hidden="true" />
-              <span className="font-inter font-bold text-[#FF5A1F] uppercase tracking-widest text-[10px]">
+              <span
+                className="font-bold text-[#FF5A1F] uppercase tracking-widest"
+                style={{ ...satoshi, fontSize: 12 }}
+              >
                 Core Advantages
               </span>
             </div>
 
-            <h2 className="font-inter font-bold text-[#111111] leading-tight tracking-tight mb-3 text-[28px] sm:text-[32px]">
-              What Makes Operating Media <span className="text-[#FF5A1F]">Mumbai's #1 Choice</span>
+            <h2
+              className="font-black text-[#111111] leading-tight tracking-tight mb-3"
+              style={{ ...satoshi, fontSize: 'clamp(26px, 4vw, 36px)' }}
+            >
+              What Makes Operating Media{' '}
+              <span className="text-[#FF5A1F]">Mumbai's #1 Choice</span>
             </h2>
 
-            <p className="font-inter font-normal text-[#111111]/55 max-w-xl leading-relaxed text-[15px]">
+            <p
+              className="font-normal text-[#111111]/55 max-w-xl leading-relaxed"
+              style={{ ...satoshi, fontSize: 16 }}
+            >
               Move beyond theory to simulated agency experience and get the technical edge.
             </p>
           </motion.div>
@@ -136,20 +156,33 @@ export default function WhyUsSection() {
           />
 
           <div className="relative z-10 text-center lg:text-left">
-            <h3 className="font-inter font-bold text-white tracking-tight leading-tight mb-2 text-[20px]">
-              Ready to accelerate your <span className="text-[#FF5A1F]">Digital Career?</span>
+            <h3
+              className="font-bold text-white tracking-tight leading-tight mb-2"
+              style={{ ...satoshi, fontSize: 'clamp(18px, 3vw, 22px)' }}
+            >
+              Ready to accelerate your{' '}
+              <span className="text-[#FF5A1F]">Digital Career?</span>
             </h3>
-            <p className="font-inter font-normal text-white/45 max-w-md text-[13px]">
+            <p
+              className="font-normal text-white/50 max-w-md"
+              style={{ ...satoshi, fontSize: 15 }}
+            >
               Download our 2026 Master's Syllabus for a breakdown of 120+ tools.
             </p>
           </div>
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-            <button className="flex items-center justify-center gap-2 font-inter font-bold text-white text-[14px] px-6 py-3 rounded-xl bg-[#FF5A1F] hover:bg-white hover:text-[#111111] transition-all duration-300">
+            <button
+              className="flex items-center justify-center gap-2 font-bold text-white px-6 py-3 rounded-xl bg-[#FF5A1F] hover:bg-white hover:text-[#111111] transition-all duration-300 border-none cursor-pointer"
+              style={{ ...satoshi, fontSize: 15 }}
+            >
               Download Syllabus <Download size={16} />
             </button>
 
-            <button className="flex items-center justify-center gap-2 font-inter font-bold text-white text-[14px] px-6 py-3 rounded-xl bg-transparent border border-white/15 hover:bg-white/10 transition-all duration-300">
+            <button
+              className="flex items-center justify-center gap-2 font-bold text-white px-6 py-3 rounded-xl bg-transparent border border-white/15 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+              style={{ ...satoshi, fontSize: 15 }}
+            >
               Book Free Demo <ArrowRight size={16} />
             </button>
           </div>
