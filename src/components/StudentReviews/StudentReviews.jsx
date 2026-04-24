@@ -1,13 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, ExternalLink } from "lucide-react";
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  OPERATING MEDIA — StudentReviews
-//  Single-row infinite auto-scrolling marquee, left → right
-//  Animation is self-contained — no index.css changes needed
-//  Stack: React + Vite + Tailwind CSS v3
-// ─────────────────────────────────────────────────────────────────────────────
+const S = { fontFamily: "'Satoshi', sans-serif" };
 
 const REVIEWS = [
   {
@@ -77,17 +72,15 @@ const REVIEWS = [
   },
 ];
 
-// ── Google G icon ─────────────────────────────────────────────────────────────
 const GoogleIcon = () => (
   <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
-    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
   </svg>
 );
 
-// ── Star rating ───────────────────────────────────────────────────────────────
 const StarRating = ({ rating }) => (
   <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
     {[1, 2, 3, 4, 5].map((i) => (
@@ -101,27 +94,35 @@ const StarRating = ({ rating }) => (
   </div>
 );
 
-// ── Single review card ────────────────────────────────────────────────────────
 function ReviewCard({ review }) {
   return (
-    <div className="flex-shrink-0 w-[300px] sm:w-[340px] bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(242,101,34,0.12)] hover:border-[#F26522]/20 transition-all duration-300 flex flex-col gap-3 mx-3">
-
+    <div
+      className="flex-shrink-0 w-[300px] sm:w-[340px] bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(242,101,34,0.12)] hover:border-[#F26522]/20 transition-all duration-300 flex flex-col gap-3 mx-3"
+      style={S}
+    >
       {/* Top row */}
       <div className="flex items-start justify-between">
         <div className="flex items-center gap-3">
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
+            className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
             style={{
               background: review.bg,
               color: review.textDark ? "#0D0D0D" : "#ffffff",
+              fontFamily: "'Satoshi', sans-serif",
+              fontWeight: 800,
+              fontSize: "14px",
             }}
             aria-hidden="true"
           >
             {review.initials}
           </div>
           <div>
-            <p className="text-[14px] font-bold text-gray-900 leading-tight">{review.name}</p>
-            <p className="text-[11px] text-gray-400 mt-0.5">Google Review</p>
+            <p style={{ ...S, fontWeight: 700, fontSize: "14px", color: "#030712", lineHeight: 1.3 }}>
+              {review.name}
+            </p>
+            <p style={{ ...S, fontWeight: 400, fontSize: "11px", color: "#9CA3AF", marginTop: "2px" }}>
+              Google Review
+            </p>
           </div>
         </div>
         <GoogleIcon />
@@ -131,31 +132,45 @@ function ReviewCard({ review }) {
       <StarRating rating={review.rating} />
 
       {/* Text */}
-      <p className="text-[13px] leading-relaxed text-gray-500 line-clamp-3 flex-1">
+      <p
+        className="line-clamp-3 flex-1"
+        style={{ ...S, fontWeight: 400, fontSize: "13px", lineHeight: 1.7, color: "#4B5563" }}
+      >
         {review.text}
       </p>
 
       {/* Footer */}
       <div className="pt-3 border-t border-gray-50 flex items-center justify-between">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-gray-300 truncate mr-2">
+        <span
+          className="truncate mr-2"
+          style={{ ...S, fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#D1D5DB" }}
+        >
           {review.role}
         </span>
-        <span className="text-[11px] font-semibold text-[#F26522] shrink-0">★ Verified</span>
+        <span style={{ ...S, fontWeight: 700, fontSize: "11px", color: "#F26522", flexShrink: 0 }}>
+          ★ Verified
+        </span>
       </div>
     </div>
   );
 }
 
-// ── Main section ──────────────────────────────────────────────────────────────
 export default function StudentReviews() {
   const [paused, setPaused] = useState(false);
-
-  // Duplicate reviews for seamless infinite loop
   const doubled = [...REVIEWS, ...REVIEWS];
+
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
 
   return (
     <>
-      {/* Self-contained keyframe — no index.css needed */}
       <style>{`
         @keyframes om-marquee {
           0%   { transform: translateX(0); }
@@ -170,7 +185,8 @@ export default function StudentReviews() {
       `}</style>
 
       <section
-        className="relative w-full py-5 sm:py-10 lg:py-14 bg-white font-inter overflow-hidden"
+        className="relative w-full py-5 sm:py-10 lg:py-14 bg-white overflow-hidden"
+        style={S}
         aria-label="Student Reviews"
       >
         {/* Background glows */}
@@ -199,11 +215,23 @@ export default function StudentReviews() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="h-[3px] w-8 rounded-full bg-[#F26522] shrink-0" aria-hidden="true" />
-                <span className="text-[11px] font-black tracking-[0.2em] uppercase text-[#F26522]">
+                <span
+                  style={{ ...S, fontWeight: 800, fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#F26522" }}
+                >
                   Student Reviews
                 </span>
               </div>
-              <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-gray-950">
+              <h2
+                style={{
+                  ...S,
+                  fontWeight: 900,
+                  fontSize: "clamp(2rem, 4vw, 3rem)",
+                  lineHeight: 1.02,
+                  letterSpacing: "-0.035em",
+                  color: "#030712",
+                  margin: 0,
+                }}
+              >
                 Our Students{" "}
                 <span
                   style={{
@@ -216,7 +244,9 @@ export default function StudentReviews() {
                   Love Us
                 </span>
               </h2>
-              <p className="mt-3 text-[15px] text-gray-500 max-w-md leading-relaxed">
+              <p
+                style={{ ...S, fontWeight: 500, fontSize: "15px", color: "#4B5563", marginTop: "12px", maxWidth: "420px", lineHeight: 1.7 }}
+              >
                 Real reviews from real students — verified on Google.
               </p>
             </div>
@@ -224,17 +254,21 @@ export default function StudentReviews() {
             {/* Right — aggregate */}
             <div className="flex items-center gap-5 shrink-0">
               <div className="text-center">
-                <p className="text-[52px] font-black leading-none tracking-tight text-gray-950">
+                <p
+                  style={{ ...S, fontWeight: 900, fontSize: "52px", lineHeight: 1, letterSpacing: "-0.04em", color: "#030712" }}
+                >
                   4.8<span style={{ color: "#F26522" }}>★</span>
                 </p>
-                <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mt-1">
+                <p
+                  style={{ ...S, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#9CA3AF", marginTop: "6px" }}
+                >
                   Google Rating
                 </p>
               </div>
 
               <div className="w-px h-16 bg-gray-100" aria-hidden="true" />
 
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2.5">
                 {[
                   { dot: "#F26522", label: "1,600+ Students" },
                   { dot: "#FFB81C", label: "93% Placement Rate" },
@@ -242,7 +276,9 @@ export default function StudentReviews() {
                 ].map(({ dot, label }) => (
                   <div key={label} className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dot }} aria-hidden="true" />
-                    <span className="text-[13px] font-semibold text-gray-700">{label}</span>
+                    <span style={{ ...S, fontWeight: 600, fontSize: "13px", color: "#374151" }}>
+                      {label}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -257,7 +293,6 @@ export default function StudentReviews() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {/* The moving track — contains doubled cards for seamless loop */}
           <div className={`flex om-marquee-track${paused ? " paused" : ""}`}>
             {doubled.map((review, i) => (
               <ReviewCard key={`${review.name}-${i}`} review={review} />
@@ -289,14 +324,19 @@ export default function StudentReviews() {
             href="https://g.co/kgs/operating-media"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 bg-white border-[1.5px] border-[#F26522] text-[#F26522] hover:bg-[#F26522] hover:text-white font-bold text-[15px] px-10 py-4 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-[0_8px_24px_rgba(242,101,34,0.30)]"
+            className="group inline-flex items-center gap-3 bg-white border-[1.5px] border-[#F26522] hover:bg-[#F26522] hover:text-white rounded-2xl transition-all duration-300 shadow-sm hover:shadow-[0_8px_24px_rgba(242,101,34,0.30)]"
+            style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#F26522", padding: "16px 40px" }}
           >
             View All Reviews on Google
-            <ExternalLink size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" aria-hidden="true" />
+            <ExternalLink
+              size={15}
+              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+              aria-hidden="true"
+            />
           </a>
         </motion.div>
 
-      </section>
+      </section >
     </>
   );
 }

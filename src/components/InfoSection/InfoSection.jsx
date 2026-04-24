@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ArrowRight, MapPin, Phone,
@@ -6,11 +6,13 @@ import {
   Zap, Shield, Trophy, GraduationCap, Download
 } from "lucide-react";
 
+const S = { fontFamily: "'Satoshi', sans-serif" };
+
 const PROGRAMS = [
   {
     icon: "🎓", label: "UG in Digital Business", badge: null,
     duration: "1 Year", students: "2,400+", level: "Beginner",
-    outcomes: ["Full digital marketing foundation","Live project experience","Google & Meta certification","Internship placement support"],
+    outcomes: ["Full digital marketing foundation", "Live project experience", "Google & Meta certification", "Internship placement support"],
     modules: "12 Modules", tools: "20+ Tools",
     highlight: "Perfect for fresh graduates entering digital careers",
     heroClass: "from-blue-500 to-blue-700",
@@ -23,7 +25,7 @@ const PROGRAMS = [
   {
     icon: "🏆", label: "MBA-Level PG Program", badge: "3 SEATS LEFT",
     duration: "11 Months", students: "5,800+", level: "Advanced",
-    outcomes: ["360° digital strategy mastery","Agency simulation projects","Guaranteed placement support","Live client campaign management"],
+    outcomes: ["360° digital strategy mastery", "Agency simulation projects", "Guaranteed placement support", "Live client campaign management"],
     modules: "24 Modules", tools: "40+ Tools",
     highlight: "Our flagship program — highest placement record",
     heroClass: "from-orange-500 to-orange-700",
@@ -36,7 +38,7 @@ const PROGRAMS = [
   {
     icon: "🤖", label: "Online AI Programs", badge: "NEW",
     duration: "6 Months", students: "1,200+", level: "Intermediate",
-    outcomes: ["AI-driven marketing workflows","ChatGPT & automation tools","Remote-ready curriculum","AI content & ad creation"],
+    outcomes: ["AI-driven marketing workflows", "ChatGPT & automation tools", "Remote-ready curriculum", "AI content & ad creation"],
     modules: "16 Modules", tools: "25+ Tools",
     highlight: "Future-proof your marketing career with AI",
     heroClass: "from-violet-500 to-violet-700",
@@ -49,7 +51,7 @@ const PROGRAMS = [
   {
     icon: "📋", label: "4–6 Month Certification", badge: null,
     duration: "4–6 Months", students: "3,100+", level: "Beginner",
-    outcomes: ["Core digital marketing skills","SEO, PPC & Social Media","Industry-recognised certificate","Job-ready portfolio"],
+    outcomes: ["Core digital marketing skills", "SEO, PPC & Social Media", "Industry-recognised certificate", "Job-ready portfolio"],
     modules: "10 Modules", tools: "15+ Tools",
     highlight: "Fast-track into digital marketing",
     heroClass: "from-emerald-500 to-emerald-700",
@@ -62,7 +64,7 @@ const PROGRAMS = [
   {
     icon: "⚡", label: "Free Masterclass", badge: "FREE",
     duration: "1 Day", students: "11,000+", level: "All levels",
-    outcomes: ["Live demo session","Career path guidance","Q&A with industry experts","Free resource kit included"],
+    outcomes: ["Live demo session", "Career path guidance", "Q&A with industry experts", "Free resource kit included"],
     modules: "1 Session", tools: "Free Kit",
     highlight: "Try before you enroll — zero commitment",
     heroClass: "from-yellow-400 to-orange-500",
@@ -75,7 +77,7 @@ const PROGRAMS = [
   {
     icon: "📅", label: "Short Term Courses", badge: null,
     duration: "1–3 Months", students: "4,200+", level: "Beginner",
-    outcomes: ["Focused skill modules","SEO or Ads or Social — pick one","Flexible weekend batches","Certificate on completion"],
+    outcomes: ["Focused skill modules", "SEO or Ads or Social — pick one", "Flexible weekend batches", "Certificate on completion"],
     modules: "6 Modules", tools: "10+ Tools",
     highlight: "Learn one skill, deeply and fast",
     heroClass: "from-gray-500 to-gray-700",
@@ -88,27 +90,34 @@ const PROGRAMS = [
 ];
 
 const CAMPUSES = [
-  { name: "Andheri",  area: "Andheri West, Mumbai"  },
+  { name: "Andheri", area: "Andheri West, Mumbai" },
   { name: "Borivali", area: "Borivali West, Mumbai" },
 ];
 
 const TRUST = [
-  { Icon: Shield,        text: "Certified Faculty" },
-  { Icon: Trophy,        text: "Job Guarantee"      },
-  { Icon: GraduationCap, text: "Live Projects"      },
-  { Icon: Zap,           text: "Agency Experience"  },
+  { Icon: Shield, text: "Certified Faculty" },
+  { Icon: Trophy, text: "Job Guarantee" },
+  { Icon: GraduationCap, text: "Live Projects" },
+  { Icon: Zap, text: "Agency Experience" },
 ];
 
 export default function InfoSection() {
   const [active, setActive] = useState(1);
   const prog = PROGRAMS[active];
 
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap');
-        .info-root { font-family: 'Inter', sans-serif; }
-        .info-root .disp { font-family: 'Inter', sans-serif; }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.35} }
         .blink { animation: blink 1.5s ease-in-out infinite; }
         .enroll-btn { position: relative; overflow: hidden; }
@@ -122,12 +131,15 @@ export default function InfoSection() {
         .prog-row:hover { transform: translateX(3px); }
       `}</style>
 
-      <section className="info-root w-full bg-[#F7F6F2] py-16 px-4 sm:px-8 lg:px-14">
+      <section
+        className="w-full bg-[#F7F6F2] py-16 px-4 sm:px-8 lg:px-14"
+        style={S}
+      >
 
         {/* Eyebrow */}
         <div className="flex items-center gap-3 mb-10 max-w-7xl mx-auto">
           <span className="h-px w-8 bg-orange-400 rounded-full" />
-          <span className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-orange-500">
+          <span style={{ ...S, fontWeight: 800, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.22em", color: "#F97316" }}>
             Programs & Admissions
           </span>
         </div>
@@ -140,7 +152,7 @@ export default function InfoSection() {
 
             {/* Program list */}
             <div className="bg-white rounded-2xl p-2.5 shadow-sm">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-gray-400 px-2 pt-1 pb-2">
+              <p style={{ ...S, fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#9CA3AF", padding: "4px 8px 8px" }}>
                 Choose a Program
               </p>
               <div className="flex flex-col gap-0.5">
@@ -154,18 +166,22 @@ export default function InfoSection() {
                       ${active === i
                         ? "bg-gray-950 text-white"
                         : "bg-transparent text-gray-600 hover:bg-gray-50"}`}
+                    style={S}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <span className="text-[14px] shrink-0">{p.icon}</span>
-                      <span className="text-[12.5px] font-semibold truncate">{p.label}</span>
+                      <span style={{ fontSize: "14px", flexShrink: 0 }}>{p.icon}</span>
+                      <span style={{ ...S, fontWeight: 600, fontSize: "13px" }} className="truncate">{p.label}</span>
                     </div>
                     <div className="flex items-center gap-1.5 shrink-0">
                       {p.badge && (
-                        <span className={`text-white text-[8px] font-black uppercase tracking-wide
-                          px-1.5 py-0.5 rounded-full
-                          ${p.badge === "3 SEATS LEFT" ? "bg-red-500"
-                            : p.badge === "NEW" ? "bg-violet-500"
-                            : "bg-emerald-500"}`}>
+                        <span
+                          className={`text-white text-[8px] font-black uppercase tracking-wide
+                            px-1.5 py-0.5 rounded-full
+                            ${p.badge === "3 SEATS LEFT" ? "bg-red-500"
+                              : p.badge === "NEW" ? "bg-violet-500"
+                                : "bg-emerald-500"}`}
+                          style={{ ...S, fontWeight: 800 }}
+                        >
                           {p.badge}
                         </span>
                       )}
@@ -178,7 +194,7 @@ export default function InfoSection() {
 
             {/* Campuses */}
             <div className="bg-white rounded-2xl p-4 shadow-sm">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-gray-400 mb-3">
+              <p style={{ ...S, fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#9CA3AF", marginBottom: "12px" }}>
                 Our Campuses
               </p>
               <div className="flex flex-col gap-2">
@@ -188,11 +204,11 @@ export default function InfoSection() {
                     <div className="flex items-center gap-2">
                       <MapPin size={13} className="text-orange-500 shrink-0" strokeWidth={2} />
                       <div>
-                        <p className="text-[12px] font-bold text-gray-900 leading-tight">{c.name}</p>
-                        <p className="text-[10px] text-gray-400 mt-0.5">{c.area}</p>
+                        <p style={{ ...S, fontWeight: 700, fontSize: "13px", color: "#030712", lineHeight: 1.3 }}>{c.name}</p>
+                        <p style={{ ...S, fontWeight: 400, fontSize: "11px", color: "#9CA3AF", marginTop: "2px" }}>{c.area}</p>
                       </div>
                     </div>
-                    <span className="text-[10px] text-orange-500 font-bold cursor-pointer">
+                    <span style={{ ...S, fontWeight: 700, fontSize: "11px", color: "#F97316", cursor: "pointer" }}>
                       Directions →
                     </span>
                   </div>
@@ -206,12 +222,13 @@ export default function InfoSection() {
                 <Phone size={15} className="text-orange-500" strokeWidth={1.8} />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-[12px] font-bold text-gray-900">Talk to Admissions</p>
-                <p className="text-[10px] text-gray-400">Mon–Sat · 9am–7pm</p>
+                <p style={{ ...S, fontWeight: 700, fontSize: "13px", color: "#030712" }}>Talk to Admissions</p>
+                <p style={{ ...S, fontWeight: 400, fontSize: "11px", color: "#9CA3AF" }}>Mon–Sat · 9am–7pm</p>
               </div>
-              <button className="shrink-0 bg-gray-950 text-white text-[11px] font-bold
-                px-3 py-1.5 rounded-lg hover:bg-gray-800 transition-colors
-                cursor-pointer border-none">
+              <button
+                className="shrink-0 bg-gray-950 text-white rounded-lg hover:bg-gray-800 transition-colors cursor-pointer border-none"
+                style={{ ...S, fontWeight: 700, fontSize: "12px", padding: "6px 12px" }}
+              >
                 Call Now
               </button>
             </div>
@@ -236,35 +253,32 @@ export default function InfoSection() {
                   {/* Left */}
                   <div className="flex-1">
                     {prog.badge && (
-                      <div className="inline-flex items-center gap-1.5 bg-white/20
-                        backdrop-blur-sm rounded-full px-3 py-1 mb-4">
+                      <div className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 mb-4">
                         <span className="blink w-1.5 h-1.5 rounded-full bg-white inline-block" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-white">
+                        <span style={{ ...S, fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#fff" }}>
                           {prog.badge}
                         </span>
                       </div>
                     )}
-                    <h2 className="disp text-[clamp(1.6rem,3vw,2.4rem)] font-black text-white
-                      leading-[1.1] mb-2.5">
+                    <h2 style={{ ...S, fontWeight: 900, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#fff", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "10px" }}>
                       {prog.label}
                     </h2>
-                    <p className="text-white/75 text-[13px] max-w-sm leading-relaxed">
+                    <p style={{ ...S, fontWeight: 500, fontSize: "14px", color: "rgba(255,255,255,0.8)", maxWidth: "380px", lineHeight: 1.65 }}>
                       {prog.highlight}
                     </p>
                   </div>
 
-                  {/* Meta pills — white bg, fully readable */}
+                  {/* Meta pills */}
                   <div className="flex sm:flex-col gap-2 shrink-0">
                     {[
-                      { Icon: Clock, val: prog.duration              },
+                      { Icon: Clock, val: prog.duration },
                       { Icon: Users, val: prog.students + " enrolled" },
-                      { Icon: Star,  val: prog.level                  },
+                      { Icon: Star, val: prog.level },
                     ].map(({ Icon, val }) => (
                       <div key={val}
-                        className="inline-flex items-center gap-2
-                          bg-white/90 backdrop-blur-sm rounded-xl px-3 py-1.5">
+                        className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-xl px-3 py-1.5">
                         <Icon size={12} className={prog.accent} strokeWidth={2} />
-                        <span className="text-[11.5px] font-bold text-gray-900 whitespace-nowrap">
+                        <span style={{ ...S, fontWeight: 700, fontSize: "12px", color: "#030712", whiteSpace: "nowrap" }}>
                           {val}
                         </span>
                       </div>
@@ -278,8 +292,7 @@ export default function InfoSection() {
 
                 {/* What you'll learn */}
                 <div className="bg-white rounded-2xl p-6 shadow-sm flex flex-col">
-                  <p className="text-[10px] font-extrabold uppercase tracking-[0.2em]
-                    text-gray-400 mb-4">
+                  <p style={{ ...S, fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#9CA3AF", marginBottom: "16px" }}>
                     What You'll Learn
                   </p>
 
@@ -287,9 +300,8 @@ export default function InfoSection() {
                   <div className="grid grid-cols-2 gap-x-4 gap-y-3 mb-5">
                     {prog.outcomes.map((o, i) => (
                       <div key={i} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={15} className={`${prog.accentCheck} shrink-0 mt-0.5`}
-                          strokeWidth={2.5} />
-                        <p className="text-[13px] font-medium text-gray-700 leading-snug">{o}</p>
+                        <CheckCircle2 size={15} className={`${prog.accentCheck} shrink-0 mt-0.5`} strokeWidth={2.5} />
+                        <p style={{ ...S, fontWeight: 500, fontSize: "13px", color: "#374151", lineHeight: 1.5 }}>{o}</p>
                       </div>
                     ))}
                   </div>
@@ -297,16 +309,14 @@ export default function InfoSection() {
                   {/* Stats row */}
                   <div className="flex gap-3 mb-5">
                     {[
-                      { label: "Modules",  val: prog.modules  },
-                      { label: "Tools",    val: prog.tools    },
+                      { label: "Modules", val: prog.modules },
+                      { label: "Tools", val: prog.tools },
                       { label: "Duration", val: prog.duration },
                     ].map(({ label, val }) => (
                       <div key={label}
-                        className="flex-1 bg-gray-50 border border-gray-100
-                          rounded-xl px-3 py-2.5 text-center">
-                        <p className="text-[14px] font-black text-gray-950 leading-tight">{val}</p>
-                        <p className="text-[9px] font-bold uppercase tracking-widest
-                          text-gray-400 mt-1">{label}</p>
+                        className="flex-1 bg-gray-50 border border-gray-100 rounded-xl px-3 py-2.5 text-center">
+                        <p style={{ ...S, fontWeight: 900, fontSize: "14px", color: "#030712", lineHeight: 1.2 }}>{val}</p>
+                        <p style={{ ...S, fontWeight: 700, fontSize: "9px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#9CA3AF", marginTop: "4px" }}>{label}</p>
                       </div>
                     ))}
                   </div>
@@ -318,35 +328,33 @@ export default function InfoSection() {
                     {TRUST.map(({ Icon, text }) => (
                       <div key={text} className="flex items-center gap-1.5">
                         <Icon size={13} className={`${prog.accentCheck} shrink-0`} strokeWidth={1.8} />
-                        <span className="text-[11.5px] font-semibold text-gray-500">{text}</span>
+                        <span style={{ ...S, fontWeight: 600, fontSize: "12px", color: "#4B5563" }}>{text}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
                 {/* Enroll card */}
-                <div className={`bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col
-                  border-t-4 ${prog.accentBorder}`}>
+                <div className={`bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col border-t-4 ${prog.accentBorder}`}>
                   <div className="p-5 flex flex-col gap-3.5 flex-1">
-                    <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-gray-400">
+                    <p style={{ ...S, fontWeight: 800, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#9CA3AF" }}>
                       Get Started
                     </p>
 
                     {/* Social proof */}
                     <div className="bg-gray-50 rounded-xl px-3.5 py-3">
-                      <p className="text-[13px] text-gray-500 leading-relaxed">
+                      <p style={{ ...S, fontWeight: 500, fontSize: "13px", color: "#4B5563", lineHeight: 1.6 }}>
                         Join{" "}
-                        <span className="font-extrabold text-gray-950">{prog.students}</span>
+                        <span style={{ fontWeight: 800, color: "#030712" }}>{prog.students}</span>
                         {" "}students already enrolled.
                       </p>
                     </div>
 
                     {/* Urgency */}
                     {prog.badge === "3 SEATS LEFT" && (
-                      <div className="flex items-center gap-2 bg-red-50
-                        border border-red-100 rounded-xl px-3 py-2.5">
+                      <div className="flex items-center gap-2 bg-red-50 border border-red-100 rounded-xl px-3 py-2.5">
                         <span className="blink w-2 h-2 rounded-full bg-red-500 shrink-0 inline-block" />
-                        <span className="text-[11.5px] font-bold text-red-600">
+                        <span style={{ ...S, fontWeight: 700, fontSize: "12px", color: "#DC2626" }}>
                           Only 3 seats remaining
                         </span>
                       </div>
@@ -355,10 +363,11 @@ export default function InfoSection() {
                     {/* Enroll button */}
                     <button
                       className={`enroll-btn group w-full py-3.5 rounded-xl text-white
-                        font-extrabold text-[14px] flex items-center justify-center gap-2
+                        flex items-center justify-center gap-2
                         bg-gradient-to-r ${prog.btnGradient} ${prog.btnShadow}
                         hover:scale-[1.02] active:scale-[0.98]
                         transition-transform duration-150 border-none cursor-pointer`}
+                      style={{ ...S, fontWeight: 800, fontSize: "15px" }}
                     >
                       Enroll Now
                       <ArrowRight size={15} strokeWidth={2.5}
@@ -367,20 +376,21 @@ export default function InfoSection() {
 
                     {/* Brochure button */}
                     <button
-                      className={`w-full py-3 rounded-xl bg-transparent font-semibold
-                        text-[13px] text-gray-600 flex items-center justify-center gap-2
+                      className={`w-full py-3 rounded-xl bg-transparent
+                        flex items-center justify-center gap-2
                         border-[1.5px] border-gray-200
-                        hover:${prog.accentBorder} hover:${prog.accent}
+                        hover:border-gray-400
                         transition-colors duration-150 cursor-pointer`}
+                      style={{ ...S, fontWeight: 600, fontSize: "13px", color: "#4B5563" }}
                     >
                       <Download size={13} strokeWidth={2} />
                       Download Brochure
                     </button>
 
                     {/* EMI */}
-                    <p className="text-[11px] text-gray-400 text-center">
+                    <p style={{ ...S, fontWeight: 400, fontSize: "12px", color: "#9CA3AF", textAlign: "center" }}>
                       EMI from{" "}
-                      <span className="font-bold text-gray-600">₹3,500/mo</span>
+                      <span style={{ fontWeight: 700, color: "#374151" }}>₹3,500/mo</span>
                       {" "}· 0% interest
                     </p>
                   </div>
