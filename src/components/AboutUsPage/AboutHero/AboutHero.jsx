@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  ArrowRight, Globe, Layers, Zap, Check, 
-  Search, Sparkles, MousePointer2, Target, Eye, Heart 
+import {
+  ArrowRight, Globe, Layers, Zap, Check,
+  Search, Sparkles, MousePointer2, Target, Eye, Heart
 } from 'lucide-react';
 
+const SATOSHI = "'Satoshi', sans-serif";
+
 const AboutHero = () => {
+  // Inject Satoshi font
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.setAttribute('data-font', 'satoshi');
+      link.href = 'https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap';
+      document.head.appendChild(link);
+    }
+  }, []);
+
   // 1. Data Definitions
   const PROGRAMS = [
     { title: "Digital Marketing", icon: "🚀", rotate: -12, color: "bg-emerald-50" },
@@ -58,8 +71,11 @@ const AboutHero = () => {
   };
 
   return (
-    <div className="bg-[#FAF9F6] font-['Inter',sans-serif] selection:bg-orange-500 selection:text-white antialiased">
-      
+    <div
+      className="bg-[#FAF9F6] selection:bg-orange-500 selection:text-white antialiased"
+      style={{ fontFamily: SATOSHI }}
+    >
+
       {/* ── SECTION 1: THE VIBRANT GRADIENT HERO ─────────────────────── */}
       <section className="relative min-h-screen flex items-center overflow-hidden pt-20 pb-32 px-6 bg-gradient-to-br from-[#854909] via-[#f07e37] to-[#f07e37]">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl -mr-32 -mt-32" />
@@ -67,61 +83,111 @@ const AboutHero = () => {
 
         <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
           <motion.div initial="hidden" animate="visible" variants={containerVars}>
-            <motion.div variants={itemVars} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-8">
-               <Sparkles size={14} className="text-yellow-300" />
-               <span className="text-[11px] font-bold text-white uppercase tracking-[0.25em]">Learning Today. Leading Tomorrow.</span>
+
+            {/* Eyebrow pill */}
+            <motion.div
+              variants={itemVars}
+              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-8"
+            >
+              <Sparkles size={14} className="text-yellow-300" />
+              <span
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.25em', color: '#fff' }}
+              >
+                Learning Today. Leading Tomorrow.
+              </span>
             </motion.div>
 
-            <motion.h1 variants={itemVars} className="text-5xl md:text-8xl font-[900] text-white tracking-[-0.05em] leading-[0.9] mb-8">
+            {/* H1 */}
+            <motion.h1
+              variants={itemVars}
+              style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(2.8rem, 8vw, 5.5rem)', letterSpacing: '-0.05em', lineHeight: 0.9, color: '#fff', marginBottom: '32px' }}
+            >
               The World's Best <br />
-              <span className="text-[#bef264]">Online Institute.</span>
+              <span style={{ color: '#bef264' }}>Online Institute.</span>
             </motion.h1>
 
-            <motion.p variants={itemVars} className="font-[700] text-[24px] text-white/90 leading-tight tracking-tight mb-10 max-w-lg">
-              Operating Media is Mumbai’s premier engine for outcome-driven digital marketing education.
+            {/* Subtitle */}
+            <motion.p
+              variants={itemVars}
+              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)', color: 'rgba(255,255,255,0.9)', lineHeight: 1.35, letterSpacing: '-0.01em', marginBottom: '40px', maxWidth: '520px' }}
+            >
+              Operating Media is Mumbai's premier engine for outcome-driven digital marketing education.
             </motion.p>
 
+            {/* CTA row */}
             <motion.div variants={itemVars} className="flex flex-wrap items-center gap-6">
-              <button className="bg-white text-[#064e3b] px-10 py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#bef264] transition-all shadow-2xl">
+              <button
+                className="bg-white text-[#064e3b] rounded-2xl hover:bg-[#bef264] transition-all shadow-2xl"
+                style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em', padding: '20px 40px' }}
+              >
                 Find Your Programme
               </button>
               <div className="flex -space-x-3">
-                {[1,2,3,4].map(i => <div key={i} className="w-10 h-10 rounded-full border-2 border-[#064e3b] bg-gray-200" />)}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#bef264] text-[#064e3b] text-[10px] font-bold border-2 border-[#064e3b]">+11K</div>
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-[#064e3b] bg-gray-200" />
+                ))}
+                <div
+                  className="flex items-center justify-center w-10 h-10 rounded-full bg-[#bef264] border-2 border-[#064e3b]"
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '10px', color: '#064e3b' }}
+                >
+                  +11K
+                </div>
               </div>
             </motion.div>
           </motion.div>
 
+          {/* Right: Program cards */}
           <div className="relative h-[500px] flex items-center justify-center">
             <div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-[48px] border border-white/10 overflow-hidden shadow-2xl">
-               <div className="relative h-full w-full flex flex-col items-center justify-center pt-10">
-                  <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="bg-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg z-30 mb-auto mt-10 border border-emerald-100">
-                    <Search className="w-4 h-4 text-[#065f46]" />
-                    <span className="text-[12px] font-bold text-gray-400 uppercase tracking-widest">Find your programme</span>
-                  </motion.div>
-                  <div className="relative w-full flex justify-center h-64 mt-auto mb-[-40px]">
-                    {PROGRAMS.map((prog, i) => (
-                      <motion.div key={i} custom={{ rotate: prog.rotate, index: i }} variants={cardVariants} initial="hidden" animate="visible" whileHover={{ scale: 1.05, zIndex: 50, y: -20 }} className={`absolute w-44 md:w-56 aspect-[3/4] ${prog.color} rounded-2xl shadow-2xl p-6 border border-emerald-100/50 flex flex-col items-center text-center justify-center transition-all cursor-pointer`} style={{ zIndex: i === 1 ? 20 : 10 }}>
-                        <span className="text-4xl mb-4">{prog.icon}</span>
-                        <h3 className="font-[700] text-[16px] md:text-[18px] text-[#0A0A0B] leading-tight uppercase tracking-tight">{prog.title}</h3>
-                        <div className="mt-4 w-8 h-1 bg-[#065f46] rounded-full" />
-                      </motion.div>
-                    ))}
-                  </div>
-               </div>
+              <div className="relative h-full w-full flex flex-col items-center justify-center pt-10">
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="bg-white rounded-full px-6 py-3 flex items-center gap-3 shadow-lg z-30 mb-auto mt-10 border border-emerald-100"
+                >
+                  <Search className="w-4 h-4 text-[#065f46]" />
+                  <span
+                    style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.2em', color: '#9CA3AF' }}
+                  >
+                    Find your programme
+                  </span>
+                </motion.div>
+
+                <div className="relative w-full flex justify-center h-64 mt-auto mb-[-40px]">
+                  {PROGRAMS.map((prog, i) => (
+                    <motion.div
+                      key={i}
+                      custom={{ rotate: prog.rotate, index: i }}
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="visible"
+                      whileHover={{ scale: 1.05, zIndex: 50, y: -20 }}
+                      className={`absolute w-44 md:w-56 aspect-[3/4] ${prog.color} rounded-2xl shadow-2xl p-6 border border-emerald-100/50 flex flex-col items-center text-center justify-center transition-all cursor-pointer`}
+                      style={{ zIndex: i === 1 ? 20 : 10 }}
+                    >
+                      <span className="text-4xl mb-4">{prog.icon}</span>
+                      <h3
+                        style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: 'clamp(14px, 1.5vw, 18px)', color: '#0A0A0B', lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '-0.01em' }}
+                      >
+                        {prog.title}
+                      </h3>
+                      <div className="mt-4 w-8 h-1 bg-[#065f46] rounded-full" />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-     
       </section>
 
-      {/* ── SECTION 2: INSTITUTIONAL CORE (NEW SECTION) ──────────────── */}
+      {/* ── SECTION 2: INSTITUTIONAL CORE ────────────────────────────── */}
       <section className="py-24 lg:py-32 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {CORE_VALUES.map((item, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -137,12 +203,14 @@ const AboutHero = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className={`font-[700] text-[24px] tracking-tight uppercase leading-none
-                    ${item.highlight ? 'text-white' : 'text-slate-900'}`}>
+                  <h3
+                    style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '26px', letterSpacing: '-0.02em', textTransform: 'uppercase', lineHeight: 1, color: item.highlight ? '#fff' : '#0f172a' }}
+                  >
                     {item.title}
                   </h3>
-                  <p className={`text-base leading-relaxed font-medium
-                    ${item.highlight ? 'text-white/80' : 'text-slate-500'}`}>
+                  <p
+                    style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: '15.5px', lineHeight: 1.7, color: item.highlight ? 'rgba(255,255,255,0.82)' : '#64748b' }}
+                  >
                     {item.desc}
                   </p>
                 </div>
@@ -156,33 +224,76 @@ const AboutHero = () => {
       <section className="py-14 px-6 bg-[#FAF9F6]">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <motion.div whileHover={{ y: -10 }} className="md:col-span-2 bg-white p-12 rounded-[40px] border border-gray-100 flex flex-col justify-between h-[450px]">
+
+            {/* Vision card */}
+            <motion.div
+              whileHover={{ y: -10 }}
+              className="md:col-span-2 bg-white p-12 rounded-[40px] border border-gray-100 flex flex-col justify-between h-[450px]"
+            >
               <div>
                 <Layers className="text-orange-500 w-10 h-10 mb-8" />
-                <h3 className="font-[700] text-[24px] text-[#0A0A0B] mb-6 tracking-tight uppercase">Our Institutional Vision</h3>
-                <p className="text-gray-500 text-lg leading-relaxed max-w-xl font-medium">To democratize elite marketing education by bridging the gap between theoretical knowledge and real-world agency performance.</p>
+                <h3
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '26px', color: '#0A0A0B', marginBottom: '24px', letterSpacing: '-0.02em', textTransform: 'uppercase' }}
+                >
+                  Our Institutional Vision
+                </h3>
+                <p
+                  style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: '17px', lineHeight: 1.7, color: '#6B7280', maxWidth: '560px' }}
+                >
+                  To democratize elite marketing education by bridging the gap between theoretical knowledge and real-world agency performance.
+                </p>
               </div>
-              <div className="flex items-center gap-4 text-orange-500 font-bold text-sm tracking-widest uppercase cursor-pointer group">
+              <div
+                className="flex items-center gap-4 text-orange-500 cursor-pointer group"
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '13px', letterSpacing: '0.15em', textTransform: 'uppercase' }}
+              >
                 LEARN MORE <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
               </div>
             </motion.div>
 
+            {/* Placement rate */}
             <div className="bg-[#0A0A0B] p-10 rounded-[40px] text-white flex flex-col justify-center items-center text-center shadow-xl">
-              <span className="text-7xl font-[900] text-orange-500 mb-2 tracking-tighter">98%</span>
-              <p className="font-[700] text-[24px] mb-2 tracking-tight">Placement Rate</p>
+              <span
+                style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(4rem, 8vw, 5rem)', color: '#F97316', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: '8px' }}
+              >
+                98%
+              </span>
+              <p
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '22px', letterSpacing: '-0.02em', color: '#fff' }}
+              >
+                Placement Rate
+              </p>
             </div>
 
+            {/* Agency First */}
             <div className="bg-orange-50 p-10 rounded-[40px] border border-orange-100 flex flex-col justify-center items-center text-center">
-              <div className="w-14 h-14 bg-orange-500 rounded-2xl flex items-center justify-center text-white mb-6"><Zap fill="white" /></div>
-              <h3 className="font-[700] text-[24px] text-[#0A0A0B] mb-4 tracking-tight uppercase">Agency First</h3>
+              <div className="w-14 h-14 bg-orange-500 rounded-2xl flex items-center justify-center text-white mb-6">
+                <Zap fill="white" />
+              </div>
+              <h3
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '24px', color: '#0A0A0B', letterSpacing: '-0.02em', textTransform: 'uppercase' }}
+              >
+                Agency First
+              </h3>
             </div>
 
+            {/* Practical mission */}
             <div className="md:col-span-2 bg-white p-10 rounded-[40px] border border-gray-100 flex flex-col md:flex-row gap-8 items-center">
-               <div className="w-full md:w-[40%] aspect-video rounded-3xl overflow-hidden shadow-lg bg-gray-100 flex items-center justify-center text-gray-300"><Globe size={40} /></div>
-               <div className="flex-1">
-                  <h3 className="font-[700] text-[24px] text-[#0A0A0B] mb-4 tracking-tight uppercase">Practical Mission</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed font-medium">Our mission is simple: Providing high-pressure hands-on experience on real ad accounts and real budgets.</p>
-               </div>
+              <div className="w-full md:w-[40%] aspect-video rounded-3xl overflow-hidden shadow-lg bg-gray-100 flex items-center justify-center text-gray-300">
+                <Globe size={40} />
+              </div>
+              <div className="flex-1">
+                <h3
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '24px', color: '#0A0A0B', marginBottom: '16px', letterSpacing: '-0.02em', textTransform: 'uppercase' }}
+                >
+                  Practical Mission
+                </h3>
+                <p
+                  style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: '15px', lineHeight: 1.7, color: '#6B7280' }}
+                >
+                  Our mission is simple: Providing high-pressure hands-on experience on real ad accounts and real budgets.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -192,25 +303,56 @@ const AboutHero = () => {
       <section className="py-14 px-6 bg-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div>
-             <motion.h2 initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} className="text-4xl md:text-5xl font-[900] text-[#0A0A0B] tracking-[-0.04em] leading-tight mb-8">
-              Industry Leading <br /> Experts & <span className="text-orange-500">Mentors.</span>
+            <motion.h2
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', color: '#0A0A0B', letterSpacing: '-0.04em', lineHeight: 1.1, marginBottom: '32px' }}
+            >
+              Industry Leading <br /> Experts &{' '}
+              <span style={{ color: '#F97316' }}>Mentors.</span>
             </motion.h2>
             <div className="space-y-6">
-              {["15+ Years of Industry Leadership", "Certified Training Professionals", "250+ Global Hiring Partners", "Advanced Lab Infrastructure"].map((text, i) => (
+              {[
+                "15+ Years of Industry Leadership",
+                "Certified Training Professionals",
+                "250+ Global Hiring Partners",
+                "Advanced Lab Infrastructure",
+              ].map((text, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-500"><Check size={14} strokeWidth={3} /></div>
-                  <span className="font-[700] text-[20px] text-[#0A0A0B] tracking-tight">{text}</span>
+                  <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 shrink-0">
+                    <Check size={14} strokeWidth={3} />
+                  </div>
+                  <span
+                    style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '18px', color: '#0A0A0B', letterSpacing: '-0.01em' }}
+                  >
+                    {text}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
+          {/* Why choose us card */}
           <div className="bg-white p-12 rounded-[50px] shadow-2xl shadow-gray-200/50 border border-gray-100 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-bl-[100px] -z-0" />
-            <h3 className="text-[24px] font-[700] text-[#0A0A0B] mb-6 relative z-10 uppercase tracking-tight">Why Professionals Choose Us?</h3>
-            <p className="text-gray-500 leading-relaxed mb-8 relative z-10 font-medium">Operating Media has evolved into a powerhouse of knowledge. We don't just provide a certificate; we provide a career launchpad with alumni in top global roles.</p>
-            <button className="flex items-center gap-3 text-orange-500 font-black uppercase tracking-widest text-[12px] group">
-              VIEW OUR CAREER PORTAL <ArrowRight size={16} className="group-hover:translate-x-2 transition-all" />
+            <h3
+              className="relative z-10"
+              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '22px', color: '#0A0A0B', marginBottom: '24px', textTransform: 'uppercase', letterSpacing: '-0.01em' }}
+            >
+              Why Professionals Choose Us?
+            </h3>
+            <p
+              className="relative z-10"
+              style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: '15.5px', lineHeight: 1.75, color: '#6B7280', marginBottom: '32px' }}
+            >
+              Operating Media has evolved into a powerhouse of knowledge. We don't just provide a certificate; we provide a career launchpad with alumni in top global roles.
+            </p>
+            <button
+              className="flex items-center gap-3 text-orange-500 group"
+              style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.15em' }}
+            >
+              VIEW OUR CAREER PORTAL
+              <ArrowRight size={16} className="group-hover:translate-x-2 transition-all" />
             </button>
           </div>
         </div>

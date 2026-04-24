@@ -8,10 +8,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 
-/**
- * AboutNarrative refactored for React + Vite + Tailwind.
- * All inline CSS removed and replaced with Tailwind utility classes.
- */
+const SATOSHI = "'Satoshi', sans-serif";
 
 /* ─────────────────────────────────────────────
    COUNT-UP HOOK
@@ -84,7 +81,9 @@ function Label({ children }) {
   return (
     <div className="inline-flex items-center gap-2 mb-5">
       <span className="w-5 h-px bg-orange-500" />
-      <span className="font-inter font-bold text-[11px] tracking-[0.18em] text-orange-500 uppercase">
+      <span
+        style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", letterSpacing: "0.18em", color: "#F97316", textTransform: "uppercase" }}
+      >
         {children}
       </span>
     </div>
@@ -144,7 +143,9 @@ function Ticker() {
       >
         {items.map((t, i) => (
           <span key={i} className="flex items-center shrink-0">
-            <span className="font-inter font-bold text-[10px] tracking-[0.2em] text-white/30 uppercase whitespace-nowrap px-7">
+            <span
+              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.2em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", whiteSpace: "nowrap", padding: "0 28px" }}
+            >
               {t}
             </span>
             <span className="text-orange-500 text-[8px]">◆</span>
@@ -162,7 +163,9 @@ function FeaturePill({ icon, text }) {
   return (
     <div className="inline-flex items-center gap-2.5 bg-white border border-neutral-100 rounded-2xl px-4 py-3 shadow-sm hover:border-orange-200 hover:shadow-md transition-all duration-200 cursor-default">
       <span className="text-base">{icon}</span>
-      <span className="font-inter font-semibold text-[13px] text-neutral-800 whitespace-nowrap">
+      <span
+        style={{ fontFamily: SATOSHI, fontWeight: 600, fontSize: "13.5px", color: "#1a1a1a", whiteSpace: "nowrap" }}
+      >
         {text}
       </span>
     </div>
@@ -202,6 +205,7 @@ function TestimonialSlider() {
     );
     return () => clearInterval(t);
   }, []);
+
   return (
     <div className="grid md:grid-cols-[1fr_260px] gap-6 items-start">
       <AnimatePresence mode="wait">
@@ -213,10 +217,16 @@ function TestimonialSlider() {
           transition={{ duration: 0.35 }}
           className="bg-neutral-950 rounded-3xl p-8 md:p-10"
         >
-          <span className="text-[56px] leading-none text-orange-500/25 font-serif block mb-4">
+          <span
+            className="block mb-4 text-orange-500/25"
+            style={{ fontSize: "56px", lineHeight: 1, fontFamily: "Georgia, serif" }}
+          >
             "
           </span>
-          <p className="font-inter font-medium text-[clamp(16px,2vw,20px)] lg:leading-[1.8] tracking-[-0.01em] text-white/80 mb-8">
+          <p
+            className="mb-8"
+            style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: "clamp(16px,2vw,20px)", lineHeight: 1.8, letterSpacing: "-0.01em", color: "rgba(255,255,255,0.82)" }}
+          >
             {TESTIMONIALS[active].text}
           </p>
           <div className="flex items-center gap-4">
@@ -226,22 +236,20 @@ function TestimonialSlider() {
               className="w-11 h-11 rounded-full object-cover border-2 border-orange-500/30"
             />
             <div>
-              <p className="font-inter font-bold text-sm text-white">
+              <p
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "14px", color: "#fff" }}
+              >
                 {TESTIMONIALS[active].name}
               </p>
-              <p className="font-inter font-medium text-[12px] text-orange-400/70">
+              <p
+                style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: "12px", color: "rgba(251,146,60,0.75)" }}
+              >
                 {TESTIMONIALS[active].role}
               </p>
             </div>
             <div className="ml-auto flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="#f97316"
-                >
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#f97316">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
               ))}
@@ -249,16 +257,16 @@ function TestimonialSlider() {
           </div>
         </motion.div>
       </AnimatePresence>
+
       <div className="flex flex-col gap-2">
         {TESTIMONIALS.map((t, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`text-left p-4 rounded-2xl border transition-all duration-200 cursor-pointer ${
-              active === i
-                ? "bg-orange-50 border-orange-200"
-                : "bg-white border-neutral-100 hover:border-neutral-200"
-            }`}
+            className={`text-left p-4 rounded-2xl border transition-all duration-200 cursor-pointer ${active === i
+              ? "bg-orange-50 border-orange-200"
+              : "bg-white border-neutral-100 hover:border-neutral-200"
+              }`}
           >
             <div className="flex items-center gap-3">
               <img
@@ -268,13 +276,14 @@ function TestimonialSlider() {
               />
               <div>
                 <p
-                  className={`font-inter font-bold text-[12px] ${
-                    active === i ? "text-orange-600" : "text-neutral-600"
-                  }`}
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "12px", color: active === i ? "#ea580c" : "#525252" }}
                 >
                   {t.name}
                 </p>
-                <p className="font-inter font-normal text-[11px] text-neutral-400 truncate max-w-[160px]">
+                <p
+                  className="truncate max-w-[160px]"
+                  style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "11px", color: "#a3a3a3" }}
+                >
                   {t.role.split("@")[1]?.trim()}
                 </p>
               </div>
@@ -286,9 +295,8 @@ function TestimonialSlider() {
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`rounded-full transition-all duration-300 cursor-pointer border-none ${
-                active === i ? "w-6 h-2 bg-orange-500" : "w-2 h-2 bg-neutral-200 hover:bg-neutral-400"
-              }`}
+              className={`rounded-full transition-all duration-300 cursor-pointer border-none ${active === i ? "w-6 h-2 bg-orange-500" : "w-2 h-2 bg-neutral-200 hover:bg-neutral-400"
+                }`}
             />
           ))}
         </div>
@@ -301,8 +309,22 @@ function TestimonialSlider() {
    MAIN COMPONENT
 ═════════════════════════════════════════════ */
 export default function AboutNarrative() {
+  // Inject Satoshi font
+  useEffect(() => {
+    if (!document.querySelector('link[data-font="satoshi"]')) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.setAttribute("data-font", "satoshi");
+      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+      document.head.appendChild(link);
+    }
+  }, []);
+
   return (
-    <section className="bg-white overflow-x-hidden selection:bg-orange-500 selection:text-white font-inter">
+    <section
+      className="bg-white overflow-x-hidden selection:bg-orange-500 selection:text-white"
+      style={{ fontFamily: SATOSHI }}
+    >
       {/* ── TICKER ── */}
       <Ticker />
 
@@ -314,10 +336,12 @@ export default function AboutNarrative() {
           <div className="grid lg:grid-cols-[1fr_340px] gap-12 lg:gap-20 items-end">
             <FadeLeft>
               <Label>Our Story</Label>
-              <h1 className="font-inter font-extrabold text-[clamp(46px,6.5vw,88px)] tracking-[-0.04em] leading-[0.96] text-neutral-950">
+              <h1
+                style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(46px,6.5vw,88px)", letterSpacing: "-0.04em", lineHeight: 0.96, color: "#0a0a0b" }}
+              >
                 One of India's{" "}
                 <span className="relative inline-block">
-                  <span className="text-orange-500">Top 5</span>
+                  <span style={{ color: "#F97316" }}>Top 5</span>
                   <motion.span
                     className="absolute -bottom-1 left-0 h-[3px] bg-orange-500 rounded-full block w-full"
                     initial={{ scaleX: 0, originX: 0 }}
@@ -334,16 +358,19 @@ export default function AboutNarrative() {
             </FadeLeft>
 
             <FadeRight delay={0.2}>
-              <p className="font-inter font-normal text-base leading-[1.85] text-neutral-500 mb-6">
+              <p
+                className="mb-6"
+                style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "16px", lineHeight: 1.85, color: "#737373" }}
+              >
                 Since 2011, Operating Media has been shaping digital marketing professionals with
                 world-class training, industry-certified instructors, and a relentlessly practical approach.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="font-inter font-bold text-[13px] text-neutral-900">Est. 2011</span>
+                <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#0a0a0b" }}>Est. 2011</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-300" />
-                <span className="font-inter font-bold text-[13px] text-neutral-900">Mumbai, India</span>
+                <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#0a0a0b" }}>Mumbai, India</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-300" />
-                <span className="font-inter font-bold text-[13px] text-orange-500">14 Years Strong</span>
+                <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#F97316" }}>14 Years Strong</span>
               </div>
             </FadeRight>
           </div>
@@ -373,18 +400,24 @@ export default function AboutNarrative() {
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
-          <div>
-            <p className="font-inter font-bold text-[10px] tracking-[0.18em] text-white/45 uppercase mb-1">Established</p>
-            <p className="font-inter font-extrabold text-[clamp(32px,5vw,52px)] tracking-[-0.04em] leading-none text-white">2011</p>
-          </div>
-          <div>
-            <p className="font-inter font-bold text-[10px] tracking-[0.18em] text-white/45 uppercase mb-1">Students Trained</p>
-            <p className="font-inter font-extrabold text-[clamp(32px,5vw,52px)] tracking-[-0.04em] leading-none text-white">11,000+</p>
-          </div>
-          <div>
-            <p className="font-inter font-bold text-[10px] tracking-[0.18em] text-white/45 uppercase mb-1">Placement Rate</p>
-            <p className="font-inter font-extrabold text-[clamp(32px,5vw,52px)] tracking-[-0.04em] leading-none text-white">98%</p>
-          </div>
+          {[
+            { label: "Established", value: "2011" },
+            { label: "Students Trained", value: "11,000+" },
+            { label: "Placement Rate", value: "98%" },
+          ].map(({ label, value }) => (
+            <div key={label}>
+              <p
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.45)", textTransform: "uppercase", marginBottom: "4px" }}
+              >
+                {label}
+              </p>
+              <p
+                style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(32px,5vw,52px)", letterSpacing: "-0.04em", lineHeight: 1, color: "#fff" }}
+              >
+                {value}
+              </p>
+            </div>
+          ))}
         </motion.div>
       </motion.div>
 
@@ -397,21 +430,27 @@ export default function AboutNarrative() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <FadeLeft>
             <Label>Who We Are</Label>
-            <h2 className="font-inter font-extrabold text-[clamp(32px,4vw,52px)] tracking-[-0.04em] leading-[1.05] text-neutral-950 mb-8">
+            <h2
+              className="mb-8"
+              style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(32px,4vw,52px)", letterSpacing: "-0.04em", lineHeight: 1.05, color: "#0a0a0b" }}
+            >
               A local initiative
               <br />
-              with <span className="text-orange-500">global influence.</span>
+              with <span style={{ color: "#F97316" }}>global influence.</span>
             </h2>
-            <div className="space-y-5 mb-10 text-neutral-500 font-inter font-normal text-[15px] leading-[1.9]">
-              <p>
-                We are <strong className="font-bold text-neutral-900">Operating Media</strong>, one of the leading Digital Marketing Training providers in India. If you aspire to be a Digital Marketing expert and want to excel in Internet Marketing, you are at the right place.
-              </p>
-              <p>
-                We also offer customized Digital Marketing Workshops for <strong className="font-bold text-neutral-900">corporate organizations</strong> who want to take their businesses to the next level by leveraging Digital Marketing.
-              </p>
-              <p>
-                With leading industry experts and <strong className="font-bold text-neutral-900">world-class infrastructure</strong>, our team consists of <span className="text-orange-500 font-semibold">certified professionals</span> with deep field experience in their respective domains.
-              </p>
+            <div className="space-y-5 mb-10">
+              {[
+                <>We are <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>Operating Media</strong>, one of the leading Digital Marketing Training providers in India. If you aspire to be a Digital Marketing expert and want to excel in Internet Marketing, you are at the right place.</>,
+                <>We also offer customized Digital Marketing Workshops for <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>corporate organizations</strong> who want to take their businesses to the next level by leveraging Digital Marketing.</>,
+                <>With leading industry experts and <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>world-class infrastructure</strong>, our team consists of <span style={{ color: "#F97316", fontWeight: 600 }}>certified professionals</span> with deep field experience in their respective domains.</>,
+              ].map((content, i) => (
+                <p
+                  key={i}
+                  style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "15.5px", lineHeight: 1.9, color: "#737373" }}
+                >
+                  {content}
+                </p>
+              ))}
             </div>
             <div className="flex flex-wrap gap-2.5">
               {[
@@ -435,7 +474,10 @@ export default function AboutNarrative() {
 
           <FadeRight delay={0.15}>
             <div className="relative">
-              <span className="absolute font-inter font-black text-[clamp(120px,18vw,200px)] tracking-[-0.05em] text-neutral-100 leading-none select-none pointer-events-none z-0 -top-10 -right-4">
+              <span
+                className="absolute leading-none select-none pointer-events-none z-0 -top-10 -right-4"
+                style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: "clamp(120px,18vw,200px)", letterSpacing: "-0.05em", color: "#f3f4f6" }}
+              >
                 14
               </span>
               <div className="relative z-10 rounded-[1.75rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.14)] h-[500px]">
@@ -454,8 +496,16 @@ export default function AboutNarrative() {
               >
                 <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center text-lg shrink-0">🏆</div>
                 <div>
-                  <p className="font-inter font-bold text-[12px] tracking-[0.05em] text-neutral-900 leading-tight uppercase">Top 5 Institute</p>
-                  <p className="font-inter font-normal text-[11px] text-neutral-400 mt-0.5">India Rankings 2024</p>
+                  <p
+                    style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "12px", letterSpacing: "0.05em", color: "#0a0a0b", lineHeight: 1.3, textTransform: "uppercase" }}
+                  >
+                    Top 5 Institute
+                  </p>
+                  <p
+                    style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "11px", color: "#a3a3a3", marginTop: "2px" }}
+                  >
+                    India Rankings 2024
+                  </p>
                 </div>
               </motion.div>
               <motion.div
@@ -465,8 +515,16 @@ export default function AboutNarrative() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.65, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="font-inter font-extrabold text-[28px] tracking-[-0.04em] leading-none text-white">14</p>
-                <p className="font-inter font-bold text-[10px] tracking-[0.18em] text-white/65 uppercase mt-0.5">Years</p>
+                <p
+                  style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: "28px", letterSpacing: "-0.04em", lineHeight: 1, color: "#fff" }}
+                >
+                  14
+                </p>
+                <p
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.65)", textTransform: "uppercase", marginTop: "2px" }}
+                >
+                  Years
+                </p>
               </motion.div>
             </div>
           </FadeRight>
@@ -483,10 +541,12 @@ export default function AboutNarrative() {
           <div className="grid lg:grid-cols-[1fr_1.6fr] gap-16 items-start">
             <FadeLeft>
               <Label>Why Choose Us</Label>
-              <h2 className="font-inter font-extrabold text-[clamp(30px,3.8vw,50px)] tracking-[-0.04em] leading-[1.05] text-white">
+              <h2
+                style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(30px,3.8vw,50px)", letterSpacing: "-0.04em", lineHeight: 1.05, color: "#fff" }}
+              >
                 Unique because
                 <br />
-                we train <span className="text-orange-500">dynamic</span>,
+                we train <span style={{ color: "#F97316" }}>dynamic</span>,
                 <br />
                 not just disciplined.
               </h2>
@@ -508,9 +568,23 @@ export default function AboutNarrative() {
                     transition={{ delay: 0.1 + i * 0.09, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                     className="bg-neutral-900 border border-neutral-800 rounded-2xl p-7 hover:border-orange-500/40 transition-all duration-300 group cursor-default"
                   >
-                    <p className="font-inter font-bold text-[10px] tracking-[0.2em] text-orange-500 uppercase mb-4">{card.num}</p>
-                    <h3 className="font-inter font-bold text-[15px] leading-[1.4] text-white mb-2 group-hover:text-orange-50 transition-colors">{card.title}</h3>
-                    <p className="font-inter font-normal text-[13px] leading-[1.75] text-neutral-500">{card.desc}</p>
+                    <p
+                      className="mb-4"
+                      style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.2em", color: "#F97316", textTransform: "uppercase" }}
+                    >
+                      {card.num}
+                    </p>
+                    <h3
+                      className="mb-2 group-hover:text-orange-50 transition-colors"
+                      style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "15.5px", lineHeight: 1.4, color: "#fff" }}
+                    >
+                      {card.title}
+                    </h3>
+                    <p
+                      style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "13.5px", lineHeight: 1.75, color: "#737373" }}
+                    >
+                      {card.desc}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -525,8 +599,10 @@ export default function AboutNarrative() {
       <div className="max-w-[1280px] mx-auto px-6 lg:px-12 py-10 lg:py-10">
         <FadeUp className="mb-12">
           <Label>Student Stories</Label>
-          <h2 className="font-inter font-extrabold text-[clamp(30px,3.8vw,50px)] tracking-[-0.04em] leading-[1.05] text-neutral-950">
-            What our alumni <span className="text-orange-500">are saying.</span>
+          <h2
+            style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(30px,3.8vw,50px)", letterSpacing: "-0.04em", lineHeight: 1.05, color: "#0a0a0b" }}
+          >
+            What our alumni <span style={{ color: "#F97316" }}>are saying.</span>
           </h2>
         </FadeUp>
         <FadeUp delay={0.1}>
@@ -543,34 +619,52 @@ export default function AboutNarrative() {
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-24 items-center">
           <FadeLeft>
             <div className="relative bg-neutral-950 rounded-3xl px-10 py-10 overflow-hidden">
-              <div className="absolute top-5 left-8 text-[72px] leading-none text-orange-500/20 font-serif select-none">"</div>
-              <p className="font-inter font-extrabold text-[clamp(18px,2.2vw,26px)] tracking-[-0.025em] leading-[1.35] relative z-10 text-white mb-6">
+              <div
+                className="absolute top-5 left-8 leading-none select-none"
+                style={{ fontSize: "72px", color: "rgba(249,115,22,0.2)", fontFamily: "Georgia, serif" }}
+              >
+                "
+              </div>
+              <p
+                className="relative z-10 mb-6"
+                style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(18px,2.2vw,26px)", letterSpacing: "-0.025em", lineHeight: 1.35, color: "#fff" }}
+              >
                 We don't just teach digital marketing.
                 <br />
-                We build digital marketing <span className="text-orange-500">practitioners.</span>
+                We build digital marketing <span style={{ color: "#F97316" }}>practitioners.</span>
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-px bg-orange-500" />
-                <span className="font-inter font-bold text-[11px] tracking-[0.18em] text-white/35 uppercase">Operating Media</span>
+                <span
+                  style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", letterSpacing: "0.18em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}
+                >
+                  Operating Media
+                </span>
               </div>
             </div>
           </FadeLeft>
 
           <FadeRight delay={0.2}>
             <Label>Operating Media</Label>
-            <div className="space-y-5 mb-10 font-inter font-normal text-[15px] leading-[1.9] text-neutral-500">
-              <p>
-                We have a very well structured and comprehensive course content covering all aspects of Digital Marketing. Our training programs are designed by industry leaders, focused on serving the local business community with the latest step-by-step workshop approach.
-              </p>
-              <p>
-                Operating Media is one of the top Digital Marketing Institutes in India having satisfied students and corporate trainees. Here you can get training from superlative instructors — making you capable in all the tools of Digital Marketing.
-              </p>
+            <div className="space-y-5 mb-10">
+              {[
+                "We have a very well structured and comprehensive course content covering all aspects of Digital Marketing. Our training programs are designed by industry leaders, focused on serving the local business community with the latest step-by-step workshop approach.",
+                "Operating Media is one of the top Digital Marketing Institutes in India having satisfied students and corporate trainees. Here you can get training from superlative instructors — making you capable in all the tools of Digital Marketing.",
+              ].map((text, i) => (
+                <p
+                  key={i}
+                  style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: "15.5px", lineHeight: 1.9, color: "#737373" }}
+                >
+                  {text}
+                </p>
+              ))}
             </div>
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.2 }}
-              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full transition-colors duration-200 shadow-[0_8px_28px_rgba(249,115,22,0.32)] hover:shadow-[0_12px_40px_rgba(249,115,22,0.45)] cursor-pointer border-none font-inter font-bold text-sm tracking-[0.02em]"
+              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full transition-colors duration-200 shadow-[0_8px_28px_rgba(249,115,22,0.32)] hover:shadow-[0_12px_40px_rgba(249,115,22,0.45)] cursor-pointer border-none"
+              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "14.5px", letterSpacing: "0.02em" }}
             >
               Explore Our Programs
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -598,11 +692,19 @@ export default function AboutNarrative() {
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <p className="font-inter font-bold text-[10px] tracking-[0.22em] text-white/40 uppercase mb-3">Ready to start?</p>
-          <h2 className="font-inter font-extrabold text-[clamp(26px,4vw,52px)] tracking-[-0.035em] leading-[1.1] text-white max-w-lg mb-6">
+          <p
+            className="mb-3"
+            style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.22em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase" }}
+          >
+            Ready to start?
+          </p>
+          <h2
+            className="mb-6 max-w-lg"
+            style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(26px,4vw,52px)", letterSpacing: "-0.035em", lineHeight: 1.1, color: "#fff" }}
+          >
             Your digital career
             <br />
-            starts <span className="text-orange-500">here.</span>
+            starts <span style={{ color: "#F97316" }}>here.</span>
           </h2>
         </motion.div>
       </div>
