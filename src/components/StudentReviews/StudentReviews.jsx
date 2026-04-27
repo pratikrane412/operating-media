@@ -1,164 +1,87 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Star, ExternalLink } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const S = { fontFamily: "'Satoshi', sans-serif" };
 
 const REVIEWS = [
   {
-    name: "Amit Parithe",
-    role: "Digital Marketing Executive",
-    rating: 5,
-    text: "Shraddha ma'am is too supportive and polite. Very good classes for learning. The practical exposure we get here is unmatched — I got placed within 2 months of completing the course.",
-    initials: "A",
-    bg: "#F26522",
+    name: "Rohit S.",
+    role: "Performance Marketer",
+    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-411.png",
+    text: "The practical training and live projects helped me understand real digital marketing. I am now confident and job-ready immediately after completing the course.",
   },
   {
-    name: "Purva Madankar",
+    name: "Neha Patil",
+    role: "SEO Specialist",
+    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-410.png",
+    text: "I'm really happy with the learning environment at Operating Media. The practical approach helped my child grow both personally and professionally.",
+  },
+  {
+    name: "Aarav Kumar",
     role: "Social Media Manager",
-    rating: 5,
-    text: "I had a great experience at Operating Media. The best institute for digital marketing training. Staff is so helpful and friendly, they helped me in every situation. Highly recommend!",
-    initials: "P",
-    bg: "#3AAA35",
+    img: "https://www.operatingmedia.com/wp-content/uploads/2025/12/IMG_20251124_042955-1.png",
+    text: "The live projects and expert guidance gave me real industry exposure. Every session was practical and focused on building real skills.",
   },
   {
-    name: "Shahreen Ansari",
-    role: "Content Strategist",
-    rating: 4,
-    text: "Teaching methods are amazing. Polite behaviour towards students and attentive to all. My experience is great. The SEO and Google Ads modules were especially valuable.",
-    initials: "S",
-    bg: "#2196F3",
+    name: "Simran Singh",
+    role: "Digital Entrepreneur",
+    img: "https://www.operatingmedia.com/wp-content/uploads/2024/11/WhatsApp-Image-2023-02-19-at-18.38.42-1.png",
+    text: "Operating Media helped me scale my business online. I learned ads, social media, and lead generation with real measurable results.",
   },
   {
-    name: "Nitin Pandey",
-    role: "Digital Marketing Exec at Google",
-    rating: 5,
-    text: "I recommend Operating Media's Digital Marketing course. Covers social media, SEO, Website Dev, Google Ads and more. My friends and I strongly think we made the right decision.",
-    initials: "N",
-    bg: "#9C27B0",
-  },
-  {
-    name: "Gargi Bhave",
-    role: "Social Media Lead at Jio",
-    rating: 5,
-    text: "Operating Media's course was in-depth and covered every relevant detail. They provide study materials and a student portal. The teachers are outstanding and incredibly helpful.",
-    initials: "G",
-    bg: "#FFB81C",
-    textDark: true,
-  },
-  {
-    name: "Yaseen Mirza",
-    role: "E-commerce Manager at Amazon",
-    rating: 5,
-    text: "Very informative course. It helped me set up my business digitally. Now I know how to handle my e-commerce business and profit from it without depending on anyone.",
-    initials: "Y",
-    bg: "#009688",
-  },
-  {
-    name: "Shiva Manoharan",
-    role: "Brand Strategist at Dentsu",
-    rating: 5,
-    text: "The best digital marketing training available. Top-notch instructors who are highly supportive and student-focused. The placement support was incredibly beneficial — landed my dream job.",
-    initials: "S",
-    bg: "#E91E63",
-  },
-  {
-    name: "Riya Sharma",
-    role: "Performance Marketing Analyst",
-    rating: 5,
-    text: "Hands-on projects and live ad budget experience made all the difference. I managed real Google and Meta campaigns which gave me immense confidence. Secured a top agency role right after.",
-    initials: "R",
-    bg: "#607D8B",
+    name: "Aditya M.",
+    role: "Media Buyer",
+    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-413.png",
+    text: "The trainers are highly supportive. The course built my confidence and skills to run successful high-budget ad campaigns.",
   },
 ];
 
-const GoogleIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 48 48" aria-hidden="true">
-    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
-    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
-    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
-    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+// Custom Quote Icon exactly like the image
+const QuoteIcon = () => (
+  <svg viewBox="0 0 24 24" className="w-12 h-12 fill-[#FBBF24] opacity-90 drop-shadow-sm">
+    <path d="M9 10.5C9 12.433 7.433 14 5.5 14C3.567 14 2 12.433 2 10.5C2 7.462 4.462 5 7.5 5V7C5.567 7 4 8.567 4 10.5C4 10.776 4.045 11.036 4.126 11.284C4.524 10.822 5.163 10.5 5.866 10.5H9ZM20 10.5C20 12.433 18.433 14 16.5 14C14.567 14 13 12.433 13 10.5C13 7.462 15.462 5 18.5 5V7C16.567 7 15 8.567 15 10.5C15 10.776 15.045 11.036 15.126 11.284C15.524 10.822 16.163 10.5 16.866 10.5H20Z" />
   </svg>
-);
-
-const StarRating = ({ rating }) => (
-  <div className="flex gap-0.5" aria-label={`${rating} out of 5 stars`}>
-    {[1, 2, 3, 4, 5].map((i) => (
-      <Star
-        key={i}
-        size={13}
-        className={i <= rating ? "fill-[#F26522] text-[#F26522]" : "fill-gray-200 text-gray-200"}
-        aria-hidden="true"
-      />
-    ))}
-  </div>
 );
 
 function ReviewCard({ review }) {
   return (
     <div
-      className="flex-shrink-0 w-[300px] sm:w-[340px] bg-white rounded-2xl p-5 border border-gray-100 shadow-[0_2px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_32px_rgba(242,101,34,0.12)] hover:border-[#F26522]/20 transition-all duration-300 flex flex-col gap-3 mx-3"
+      className="flex flex-col items-center text-center bg-white rounded-2xl p-8 border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.12)] transition-shadow duration-300 relative w-full h-[320px] max-w-[340px]"
       style={S}
     >
-      {/* Top row */}
-      <div className="flex items-start justify-between">
-        <div className="flex items-center gap-3">
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-            style={{
-              background: review.bg,
-              color: review.textDark ? "#0D0D0D" : "#ffffff",
-              fontFamily: "'Satoshi', sans-serif",
-              fontWeight: 800,
-              fontSize: "14px",
-            }}
-            aria-hidden="true"
-          >
-            {review.initials}
-          </div>
-          <div>
-            <p style={{ ...S, fontWeight: 700, fontSize: "14px", color: "#030712", lineHeight: 1.3 }}>
-              {review.name}
-            </p>
-            <p style={{ ...S, fontWeight: 400, fontSize: "11px", color: "#9CA3AF", marginTop: "2px" }}>
-              Google Review
-            </p>
-          </div>
-        </div>
-        <GoogleIcon />
+      {/* Top Left Quote Icon */}
+      <div className="absolute top-6 left-6">
+        <QuoteIcon />
       </div>
 
-      {/* Stars */}
-      <StarRating rating={review.rating} />
+      {/* Round Image */}
+      <div className="w-20 h-20 rounded-full overflow-hidden border-[3px] border-white shadow-md z-10 mb-4 bg-gray-100">
+        <img
+          src={review.img}
+          alt={review.name}
+          className="w-full h-full object-cover"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+      </div>
 
-      {/* Text */}
-      <p
-        className="line-clamp-3 flex-1"
-        style={{ ...S, fontWeight: 400, fontSize: "13px", lineHeight: 1.7, color: "#4B5563" }}
-      >
-        {review.text}
+      {/* Name */}
+      <h3 className="font-bold text-[18px] text-gray-900 tracking-tight leading-tight mb-3">
+        {review.name}
+      </h3>
+
+      {/* Review Text */}
+      <p className="font-medium text-[14px] text-gray-500 leading-relaxed max-w-[280px] line-clamp-5">
+        "{review.text}"
       </p>
-
-      {/* Footer */}
-      <div className="pt-3 border-t border-gray-50 flex items-center justify-between">
-        <span
-          className="truncate mr-2"
-          style={{ ...S, fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#D1D5DB" }}
-        >
-          {review.role}
-        </span>
-        <span style={{ ...S, fontWeight: 700, fontSize: "11px", color: "#F26522", flexShrink: 0 }}>
-          ★ Verified
-        </span>
-      </div>
     </div>
   );
 }
 
 export default function StudentReviews() {
-  const [paused, setPaused] = useState(false);
-  const doubled = [...REVIEWS, ...REVIEWS];
+  const [startIndex, setStartIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(3);
 
+  // Inject Satoshi font
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -169,174 +92,95 @@ export default function StudentReviews() {
     }
   }, []);
 
+  // Handle Responsive layout
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setCardsToShow(1);
+      else if (window.innerWidth < 1024) setCardsToShow(2);
+      else setCardsToShow(3);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Autoplay Logic
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setStartIndex((prev) => 
+        (prev + cardsToShow) >= REVIEWS.length ? 0 : prev + cardsToShow
+      );
+    }, 5000); // changes every 5 seconds
+    return () => clearInterval(timer);
+  }, [cardsToShow]);
+
+  const totalPages = Math.ceil(REVIEWS.length / cardsToShow);
+  const currentPage = Math.floor(startIndex / cardsToShow);
+
+  const visibleReviews = REVIEWS.slice(startIndex, startIndex + cardsToShow);
+
   return (
-    <>
-      <style>{`
-        @keyframes om-marquee {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .om-marquee-track {
-          animation: om-marquee 40s linear infinite;
-        }
-        .om-marquee-track.paused {
-          animation-play-state: paused;
-        }
-      `}</style>
+    <section className="relative w-full py-16 lg:py-24 bg-[#FAFAFA] overflow-hidden selection:bg-orange-500 selection:text-white" style={S}>
+      
+      {/* Subtle Grid Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(45deg, #000 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
-      <section
-        className="relative w-full py-5 sm:py-10 lg:py-14 bg-white overflow-hidden"
-        style={S}
-        aria-label="Student Reviews"
-      >
-        {/* Background glows */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-          <div
-            className="absolute -top-20 left-1/4 w-[500px] h-[300px] rounded-full blur-[80px]"
-            style={{ background: "rgba(242,101,34,0.05)" }}
-          />
-          <div
-            className="absolute bottom-0 right-1/4 w-[400px] h-[300px] rounded-full blur-[80px]"
-            style={{ background: "rgba(255,184,28,0.06)" }}
-          />
-        </div>
-
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12">
+        
         {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 mb-12"
+          className="text-center mb-14"
         >
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-
-            {/* Left */}
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="h-[3px] w-8 rounded-full bg-[#F26522] shrink-0" aria-hidden="true" />
-                <span
-                  style={{ ...S, fontWeight: 800, fontSize: "11px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#F26522" }}
-                >
-                  Student Reviews
-                </span>
-              </div>
-              <h2
-                style={{
-                  ...S,
-                  fontWeight: 900,
-                  fontSize: "clamp(2rem, 4vw, 3rem)",
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.035em",
-                  color: "#030712",
-                  margin: 0,
-                }}
-              >
-                Our Students{" "}
-                <span
-                  style={{
-                    background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  Love Us
-                </span>
-              </h2>
-              <p
-                style={{ ...S, fontWeight: 500, fontSize: "15px", color: "#4B5563", marginTop: "12px", maxWidth: "420px", lineHeight: 1.7 }}
-              >
-                Real reviews from real students — verified on Google.
-              </p>
-            </div>
-
-            {/* Right — aggregate */}
-            <div className="flex items-center gap-5 shrink-0">
-              <div className="text-center">
-                <p
-                  style={{ ...S, fontWeight: 900, fontSize: "52px", lineHeight: 1, letterSpacing: "-0.04em", color: "#030712" }}
-                >
-                  4.8<span style={{ color: "#F26522" }}>★</span>
-                </p>
-                <p
-                  style={{ ...S, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.12em", color: "#9CA3AF", marginTop: "6px" }}
-                >
-                  Google Rating
-                </p>
-              </div>
-
-              <div className="w-px h-16 bg-gray-100" aria-hidden="true" />
-
-              <div className="flex flex-col gap-2.5">
-                {[
-                  { dot: "#F26522", label: "1,600+ Students" },
-                  { dot: "#FFB81C", label: "93% Placement Rate" },
-                  { dot: "#3AAA35", label: "500+ Reviews" },
-                ].map(({ dot, label }) => (
-                  <div key={label} className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full shrink-0" style={{ background: dot }} aria-hidden="true" />
-                    <span style={{ ...S, fontWeight: 600, fontSize: "13px", color: "#374151" }}>
-                      {label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
+          <div className="inline-flex items-center justify-center px-6 py-1.5 rounded-full border border-orange-300 mb-5 bg-white shadow-sm">
+            <span className="font-bold text-[12px] uppercase tracking-widest text-orange-500">
+              Testimonials
+            </span>
           </div>
+
+          <h2 className="font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.1] tracking-tight text-gray-900">
+            Experiences That Inspire <span className="text-[#FFB800]">Confidence</span>
+          </h2>
         </motion.div>
 
-        {/* ── Marquee track ── */}
-        <div
-          className="relative z-10 overflow-hidden"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
-          <div className={`flex om-marquee-track${paused ? " paused" : ""}`}>
-            {doubled.map((review, i) => (
-              <ReviewCard key={`${review.name}-${i}`} review={review} />
-            ))}
-          </div>
+        {/* ── Cards Viewport ── */}
+        <div className="w-full flex justify-center mb-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={startIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
+              className="flex justify-center gap-6 lg:gap-10 w-full"
+            >
+              {visibleReviews.map((review, i) => (
+                <ReviewCard key={i} review={review} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Left + right fade masks */}
-        <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-24 z-20"
-          style={{ background: "linear-gradient(to right, #ffffff, transparent)" }}
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-24 z-20"
-          style={{ background: "linear-gradient(to left, #ffffff, transparent)" }}
-          aria-hidden="true"
-        />
+        {/* ── Custom Dots Pagination ── */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-4">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button 
+                key={i}
+                onClick={() => setStartIndex(i * cardsToShow)}
+                className={`flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentPage === i ? 'w-8 h-8 border-[1.5px] border-[#FFB800]' : 'w-8 h-8'}`}
+              >
+                <div className={`rounded-full transition-all duration-300 ${currentPage === i ? 'w-2 h-2 bg-[#FFB800]' : 'w-1.5 h-1.5 bg-gray-300 hover:bg-gray-400'}`} />
+              </button>
+            ))}
+          </div>
+        )}
 
-        {/* ── CTA ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="relative z-10 flex justify-center mt-12"
-        >
-          <a
-            href="https://g.co/kgs/operating-media"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 bg-white border-[1.5px] border-[#F26522] hover:bg-[#F26522] hover:text-white rounded-2xl transition-all duration-300 shadow-sm hover:shadow-[0_8px_24px_rgba(242,101,34,0.30)]"
-            style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#F26522", padding: "16px 40px" }}
-          >
-            View All Reviews on Google
-            <ExternalLink
-              size={15}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
-              aria-hidden="true"
-            />
-          </a>
-        </motion.div>
-
-      </section >
-    </>
+      </div>
+    </section>
   );
 }

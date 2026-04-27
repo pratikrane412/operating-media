@@ -12,17 +12,17 @@ import {
   CheckCircle, Zap,
 } from "lucide-react";
 
-const SATOSHI = "'Satoshi', sans-serif";
-
-/* ── Animated Counter ── */
+/* ── Animated Counter Logic ── */
 const CounterValue = ({ value, isDecimal = false }) => {
   const ref = useRef(null);
   const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, { damping: 55, stiffness: 90 });
+  const springValue = useSpring(motionValue, { damping: 50, stiffness: 80 });
   const isInView = useInView(ref, { once: true, amount: 0.5 });
 
   useEffect(() => {
-    if (isInView) motionValue.set(value);
+    if (isInView) {
+      motionValue.set(value);
+    }
   }, [isInView, value, motionValue]);
 
   const display = useTransform(springValue, (v) =>
@@ -38,22 +38,26 @@ const STATS = [
     num: 11000, suffix: "+",
     label: "Professionals", sub: "Trained",
     Icon: Users,
+    color: "orange"
   },
   {
     num: 1200, suffix: "+",
     label: "Successful", sub: "Batches",
     Icon: BookOpen,
+    color: "amber"
   },
   {
     num: 15, suffix: "+",
     label: "Years of", sub: "Excellence",
     Icon: Trophy,
+    color: "orange"
   },
   {
     num: 4.8, suffix: "★",
     label: "Google", sub: "Rating",
     Icon: Star,
     isDecimal: true,
+    color: "amber"
   },
 ];
 
@@ -64,56 +68,50 @@ const TRUST = [
   { Icon: TrendingUp, text: "94% Placement Rate" },
 ];
 
-/* ── Stat Card ── */
-const StatCard = ({ stat, index }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
-    className="group relative flex flex-col items-center justify-center text-center
-      overflow-hidden rounded-2xl border border-gray-100 bg-white
-      px-5 py-8 shadow-sm hover:shadow-md hover:border-orange-200
-      transition-all duration-300 cursor-default"
-    style={{ fontFamily: SATOSHI }}
-  >
-    {/* Orange top bar */}
-    <div className="absolute top-0 left-0 right-0 h-[3px] bg-orange-500 rounded-t-2xl" />
-
-    {/* Icon */}
-    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl
-      bg-orange-50 group-hover:bg-orange-100 transition-colors duration-300">
-      <stat.Icon size={22} strokeWidth={1.6} className="text-orange-500" />
-    </div>
-
-    {/* Number */}
-    <div
-      className="mb-2 flex items-baseline gap-0.5 leading-none tracking-tighter text-gray-950"
-      style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: "clamp(30px, 3.5vw, 44px)" }}
+/* ── Stat Card Component ── */
+const StatCard = ({ stat, index }) => {
+  const isOrange = stat.color === "orange";
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
+      className={`group relative flex flex-col items-center justify-center text-center overflow-hidden rounded-3xl border bg-white/80 backdrop-blur-md px-4 py-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${isOrange ? 'border-orange-100 hover:border-orange-300' : 'border-amber-100 hover:border-amber-300'}`}
     >
-      <CounterValue value={stat.num} isDecimal={stat.isDecimal} />
-      <span className="text-orange-500 ml-0.5" style={{ fontSize: "0.55em" }}>{stat.suffix}</span>
-    </div>
+      {/* Top Accent Line */}
+      <div className={`absolute top-0 left-0 right-0 h-1 rounded-t-3xl ${isOrange ? 'bg-orange-500' : 'bg-amber-400'}`} />
 
-    {/* Labels */}
-    <p
-      className="text-gray-800 leading-tight"
-      style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.16em" }}
-    >
-      {stat.label}
-    </p>
-    <p
-      className="mt-1 text-gray-400"
-      style={{ fontFamily: SATOSHI, fontWeight: 500, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em" }}
-    >
-      {stat.sub}
-    </p>
-  </motion.div>
-);
+      {/* Background Glow on Hover */}
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none bg-gradient-to-b from-transparent ${isOrange ? 'to-orange-500' : 'to-amber-500'}`} />
+
+      {/* Icon */}
+      <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl shadow-inner transition-transform duration-300 group-hover:scale-110 ${isOrange ? 'bg-orange-50 text-orange-500' : 'bg-amber-50 text-amber-500'}`}>
+        <stat.Icon size={26} strokeWidth={2} />
+      </div>
+
+      {/* Animated Number */}
+      <div className="mb-2 flex items-baseline gap-1 leading-none tracking-tight text-gray-900 font-black text-[clamp(2.2rem,4vw,3.2rem)]">
+        <CounterValue value={stat.num} isDecimal={stat.isDecimal} />
+        <span className={`${isOrange ? 'text-orange-500' : 'text-amber-500'}`} style={{ fontSize: "0.6em" }}>{stat.suffix}</span>
+      </div>
+
+      {/* Labels */}
+      <p className="font-bold text-[13px] uppercase tracking-widest text-gray-800 leading-tight">
+        {stat.label}
+      </p>
+      <p className="mt-1 font-semibold text-[11px] uppercase tracking-[0.15em] text-gray-400">
+        {stat.sub}
+      </p>
+    </motion.div>
+  );
+};
 
 /* ── Main Section ── */
 export default function StatsSection() {
-  // Inject Satoshi font
+  
+  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -125,96 +123,74 @@ export default function StatsSection() {
   }, []);
 
   return (
-    <section
-      className="w-full bg-white px-4 py-12 relative"
-      style={{ fontFamily: SATOSHI }}
-    >
+    <section className="relative w-full overflow-hidden bg-[#FAFAFA] py-16 lg:py-24 selection:bg-orange-500 selection:text-white" style={{ fontFamily: "'Satoshi', sans-serif" }}>
 
-      {/* Dot grid bg */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
-        style={{
-          backgroundImage: "radial-gradient(circle, #9CA3AF 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
+      {/* ── Background Subtle Details ── */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, #000 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }} />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-orange-300/20 to-transparent blur-[80px] pointer-events-none" />
 
-      {/* Subtle top glow */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 overflow-hidden">
-        <div className="mx-auto h-28 w-1/2 rounded-full bg-orange-50 blur-[80px]" />
-      </div>
+      {/* ── Main Container Aligning with rest of page max-w-[1400px] ── */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12">
 
-      <div className="relative z-10 mx-auto max-w-6xl">
-
-        {/* Eyebrow label */}
+        {/* ── Section Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 flex items-center justify-center gap-3"
+          transition={{ duration: 0.6 }}
+          className="mb-10 lg:mb-14 flex items-center justify-center gap-3"
         >
-          <span className="h-px w-8 bg-orange-300 rounded-full" />
-          <span
-            style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#F97316" }}
-          >
+          <span className="h-[2px] w-10 bg-gradient-to-r from-transparent to-orange-400 rounded-full" />
+          <span className="font-bold text-[12px] uppercase tracking-[0.2em] text-orange-600 text-center">
             Trusted by 11,000+ Professionals Across India
           </span>
-          <span className="h-px w-8 bg-orange-300 rounded-full" />
+          <span className="h-[2px] w-10 bg-gradient-to-l from-transparent to-orange-400 rounded-full" />
         </motion.div>
 
-        {/* Stat cards */}
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-5 mb-5">
+        {/* ── Stat Cards Grid ── */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
           {STATS.map((stat, i) => (
             <StatCard key={i} stat={stat} index={i} />
           ))}
         </div>
 
-        {/* Trust + CTA strip */}
+        {/* ── Bottom Trust & CTA Strip ── */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.22 }}
-          className="flex flex-col items-center gap-5 rounded-2xl
-            border border-gray-100 bg-gray-50/60 px-6 py-5
-            lg:flex-row lg:justify-between"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-col lg:flex-row items-center justify-between gap-6 rounded-3xl border border-gray-200/60 bg-white p-6 sm:p-8 shadow-sm"
         >
-          {/* Trust badges */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:justify-start">
-            {TRUST.map(({ Icon, text }) => (
-              <div key={text} className="flex items-center gap-2">
-                <Icon size={14} strokeWidth={1.9} className="shrink-0 text-orange-500" />
-                <span
-                  style={{ fontFamily: SATOSHI, fontWeight: 600, fontSize: "13px", color: "#6B7280" }}
-                >
+          {/* Trust Badges */}
+          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-8 gap-y-4">
+            {TRUST.map(({ Icon, text }, idx) => (
+              <div key={idx} className="flex items-center gap-2.5">
+                <Icon size={18} strokeWidth={2.5} className="shrink-0 text-green-500" />
+                <span className="font-bold text-[13px] md:text-[14px] text-gray-700 tracking-wide">
                   {text}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* CTA */}
-          <button
-            className="group relative overflow-hidden inline-flex shrink-0 items-center
-              gap-2 rounded-xl bg-orange-500 hover:bg-orange-600
-              px-7 py-3.5
-              shadow-[0_4px_16px_rgba(249,115,22,0.3)]
-              hover:shadow-[0_8px_24px_rgba(249,115,22,0.4)]
-              active:scale-[0.97] transition-all duration-200 cursor-pointer border-none"
-            style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "14px", color: "#fff" }}
-          >
-            {/* Shimmer */}
-            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full
-              bg-gradient-to-r from-transparent via-white/20 to-transparent
-              transition-transform duration-500 ease-in-out" />
-            <span className="relative z-10">See Our Placements</span>
-            <ArrowUpRight size={15} className="relative z-10 group-hover:-translate-y-0.5
-              group-hover:translate-x-0.5 transition-transform duration-200" />
+          {/* CTA Button */}
+          <button className="group relative overflow-hidden inline-flex shrink-0 items-center gap-2 rounded-2xl bg-gradient-to-r from-orange-600 to-amber-500 px-8 py-4 shadow-[0_8px_25px_-8px_rgba(249,115,22,0.6)] hover:shadow-[0_12px_30px_-10px_rgba(249,115,22,0.8)] active:scale-95 transition-all duration-300 w-full lg:w-auto justify-center">
+            {/* Shimmer Effect */}
+            <span className="absolute inset-0 w-full h-full bg-white/20 -translate-x-full group-hover:animate-shine" />
+            <span className="font-black text-[15px] text-white relative z-10">See Our Placements</span>
+            <ArrowUpRight size={18} strokeWidth={2.5} className="text-white relative z-10 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
           </button>
         </motion.div>
 
       </div>
+
+      {/* ── Custom Keyframes ── */}
+      <style>{`
+        @keyframes shine { 100% { transform: translateX(100%); } }
+        .animate-shine { animation: shine 1.5s ease; }
+      `}</style>
+      
     </section>
   );
 }

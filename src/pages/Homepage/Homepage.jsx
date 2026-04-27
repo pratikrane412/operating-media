@@ -1,6 +1,7 @@
 import React from 'react';
 // We use ../../ to go back twice to find the components folder
 import HeroSection from '../../components/HeroSection/HeroSection';
+import Strpi from "../../components/Strpi/strpi.jsx"
 import AboutSection from '../../components/AboutSection/AboutSection.jsx';
 import Programs from '../../components/Programs/Programs';
 import WhyUsAuthority from '../../components/WhyUsAuthority/WhyUsAuthority.jsx';
@@ -22,6 +23,7 @@ const Homepage = () => {
   return (
     <main>
       <HeroSection />
+      <Strpi />
       <AboutSection />
       <Programs />
       <WhyUsAuthority />

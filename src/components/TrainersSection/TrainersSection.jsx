@@ -1,113 +1,73 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Linkedin, ArrowRight, ArrowLeft } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
+// ── Course/Mentor Data ──
 const MENTORS = [
   {
     name: "Shraddha Rane",
-    role: "Organic Growth & SEO Specialist",
+    desc: "Lorem Ipsum is simply dummy",
     img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-410.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
+    themeClass: "bg-[#FCD2A1] border-[#FCD2A1]",
+    gradientClass: "from-[#FFF6EE] to-[#FDE7CF]",
   },
   {
     name: "Harsh Pareek",
-    role: "Performance Marketing Head",
+    desc: "Lorem Ipsum is simply dummy",
     img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-411.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
+    themeClass: "bg-[#F3D779] border-[#F3D779]",
+    gradientClass: "from-[#FEFBF2] to-[#F8EBB5]",
   },
   {
     name: "Hemant Mane",
-    role: "Search Strategy Director",
+    desc: "Lorem Ipsum is simply dummy",
     img: "https://www.operatingmedia.com/wp-content/uploads/2024/11/WhatsApp-Image-2023-02-19-at-18.38.42-1.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
-  },
-  {
-    name: "Rahul Singh",
-    role: "Media Buying Expert",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/rahul-1-1.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
+    themeClass: "bg-[#EEFA79] border-[#EEFA79]",
+    gradientClass: "from-[#FCFEE5] to-[#F6FCB2]",
   },
   {
     name: "Zahid Shaikh",
-    role: "Digital Marketing Trainer",
+    desc: "Lorem Ipsum is simply dummy",
     img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-413.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
-  },
-  {
-    name: "Vikram Kamble",
-    role: "Digital Marketing Trainer",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2025/12/IMG_20251124_042955-1.png",
-    linkedin: "#",
-    bg: "#FFF7ED",
+    themeClass: "bg-[#D3FC91] border-[#D3FC91]",
+    gradientClass: "from-[#F7FEE9] to-[#E6FDBE]",
   },
 ];
 
-const S = { fontFamily: "'Satoshi', sans-serif" };
-
-function MentorCard({ mentor, index }) {
+// ── Card Component ──
+function MentorCard({ mentor }) {
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex-shrink-0 rounded-2xl border border-gray-100 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1 cursor-default"
-      style={{
-        width: "clamp(200px, 19vw, 238px)",
-        scrollSnapAlign: "start",
-      }}
+    <div
+      className={`group flex flex-col rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] cursor-default overflow-hidden w-full max-w-[300px] ${mentor.themeClass}`}
     >
-      {/* Photo area */}
-      <div
-        className="relative overflow-hidden"
-        style={{ height: "clamp(220px, 24vw, 270px)", background: mentor.bg }}
-      >
-        {/* LinkedIn badge */}
-        <a
-          href={mentor.linkedin}
-          onClick={(e) => e.stopPropagation()}
-          className="absolute top-3 right-3 z-10 w-7 h-7 rounded-lg bg-[#0A66C2] flex items-center justify-center shadow-md hover:scale-110 transition-transform duration-200"
-        >
-          <Linkedin size={12} className="text-white" strokeWidth={2.5} />
-        </a>
-
-        {/* Photo */}
+      {/* ── Photo Area (Gradient Top) ── */}
+      <div className={`relative h-[260px] sm:h-[280px] w-full bg-gradient-to-b ${mentor.gradientClass} overflow-hidden rounded-t-2xl`}>
         <img
           src={mentor.img}
           alt={mentor.name}
-          className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
+          className="w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500 ease-out"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
         />
-
-        {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white/60 to-transparent pointer-events-none" />
       </div>
 
-      {/* Info area */}
-      <div className="px-4 py-4 border-t border-gray-50">
-        <h3 style={{ ...S, fontWeight: 800, fontSize: "14px", color: "#030712", lineHeight: 1.3, letterSpacing: "-0.01em" }}>
+      {/* ── Info Area (Solid Bottom) ── */}
+      <div className={`px-4 py-6 text-center ${mentor.themeClass}`}>
+        <h3 className="font-bold text-[19px] text-gray-900 tracking-tight leading-tight mb-1.5">
           {mentor.name}
         </h3>
-        <p style={{ ...S, fontWeight: 500, fontSize: "12px", color: "#9CA3AF", marginTop: "5px", lineHeight: 1.4 }}>
-          {mentor.role}
+        <p className="font-medium text-[13px] text-gray-600 opacity-90">
+          {mentor.desc}
         </p>
       </div>
-    </motion.article >
+    </div>
   );
 }
 
 export default function TrainersSection() {
-  const scrollRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
+  const [startIndex, setStartIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(4); // Default to Desktop
 
+  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -118,113 +78,116 @@ export default function TrainersSection() {
     }
   }, []);
 
-  const updateScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanLeft(el.scrollLeft > 10);
-    setCanRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  // Update cards per view based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setCardsToShow(1); // Mobile: 1 card
+      else if (window.innerWidth < 1024) setCardsToShow(2); // Tablet: 2 cards
+      else if (window.innerWidth < 1280) setCardsToShow(3); // Laptop: 3 cards
+      else setCardsToShow(4); // Desktop: 4 cards
+    };
+
+    handleResize(); // Set initial
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateScroll, { passive: true });
-    updateScroll();
-    return () => el.removeEventListener("scroll", updateScroll);
-  }, [updateScroll]);
+  const totalPages = Math.ceil(MENTORS.length / cardsToShow);
+  const currentPage = Math.floor(startIndex / cardsToShow);
 
-  const scroll = (dir) =>
-    scrollRef.current?.scrollBy({ left: dir * 260, behavior: "smooth" });
+  const nextSlide = () => {
+    if (startIndex + cardsToShow < MENTORS.length) {
+      setStartIndex((prev) => prev + cardsToShow);
+    }
+  };
 
-  const PAD = "clamp(20px, 5vw, 72px)";
+  const prevSlide = () => {
+    if (startIndex - cardsToShow >= 0) {
+      setStartIndex((prev) => prev - cardsToShow);
+    }
+  };
+
+  // Get exactly the cards we need to show right now without overflow
+  const visibleCards = MENTORS.slice(startIndex, startIndex + cardsToShow);
 
   return (
-    <section className="w-full py-16 bg-white" style={S}>
+    <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden selection:bg-orange-500 selection:text-white" style={{ fontFamily: "'Satoshi', sans-serif" }}>
 
-      {/* Header */}
-      <div
-        className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
-        style={{ paddingLeft: PAD, paddingRight: PAD }}
+      {/* ── Header ── */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col items-center text-center mb-10 lg:mb-14 px-6"
       >
-        {/* Left */}
-        <div>
-          <div className="flex items-center gap-2.5 mb-4">
-            <span className="h-px w-8 bg-orange-400 rounded-full" />
-            <span style={{ ...S, fontWeight: 800, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.2em", color: "#F97316" }}>
-              Our Instructors
-            </span>
-          </div>
-          <h2 style={{ ...S, fontWeight: 900, fontSize: "clamp(1.7rem, 3.2vw, 2.6rem)", color: "#030712", lineHeight: 1.1, letterSpacing: "-0.035em", margin: 0 }}>
-            Learn from Industry<br />
-            <span style={{ background: "linear-gradient(90deg,#F97316,#FBBF24)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              Experts & Practitioners
-            </span>
-          </h2>
+        <div className="inline-flex items-center justify-center px-5 py-1.5 rounded-full border border-orange-400 mb-5 shadow-sm">
+          <span className="font-bold text-[12px] text-orange-500 tracking-wide uppercase">
+            Industry Expert Mentors
+          </span>
         </div>
 
-        {/* Right */}
-        <div className="flex flex-col gap-4 md:items-end">
-          <p style={{ ...S, fontWeight: 500, fontSize: "13px", color: "#4B5563", lineHeight: 1.65, maxWidth: "240px" }} className="md:text-right">
-            Every trainer is an active industry professional — not just a teacher.
-          </p>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => scroll(-1)}
-              disabled={!canLeft}
-              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50 disabled:opacity-20 transition-all duration-200 cursor-pointer"
-            >
-              <ArrowLeft size={15} />
-            </button>
-            <button
-              onClick={() => scroll(1)}
-              disabled={!canRight}
-              className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-600 hover:border-orange-400 hover:text-orange-500 hover:bg-orange-50 disabled:opacity-20 transition-all duration-200 cursor-pointer"
-            >
-              <ArrowRight size={15} />
-            </button>
-          </div>
-        </div>
-      </div>
+        <h2 className="font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.1] tracking-tight text-gray-900">
+          Learn from Real <span className="text-[#FFB800]">Industry Professionals</span>
+        </h2>
+      </motion.div>
 
-      {/* Carousel wrapper — overflow visible on section, hidden only on this div */}
-      <div style={{ overflowX: "auto", overflowY: "visible", paddingBottom: "12px" }}>
-        <div
-          ref={scrollRef}
-          style={{
-            display: "flex",
-            gap: "16px",
-            paddingLeft: PAD,
-            paddingRight: PAD,
-            scrollSnapType: "x mandatory",
-            overflowX: "auto",
-            overflowY: "visible",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-            paddingBottom: "8px",
-          }}
+      {/* ── Main Controlled Carousel Area (No Cut Offs) ── */}
+      <div className="max-w-[1400px] mx-auto flex items-center justify-center px-4 sm:px-6">
+        
+        {/* Left Arrow */}
+        <button
+          onClick={prevSlide}
+          disabled={startIndex === 0}
+          className={`hidden md:flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-orange-300 text-orange-500 hover:bg-orange-50 active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none mr-4 lg:mr-8`}
         >
-          {MENTORS.map((m, i) => (
-            <MentorCard key={m.name} mentor={m} index={i} />
-          ))}
+          <ChevronLeft size={28} strokeWidth={1.5} />
+        </button>
 
-          {/* View all end-cap */}
-          <div
-            className="flex-shrink-0 flex flex-col items-center justify-center gap-3 opacity-30 hover:opacity-90 transition-opacity duration-200 cursor-pointer"
-            style={{ width: 90, paddingRight: "16px", scrollSnapAlign: "start" }}
-          >
-            <div className="w-11 h-11 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center">
-              <ArrowRight size={15} className="text-gray-400" />
-            </div>
-            <span style={{ ...S, fontWeight: 900, fontSize: "9px", textTransform: "uppercase", letterSpacing: "0.15em", color: "#111827", textAlign: "center" }}>
-              View All
-            </span>
-          </div>
+        {/* ── Exact Fit Container (Framer Motion Animated) ── */}
+        {/* Instead of scrolling, we replace the grid content smoothly */}
+        <div className="flex-1 flex justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={startIndex} // Re-animates when startIndex changes
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
+              className="flex justify-center gap-6 lg:gap-8 w-full"
+            >
+              {visibleCards.map((mentor, i) => (
+                <MentorCard key={i} mentor={mentor} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
+
+        {/* Right Arrow */}
+        <button
+          onClick={nextSlide}
+          disabled={startIndex + cardsToShow >= MENTORS.length}
+          className={`hidden md:flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-orange-300 text-orange-500 hover:bg-orange-50 active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none ml-4 lg:ml-8`}
+        >
+          <ChevronRight size={28} strokeWidth={1.5} />
+        </button>
       </div>
 
-      <style>{`
-        div::-webkit-scrollbar { display: none; }
-      `}</style>
+      {/* ── Image-Style Pagination Dots ── */}
+      {/* We only render dots if there is more than 1 page */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-3 mt-10">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <div 
+              key={i} 
+              className={`flex items-center justify-center rounded-full transition-all duration-300 ${currentPage === i ? 'w-6 h-6 border border-yellow-400' : 'w-6 h-6'}`}
+            >
+              <div className={`rounded-full transition-all duration-300 ${currentPage === i ? 'w-1.5 h-1.5 bg-yellow-500' : 'w-1.5 h-1.5 bg-gray-300'}`} />
+            </div>
+          ))}
+        </div>
+      )}
+
     </section>
   );
 }

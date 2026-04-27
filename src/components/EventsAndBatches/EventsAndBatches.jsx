@@ -15,85 +15,62 @@ const TRUST = [
   '100% Placement Assistance',
 ];
 
-const SATOSHI = "'Satoshi', sans-serif";
-
 function BatchTable({ campus, dataKey, delay }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-30px' }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
-      className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm
-        hover:shadow-lg hover:border-orange-200 transition-all duration-300"
-      style={{ fontFamily: SATOSHI }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
+      className="overflow-hidden rounded-3xl border border-gray-200/60 bg-white/80 backdrop-blur-md shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-500"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-gray-100 bg-orange-50/50 px-5 py-4">
-        <h4
-          className="flex items-center gap-2 text-gray-900"
-          style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: '17px', letterSpacing: '-0.02em' }}
-        >
-          <MapPin size={17} className="text-orange-500 shrink-0" strokeWidth={2} />
+      {/* ── Table Header ── */}
+      <div className="flex items-center justify-between border-b border-gray-100 bg-orange-50/50 px-6 py-5">
+        <h4 className="flex items-center gap-2.5 font-bold text-[18px] text-gray-900 tracking-tight">
+          <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+            <MapPin size={16} className="text-orange-600 shrink-0" strokeWidth={2.5} />
+          </div>
           {campus}
         </h4>
-        <div className="flex items-center gap-1.5 rounded-full border border-green-200 bg-green-50 px-3 py-1">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
-          <span
-            style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#15803d' }}
-          >
+        
+        {/* Pulsating Badge */}
+        <div className="flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1.5 shadow-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          <span className="font-bold text-[10px] tracking-widest uppercase text-green-700">
             Enrolling
           </span>
         </div>
       </div>
 
-      {/* Table */}
-      <div className="px-4 pb-4 pt-1">
+      {/* ── Table Body ── */}
+      <div className="px-5 pb-5 pt-2">
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th
-                className="pb-2 pt-3 text-left text-gray-400"
-                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em' }}
-              >
-                Session
-              </th>
-              <th
-                className="pb-2 pt-3 text-right text-gray-400"
-                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.16em' }}
-              >
-                Timing
-              </th>
+              <th className="pb-3 pt-3 text-left font-bold text-[11px] uppercase tracking-widest text-gray-400">Session Type</th>
+              <th className="pb-3 pt-3 text-right font-bold text-[11px] uppercase tracking-widest text-gray-400">Timing</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-50">
             {batches.map((b, i) => (
-              <tr key={i} className="border-t border-gray-50 hover:bg-orange-50/30 transition-colors duration-150">
-                <td className="py-3 pr-3">
+              <tr key={i} className="group hover:bg-orange-50/40 transition-colors duration-300">
+                <td className="py-4 pr-3 rounded-l-xl">
                   {b.type === 'Sunday' ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-xl border border-yellow-200 bg-yellow-50 px-2.5 py-1">
-                      <Sparkles size={11} className="text-yellow-500" />
-                      <span
-                        style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#a16207' }}
-                      >
-                        Weekend
-                      </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-50 px-2.5 py-1.5 shadow-sm">
+                      <Sparkles size={12} className="text-amber-500" />
+                      <span className="font-bold text-[11px] uppercase tracking-widest text-amber-700">Weekend</span>
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1.5 rounded-xl border border-orange-100 bg-orange-50 px-2.5 py-1">
-                      <Zap size={11} className="text-orange-500" />
-                      <span
-                        style={{ fontFamily: SATOSHI, fontWeight: 600, fontSize: '11.5px', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#ea580c' }}
-                      >
-                        Weekday
-                      </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-orange-200 bg-orange-50 px-2.5 py-1.5 shadow-sm">
+                      <Zap size={12} className="text-orange-500" />
+                      <span className="font-bold text-[11px] uppercase tracking-widest text-orange-700">Weekday</span>
                     </span>
                   )}
                 </td>
-                <td
-                  className="py-3 text-right text-gray-900"
-                  style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: '14.5px', letterSpacing: '-0.01em' }}
-                >
+                <td className="py-4 text-right font-black text-[15px] tracking-tight text-gray-900 rounded-r-xl group-hover:text-orange-600 transition-colors">
                   {b[dataKey]}
                 </td>
               </tr>
@@ -105,8 +82,9 @@ function BatchTable({ campus, dataKey, delay }) {
   );
 }
 
-export default function BatchSchedule() {
-  // Inject Satoshi font
+export default function EventsAndBatches() {
+  
+  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement('link');
@@ -118,140 +96,130 @@ export default function BatchSchedule() {
   }, []);
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-white"
-      style={{ fontFamily: SATOSHI }}
+    <section 
+      className="relative w-full overflow-hidden bg-[#FAFAFA] font-sans selection:bg-orange-500 selection:text-white"
+      style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
 
-      {/* Dot grid */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] bg-[size:24px_24px] opacity-60" />
+      {/* ── Background Subtle Dot Grid & Glows ── */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#e5e7eb_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-60 mix-blend-multiply z-0" />
+      
+      <div className="pointer-events-none absolute inset-0 overflow-hidden flex justify-center z-0">
+        <div className="absolute -top-[10%] right-[-5%] h-[500px] w-[500px] rounded-full bg-gradient-to-bl from-orange-400/20 to-transparent blur-[120px] animate-pulse-slow" />
+        <div className="absolute -bottom-[10%] left-[-10%] h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-amber-400/20 to-transparent blur-[100px] animate-pulse-slow" style={{ animationDelay: "2s" }} />
+      </div>
 
-      {/* Ambient glows */}
-      <div className="pointer-events-none absolute -top-32 right-0 h-96 w-96 rounded-full bg-orange-100/50 blur-[110px]" />
-      <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-yellow-100/40 blur-[100px]" />
+      {/* ════ MAIN CONTAINER (Aligned with rest of the page: max-w-[1400px]) ════ */}
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-12 pt-20 pb-16 lg:pt-24 lg:pb-24">
 
-      <div className="relative z-10 mx-auto max-w-6xl px-5 sm:px-8 lg:px-14 py-12 sm:py-10">
+        {/* ── Section Header ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-14 text-center lg:text-left flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
+        >
+          <div className="max-w-2xl mx-auto lg:mx-0 w-full">
+            <div className="mb-4 flex items-center justify-center lg:justify-start gap-3">
+              <span className="h-[2px] w-10 bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" />
+              <span className="font-bold text-[12px] uppercase tracking-[0.2em] text-orange-600">
+                Enrollment Schedule
+              </span>
+            </div>
+            
+            <h2 className="font-black text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] tracking-tight text-gray-900 mb-4">
+              Upcoming <br className="hidden lg:block"/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-400">
+                Batches 2025
+              </span>
+            </h2>
+          </div>
 
-        {/* Header */}
+          <div className="max-w-md mx-auto lg:mx-0 lg:pb-2 w-full">
+            <p className="font-medium text-[16px] md:text-[18px] text-gray-500 leading-relaxed text-center lg:text-right">
+              Flexible learning paths across our Mumbai campuses — tailored for students, freshers, and working professionals.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ── Batch Tables Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+          <BatchTable campus="Andheri Campus" dataKey="andheri" delay={0.1} />
+          <BatchTable campus="Borivali Campus" dataKey="borivali" delay={0.2} />
+        </div>
+
+        {/* ── Trust Indicators Strip ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-10"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-3xl border border-green-200/60 bg-green-50/80 backdrop-blur-sm px-6 py-5 shadow-sm max-w-4xl mx-auto"
         >
-          <div className="mb-4 flex items-center gap-3">
-            <span className="h-px w-10 shrink-0 bg-orange-500" />
-            <span
-              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.2em', color: '#F97316' }}
-            >
-              Enrollment Schedule
-            </span>
-          </div>
-          <h2
-            className="mb-4"
-            style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', lineHeight: 1.05, letterSpacing: '-0.03em' }}
-          >
-            <span
-              style={{
-                background: 'linear-gradient(90deg, #F97316, #FBBF24)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              Batches 2025
-            </span>
-          </h2>
-          <p
-            className="max-w-xl"
-            style={{ fontFamily: SATOSHI, fontWeight: 400, fontSize: '16.5px', lineHeight: 1.75, color: '#6B7280' }}
-          >
-            Flexible learning paths across our Mumbai campuses — for students, freshers, and working professionals alike.
-          </p>
-        </motion.div>
-
-        {/* Batch Tables */}
-        <div className="mb-6 grid grid-cols-1 gap-5 lg:grid-cols-2">
-          <BatchTable campus="Andheri Campus" dataKey="andheri" delay={0.08} />
-          <BatchTable campus="Borivali Campus" dataKey="borivali" delay={0.16} />
-        </div>
-
-        {/* Trust strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.18 }}
-          className="mt-0 flex flex-wrap items-center justify-center gap-x-8 gap-y-3
-            rounded-2xl border border-green-200 bg-green-50 px-6 py-4"
-        >
-          <ShieldCheck size={15} className="shrink-0 text-green-600" strokeWidth={2} />
-          {TRUST.map((t, i) => (
-            <span key={t} className="flex items-center gap-4">
-              {i > 0 && <span className="hidden h-3 w-px bg-green-300 sm:block" />}
-              <span
-                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.12em', color: '#14532d' }}
-              >
-                {t}
+          <ShieldCheck size={24} className="shrink-0 text-green-600" strokeWidth={2.5} />
+          {TRUST.map((text, i) => (
+            <span key={i} className="flex items-center gap-4">
+              {i > 0 && <span className="hidden h-4 w-[2px] bg-green-200 sm:block" />}
+              <span className="font-bold text-[13px] md:text-[14px] uppercase tracking-widest text-green-800 text-center">
+                {text}
               </span>
             </span>
           ))}
         </motion.div>
 
-      </div>{/* end max-w container */}
+      </div>
 
-      {/* ══ CTA CARD — truly full width, touches screen edges ══ */}
+      {/* ════ EDGE-TO-EDGE CTA BANNER ════ */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-        className="relative overflow-hidden w-full
-          bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400
-          px-6 sm:px-12 lg:px-20 py-10 sm:py-12 shadow-[0_-8px_40px_rgba(249,115,22,0.2)]"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="relative overflow-hidden w-full bg-gradient-to-r from-orange-600 via-orange-500 to-amber-500 py-12 lg:py-16 shadow-[0_-15px_50px_rgba(249,115,22,0.15)]"
       >
-        {/* Diagonal stripe */}
-        <div className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.04)_0px,rgba(255,255,255,0.04)_1px,transparent_1px,transparent_12px)]" />
+        {/* Subtle Diagonal Pattern Overlay */}
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay" />
 
-        <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between max-w-6xl mx-auto">
+        {/* Inner Container matched with Main Container width & padding */}
+        <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12">
 
-          {/* Left */}
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-            {/* Headline */}
-            <h3
-              style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: 'clamp(1.3rem, 2.5vw, 1.7rem)', lineHeight: 1.2, letterSpacing: '-0.02em', color: '#fff' }}
-            >
+          {/* Left Text */}
+          <div className="text-center lg:text-left">
+            <h3 className="font-black text-[clamp(1.8rem,3vw,2.5rem)] leading-tight tracking-tight text-white drop-shadow-md">
               Start Your Career Transformation Today.
             </h3>
+            <p className="font-medium text-[16px] text-white/80 mt-2">Reserve your seat in the next batch before it fills up.</p>
           </div>
 
-          {/* Right — buttons */}
-          <div className="flex shrink-0 gap-3">
-            <button
-              className="group inline-flex items-center gap-2 rounded-xl bg-white
-                px-8 py-3.5 shadow-md hover:shadow-xl active:scale-95 transition-all duration-200
-                whitespace-nowrap cursor-pointer border-none"
-              style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: '15px', color: '#ea580c' }}
-            >
-              <Rocket size={15} className="text-orange-500" />
-              Enroll Today
-              <ArrowUpRight size={15} className="group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-150" />
+          {/* Right Buttons */}
+          <div className="flex flex-col sm:flex-row shrink-0 gap-4 w-full lg:w-auto">
+            
+            {/* Primary Button */}
+            <button className="group relative w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-white px-10 py-4 shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.25)] active:scale-95 transition-all duration-300 overflow-hidden cursor-pointer">
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-orange-100/50 to-transparent -translate-x-full group-hover:animate-shine" />
+              <Rocket size={18} className="text-orange-500 relative z-10" />
+              <span className="font-black text-[16px] text-gray-900 relative z-10">Enroll Today</span>
+              <ArrowUpRight size={18} className="text-gray-900 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform relative z-10" />
             </button>
-            <button
-              className="inline-flex items-center justify-center gap-2 rounded-xl
-                border-2 border-white/30 px-7 py-3.5 text-white
-                hover:border-white/70 hover:bg-white/10 active:scale-95
-                transition-all duration-200 whitespace-nowrap cursor-pointer bg-transparent"
-              style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: '15px' }}
-            >
-              Download
+            
+            {/* Secondary Button */}
+            <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border-2 border-white/40 px-10 py-4 text-white hover:border-white hover:bg-white/10 active:scale-95 transition-all duration-300 font-bold text-[16px] cursor-pointer backdrop-blur-sm">
+              Download Syllabus
             </button>
+
           </div>
 
         </div>
       </motion.div>
 
+      {/* ── Custom Animations ── */}
+      <style>{`
+        @keyframes shine { 100% { transform: translateX(100%); } }
+        .animate-shine { animation: shine 1.5s ease; }
+        .animate-pulse-slow { animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+      `}</style>
+      
     </section>
   );
 }

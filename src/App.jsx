@@ -51,7 +51,7 @@ function App() {
         
 
       </Routes>
-      <LocationsSection />
+      {/* <LocationsSection /> */}
       <Footer />
     </div>
   );

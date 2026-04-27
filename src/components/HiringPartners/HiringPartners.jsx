@@ -7,9 +7,9 @@ function FadeUp({ children, delay = 0, className = "" }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94], delay }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay }}
       className={className}
     >
       {children}
@@ -17,10 +17,8 @@ function FadeUp({ children, delay = 0, className = "" }) {
   );
 }
 
-const S = { fontFamily: "'Satoshi', sans-serif" };
-
 /* ═══════════════════════════════════════════════════════════
-   LOGOS — all verified working CDN links
+   LOGOS DATA
 ═══════════════════════════════════════════════════════════ */
 const ROW_1 = [
   { name: "Google", url: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
@@ -72,18 +70,7 @@ const ROW_3 = [
 ═══════════════════════════════════════════════════════════ */
 function LogoCard({ logo }) {
   return (
-    <div
-      className="shrink-0 group cursor-default
-                 flex items-center justify-center
-                 bg-white rounded-xl px-4
-                 border border-gray-100
-                 shadow-[0_1px_3px_rgba(0,0,0,0.05)]
-                 hover:shadow-[0_4px_14px_rgba(249,115,22,0.12)]
-                 hover:border-orange-200
-                 hover:-translate-y-0.5
-                 transition-all duration-200"
-      style={{ width: 128, height: 60 }}
-    >
+    <div className="shrink-0 group cursor-default flex items-center justify-center bg-white rounded-2xl w-[140px] md:w-[160px] h-[64px] md:h-[72px] border border-gray-100 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_20px_rgba(249,115,22,0.15)] hover:border-orange-200 hover:-translate-y-1 transition-all duration-300 px-6">
       <img
         src={logo.url}
         alt={logo.name}
@@ -91,15 +78,9 @@ function LogoCard({ logo }) {
           e.currentTarget.style.display = "none";
           e.currentTarget.nextElementSibling?.classList.remove("hidden");
         }}
-        className="max-h-[26px] max-w-[88px] w-auto h-auto object-contain
-                   grayscale opacity-55
-                   group-hover:grayscale-0 group-hover:opacity-100
-                   transition-all duration-300"
+        className="max-h-[28px] max-w-full w-auto h-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 ease-out"
       />
-      <span
-        className="hidden text-center leading-tight"
-        style={{ ...S, fontWeight: 600, fontSize: "10px", color: "#9CA3AF" }}
-      >
+      <span className="hidden text-center leading-tight font-bold text-[12px] text-gray-400">
         {logo.name}
       </span>
     </div>
@@ -109,21 +90,18 @@ function LogoCard({ logo }) {
 /* ═══════════════════════════════════════════════════════════
    MARQUEE ROW
 ═══════════════════════════════════════════════════════════ */
-function MarqueeRow({ logos, direction = "left", duration = 36 }) {
-  const xFrom = direction === "left" ? "0%" : "-50%";
-  const xTo = direction === "left" ? "-50%" : "0%";
-
+function MarqueeRow({ logos, direction = "left", duration = 40 }) {
+  const isLeft = direction === "left";
   return (
-    <div className="flex overflow-hidden select-none py-1">
-      <motion.div
-        className="flex gap-3 shrink-0 items-center"
-        animate={{ x: [xFrom, xTo] }}
-        transition={{ ease: "linear", duration, repeat: Infinity }}
+    <div className="flex overflow-hidden select-none py-1.5 w-full hover:[&>div]:![animation-play-state:paused]">
+      <div 
+        className={`flex gap-3 md:gap-4 shrink-0 items-center w-max ${isLeft ? 'animate-marquee-left' : 'animate-marquee-right'}`}
+        style={{ animationDuration: `${duration}s` }}
       >
         {[...logos, ...logos].map((logo, i) => (
           <LogoCard key={`${logo.name}-${i}`} logo={logo} />
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -144,108 +122,98 @@ export default function HiringPartners() {
   }, []);
 
   return (
-    <section
-      className="relative bg-white overflow-hidden py-9"
-      style={S}
-    >
-      {/* Subtle dot grid */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.18]"
-        style={{
-          backgroundImage: "radial-gradient(rgba(249,115,22,0.12) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
+    <section className="relative bg-[#FAFAFA] overflow-hidden py-20 lg:py-24 font-sans selection:bg-orange-500 selection:text-white" style={{ fontFamily: "'Satoshi', sans-serif" }}>
+      
+      {/* ── Subtle Dot Grid ── */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle at center, #000 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }} />
 
-      {/* Top accent stripe */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange-500 to-transparent" />
+      {/* ── Glow Orbs ── */}
+      <div className="absolute -top-[10%] -right-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-bl from-orange-400/20 to-transparent blur-[100px] pointer-events-none animate-pulse-slow" />
+      <div className="absolute -bottom-[10%] -left-[5%] w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-amber-300/20 to-transparent blur-[100px] pointer-events-none" style={{ animationDelay: "2s" }} />
 
-      {/* Glow orbs */}
-      <div
-        className="absolute -top-32 -right-32 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(249,115,22,0.06), transparent 65%)" }}
-      />
-      <div
-        className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(249,115,22,0.04), transparent 65%)" }}
-      />
+      {/* ── Header ── */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12 mb-16">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
 
-      {/* ─── HEADER ─── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-16 mb-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-
-          <FadeUp delay={0}>
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.1 }}
-                  className="block h-[2px] w-7 bg-orange-500 rounded-full origin-left"
-                />
-                <span style={{ ...S, fontWeight: 800, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.32em", color: "#6B7280" }}>
-                  Placement Network
-                </span>
-              </div>
-
-              <h2
-                style={{
-                  ...S,
-                  fontWeight: 900,
-                  fontSize: "clamp(32px, 4.5vw, 56px)",
-                  lineHeight: 0.94,
-                  letterSpacing: "-0.035em",
-                  color: "#030712",
-                  margin: 0,
-                }}
-              >
-                Trusted by{" "}
-                <span style={{ color: "#F97316" }}>Top Brands</span>
-              </h2>
-
-              <p style={{ ...S, fontWeight: 500, fontSize: "15px", color: "#4B5563", marginTop: "14px", maxWidth: "460px", lineHeight: 1.7 }}>
-                Join 11,000+ successful alumni placed at India's leading agencies,
-                global brands, and fastest-growing startups.
-              </p>
+          {/* Left Area */}
+          <FadeUp delay={0} className="max-w-2xl">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block h-[2px] w-10 bg-gradient-to-r from-orange-500 to-amber-400 rounded-full" />
+              <span className="font-bold text-[12px] uppercase tracking-[0.2em] text-orange-600">
+                Placement Network
+              </span>
             </div>
+
+            <h2 className="font-black text-[clamp(2.4rem,4.5vw,3.8rem)] leading-[1.05] tracking-tight text-gray-900 mb-4">
+              Trusted by <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500 relative inline-block">
+                Top Brands
+                <svg className="absolute w-full h-[12px] -bottom-1 left-0 text-amber-400 opacity-50" viewBox="0 0 100 20" preserveAspectRatio="none">
+                  <path d="M0 15 Q 50 0 100 15" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
+                </svg>
+              </span>
+            </h2>
+
+            <p className="font-medium text-[16px] md:text-[18px] text-gray-500 max-w-[500px] leading-relaxed">
+              Join 11,000+ successful alumni placed at India's leading agencies, global brands, and fastest-growing startups.
+            </p>
           </FadeUp>
 
-          {/* Stats */}
-          <FadeUp delay={0.15}>
-            <div className="flex gap-8 md:gap-10">
+          {/* Right Area: Stats Row */}
+          <FadeUp delay={0.2}>
+            <div className="flex flex-wrap lg:flex-nowrap gap-8 lg:gap-12 bg-white px-8 py-6 rounded-3xl border border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)]">
               {[
-                { value: "200+", label: "Hiring Partners" },
-                { value: "11k+", label: "Alumni Placed" },
-                { value: "94%", label: "Placement Rate" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center md:text-right">
-                  <div style={{ ...S, fontWeight: 800, fontSize: "clamp(1.4rem, 2.5vw, 2rem)", lineHeight: 1, letterSpacing: "-0.03em", color: "#111827" }}>
+                { value: "400+", label: "Hiring Partners", color: "text-orange-500" },
+                { value: "11k+", label: "Alumni Placed", color: "text-amber-500" },
+                { value: "89%", label: "Placement Rate", color: "text-green-500" },
+              ].map((stat, idx) => (
+                <div key={stat.label} className={`flex flex-col text-center ${idx !== 2 ? 'border-r border-gray-100 pr-8 lg:pr-12' : ''}`}>
+                  <span className={`font-black text-[28px] md:text-[34px] leading-none tracking-tight ${stat.color} mb-1.5`}>
                     {stat.value}
-                  </div>
-                  <div style={{ ...S, fontWeight: 600, fontSize: "11px", color: "#9CA3AF", marginTop: "5px", letterSpacing: "0.06em" }}>
+                  </span>
+                  <span className="font-bold text-[11px] md:text-[12px] text-gray-500 uppercase tracking-widest">
                     {stat.label}
-                  </div>
+                  </span>
                 </div>
               ))}
             </div>
           </FadeUp>
 
         </div>
-
-        <div className="mt-6 h-px bg-gradient-to-r from-transparent via-gray-100 to-transparent" />
       </div>
 
-      {/* ─── 3 MARQUEE ROWS ─── */}
-      <div className="relative z-10 flex flex-col gap-3">
-        <MarqueeRow logos={ROW_1} direction="left" duration={42} />
-        <MarqueeRow logos={ROW_2} direction="right" duration={50} />
-        <MarqueeRow logos={ROW_3} direction="left" duration={38} />
+      {/* ── Marquee Section ── */}
+      <div className="relative z-10 flex flex-col gap-3 md:gap-4 w-full">
+        {/* Edge Fade Masks for smooth blend */}
+        <div className="absolute inset-y-0 left-0 w-20 md:w-40 z-20 pointer-events-none bg-gradient-to-r from-[#FAFAFA] to-transparent" />
+        <div className="absolute inset-y-0 right-0 w-20 md:w-40 z-20 pointer-events-none bg-gradient-to-l from-[#FAFAFA] to-transparent" />
+
+        {/* 3 Infinite Moving Rows */}
+        <MarqueeRow logos={ROW_1} direction="left" duration={50} />
+        <MarqueeRow logos={ROW_2} direction="right" duration={60} />
+        <MarqueeRow logos={ROW_3} direction="left" duration={55} />
       </div>
 
-      {/* Fade masks */}
-      <div className="absolute inset-y-0 left-0 w-16 md:w-28 z-20 pointer-events-none bg-gradient-to-r from-white to-transparent" />
-      <div className="absolute inset-y-0 right-0 w-16 md:w-28 z-20 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+      {/* ── Custom Animations ── */}
+      <style>{`
+        @keyframes marqueeLeft {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marqueeRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0%); }
+        }
+        .animate-marquee-left {
+          animation: marqueeLeft linear infinite;
+        }
+        .animate-marquee-right {
+          animation: marqueeRight linear infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+      `}</style>
     </section>
   );
 }

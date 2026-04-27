@@ -2,112 +2,65 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   CheckCircle2, Users2, Trophy,
-  Briefcase, ArrowUpRight, Sparkles, ShieldCheck,
+  Briefcase, ArrowRight, ShieldCheck,
 } from "lucide-react";
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  OPERATING MEDIA — WhyUsAuthority
-// ─────────────────────────────────────────────────────────────────────────────
-
-// ── Intersection hook ────────────────────────────────────────────────────────
-function useInView(threshold = 0.08) {
-  const ref = useRef(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) { setInView(true); return; }
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
-      { threshold }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, inView];
-}
-
-// ── Animation presets ────────────────────────────────────────────────────────
+// ── Animation Presets ────────────────────────────────────────────────────────
 const fadeUp = (d = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: d },
-  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: d },
+  viewport: { once: true, margin: "-50px" },
 });
-const fadeRight = (d = 0) => ({
-  initial: { opacity: 0, x: -24 },
-  whileInView: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: d },
-  viewport: { once: true },
-});
+
 const fadeLeft = (d = 0) => ({
-  initial: { opacity: 0, x: 24 },
+  initial: { opacity: 0, x: 40 },
   whileInView: { opacity: 1, x: 0 },
-  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: d },
-  viewport: { once: true },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: d },
+  viewport: { once: true, margin: "-50px" },
 });
+
 const scaleIn = (d = 0) => ({
-  initial: { opacity: 0, scale: 0.93 },
+  initial: { opacity: 0, scale: 0.95 },
   whileInView: { opacity: 1, scale: 1 },
-  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: d },
-  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: d },
+  viewport: { once: true },
 });
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const REASONS = [
   {
     title: "15+ Years of Legacy",
-    desc: "Mumbai's pioneer in digital education since 2011 — the institute top agencies trust.",
+    desc: "Mumbai's pioneer in digital education since 2011. The institute top agencies trust.",
     Icon: Trophy,
-    iconBg: "bg-orange-50",
-    iconColor: "#F26522",
-    stat: "15+",
-    statColor: "#F26522",
-    hoverShadow: "hover:shadow-[0_16px_48px_rgba(242,101,34,0.12)]",
-    hoverBorder: "hover:border-orange-200",
-    hoverTitle: "group-hover:text-[#F26522]",
+    color: "text-orange-500",
+    bg: "bg-orange-50",
   },
   {
     title: "1,600+ Students Trained",
     desc: "A growing network of placed professionals working at top agencies across India.",
     Icon: Users2,
-    iconBg: "bg-yellow-50",
-    iconColor: "#FFB81C",
-    stat: "1,600+",
-    statColor: "#FFB81C",
-    hoverShadow: "hover:shadow-[0_16px_48px_rgba(255,184,28,0.12)]",
-    hoverBorder: "hover:border-yellow-200",
-    hoverTitle: "group-hover:text-[#FFB81C]",
+    color: "text-amber-500",
+    bg: "bg-amber-50",
   },
   {
     title: "Google & Meta Certified",
-    desc: "Validate your skills with globally recognised certifications from Google, Meta & HubSpot.",
+    desc: "Validate your skills with globally recognised certifications from top tech giants.",
     Icon: CheckCircle2,
-    iconBg: "bg-orange-50",
-    iconColor: "#F26522",
-    stat: "5+",
-    statColor: "#F26522",
-    hoverShadow: "hover:shadow-[0_16px_48px_rgba(242,101,34,0.10)]",
-    hoverBorder: "hover:border-orange-200",
-    hoverTitle: "group-hover:text-[#F26522]",
+    color: "text-green-500",
+    bg: "bg-green-50",
   },
   {
     title: "400+ Hiring Partners",
     desc: "Direct access to full-time roles and internships through our active recruiter network.",
     Icon: Briefcase,
-    iconBg: "bg-yellow-50",
-    iconColor: "#FFB81C",
-    stat: "400+",
-    statColor: "#FFB81C",
-    hoverShadow: "hover:shadow-[0_16px_48px_rgba(255,184,28,0.10)]",
-    hoverBorder: "hover:border-yellow-200",
-    hoverTitle: "group-hover:text-[#FFB81C]",
+    color: "text-blue-500",
+    bg: "bg-blue-50",
   },
 ];
 
-const SATOSHI = "'Satoshi', sans-serif";
-
 export default function WhyUsAuthority() {
-  // Inject Satoshi font
+  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -119,350 +72,147 @@ export default function WhyUsAuthority() {
   }, []);
 
   return (
-    <section
-      className="relative w-full overflow-hidden bg-white py-5 lg:py-10"
-      style={{ fontFamily: SATOSHI }}
+    <section 
+      className="relative w-full overflow-hidden bg-white py-20 lg:py-32 selection:bg-orange-500 selection:text-white"
+      style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
-      {/* Background Decor */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div
-          className="absolute -top-40 right-0 h-[480px] w-[480px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(242,101,34,0.09) 0%, transparent 70%)", filter: "blur(80px)" }}
-        />
-        <div
-          className="absolute -bottom-20 -left-24 h-[380px] w-[380px] rounded-full"
-          style={{ background: "radial-gradient(circle, rgba(255,184,28,0.07) 0%, transparent 70%)", filter: "blur(80px)" }}
-        />
+      {/* ── Minimal Background Ambient ── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden flex justify-center z-0">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-bl from-orange-100/40 to-transparent blur-[100px]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+      <div className="relative z-10 mx-auto max-w-[1300px] px-6 sm:px-10 lg:px-12">
 
-        {/* ── Section header ─────────────────────────────────────────────── */}
-        <div className="mb-12 flex flex-col gap-8 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
+        {/* ── Main Layout: 2 Columns ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-          <motion.div className="max-w-2xl" {...fadeRight(0)}>
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-px w-10 shrink-0" style={{ background: "#F26522" }} />
-              <span
-                style={{
-                  color: "#F26522",
-                  fontFamily: SATOSHI,
-                  fontWeight: 700,
-                  fontSize: "12px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                Why Operating Media Beats the Rest
-              </span>
-            </div>
-
-            <h2
-              style={{
-                fontFamily: SATOSHI,
-                fontWeight: 800,
-                fontSize: "clamp(2.8rem, 6vw, 4.8rem)",
-                lineHeight: 0.92,
-                letterSpacing: "-0.04em",
-                color: "#030712",
-                marginBottom: "8px",
-              }}
+          {/* ════ LEFT: CLEAN VISUALS (Overlapping Images) ════ */}
+          <div className="relative w-full h-[500px] sm:h-[600px] flex items-center justify-center">
+            
+            {/* Main Image */}
+            <motion.div 
+              className="absolute left-0 top-0 w-[80%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl z-10"
+              {...scaleIn(0)}
             >
-              The Standard
-              <br />
-              of{" "}
-              <span
-                style={{
-                  background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                Digital Mastery.
-              </span>
-            </h2>
-          </motion.div>
+              <img 
+                src="/images/OM-images.jpg" 
+                alt="Classroom Training" 
+                className="w-full h-full object-cover transition-transform duration-[10s] hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/10" />
+            </motion.div>
 
-          <motion.div
-            className="max-w-sm border-l-[3px] pl-6"
-            style={{ borderColor: "#F26522" }}
-            {...fadeLeft(0.12)}
-          >
-            <p
-              style={{
-                fontFamily: SATOSHI,
-                fontWeight: 400,
-                fontSize: "16.5px",
-                fontStyle: "italic",
-                lineHeight: 1.8,
-                color: "#6B7280",
-              }}
+            {/* Overlapping Secondary Image */}
+            <motion.div 
+              className="absolute right-0 bottom-0 w-[55%] h-[55%] rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-[6px] border-white z-20"
+              {...scaleIn(0.2)}
             >
-              "We don't just teach modules — we build careers using the same AI tools
-              that world-class agencies use every day."
-            </p>
-            <p
-              style={{
-                fontFamily: SATOSHI,
-                fontWeight: 700,
-                fontSize: "12px",
-                textTransform: "uppercase",
-                letterSpacing: "0.18em",
-                color: "#F26522",
-                marginTop: "12px",
-              }}
+              <img 
+                src="/images/OM-images2.jpg" 
+                alt="Student Success" 
+                className="w-full h-full object-cover transition-transform duration-[10s] hover:scale-110"
+              />
+            </motion.div>
+
+            {/* Floating Glass Badge 1 */}
+            <motion.div 
+              className="absolute top-10 -right-6 md:-right-10 z-30 bg-white/90 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white/50 animate-float"
+              {...fadeLeft(0.4)}
             >
-              — Operating Media, Mumbai
-            </p>
-          </motion.div>
-        </div>
+              <p className="font-black text-[32px] text-gray-900 leading-none">89<span className="text-orange-500">%</span></p>
+              <p className="font-bold text-[11px] uppercase tracking-widest text-gray-500 mt-1">Placement Rate</p>
+            </motion.div>
 
-        {/* ── Main 2-col grid ────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+            {/* Floating Glass Badge 2 */}
+            <motion.div 
+              className="absolute bottom-16 -left-6 md:-left-10 z-30 bg-gray-900/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-gray-700 animate-float-delayed"
+              {...fadeUp(0.6)}
+            >
+              <p className="font-black text-[24px] text-white leading-none italic">"Real Skills."</p>
+              <p className="font-medium text-[12px] text-gray-400 mt-1">Live Agency Projects</p>
+            </motion.div>
 
-          {/* BENTO LEFT */}
-          <div className="lg:col-span-7">
-            <div className="grid h-[480px] grid-cols-12 grid-rows-6 gap-3 sm:h-[580px] sm:gap-4 lg:h-[640px]">
-
-              {/* Main classroom image */}
-              <motion.div
-                className="relative col-span-8 row-span-4 overflow-hidden rounded-3xl shadow-[0_16px_48px_rgba(0,0,0,0.12)] group"
-                {...scaleIn(0)}
-              >
-                <img
-                  src="/images/OM-images.jpg"
-                  alt="Classroom"
-                  className="h-full w-full object-cover transition-transform duration-[9000ms] group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/15 to-transparent" />
-                <div className="absolute bottom-6 left-6 z-10">
-                  <p
-                    style={{
-                      fontFamily: SATOSHI,
-                      fontWeight: 900,
-                      fontSize: "23px",
-                      fontStyle: "italic",
-                      color: "#fff",
-                      lineHeight: 1.25,
-                    }}
-                  >
-                    "Real Skills. <br />Real Results."
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: SATOSHI,
-                      fontWeight: 700,
-                      fontSize: "10px",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.14em",
-                      color: "rgba(255,255,255,0.6)",
-                      marginTop: "6px",
-                    }}
-                  >
-                    Live Classroom Experience
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Placement rate badge */}
-              <motion.div
-                className="col-span-4 row-span-3 flex flex-col items-center justify-center rounded-3xl p-5 text-center relative overflow-hidden"
-                style={{ background: "linear-gradient(135deg, #FFB81C 0%, #F26522 100%)" }}
-                {...scaleIn(0.08)}
-              >
-                <p
-                  className="relative z-10"
-                  style={{
-                    fontFamily: SATOSHI,
-                    fontWeight: 900,
-                    color: "#fff",
-                    fontSize: "clamp(2.8rem, 5vw, 3.75rem)",
-                    lineHeight: 1,
-                  }}
-                >
-                  89%
-                </p>
-                <p
-                  className="relative z-10"
-                  style={{
-                    fontFamily: SATOSHI,
-                    fontWeight: 700,
-                    fontSize: "11px",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.14em",
-                    color: "rgba(255,255,255,0.75)",
-                    marginTop: "8px",
-                  }}
-                >
-                  Placement Rate
-                </p>
-              </motion.div>
-
-              {/* Student image */}
-              <motion.div
-                className="relative col-span-4 row-span-3 overflow-hidden rounded-3xl shadow-[0_12px_32px_rgba(0,0,0,0.10)]"
-                {...scaleIn(0.14)}
-              >
-                <img
-                  src="/images/OM-images2.jpg"
-                  alt="Student"
-                  className="h-full w-full object-cover"
-                />
-              </motion.div>
-
-              {/* CTA strip */}
-              <motion.a
-                href="#brochure"
-                className="relative col-span-8 row-span-2 flex cursor-pointer items-center justify-between gap-4 overflow-hidden rounded-3xl p-5 sm:p-6 group"
-                style={{
-                  background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
-                  boxShadow: "0 8px 28px rgba(242,101,34,0.35)",
-                }}
-                {...scaleIn(0.18)}
-              >
-                <div className="relative z-10">
-                  <h3
-                    style={{
-                      fontFamily: SATOSHI,
-                      fontWeight: 900,
-                      fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                      color: "#fff",
-                    }}
-                  >
-                    Ready to Start?
-                  </h3>
-                  <p
-                    style={{
-                      fontFamily: SATOSHI,
-                      fontWeight: 400,
-                      fontSize: "13.5px",
-                      color: "rgba(255,255,255,0.8)",
-                      marginTop: "2px",
-                    }}
-                  >
-                    Download our 2026 Master Syllabus
-                  </p>
-                </div>
-                <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white transition-all group-hover:scale-110">
-                  <ArrowUpRight size={20} style={{ color: "#F26522" }} />
-                </span>
-              </motion.a>
-
-            </div>
           </div>
 
-          {/* RIGHT: REASON CARDS */}
-          <div className="flex flex-col justify-center gap-3 lg:col-span-5">
+          {/* ════ RIGHT: CONTENT & CLEAN LIST ════ */}
+          <div className="flex flex-col">
+            
+            {/* Header */}
+            <motion.div {...fadeUp(0)}>
+              <div className="mb-4 flex items-center gap-3">
+                <span className="h-[2px] w-8 bg-orange-500 rounded-full" />
+                <span className="font-bold text-[12px] text-orange-600 uppercase tracking-[0.2em]">
+                  Why Choose Us
+                </span>
+              </div>
+              <h2 className="font-black text-[clamp(2.5rem,4vw,3.5rem)] leading-[1.1] tracking-tight text-gray-900 mb-6">
+                The Standard of <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
+                  Digital Mastery.
+                </span>
+              </h2>
+              <p className="font-medium text-[16px] md:text-[18px] text-gray-500 leading-relaxed mb-10 max-w-[500px]">
+                We don't just teach modules — we build careers using the same AI tools that world-class agencies use every day.
+              </p>
+            </motion.div>
 
-            {REASONS.map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: 28 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.08 }}
-                viewport={{ once: true }}
-                className={`group flex cursor-default items-start gap-4 rounded-2xl border border-gray-100 bg-white p-5 transition-all duration-300 ${item.hoverBorder} ${item.hoverShadow}`}
-              >
-                <div
-                  className={`flex shrink-0 items-center justify-center rounded-2xl transition-all group-hover:scale-110 ${item.iconBg}`}
-                  style={{ width: "52px", height: "52px" }}
+            {/* Clean Reasons List */}
+            <div className="flex flex-col gap-8 mb-12">
+              {REASONS.map((item, idx) => (
+                <motion.div 
+                  key={idx} 
+                  className="group flex items-start gap-5"
+                  {...fadeUp(0.2 + idx * 0.1)}
                 >
-                  <item.Icon size={24} style={{ color: item.iconColor }} />
-                </div>
-                <div className="flex-1">
-                  <div className="mb-1.5 flex items-start justify-between gap-2">
-                    <h4
-                      className={`transition-colors leading-snug ${item.hoverTitle}`}
-                      style={{
-                        fontFamily: SATOSHI,
-                        fontWeight: 700,
-                        fontSize: "16px",
-                        color: "#030712",
-                      }}
-                    >
+                  {/* Subtle Icon Background */}
+                  <div className={`w-14 h-14 shrink-0 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110 ${item.bg}`}>
+                    <item.Icon size={24} strokeWidth={2.5} className={item.color} />
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-bold text-[18px] text-gray-900 leading-tight mb-1.5 group-hover:text-orange-600 transition-colors">
                       {item.title}
                     </h4>
-                    <span
-                      style={{
-                        fontFamily: SATOSHI,
-                        fontWeight: 900,
-                        fontSize: "15px",
-                        color: item.statColor,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {item.stat}
-                    </span>
+                    <p className="font-medium text-[15px] leading-relaxed text-gray-500">
+                      {item.desc}
+                    </p>
                   </div>
-                  <p
-                    style={{
-                      fontFamily: SATOSHI,
-                      fontWeight: 400,
-                      fontSize: "14px",
-                      lineHeight: 1.65,
-                      color: "#6B7280",
-                    }}
-                  >
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
 
-            {/* ISO badge */}
-            <motion.div
-              {...fadeUp(0.36)}
-              className="flex items-center gap-3 rounded-2xl border px-5 py-4"
-              style={{ borderColor: "rgba(58,170,53,0.30)", background: "rgba(58,170,53,0.05)" }}
+            {/* Bottom Actions (ISO + CTA) */}
+            <motion.div 
+              className="flex flex-col sm:flex-row items-center gap-6 pt-8 border-t border-gray-100"
+              {...fadeUp(0.6)}
             >
-              <ShieldCheck size={20} style={{ color: "#3AAA35" }} />
-              <div className="flex-1">
-                <p
-                  style={{
-                    fontFamily: SATOSHI,
-                    fontWeight: 700,
-                    fontSize: "14px",
-                    color: "#1a5c17",
-                  }}
-                >
-                  ISO 9001:2015 Certified Training
-                </p>
-                <p
-                  style={{
-                    fontFamily: SATOSHI,
-                    fontWeight: 500,
-                    fontSize: "12px",
-                    color: "#3AAA35",
-                    marginTop: "2px",
-                  }}
-                >
-                  Govt. of India · MSME Registered
-                </p>
+              {/* Primary Button */}
+              <button className="w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 h-[54px] rounded-xl bg-gray-900 text-white font-bold text-[15px] transition-all hover:bg-orange-500 hover:shadow-lg hover:shadow-orange-500/30 active:scale-95 overflow-hidden">
+                <span className="relative z-10">Explore Courses</span>
+                <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              {/* Minimal ISO Indicator */}
+              <div className="flex items-center gap-3 text-gray-500">
+                <ShieldCheck size={24} className="text-green-500" />
+                <div className="flex flex-col">
+                  <span className="font-bold text-[13px] text-gray-800 leading-tight">ISO 9001:2015</span>
+                  <span className="font-semibold text-[11px] uppercase tracking-widest">Certified</span>
+                </div>
               </div>
             </motion.div>
 
-            {/* CTA button */}
-            <motion.a
-              href="#courses"
-              {...fadeUp(0.44)}
-              className="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl px-7 py-4 text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(242,101,34,0.44)]"
-              style={{
-                fontFamily: SATOSHI,
-                fontWeight: 700,
-                fontSize: "16px",
-                background: "linear-gradient(95deg, #F26522 0%, #FFB81C 100%)",
-                boxShadow: "0 8px 28px rgba(242,101,34,0.38)",
-              }}
-            >
-              <Sparkles size={17} className="text-white/70" />
-              Explore All Courses
-              <ArrowUpRight size={16} />
-            </motion.a>
-
           </div>
         </div>
       </div>
+
+      {/* ── Custom Animations ── */}
+      <style>{`
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        @keyframes floatDelayed { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-16px); } }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: floatDelayed 7s ease-in-out infinite; animation-delay: 2s; }
+      `}</style>
     </section>
   );
 }
