@@ -28,8 +28,8 @@ const Homepage = () => {
       <Programs />
       <WhyUsAuthority />
       <EventsAndBatches />
-      <StatsCounter/>
-      <InstitutionCampus/>
+      {/* <StatsCounter/> */}
+     
       
       <AlumniPlacement />
       <CounselorCTA />
@@ -39,6 +39,7 @@ const Homepage = () => {
 
       <InfoSection />
       <StudentReviews/>
+       <InstitutionCampus/>
     </main>
   );
 };

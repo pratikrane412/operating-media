@@ -1,73 +1,64 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, GraduationCap, Linkedin } from "lucide-react";
 
-// ── Course/Mentor Data ──
+// ── Shared Image & Base Data ──
+const DEFAULT_IMAGE = "/images/Harsh-Ibraine.webp";
+
+// Add up to 8 mentors here.
 const MENTORS = [
-  {
-    name: "Shraddha Rane",
-    desc: "Lorem Ipsum is simply dummy",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-410.png",
-    themeClass: "bg-[#FCD2A1] border-[#FCD2A1]",
-    gradientClass: "from-[#FFF6EE] to-[#FDE7CF]",
-  },
-  {
-    name: "Harsh Pareek",
-    desc: "Lorem Ipsum is simply dummy",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-411.png",
-    themeClass: "bg-[#F3D779] border-[#F3D779]",
-    gradientClass: "from-[#FEFBF2] to-[#F8EBB5]",
-  },
-  {
-    name: "Hemant Mane",
-    desc: "Lorem Ipsum is simply dummy",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2024/11/WhatsApp-Image-2023-02-19-at-18.38.42-1.png",
-    themeClass: "bg-[#EEFA79] border-[#EEFA79]",
-    gradientClass: "from-[#FCFEE5] to-[#F6FCB2]",
-  },
-  {
-    name: "Zahid Shaikh",
-    desc: "Lorem Ipsum is simply dummy",
-    img: "https://www.operatingmedia.com/wp-content/uploads/2024/10/Group-413.png",
-    themeClass: "bg-[#D3FC91] border-[#D3FC91]",
-    gradientClass: "from-[#F7FEE9] to-[#E6FDBE]",
-  },
+  { name: "Shraddha Rane", role: "Digital Marketing Expert", img: DEFAULT_IMAGE },
+  { name: "Harsh Pareek", role: "SEO & Growth Strategist", img: DEFAULT_IMAGE },
+  { name: "Hemant Mane", role: "Performance Marketing Lead", img: DEFAULT_IMAGE },
+  { name: "Zahid Shaikh", role: "Social Media Specialist", img: DEFAULT_IMAGE },
+  { name: "Pooja Sharma", role: "Content Strategy Head", img: DEFAULT_IMAGE },
+  { name: "Rahul Verma", role: "E-Commerce Expert", img: DEFAULT_IMAGE },
+  { name: "Amit Singh", role: "Analytics Lead", img: DEFAULT_IMAGE },
+  { name: "Sneha Patil", role: "Brand Manager", img: DEFAULT_IMAGE },
 ];
 
-// ── Card Component ──
+// ── Ultra-Premium Full-Bleed Card Component ──
 function MentorCard({ mentor }) {
   return (
-    <div
-      className={`group flex flex-col rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] cursor-default overflow-hidden w-full max-w-[300px] ${mentor.themeClass}`}
-    >
-      {/* ── Photo Area (Gradient Top) ── */}
-      <div className={`relative h-[260px] sm:h-[280px] w-full bg-gradient-to-b ${mentor.gradientClass} overflow-hidden rounded-t-2xl`}>
+    <div className="group flex flex-col rounded-[24px] bg-white border border-gray-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-2 hover:shadow-[0_20px_40px_-15px_rgba(236,171,0,0.25)] hover:border-[#ecab00]/40 transition-all duration-500 cursor-default overflow-hidden w-full max-w-[290px] mx-auto relative">
+      
+      {/* ── Photo Area (Full Bleed Object Cover) ── */}
+      <div className="relative h-[280px] sm:h-[320px] w-full overflow-hidden bg-gray-100">
         <img
           src={mentor.img}
           alt={mentor.name}
-          className="w-full h-full object-contain object-bottom group-hover:scale-105 transition-transform duration-500 ease-out"
-          onError={(e) => { e.currentTarget.style.display = "none"; }}
+          // Changed to object-cover so it completely fills the space without weird borders
+          className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-[8s] ease-out"
         />
+        
+        {/* Dark Overlay that rises on hover to make text/icons pop */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        {/* Hidden LinkedIn Icon that pops up on hover (Premium Touch) */}
+        <div className="absolute bottom-4 right-4 bg-[#ecab00] p-2.5 rounded-full text-[#0f172a] translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 shadow-lg cursor-pointer">
+          <Linkedin size={18} fill="currentColor" strokeWidth={1} />
+        </div>
       </div>
 
-      {/* ── Info Area (Solid Bottom) ── */}
-      <div className={`px-4 py-6 text-center ${mentor.themeClass}`}>
-        <h3 className="font-bold text-[19px] text-gray-900 tracking-tight leading-tight mb-1.5">
+      {/* ── Info Area ── */}
+      <div className="px-6 py-6 text-center bg-white relative z-20">
+        <h3 className="font-black text-[20px] md:text-[22px] text-[#0f172a] tracking-tight leading-tight mb-1 transition-colors group-hover:text-[#ecab00]">
           {mentor.name}
         </h3>
-        <p className="font-medium text-[13px] text-gray-600 opacity-90">
-          {mentor.desc}
+        <p className="font-bold text-[12px] uppercase tracking-widest text-[#ecab00]">
+          {mentor.role}
         </p>
       </div>
+      
     </div>
   );
 }
 
 export default function TrainersSection() {
   const [startIndex, setStartIndex] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(4); // Default to Desktop
+  const [cardsToShow, setCardsToShow] = useState(4);
 
-  // Inject Satoshi font dynamically
+  // Inject Satoshi font
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -81,13 +72,13 @@ export default function TrainersSection() {
   // Update cards per view based on screen size
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) setCardsToShow(1); // Mobile: 1 card
-      else if (window.innerWidth < 1024) setCardsToShow(2); // Tablet: 2 cards
-      else if (window.innerWidth < 1280) setCardsToShow(3); // Laptop: 3 cards
-      else setCardsToShow(4); // Desktop: 4 cards
+      if (window.innerWidth < 640) setCardsToShow(1); // Mobile
+      else if (window.innerWidth < 1024) setCardsToShow(2); // Tablet
+      else if (window.innerWidth < 1280) setCardsToShow(3); // Laptop
+      else setCardsToShow(4); // Large Desktop
     };
 
-    handleResize(); // Set initial
+    handleResize(); 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -107,11 +98,16 @@ export default function TrainersSection() {
     }
   };
 
-  // Get exactly the cards we need to show right now without overflow
   const visibleCards = MENTORS.slice(startIndex, startIndex + cardsToShow);
 
   return (
-    <section className="relative w-full py-16 lg:py-24 bg-white overflow-hidden selection:bg-orange-500 selection:text-white" style={{ fontFamily: "'Satoshi', sans-serif" }}>
+    <section 
+      className="relative w-full py-16 lg:py-24 bg-[#FAFCFF] overflow-hidden selection:bg-[#ecab00] selection:text-[#0f172a]" 
+      style={{ fontFamily: "'Satoshi', sans-serif" }}
+    >
+      {/* ── Background Grid ── */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" 
+           style={{ backgroundImage: 'linear-gradient(#0f172a 1px, transparent 1px), linear-gradient(90deg, #0f172a 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
 
       {/* ── Header ── */}
       <motion.div 
@@ -119,74 +115,100 @@ export default function TrainersSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col items-center text-center mb-10 lg:mb-14 px-6"
+        className="relative z-10 flex flex-col items-center text-center mb-12 lg:mb-16 px-6"
       >
-        <div className="inline-flex items-center justify-center px-5 py-1.5 rounded-full border border-orange-400 mb-5 shadow-sm">
-          <span className="font-bold text-[12px] text-orange-500 tracking-wide uppercase">
+        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
+          <GraduationCap size={16} className="text-[#ecab00]" strokeWidth={2.5} />
+          <span className="font-bold text-[11px] text-[#0f172a] uppercase tracking-widest">
             Industry Expert Mentors
           </span>
         </div>
 
-        <h2 className="font-black text-[clamp(2.2rem,4vw,3.5rem)] leading-[1.1] tracking-tight text-gray-900">
-          Learn from Real <span className="text-[#FFB800]">Industry Professionals</span>
+        {/* Fixed 46px Desktop Heading */}
+        <h2 className="font-black text-[32px] md:text-[38px] lg:text-[46px] leading-[1.1] tracking-tight text-[#0f172a]">
+          Learn from Real <br className="block sm:hidden"/>
+          <span className="text-[#ecab00]">Industry Professionals.</span>
         </h2>
       </motion.div>
 
-      {/* ── Main Controlled Carousel Area (No Cut Offs) ── */}
-      <div className="max-w-[1400px] mx-auto flex items-center justify-center px-4 sm:px-6">
+      {/* ── Carousel Area ── */}
+      <div className="relative z-10 max-w-[1400px] mx-auto flex flex-col items-center px-4 sm:px-6">
         
-        {/* Left Arrow */}
-        <button
-          onClick={prevSlide}
-          disabled={startIndex === 0}
-          className={`hidden md:flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-orange-300 text-orange-500 hover:bg-orange-50 active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none mr-4 lg:mr-8`}
-        >
-          <ChevronLeft size={28} strokeWidth={1.5} />
-        </button>
+        <div className="flex w-full items-center justify-center">
+          
+          {/* Left Arrow (Desktop/Tablet) */}
+          <button
+            onClick={prevSlide}
+            disabled={startIndex === 0}
+            className="hidden sm:flex shrink-0 items-center justify-center w-14 h-14 rounded-full border border-gray-200 bg-white text-[#0f172a] hover:bg-[#ecab00] hover:text-[#0f172a] hover:border-[#ecab00] hover:shadow-md active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none mr-4 lg:mr-8 shadow-sm"
+          >
+            <ChevronLeft size={28} strokeWidth={2} />
+          </button>
 
-        {/* ── Exact Fit Container (Framer Motion Animated) ── */}
-        {/* Instead of scrolling, we replace the grid content smoothly */}
-        <div className="flex-1 flex justify-center">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={startIndex} // Re-animates when startIndex changes
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
-              className="flex justify-center gap-6 lg:gap-8 w-full"
-            >
-              {visibleCards.map((mentor, i) => (
-                <MentorCard key={i} mentor={mentor} />
+          {/* ── Animated Card Grid ── */}
+          <div className="flex-1 w-full flex justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={startIndex}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className={`grid gap-6 lg:gap-8 w-full max-w-[1250px] mx-auto ${
+                  cardsToShow === 1 ? 'grid-cols-1' : 
+                  cardsToShow === 2 ? 'grid-cols-2' : 
+                  cardsToShow === 3 ? 'grid-cols-3' : 'grid-cols-4'
+                }`}
+              >
+                {visibleCards.map((mentor, i) => (
+                  <MentorCard key={`${startIndex}-${i}`} mentor={mentor} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right Arrow (Desktop/Tablet) */}
+          <button
+            onClick={nextSlide}
+            disabled={startIndex + cardsToShow >= MENTORS.length}
+            className="hidden sm:flex shrink-0 items-center justify-center w-14 h-14 rounded-full border border-gray-200 bg-white text-[#0f172a] hover:bg-[#ecab00] hover:text-[#0f172a] hover:border-[#ecab00] hover:shadow-md active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none ml-4 lg:ml-8 shadow-sm"
+          >
+            <ChevronRight size={28} strokeWidth={2} />
+          </button>
+
+        </div>
+
+        {/* ── Mobile Navigation Controls (Dots & Arrows) ── */}
+        <div className="flex sm:hidden items-center justify-between w-full max-w-[280px] mt-10">
+          <button
+            onClick={prevSlide}
+            disabled={startIndex === 0}
+            className="w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 bg-white text-[#0f172a] hover:bg-[#ecab00] hover:text-[#0f172a] disabled:opacity-30 disabled:pointer-events-none transition-all shadow-sm"
+          >
+            <ChevronLeft size={22} strokeWidth={2} />
+          </button>
+
+          {totalPages > 1 && (
+            <div className="flex items-center gap-2.5">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <div 
+                  key={i} 
+                  className={`transition-all duration-300 rounded-full ${currentPage === i ? 'w-6 h-2 bg-[#ecab00]' : 'w-2 h-2 bg-gray-300'}`}
+                />
               ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-
-        {/* Right Arrow */}
-        <button
-          onClick={nextSlide}
-          disabled={startIndex + cardsToShow >= MENTORS.length}
-          className={`hidden md:flex shrink-0 items-center justify-center w-12 h-12 rounded-full border border-orange-300 text-orange-500 hover:bg-orange-50 active:scale-95 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none ml-4 lg:ml-8`}
-        >
-          <ChevronRight size={28} strokeWidth={1.5} />
-        </button>
-      </div>
-
-      {/* ── Image-Style Pagination Dots ── */}
-      {/* We only render dots if there is more than 1 page */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-3 mt-10">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <div 
-              key={i} 
-              className={`flex items-center justify-center rounded-full transition-all duration-300 ${currentPage === i ? 'w-6 h-6 border border-yellow-400' : 'w-6 h-6'}`}
-            >
-              <div className={`rounded-full transition-all duration-300 ${currentPage === i ? 'w-1.5 h-1.5 bg-yellow-500' : 'w-1.5 h-1.5 bg-gray-300'}`} />
             </div>
-          ))}
+          )}
+
+          <button
+            onClick={nextSlide}
+            disabled={startIndex + cardsToShow >= MENTORS.length}
+            className="w-11 h-11 flex items-center justify-center rounded-full border border-gray-200 bg-white text-[#0f172a] hover:bg-[#ecab00] hover:text-[#0f172a] disabled:opacity-30 disabled:pointer-events-none transition-all shadow-sm"
+          >
+            <ChevronRight size={22} strokeWidth={2} />
+          </button>
         </div>
-      )}
+
+      </div>
 
     </section>
   );

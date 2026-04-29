@@ -263,40 +263,7 @@ export default function AboutSectionPremium() {
         </div>
       </div>
 
-      {/* ══════════════════════════════════════
-          BOTTOM: STATS & CTA BAND
-      ══════════════════════════════════════ */}
-      <div className="relative z-20 w-full bg-white border-t border-gray-100 py-16 sm:py-20">
-        <div className="max-w-[1350px] mx-auto px-6 sm:px-10 lg:px-16">
-          
-          <p className={`text-center font-bold text-[13px] sm:text-[15px] uppercase tracking-[0.25em] text-[#0f172a]/40 mb-10 transition-all duration-700 ${inView ? "opacity-100" : "opacity-0"}`}>
-            Why 500+ Professionals Chose Operating Media
-          </p>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
-            {STATS.map((stat, i) => (
-              <StatCard key={i} stat={stat} inView={inView} delay={500 + i * 100} />
-            ))}
-          </div>
-
-          {/* Dark Tech CTA Strip */}
-          <div className={`relative overflow-hidden rounded-[32px] bg-[#0f172a] p-8 md:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-[0_20px_40px_-15px_rgba(15,23,42,0.4)] transition-all duration-1000 delay-[800ms] ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}>
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:20px_20px]" />
-            <div className="absolute right-0 top-0 bottom-0 w-full lg:w-1/2 bg-[radial-gradient(ellipse_at_right,_rgba(236,171,0,0.15)_0%,_transparent_70%)] pointer-events-none" />
-
-            <div className="relative z-10 text-center lg:text-left">
-              <p className="font-black text-[28px] md:text-[38px] text-white leading-tight mb-3">Ready to start your digital career?</p>
-              <p className="font-medium text-[16px] md:text-[18px] text-white/70">Join 500+ placed professionals. Next batch starts soon.</p>
-            </div>
-
-            <button className="relative z-10 group h-[60px] px-10 rounded-2xl bg-[#ecab00] text-[#0f172a] font-bold text-[18px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 hover:shadow-[#ecab00]/50 transition-all active:scale-[0.98] flex items-center justify-center gap-3 shrink-0 whitespace-nowrap">
-              <span>Book Free Demo</span>
-              <span className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><IconArrow /></span>
-            </button>
-          </div>
-
-        </div>
-      </div>
+     
 
       {/* ── CUSTOM ANIMATIONS ── */}
       <style>{`
