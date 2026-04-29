@@ -174,13 +174,13 @@ export default function AboutSectionPremium() {
               </span>
             </div>
 
-            {/* Headline */}
-            <h2 className={`font-black text-[clamp(2.8rem,5vw,4.5rem)] leading-[1.05] tracking-tight text-[#0f172a] transition-all duration-700 delay-100 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+            {/* Headline (Updated to EXACT 46px on Desktop) */}
+            <h2 className={`font-black text-[32px] md:text-[38px] lg:text-[46px] leading-[1.15] tracking-tight text-[#0f172a] transition-all duration-700 delay-100 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
               India's Best <br />
               <span className="relative inline-block text-[#ecab00] pb-1">
                 Digital Marketing
-                <svg className={`absolute w-full h-[12px] -bottom-1 left-0 text-[#ecab00] transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`} viewBox="0 0 100 20" preserveAspectRatio="none" style={{ transformOrigin: 'left' }}>
-                  <path d="M0 15 Q 50 0 100 15" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round"/>
+                <svg className={`absolute w-full h-[8px] -bottom-0.5 left-0 text-[#ecab00] transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`} viewBox="0 0 100 20" preserveAspectRatio="none" style={{ transformOrigin: 'left' }}>
+                  <path d="M0 15 Q 50 0 100 15" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round"/>
                 </svg>
               </span> <br />
               Training Institute.
