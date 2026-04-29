@@ -125,7 +125,7 @@ const AboutFaculty = () => {
             >
               <div className="h-[2px] w-10 bg-orange-500" />
               <span
-                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.25em", color: "#F97316" }}
+                style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.25em", color: "#ECAB00" }}
               >
                 Methodology
               </span>
@@ -141,7 +141,7 @@ const AboutFaculty = () => {
               Redefining Digital <br />
               <span
                 style={{
-                  background: "linear-gradient(90deg, #F97316, #EA580C)",
+                  background: "linear-gradient(90deg, #ECAB00, #EA580C)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",

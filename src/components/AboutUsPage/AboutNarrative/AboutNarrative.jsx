@@ -82,7 +82,7 @@ function Label({ children }) {
     <div className="inline-flex items-center gap-2 mb-5">
       <span className="w-5 h-px bg-orange-500" />
       <span
-        style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", letterSpacing: "0.18em", color: "#F97316", textTransform: "uppercase" }}
+        style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "11px", letterSpacing: "0.18em", color: "#ECAB00", textTransform: "uppercase" }}
       >
         {children}
       </span>
@@ -249,7 +249,7 @@ function TestimonialSlider() {
             </div>
             <div className="ml-auto flex gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#f97316">
+                <svg key={i} width="12" height="12" viewBox="0 0 24 24" fill="#ECAB00">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
               ))}
@@ -341,7 +341,7 @@ export default function AboutNarrative() {
               >
                 One of India's{" "}
                 <span className="relative inline-block">
-                  <span style={{ color: "#F97316" }}>Top 5</span>
+                  <span style={{ color: "#ECAB00" }}>Top 5</span>
                   <motion.span
                     className="absolute -bottom-1 left-0 h-[3px] bg-orange-500 rounded-full block w-full"
                     initial={{ scaleX: 0, originX: 0 }}
@@ -370,7 +370,7 @@ export default function AboutNarrative() {
                 <span className="w-1 h-1 rounded-full bg-neutral-300" />
                 <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#0a0a0b" }}>Mumbai, India</span>
                 <span className="w-1 h-1 rounded-full bg-neutral-300" />
-                <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#F97316" }}>14 Years Strong</span>
+                <span style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "13.5px", color: "#ECAB00" }}>14 Years Strong</span>
               </div>
             </FadeRight>
           </div>
@@ -436,13 +436,13 @@ export default function AboutNarrative() {
             >
               A local initiative
               <br />
-              with <span style={{ color: "#F97316" }}>global influence.</span>
+              with <span style={{ color: "#ECAB00" }}>global influence.</span>
             </h2>
             <div className="space-y-5 mb-10">
               {[
                 <>We are <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>Operating Media</strong>, one of the leading Digital Marketing Training providers in India. If you aspire to be a Digital Marketing expert and want to excel in Internet Marketing, you are at the right place.</>,
                 <>We also offer customized Digital Marketing Workshops for <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>corporate organizations</strong> who want to take their businesses to the next level by leveraging Digital Marketing.</>,
-                <>With leading industry experts and <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>world-class infrastructure</strong>, our team consists of <span style={{ color: "#F97316", fontWeight: 600 }}>certified professionals</span> with deep field experience in their respective domains.</>,
+                <>With leading industry experts and <strong style={{ fontWeight: 700, color: "#0a0a0b" }}>world-class infrastructure</strong>, our team consists of <span style={{ color: "#ECAB00", fontWeight: 600 }}>certified professionals</span> with deep field experience in their respective domains.</>,
               ].map((content, i) => (
                 <p
                   key={i}
@@ -546,7 +546,7 @@ export default function AboutNarrative() {
               >
                 Unique because
                 <br />
-                we train <span style={{ color: "#F97316" }}>dynamic</span>,
+                we train <span style={{ color: "#ECAB00" }}>dynamic</span>,
                 <br />
                 not just disciplined.
               </h2>
@@ -570,7 +570,7 @@ export default function AboutNarrative() {
                   >
                     <p
                       className="mb-4"
-                      style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.2em", color: "#F97316", textTransform: "uppercase" }}
+                      style={{ fontFamily: SATOSHI, fontWeight: 700, fontSize: "10px", letterSpacing: "0.2em", color: "#ECAB00", textTransform: "uppercase" }}
                     >
                       {card.num}
                     </p>
@@ -602,7 +602,7 @@ export default function AboutNarrative() {
           <h2
             style={{ fontFamily: SATOSHI, fontWeight: 800, fontSize: "clamp(30px,3.8vw,50px)", letterSpacing: "-0.04em", lineHeight: 1.05, color: "#0a0a0b" }}
           >
-            What our alumni <span style={{ color: "#F97316" }}>are saying.</span>
+            What our alumni <span style={{ color: "#ECAB00" }}>are saying.</span>
           </h2>
         </FadeUp>
         <FadeUp delay={0.1}>
@@ -631,7 +631,7 @@ export default function AboutNarrative() {
               >
                 We don't just teach digital marketing.
                 <br />
-                We build digital marketing <span style={{ color: "#F97316" }}>practitioners.</span>
+                We build digital marketing <span style={{ color: "#ECAB00" }}>practitioners.</span>
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-8 h-px bg-orange-500" />
@@ -704,7 +704,7 @@ export default function AboutNarrative() {
           >
             Your digital career
             <br />
-            starts <span style={{ color: "#F97316" }}>here.</span>
+            starts <span style={{ color: "#ECAB00" }}>here.</span>
           </h2>
         </motion.div>
       </div>

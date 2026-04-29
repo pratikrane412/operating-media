@@ -254,7 +254,7 @@ const AboutHero = () => {
             {/* Placement rate */}
             <div className="bg-[#0A0A0B] p-10 rounded-[40px] text-white flex flex-col justify-center items-center text-center shadow-xl">
               <span
-                style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(4rem, 8vw, 5rem)', color: '#F97316', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: '8px' }}
+                style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(4rem, 8vw, 5rem)', color: '#ECAB00', lineHeight: 1, letterSpacing: '-0.04em', marginBottom: '8px' }}
               >
                 98%
               </span>
@@ -309,7 +309,7 @@ const AboutHero = () => {
               style={{ fontFamily: SATOSHI, fontWeight: 900, fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', color: '#0A0A0B', letterSpacing: '-0.04em', lineHeight: 1.1, marginBottom: '32px' }}
             >
               Industry Leading <br /> Experts &{' '}
-              <span style={{ color: '#F97316' }}>Mentors.</span>
+              <span style={{ color: '#ECAB00' }}>Mentors.</span>
             </motion.h2>
             <div className="space-y-6">
               {[

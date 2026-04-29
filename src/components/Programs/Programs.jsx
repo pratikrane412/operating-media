@@ -49,9 +49,9 @@ const COURSES = [
     desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     badgeText: "Advance Diploma",
-    badgeBg: "bg-[#F97316]", 
+    badgeBg: "bg-[#ECAB00]", 
     badgeTextCol: "text-white",
-    borderColor: "border-[#F97316]/50 hover:border-[#F97316]",
+    borderColor: "border-[#ECAB00]/50 hover:border-[#ECAB00]",
     shadowHover: "hover:shadow-[0_20px_40px_-15px_rgba(249,115,22,0.25)]",
     features: [
       "7 Months / 200 Hours",
@@ -182,8 +182,8 @@ export default function CoursesSection() {
             <h2 className="font-black text-[clamp(2.5rem,4.5vw,3.8rem)] leading-[1.05] tracking-tight text-[#0F172A]">
               Master Digital <br className="hidden sm:block" />
               Marketing Through <br className="hidden sm:block" />
-              Hands-On <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F97316] to-[#FBBF24]">Practical</span> <br className="hidden sm:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] to-[#F97316]">Training</span>
+              Hands-On <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ECAB00] to-[#FBBF24]">Practical</span> <br className="hidden sm:block" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FBBF24] to-[#ECAB00]">Training</span>
             </h2>
           </div>
 

@@ -229,7 +229,7 @@ export default function ContactHero() {
           <div className="mb-10">
             <div className="flex items-center gap-2 mb-4">
               <span className="h-[2px] w-6 rounded-full bg-orange-500" />
-              <span style={{ ...S, fontWeight: 700, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#F97316" }}>
+              <span style={{ ...S, fontWeight: 700, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#ECAB00" }}>
                 Our Campuses
               </span>
             </div>
@@ -310,7 +310,7 @@ export default function ContactHero() {
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 hover:text-orange-600 transition-colors"
-                style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#F97316" }}
+                style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#ECAB00" }}
               >
                 Get Directions <ChevronRight size={16} />
               </a>

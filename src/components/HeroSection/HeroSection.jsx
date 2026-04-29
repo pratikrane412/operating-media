@@ -33,7 +33,7 @@ export default function HeroUltra() {
           </div>
 
           <div className="btns">
-            <button className="primary">Enroll Now →</button>
+            <button className="primary">Book a Demo →</button>
             <button className="secondary">Download Brochure</button>
           </div>
 
@@ -124,7 +124,7 @@ export default function HeroUltra() {
         }
 
         .orange {
-          color: #f97316;
+          color: #ECAB00;
         }
 
         .highlight {
@@ -139,7 +139,7 @@ export default function HeroUltra() {
           left: 0;
           width: 100%;
           height: 10px;
-          border: 2px solid #f97316;
+          border: 2px solid #ECAB00;
           border-radius: 999px;
         }
 
@@ -165,7 +165,7 @@ export default function HeroUltra() {
         }
 
         .primary {
-          background: #f97316;
+          background: #ECAB00;
           color: white;
           padding: 13px 26px;
           border-radius: 8px;
@@ -203,7 +203,7 @@ export default function HeroUltra() {
           position: absolute;
           width: clamp(320px, 42vw, 540px);
           height: clamp(320px, 42vw, 540px);
-          background: radial-gradient(circle, #fb923c 0%, #f97316 55%, transparent 70%);
+          background: radial-gradient(circle, #fb923c 0%, #ECAB00 55%, transparent 70%);
           filter: blur(50px);
           z-index: 1;
         }
@@ -219,7 +219,7 @@ export default function HeroUltra() {
         /* ICONS */
         .icon {
           position: absolute;
-          width: 36px;
+          width: 45px;
           background: #ffffff;
           padding: 6px;
           border-radius: 50%;
@@ -227,9 +227,9 @@ export default function HeroUltra() {
         }
 
         .google { top: 8%; left: 12%; }
-        .fb { top: 22%; right: 12%; }
-        .insta { top: 48%; right: 2%; }
-        .yt { bottom: 18%; right: 18%; }
+        .fb { top: -10%; right: 32%; }
+        .insta { top: 35%; right: 2%; }
+        .yt { bottom: 10%; right: 10%; }
 
         /* CARDS */
         .card {
@@ -240,18 +240,19 @@ export default function HeroUltra() {
           z-index: 3;
         }
 
-        .card1 { bottom: 12%; left: 8%; }
-        .card2 { bottom: 6%; right: 8%; }
+        .card1 { bottom: 4%; left: 8%; }
+        .card2 { bottom: 25%; right: -3%; }
 
         .card strong {
-          font-size: 16px;
+          font-size: 24px;
           display: block;
           color: #111;
         }
 
         .card span {
-          font-size: 11px;
-          color: #666;
+          font-size: 18px;
+    color: #666;
+    font-weight: 500;
         }
 
         /* FLOAT */

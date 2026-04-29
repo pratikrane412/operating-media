@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const S = { fontFamily: "'Satoshi', sans-serif" };
 
@@ -36,9 +36,12 @@ const REVIEWS = [
   },
 ];
 
+// Doubling the array to create a seamless infinite loop
+const doubledReviews = [...REVIEWS, ...REVIEWS];
+
 // Custom Quote Icon exactly like the image
 const QuoteIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-12 h-12 fill-[#FBBF24] opacity-90 drop-shadow-sm">
+  <svg viewBox="0 0 24 24" className="w-10 h-10 lg:w-12 lg:h-12 fill-[#FBBF24] opacity-90 drop-shadow-sm">
     <path d="M9 10.5C9 12.433 7.433 14 5.5 14C3.567 14 2 12.433 2 10.5C2 7.462 4.462 5 7.5 5V7C5.567 7 4 8.567 4 10.5C4 10.776 4.045 11.036 4.126 11.284C4.524 10.822 5.163 10.5 5.866 10.5H9ZM20 10.5C20 12.433 18.433 14 16.5 14C14.567 14 13 12.433 13 10.5C13 7.462 15.462 5 18.5 5V7C16.567 7 15 8.567 15 10.5C15 10.776 15.045 11.036 15.126 11.284C15.524 10.822 16.163 10.5 16.866 10.5H20Z" />
   </svg>
 );
@@ -46,16 +49,16 @@ const QuoteIcon = () => (
 function ReviewCard({ review }) {
   return (
     <div
-      className="flex flex-col items-center text-center bg-white rounded-2xl p-8 border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.12)] transition-shadow duration-300 relative w-full h-[320px] max-w-[340px]"
+      className="shrink-0 flex flex-col items-center text-center bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.06)] hover:shadow-[0_15px_30px_-10px_rgba(0,0,0,0.12)] transition-all duration-300 relative w-[280px] md:w-[320px] lg:w-[340px] h-[280px] md:h-[320px] group cursor-default"
       style={S}
     >
       {/* Top Left Quote Icon */}
-      <div className="absolute top-6 left-6">
+      <div className="absolute top-5 left-5 md:top-6 md:left-6 transition-transform duration-300 group-hover:scale-110">
         <QuoteIcon />
       </div>
 
       {/* Round Image */}
-      <div className="w-20 h-20 rounded-full overflow-hidden border-[3px] border-white shadow-md z-10 mb-4 bg-gray-100">
+      <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-[3px] border-white shadow-md z-10 mb-4 bg-gray-100 transition-transform duration-300 group-hover:scale-105">
         <img
           src={review.img}
           alt={review.name}
@@ -65,12 +68,12 @@ function ReviewCard({ review }) {
       </div>
 
       {/* Name */}
-      <h3 className="font-bold text-[18px] text-gray-900 tracking-tight leading-tight mb-3">
+      <h3 className="font-bold text-[16px] md:text-[18px] text-gray-900 tracking-tight leading-tight mb-2 md:mb-3">
         {review.name}
       </h3>
 
       {/* Review Text */}
-      <p className="font-medium text-[14px] text-gray-500 leading-relaxed max-w-[280px] line-clamp-5">
+      <p className="font-medium text-[13px] md:text-[14px] text-gray-500 leading-relaxed max-w-[280px] line-clamp-5">
         "{review.text}"
       </p>
     </div>
@@ -78,10 +81,8 @@ function ReviewCard({ review }) {
 }
 
 export default function StudentReviews() {
-  const [startIndex, setStartIndex] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(3);
-
-  // Inject Satoshi font
+  
+  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -92,41 +93,13 @@ export default function StudentReviews() {
     }
   }, []);
 
-  // Handle Responsive layout
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) setCardsToShow(1);
-      else if (window.innerWidth < 1024) setCardsToShow(2);
-      else setCardsToShow(3);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Autoplay Logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setStartIndex((prev) => 
-        (prev + cardsToShow) >= REVIEWS.length ? 0 : prev + cardsToShow
-      );
-    }, 5000); // changes every 5 seconds
-    return () => clearInterval(timer);
-  }, [cardsToShow]);
-
-  const totalPages = Math.ceil(REVIEWS.length / cardsToShow);
-  const currentPage = Math.floor(startIndex / cardsToShow);
-
-  const visibleReviews = REVIEWS.slice(startIndex, startIndex + cardsToShow);
-
   return (
     <section className="relative w-full py-16 lg:py-24 bg-[#FAFAFA] overflow-hidden selection:bg-orange-500 selection:text-white" style={S}>
       
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(45deg, #000 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-0">
         
         {/* ── Header ── */}
         <motion.div
@@ -134,7 +107,7 @@ export default function StudentReviews() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-12 lg:mb-16 px-6"
         >
           <div className="inline-flex items-center justify-center px-6 py-1.5 rounded-full border border-orange-300 mb-5 bg-white shadow-sm">
             <span className="font-bold text-[12px] uppercase tracking-widest text-orange-500">
@@ -147,40 +120,51 @@ export default function StudentReviews() {
           </h2>
         </motion.div>
 
-        {/* ── Cards Viewport ── */}
-        <div className="w-full flex justify-center mb-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={startIndex}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
-              className="flex justify-center gap-6 lg:gap-10 w-full"
-            >
-              {visibleReviews.map((review, i) => (
+        {/* ── Infinite Marquee Viewport ── */}
+        <div className="w-full relative py-4">
+          
+          {/* Edge Fade Masks for Smooth Disappearance */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+
+          {/* The Track (Pauses on Hover) */}
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            
+            <div className="flex gap-4 md:gap-6 px-2 md:px-3">
+              {doubledReviews.map((review, i) => (
                 <ReviewCard key={i} review={review} />
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </div>
+            
+            {/* Render a second exact copy to keep the scroll loop seamless */}
+            <div className="flex gap-4 md:gap-6 px-2 md:px-3">
+              {doubledReviews.map((review, i) => (
+                <ReviewCard key={i + 100} review={review} />
+              ))}
+            </div>
+
+          </div>
+
         </div>
 
-        {/* ── Custom Dots Pagination ── */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-4">
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <button 
-                key={i}
-                onClick={() => setStartIndex(i * cardsToShow)}
-                className={`flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${currentPage === i ? 'w-8 h-8 border-[1.5px] border-[#FFB800]' : 'w-8 h-8'}`}
-              >
-                <div className={`rounded-full transition-all duration-300 ${currentPage === i ? 'w-2 h-2 bg-[#FFB800]' : 'w-1.5 h-1.5 bg-gray-300 hover:bg-gray-400'}`} />
-              </button>
-            ))}
-          </div>
-        )}
-
       </div>
+
+      {/* ── Custom Infinite Scroll Animation CSS ── */}
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        /* Base desktop scroll speed */
+        .animate-marquee {
+          animation: marquee 50s linear infinite; 
+        }
+        /* Slower on mobile to make it readable */
+        @media (max-width: 768px) {
+          .animate-marquee { animation-duration: 35s; }
+        }
+      `}</style>
+
     </section>
   );
 }

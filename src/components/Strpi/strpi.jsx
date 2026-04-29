@@ -1,31 +1,67 @@
 import React, { useEffect } from "react";
 
-// --- Icons (Pixel Perfect Recreations) ---
-const IconBook = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-  </svg>
-);
-const IconGrid = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="3" width="7" height="7" rx="1" />
-    <rect x="14" y="3" width="7" height="7" rx="1" />
-    <rect x="3" y="14" width="7" height="7" rx="1" />
-    <rect x="14" y="14" width="7" height="7" rx="1" />
-  </svg>
-);
-const IconArrowUpRight = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="7" y1="17" x2="17" y2="7" />
-    <polyline points="7 7 17 7 17 17" />
+// --- Pixel-Perfect Laptop User Icon (Matched from Image) ---
+const IconLaptopUser = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A0F1C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    {/* Laptop Screen */}
+    <rect x="4" y="5" width="16" height="11" rx="1.5" />
+    {/* Laptop Base */}
+    <path d="M2 20h20" />
+    <path d="M4 16v4" />
+    <path d="M20 16v4" />
+    {/* User Head */}
+    <circle cx="12" cy="10" r="2" />
+    {/* User Shoulders */}
+    <path d="M9 16v-1a3 3 0 0 1 6 0v1" />
   </svg>
 );
 
-export default function Strpi() {
-  
+// --- Data Array with Exact Colors from Image ---
+const statsData = [
+  {
+    id: 1,
+    num: "11,000+",
+    label: "Professionals Trained",
+    colorStr: "#FF7A00", // Orange
+    iconBg: "bg-[#FF7A00]",
+    gradient: "from-[#FF7A00]/50 via-transparent to-transparent",
+    gradientHover: "group-hover:from-[#FF7A00]",
+    glow: "group-hover:shadow-[0_0_40px_-15px_rgba(255,122,0,0.5)]",
+  },
+  {
+    id: 2,
+    num: "1200+",
+    label: "Successful Batches",
+    colorStr: "#FFB800", // Yellow-Orange
+    iconBg: "bg-[#FFB800]",
+    gradient: "from-[#FFB800]/50 via-transparent to-transparent",
+    gradientHover: "group-hover:from-[#FFB800]",
+    glow: "group-hover:shadow-[0_0_40px_-15px_rgba(255,184,0,0.5)]",
+  },
+  {
+    id: 3,
+    num: "75+",
+    label: "Corporate Seminars",
+    colorStr: "#D4FF00", // Lime/Neon Yellow
+    iconBg: "bg-[#D4FF00]",
+    gradient: "from-[#D4FF00]/40 via-transparent to-transparent",
+    gradientHover: "group-hover:from-[#D4FF00]",
+    glow: "group-hover:shadow-[0_0_40px_-15px_rgba(212,255,0,0.4)]",
+  },
+  {
+    id: 4,
+    num: "4.8+",
+    label: "Student Rating",
+    colorStr: "#52FF00", // Bright Green
+    iconBg: "bg-[#52FF00]",
+    gradient: "from-[#52FF00]/40 via-transparent to-transparent",
+    gradientHover: "group-hover:from-[#52FF00]",
+    glow: "group-hover:shadow-[0_0_40px_-15px_rgba(82,255,0,0.4)]",
+  }
+];
+
+export default function GlassmorphicStats() {
   useEffect(() => {
-    // Inject Satoshi Font dynamically just in case it's not loaded
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -37,95 +73,74 @@ export default function Strpi() {
 
   return (
     <section 
-      className="w-full relative z-30 font-sans selection:bg-[#0A0F1C] selection:text-white"
+      // Very dark background matching the image aesthetic
+      className="w-full relative z-30 py-20 bg-[#090C15] overflow-hidden"
       style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
-      {/* 
-        Responsive Grid: 
-        1 column on mobile -> 2 columns on tablet -> 4 columns on Desktop (Edge-to-Edge)
-      */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-y border-gray-100">
+      {/* Subtle Background Mesh Gradient for Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#ffffff05] via-transparent to-transparent pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* ── CARD 1: ORANGE ── */}
-        <div className="group relative bg-[#FF6B00] p-8 lg:p-10 xl:p-12 flex flex-col justify-between overflow-hidden transition-all duration-500 hover:bg-[#E66000] cursor-default">
-          {/* Subtle Hover Light Effect */}
-          <div className="absolute -right-12 -top-12 w-48 h-48 bg-white opacity-0 group-hover:opacity-10 rounded-full blur-3xl transition-opacity duration-700 pointer-events-none" />
+        {/* Responsive Grid: 1 col (Mobile) -> 2 cols (Tablet) -> 4 cols (Desktop) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           
-          <div className="flex items-start justify-between mb-16 lg:mb-12 relative z-10">
-            {/* Book Icon with Frosted Glass Effect */}
-            <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/10 shadow-sm transition-transform duration-500 group-hover:scale-110">
-              <IconBook />
+          {statsData.map((stat) => (
+            <div 
+              key={stat.id}
+              className="group relative cursor-default"
+            >
+              {/* 
+                Fading Border Wrapper 
+                Yeh trick image jaisa exact "top-left se fade hota hua border" banata hai
+              */}
+              <div 
+                className={`relative p-[1.5px] rounded-2xl bg-gradient-to-br ${stat.gradient} ${stat.gradientHover} transition-all duration-700 ease-out h-full ${stat.glow}`}
+              >
+                {/* Inner Card Solid Dark Background */}
+                <div className="bg-[#0D121E]/90 backdrop-blur-xl rounded-[15px] h-full p-6 xl:p-8 flex items-center gap-5 relative overflow-hidden">
+                  
+                  {/* Subtle hover background glow inside the card */}
+                  <div 
+                    className="absolute -left-10 -top-10 w-32 h-32 rounded-full opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-20"
+                    style={{ backgroundColor: stat.colorStr }}
+                  />
+
+                  {/* Colored Icon Circle */}
+                  <div className="relative z-10">
+                    <div 
+                      className={`w-14 h-14 xl:w-16 xl:h-16 rounded-full ${stat.iconBg} flex items-center justify-center transform transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-rotate-3`}
+                    >
+                      {/* Icon inside the circle */}
+                      <span className="transform transition-transform duration-500 group-hover:scale-110">
+                        <IconLaptopUser />
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Text Content */}
+                  <div className="relative z-10 flex flex-col justify-center">
+                    <h3 className="font-black text-[28px] xl:text-[34px] leading-tight text-white tracking-tight flex items-center drop-shadow-md">
+                      {stat.num.replace('+', '')}
+                      {/* Animated '+' Sign */}
+                      <span 
+                        className="ml-1 inline-block transform transition-transform duration-700 group-hover:scale-125"
+                        style={{ color: stat.colorStr }}
+                      >
+                        +
+                      </span>
+                    </h3>
+                    <p className="font-medium text-[14px] xl:text-[15px] text-white/70 leading-snug mt-1 transition-colors duration-300 group-hover:text-white/90">
+                      {stat.label}
+                    </p>
+                  </div>
+
+                </div>
+              </div>
             </div>
-            {/* Arrow Button */}
-            <button className="w-11 h-11 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/10 transition-all duration-300 group-hover:bg-white group-hover:text-[#FF6B00] group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:shadow-md">
-              <IconArrowUpRight />
-            </button>
-          </div>
-          
-          <div className="relative z-10">
-            <h3 className="font-bold text-[24px] text-white tracking-tight mb-3">Easy to Learn</h3>
-            <p className="font-medium text-[16px] text-white/90 leading-relaxed max-w-[280px]">
-              Simple navigation and engaging content — stress-free learning.
-            </p>
-          </div>
-        </div>
+          ))}
 
-        {/* ── CARD 2: WHITE ── */}
-        <div className="group relative bg-white p-8 lg:p-10 xl:p-12 border-b md:border-b-0 md:border-r border-gray-100 flex flex-col justify-center gap-6 transition-all duration-300 hover:bg-[#FAFAFA] cursor-pointer overflow-hidden">
-          {/* Animated Bottom Border on Hover */}
-          <div className="absolute bottom-0 left-0 w-full h-[4px] bg-[#FF6B00] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-          
-          <p className="font-bold text-[19px] lg:text-[21px] text-[#0A0A0A] leading-[1.5] tracking-tight">
-            Your study journey gets easier and guided with top educators
-          </p>
-          <div className="inline-flex items-center gap-2 font-bold text-[15px] text-[#FF6B00] transition-all">
-            Learn More 
-            <span className="transform transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-1">
-              <IconArrowUpRight />
-            </span>
-          </div>
         </div>
-
-        {/* ── CARD 3: WHITE ── */}
-        <div className="group relative bg-white p-8 lg:p-10 xl:p-12 border-b md:border-b-0 lg:border-r border-gray-100 flex flex-col justify-center gap-6 transition-all duration-300 hover:bg-[#FAFAFA] cursor-pointer overflow-hidden">
-          {/* Animated Bottom Border on Hover */}
-          <div className="absolute bottom-0 left-0 w-full h-[4px] bg-[#FF6B00] transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100" />
-          
-          <p className="font-bold text-[19px] lg:text-[21px] text-[#0A0A0A] leading-[1.5] tracking-tight">
-            Earn global certifications from Google, Meta & HubSpot
-          </p>
-          <div className="inline-flex items-center gap-2 font-bold text-[15px] text-[#FF6B00] transition-all">
-            Get Certified 
-            <span className="transform transition-transform duration-300 group-hover:translate-x-2 group-hover:-translate-y-1">
-              <IconArrowUpRight />
-            </span>
-          </div>
-        </div>
-
-        {/* ── CARD 4: DARK NAVY/BLACK ── */}
-        <div className="group relative bg-[#0A0F1C] p-8 lg:p-10 xl:p-12 flex flex-col justify-center overflow-hidden cursor-default">
-          {/* High-End Tech Grid Background (Faint) */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:16px_16px]" />
-          
-          <div className="relative z-10 flex items-center gap-2.5 mb-5 text-[#8A94A6]">
-            <IconGrid />
-            <span className="font-bold text-[12px] uppercase tracking-[0.18em]">Total Courses</span>
-          </div>
-          
-          <div className="relative z-10">
-            <p className="font-black text-[56px] lg:text-[68px] leading-none text-white tracking-tighter flex items-center drop-shadow-md">
-              1600
-              {/* Spinning Plus Animation on Hover */}
-              <span className="text-[#FFC107] ml-2 transform transition-all duration-700 ease-in-out inline-block group-hover:rotate-180 group-hover:scale-110 drop-shadow-lg">
-                +
-              </span>
-            </p>
-            <p className="font-bold text-[12px] uppercase text-[#8A94A6] mt-4 tracking-[0.18em]">
-              Students Trained
-            </p>
-          </div>
-        </div>
-
       </div>
     </section>
   );
