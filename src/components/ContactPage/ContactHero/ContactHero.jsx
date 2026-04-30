@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, MapPin, Mail, Phone, Clock, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, MapPin, Mail, Phone, Clock, ChevronRight, User, ChevronDown, ArrowRight } from "lucide-react";
 
-const S = { fontFamily: "'Satoshi', sans-serif" };
-
+// ── DATA ──
 const campuses = [
   {
     city: "Mumbai",
@@ -13,7 +12,7 @@ const campuses = [
     email: "mumbai@operatingmedia.com",
     hours: "Mon–Sat · 9am – 7pm",
     mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.827086054441!2d72.8469753150028!3d19.11862768709886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c90e9b9c6255%3A0x8c8a7e6c9e5a4b8b!2sChandra%20Niwas%20Office%20No.%202%2C%20Old%20Police%20Lane%2C%20Andheri%20East%2C%20Mumbai%2C%20Maharashtra%20400069!5e0!3m2!1sen!2sin!4v1701301234567",
-    accent: "#FF6B00",
+    accent: "#2563eb",
     tag: "Main Campus",
   },
   {
@@ -24,7 +23,7 @@ const campuses = [
     email: "borivali@operatingmedia.com",
     hours: "Mon–Sat · 9am – 7pm",
     mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.827086054441!2d72.8469753150028!3d19.11862768709886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c90e9b9c6255%3A0x8c8a7e6c9e5a4b8b!2sChandra%20Niwas%20Office%20No.%202%2C%20Old%20Police%20Lane%2C%20Andheri%20East%2C%20Mumbai%2C%20Maharashtra%20400069!5e0!3m2!1sen!2sin!4v1701301234567",
-    accent: "#1E3B8A",
+    accent: "#ECAB00",
     tag: "Suburbs Campus",
   },
 ];
@@ -37,18 +36,10 @@ const contactInfo = [
 
 export default function ContactHero() {
   const [activeTab, setActiveTab] = useState(0);
-  const [form, setForm] = useState({ name: "", phone: "", email: "", branch: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  useEffect(() => {
-    if (!document.querySelector('link[data-font="satoshi"]')) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.setAttribute("data-font", "satoshi");
-      link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
-      document.head.appendChild(link);
-    }
-  }, []);
+  // Form State
+  const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", location: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,249 +48,224 @@ export default function ContactHero() {
   };
 
   return (
-    <>
-      <style>{`
-        .form-input {
-          width: 100%;
-          background: #F7F7F5;
-          border: 1.5px solid transparent;
-          border-radius: 14px;
-          padding: 16px 20px;
-          font-size: 15px;
-          font-weight: 500;
-          color: #111;
-          outline: none;
-          transition: border-color 0.2s, box-shadow 0.2s;
-          font-family: 'Satoshi', sans-serif;
-        }
-        .form-input::placeholder { color: #aaa; font-family: 'Satoshi', sans-serif; }
-        .form-input:focus {
-          border-color: #FF6B00;
-          box-shadow: 0 0 0 3px rgba(255,107,0,0.08);
-          background: #fff;
-        }
-        .map-frame { filter: grayscale(0.3); transition: filter 0.5s; }
-        .map-frame:hover { filter: grayscale(0); }
-        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-up   { animation: fadeUp 0.55s ease both; }
-        .fade-up-1 { animation-delay: 0.05s; }
-        .fade-up-2 { animation-delay: 0.15s; }
-        .fade-up-3 { animation-delay: 0.25s; }
-      `}</style>
+    <main className="w-full bg-[#fcfaf2] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-[#0f172a] overflow-hidden">
+      
+      {/* ── BACKGROUND GLOWS ── */}
+      <div className="fixed top-0 left-[-10%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
+      <div className="fixed bottom-0 right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[120px] animate-pulse-slow pointer-events-none z-0" />
 
-      <main className="w-full bg-white" style={S}>
-
-        {/* ── 1. HERO BANNER ── */}
-        <section
-          className="relative w-full flex items-center justify-center overflow-hidden"
-          style={{ minHeight: 380, background: "linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#1a1a2e 100%)" }}
-        >
-          {/* Grid texture */}
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: "linear-gradient(rgba(255,107,0,0.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,0.3) 1px,transparent 1px)",
-            backgroundSize: "48px 48px",
-          }} />
-          {/* Glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full opacity-20 blur-3xl" style={{ background: "#FF6B00" }} />
-
-          <div className="relative z-10 text-center px-6 py-20 md:py-24 max-w-3xl mx-auto">
-            <div className="fade-up fade-up-1 flex items-center justify-center gap-2 mb-6">
-              <span className="h-[2px] w-6 rounded-full bg-orange-500" />
-              <span style={{ ...S, fontWeight: 700, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#FB923C" }}>
-                Get in touch
+      {/* ── 1. HERO & FORM SECTION ── */}
+      <section className="relative z-10 px-6 py-12 md:py-20 max-w-[1400px] mx-auto">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+              <span className="font-bold text-[11px] md:text-xs text-[#2563eb] uppercase tracking-[0.2em]">
+                Get In Touch
               </span>
-              <span className="h-[2px] w-6 rounded-full bg-orange-500" />
             </div>
-
-            <h1
-              className="fade-up fade-up-2"
-              style={{ ...S, fontWeight: 900, fontSize: "clamp(2.2rem, 6vw, 3.8rem)", color: "#fff", letterSpacing: "-0.04em", lineHeight: 1.08, marginBottom: "20px" }}
-            >
-              We're here to help<br className="hidden md:block" /> you get started
+            <h1 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-4">
+              Let's Build Your <span className="relative inline-block text-[#ECAB00]">
+                Digital Career
+                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                </svg>
+              </span>
             </h1>
-
-            <p
-              className="fade-up fade-up-3"
-              style={{ ...S, fontWeight: 500, fontSize: "16px", color: "rgba(255,255,255,0.6)", lineHeight: 1.75, maxWidth: "500px", margin: "0 auto" }}
-            >
-              Have questions about admissions, courses, or placements? Reach out — our team responds fast.
+            <p className="font-medium text-[16px] md:text-[18px] text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Have questions about admissions, courses, or placements? Request a quote or reach out directly — our experts respond fast.
             </p>
-          </div>
-        </section>
+          </motion.div>
+        </div>
 
-        {/* ── 2. FORM + INFO PANEL ── */}
-        <section className="px-4 md:px-8 py-14 md:py-18 max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_340px] gap-6 items-start">
+        {/* 2-Column Split: Form + Info Panel */}
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 md:gap-12 items-start">
+          
+          {/* ── DARK PREMIUM FORM (As per your reference image) ── */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.6 }}
+            className="bg-[#0A0F1C] rounded-[2rem] p-6 md:p-10 border border-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.4)] relative overflow-hidden"
+          >
+            {/* Subtle Inner Glow */}
+            <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-[#ECAB00]/10 rounded-full blur-[80px] pointer-events-none" />
 
-            {/* Form Card */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 md:p-10">
-              <h2 style={{ ...S, fontWeight: 900, fontSize: "clamp(1.4rem, 2.5vw, 1.8rem)", color: "#030712", letterSpacing: "-0.03em", marginBottom: "8px" }}>
-                Send us a message
-              </h2>
-              <p style={{ ...S, fontWeight: 400, fontSize: "15px", color: "#6B7280", marginBottom: "32px", lineHeight: 1.6 }}>
-                We'll get back to you within a few hours.
-              </p>
-
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <input className="form-input" placeholder="Full Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
-                  <input className="form-input" placeholder="+91 Phone Number" type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} required />
+            <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-5">
+              
+              <div className="grid sm:grid-cols-2 gap-5">
+                {/* Full Name */}
+                <div className="relative group">
+                  <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#ECAB00] transition-colors" />
+                  <input 
+                    type="text" 
+                    placeholder="Enter Full Name" 
+                    className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-[15px] text-white placeholder-gray-500 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none"
+                    required
+                  />
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <input className="form-input" placeholder="Email Address" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
-                  <select className="form-input" value={form.branch} onChange={e => setForm({ ...form, branch: e.target.value })} required>
-                    <option value="">Select Campus</option>
-                    <option>Andheri West, Mumbai</option>
-                    <option>Borivali West, Mumbai</option>
-                  </select>
-                </div>
-                <textarea
-                  className="form-input"
-                  rows={4}
-                  placeholder="Your message or query..."
-                  value={form.message}
-                  onChange={e => setForm({ ...form, message: e.target.value })}
-                  style={{ resize: "none" }}
-                />
 
-                <button
-                  type="submit"
-                  className="flex items-center justify-center gap-2 text-white rounded-2xl transition-all duration-200 active:scale-95 shadow-md shadow-orange-200 hover:shadow-lg hover:shadow-orange-200 self-start"
-                  style={{
-                    ...S,
-                    fontWeight: 800,
-                    fontSize: "16px",
-                    padding: "16px 36px",
-                    background: sent ? "#16a34a" : "linear-gradient(135deg,#FF6B00,#ea580c)",
-                  }}
-                >
-                  {sent ? "✓ Message Sent!" : <> Send Message <ArrowUpRight size={17} /> </>}
-                </button>
-              </form>
-            </div>
-
-            {/* Info Panel */}
-            <div className="flex flex-col gap-4">
-              {contactInfo.map((item, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 flex items-start gap-4 hover:border-orange-100 transition-colors duration-200">
-                  <div className="w-10 h-10 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500 flex-shrink-0">
-                    {item.icon}
+                {/* Phone Number with IN +91 */}
+                <div className="flex items-center bg-[#131B2F] border border-white/10 rounded-xl overflow-hidden focus-within:border-[#ECAB00] focus-within:ring-1 focus-within:ring-[#ECAB00] transition-all">
+                  <div className="flex items-center gap-2 px-4 border-r border-white/10 text-gray-400 shrink-0">
+                    <span className="text-[13px] font-bold">IN</span>
+                    <span className="text-[14px] font-medium">+91</span>
                   </div>
-                  <div>
-                    <p style={{ ...S, fontWeight: 700, fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.15em", color: "#9CA3AF", marginBottom: "4px" }}>
-                      {item.label}
-                    </p>
-                    <p style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#030712", lineHeight: 1.3 }}>
-                      {item.value}
-                    </p>
-                    <p style={{ ...S, fontWeight: 500, fontSize: "13px", color: "#6B7280", marginTop: "2px" }}>
-                      {item.sub}
-                    </p>
-                  </div>
+                  <input 
+                    type="tel" 
+                    placeholder="Phone Number" 
+                    className="w-full bg-transparent py-4 px-4 text-[15px] text-white placeholder-gray-500 outline-none"
+                    required
+                  />
                 </div>
-              ))}
-
-              {/* Social nudge */}
-              <div className="bg-slate-900 rounded-2xl p-5">
-                <p style={{ ...S, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", color: "rgba(255,255,255,0.35)", marginBottom: "12px" }}>
-                  Follow us
-                </p>
-                <div className="flex gap-4">
-                  {["Instagram", "LinkedIn", "YouTube"].map((s, i) => (
-                    <a
-                      key={i}
-                      href="#"
-                      className="hover:text-orange-400 transition-colors duration-150"
-                      style={{ ...S, fontWeight: 700, fontSize: "14px", color: "rgba(255,255,255,0.7)" }}
-                    >
-                      {s}
-                    </a>
-                  ))}
-                </div>
-                <p style={{ ...S, fontWeight: 400, fontSize: "13px", color: "rgba(255,255,255,0.35)", marginTop: "12px", lineHeight: 1.65 }}>
-                  Stay updated with tips, student stories & live campaigns.
-                </p>
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* ── 3. CAMPUS SECTION ── */}
-        <section className="px-4 md:px-8 pb-14 md:pb-18 max-w-6xl mx-auto">
-          <div className="mb-10">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="h-[2px] w-6 rounded-full bg-orange-500" />
-              <span style={{ ...S, fontWeight: 700, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#ECAB00" }}>
-                Our Campuses
-              </span>
-            </div>
-            <h2 style={{ ...S, fontWeight: 900, fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "#030712", letterSpacing: "-0.03em" }}>
-              Visit us in person
-            </h2>
-          </div>
+              <div className="grid sm:grid-cols-2 gap-5">
+                {/* Email Address */}
+                <div className="relative group">
+                  <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#ECAB00] transition-colors" />
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-[15px] text-white placeholder-gray-500 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none"
+                    required
+                  />
+                </div>
 
-          {/* Tab switcher */}
-          <div className="flex gap-2 mb-7 bg-gray-100 rounded-2xl p-1 w-fit">
+                {/* Select Course */}
+                <div className="relative group">
+                  <select className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer">
+                    <option value="">Select Course</option>
+                    <option value="masters">PG in Digital Marketing (PGDM)</option>
+                    <option value="business">PG in Business Strategy (PGDBS)</option>
+                    <option value="short">Short Term Certifications</option>
+                  </select>
+                  <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none group-focus-within:text-[#ECAB00]" />
+                </div>
+              </div>
+
+              {/* Select Preferred Location */}
+              <div className="relative group">
+                <select className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer">
+                  <option value="">Select Preferred Location</option>
+                  <option value="andheri">Andheri West, Mumbai</option>
+                  <option value="borivali">Borivali West, Mumbai</option>
+                  <option value="online">Online Live Classes</option>
+                </select>
+                <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none group-focus-within:text-[#ECAB00]" />
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="mt-2 w-max flex items-center justify-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0A0F1C] font-black text-[15px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group"
+              >
+                {sent ? "✓ Request Sent!" : <> Request A Quote <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /> </>}
+              </button>
+
+            </form>
+          </motion.div>
+
+          {/* ── INFO PANEL (Light Theme) ── */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col gap-4"
+          >
+            {contactInfo.map((item, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex items-start gap-5 hover:border-[#2563eb]/40 hover:shadow-md transition-all duration-300 group">
+                <div className="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-[#2563eb] shrink-0 group-hover:scale-110 group-hover:bg-[#2563eb] group-hover:text-white transition-all duration-300">
+                  {item.icon}
+                </div>
+                <div>
+                  <p className="font-bold text-[11px] text-gray-400 uppercase tracking-widest mb-1">
+                    {item.label}
+                  </p>
+                  <p className="font-black text-[16px] text-[#0f172a] leading-tight mb-1">
+                    {item.value}
+                  </p>
+                  <p className="font-medium text-[13px] text-gray-500">
+                    {item.sub}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* ── 2. CAMPUS TABS & MAP ── */}
+      <section className="relative z-10 px-6 pb-20 md:pb-24 max-w-[1400px] mx-auto mt-10">
+        
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="font-black text-[28px] md:text-[36px] text-[#0f172a] leading-tight">
+            Visit us <span className="text-[#ECAB00]">in person</span>
+          </h2>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex justify-center md:justify-start gap-2 mb-8">
+          <div className="bg-white border border-gray-200 rounded-2xl p-1.5 flex shadow-sm">
             {campuses.map((c, i) => (
               <button
                 key={i}
                 onClick={() => setActiveTab(i)}
-                className={`px-6 py-3 rounded-xl transition-all duration-200 ${activeTab === i ? "bg-white shadow" : "hover:text-gray-600"}`}
-                style={{ ...S, fontWeight: 700, fontSize: "14px", color: activeTab === i ? "#030712" : "#9CA3AF", border: "none", cursor: "pointer" }}
+                className={`px-8 py-3 rounded-xl transition-all duration-300 font-bold text-[15px] ${
+                  activeTab === i ? "bg-[#0f172a] text-white shadow-md" : "bg-transparent text-gray-500 hover:text-[#0f172a]"
+                }`}
               >
                 {c.city}
               </button>
             ))}
           </div>
+        </div>
 
-          {/* Active campus card */}
+        {/* Active Campus Card */}
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-[1fr_1.6fr] gap-4 items-stretch"
+            className="grid lg:grid-cols-[1fr_1.5fr] gap-6 items-stretch"
           >
-            {/* Info */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-8 flex flex-col justify-between gap-6">
+            {/* Campus Info */}
+            <div className="bg-white rounded-[2rem] border border-gray-200 shadow-md p-8 md:p-10 flex flex-col justify-between">
               <div>
-                <span
-                  className="text-white px-3 py-1.5 rounded-full mb-5 inline-block"
-                  style={{ ...S, fontWeight: 700, fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.1em", background: campuses[activeTab].accent }}
-                >
+                <span className={`inline-block px-4 py-1.5 rounded-full mb-6 font-bold text-[11px] uppercase tracking-widest text-white`} style={{ backgroundColor: campuses[activeTab].accent }}>
                   {campuses[activeTab].tag}
                 </span>
 
-                <h3 style={{ ...S, fontWeight: 900, fontSize: "clamp(1.5rem, 3vw, 2rem)", color: "#030712", letterSpacing: "-0.03em", marginBottom: "4px" }}>
+                <h3 className="font-black text-[28px] md:text-[32px] text-[#0f172a] leading-tight mb-2">
                   {campuses[activeTab].city}
                 </h3>
-                <p style={{ ...S, fontWeight: 500, fontSize: "15px", color: "#6B7280", marginBottom: "24px" }}>
+                <p className="font-bold text-[16px] text-gray-400 mb-8 pb-6 border-b border-gray-100">
                   {campuses[activeTab].label}
                 </p>
 
-                <div className="flex flex-col gap-5">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={17} className="text-orange-500 mt-0.5 flex-shrink-0" />
-                    <p style={{ ...S, fontWeight: 500, fontSize: "14px", color: "#374151", lineHeight: 1.7 }}>
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center shrink-0">
+                      <MapPin size={18} className="text-[#ECAB00]" />
+                    </div>
+                    <p className="font-medium text-[15px] text-gray-600 leading-relaxed pt-2">
                       {campuses[activeTab].address}
                     </p>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Phone size={17} className="text-orange-500 flex-shrink-0" />
-                    <p style={{ ...S, fontWeight: 600, fontSize: "15px", color: "#111827" }}>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                      <Phone size={18} className="text-[#2563eb]" />
+                    </div>
+                    <p className="font-bold text-[15px] text-[#0f172a]">
                       {campuses[activeTab].phone}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Mail size={17} className="text-orange-500 flex-shrink-0" />
-                    <p style={{ ...S, fontWeight: 600, fontSize: "15px", color: "#111827" }}>
-                      {campuses[activeTab].email}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Clock size={17} className="text-orange-500 flex-shrink-0" />
-                    <p style={{ ...S, fontWeight: 600, fontSize: "15px", color: "#111827" }}>
-                      {campuses[activeTab].hours}
                     </p>
                   </div>
                 </div>
@@ -309,51 +275,59 @@ export default function ContactHero() {
                 href={`https://maps.google.com/?q=${encodeURIComponent(campuses[activeTab].address)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 hover:text-orange-600 transition-colors"
-                style={{ ...S, fontWeight: 700, fontSize: "15px", color: "#ECAB00" }}
+                className="mt-10 flex items-center gap-2 font-black text-[15px] text-[#2563eb] hover:text-[#0f172a] transition-colors group"
               >
-                Get Directions <ChevronRight size={16} />
+                Get Directions <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </a>
             </div>
 
-            {/* Map */}
-            <div className="rounded-3xl overflow-hidden border border-gray-100 shadow-sm" style={{ minHeight: 340 }}>
+            {/* Map iframe */}
+            <div className="rounded-[2rem] overflow-hidden border border-gray-200 shadow-md h-[400px] lg:h-auto relative group">
+              {/* Grayscale filter removed on hover */}
               <iframe
                 src={campuses[activeTab].mapSrc}
-                className="map-frame w-full h-full"
-                style={{ minHeight: 340, border: 0 }}
+                className="w-full h-full filter grayscale-[0.4] group-hover:grayscale-0 transition-all duration-500 border-0"
                 allowFullScreen=""
                 loading="lazy"
                 title={campuses[activeTab].city}
               />
             </div>
           </motion.div>
-        </section >
+        </AnimatePresence>
 
-        {/* ── 4. BOTTOM CTA STRIP ── */}
-        < section className="px-4 md:px-8 pb-16 max-w-6xl mx-auto" >
-          <div
-            className="rounded-3xl p-10 md:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
-            style={{ background: "linear-gradient(135deg,#0f172a,#1e293b)" }}
-          >
-            <div>
-              <p style={{ ...S, fontWeight: 900, fontSize: "clamp(1.3rem, 3vw, 1.7rem)", color: "#fff", letterSpacing: "-0.03em", lineHeight: 1.2, marginBottom: "8px" }}>
-                Ready to start your journey?
-              </p>
-              <p style={{ ...S, fontWeight: 400, fontSize: "15px", color: "rgba(255,255,255,0.45)", lineHeight: 1.65 }}>
-                Join 11,000+ students who've built careers through Operating Media.
-              </p>
-            </div>
-            <button
-              className="shrink-0 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white rounded-2xl transition-all duration-200 shadow-lg shadow-orange-900/30"
-              style={{ ...S, fontWeight: 800, fontSize: "16px", padding: "18px 32px", whiteSpace: "nowrap" }}
-            >
-              Enroll Now <ArrowUpRight size={18} />
-            </button>
+      </section>
+
+      {/* ── 3. BOTTOM CTA STRIP (Dark Navy) ── */}
+      <section className="relative z-10 px-6 pb-20 max-w-[1400px] mx-auto">
+        <div className="bg-[#0A0F1C] rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-[0_20px_50px_-10px_rgba(10,15,28,0.5)] border border-white/5 relative overflow-hidden">
+          
+          <div className="absolute top-[-50%] left-[-10%] w-[300px] h-[300px] bg-[#2563eb]/20 rounded-full blur-[80px] pointer-events-none" />
+
+          <div className="relative z-10 text-center md:text-left">
+            <p className="font-black text-[24px] md:text-[32px] text-white leading-tight mb-2">
+              Ready to start your <span className="text-[#ECAB00]">journey?</span>
+            </p>
+            <p className="font-medium text-[16px] text-gray-400">
+              Join 11,000+ students who've built careers through Operating Media.
+            </p>
           </div>
-        </section >
+          
+          <button className="relative z-10 shrink-0 flex items-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0A0F1C] font-black text-[16px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group">
+            Enroll Now <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </button>
+        </div>
+      </section>
 
-      </main >
-    </>
+      {/* ── CUSTOM CSS ── */}
+      <style>{`
+        .animate-pulse-slow { 
+          animation: pulseGlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.1); }
+        }
+      `}</style>
+    </main>
   );
 }

@@ -1,230 +1,190 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// SETUP REQUIRED IN YOUR PROJECT:
-// index.html <head>:
-// <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
-// ─────────────────────────────────────────────────────────────────────────────
-
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Download, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Award } from 'lucide-react';
 
-const satoshi = { fontFamily: "'Satoshi', sans-serif" };
+// ── Added 2 new logos (Microsoft Ads & Google Analytics) ──
+const globalPartners = [
+  { name: "Google Ads", url: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
+  { name: "Meta Blueprint", url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
+  { name: "HubSpot", url: "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg" },
+  { name: "Microsoft Ads", url: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
+];
 
-const CertificationSection = () => {
-  const globalPartners = [
-    { name: "Google Ads", url: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
-    { name: "Meta Blueprint", url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
-    { name: "HubSpot", url: "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg" },
-  ];
-
+export default function CertificationSection() {
   return (
     <section
-      className="py-5 bg-white antialiased overflow-hidden"
-      style={satoshi}
+      className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#0A0F1C] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-[#0A0F1C] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      {/* ── Background Subtle Grid & Glow for Dark Theme ── */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{ 
+          backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)', 
+          backgroundSize: '40px 40px' 
+        }}
+      />
+      
+      <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#ECAB00]/15 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#2563eb]/15 blur-[120px] animate-pulse-slow pointer-events-none z-0" />
 
-        {/* 1. TOP SECTION: Split Content */}
-        <div className="grid lg:grid-cols-2 gap-20 items-start mb-15">
+      <div className="relative z-10 max-w-[1400px] mx-auto">
 
-          {/* Left: Text Content */}
+        {/* ── SPLIT GRID LAYOUT ── */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+          {/* ── LEFT: TEXT CONTENT ── */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-start"
+            transition={{ duration: 0.6 }}
+            className="text-left"
           >
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 bg-orange-50 px-4 py-2 rounded-full mb-8">
-              <ShieldCheck size={16} className="text-[#FF5A1F]" />
-              <span
-                className="text-[11px] text-[#FF5A1F] uppercase"
-                style={{ ...satoshi, fontWeight: 900, letterSpacing: '0.3em' }}
-              >
+            {/* Eyebrow Badge (Adapted for Dark Mode) */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2563eb]/15 border border-[#2563eb]/30 mb-6">
+              <ShieldCheck size={16} className="text-[#3b82f6]" />
+              <span className="font-bold text-[11px] md:text-xs text-[#3b82f6] uppercase tracking-[0.2em]">
                 Industry Recognized
               </span>
             </div>
 
-            {/* Heading */}
-            <h2
-              className="text-[#212121] text-[34px] md:text-[52px] leading-[1.1] mb-8 tracking-tight"
-              style={{ ...satoshi, fontWeight: 600 }}
-            >
+            {/* Main Heading (White Text for Dark Theme) */}
+            <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-white leading-[1.1] tracking-tight mb-6">
               Get Certified. <br />
-              <span className="text-[#FF5A1F]">Lead the Industry.</span>
+              <span className="relative inline-block text-[#ECAB00]">
+                Lead the Industry.
+                {/* Underline Effect */}
+                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                </svg>
+              </span>
             </h2>
 
-            <div
-              className="space-y-6 text-[#808080] text-[16px] md:text-[18px] leading-relaxed max-w-xl"
-              style={{ ...satoshi, fontWeight: 500 }}
-            >
+            {/* Description */}
+            <div className="space-y-5 text-gray-300 text-[16px] md:text-[18px] font-medium leading-relaxed max-w-xl mb-10">
               <p>
                 Operating Media's Masters Program is meticulously designed to ensure
                 you don't just hold a paper, but a{' '}
-                <span className="text-[#212121]" style={{ ...satoshi, fontWeight: 700 }}>
-                  prestigious credential
-                </span>{' '}
+                <span className="text-white font-bold">prestigious credential</span>{' '}
                 valued by elite digital agencies.
               </p>
               <p>
                 Upon completion, you earn the{' '}
-                <span
-                  className="text-black border-b-2 border-orange-400"
-                  style={{ ...satoshi, fontWeight: 700 }}
-                >
+                <span className="text-white font-bold border-b-2 border-[#ECAB00]">
                   Advanced Master's Certification
                 </span>
-                .{' '}
-                Our curriculum aligns with global standards, making your profile stand out in any interview.
+                . Our curriculum aligns with global standards, making your profile stand out in any interview.
               </p>
             </div>
 
-            {/* Global Exam Preparation Badges */}
-            <div className="mt-12">
-              <p
-                className="text-[#212121] text-[12px] uppercase mb-6"
-                style={{ ...satoshi, fontWeight: 700, letterSpacing: '0.2em' }}
-              >
-                Preparation for global certifications:
-              </p>
-              <div className="flex flex-wrap gap-4">
-                {globalPartners.map((partner, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 bg-[#F8F9FB] px-5 py-3 rounded-2xl border border-gray-100 shadow-sm"
-                  >
-                    <img src={partner.url} alt={partner.name} className="h-4 w-auto grayscale opacity-80" />
-                    <span
-                      className="text-gray-600 text-[13px]"
-                      style={{ ...satoshi, fontWeight: 700 }}
+            {/* ── NAVY BLUE BOX: Global Certifications ── */}
+            <div className="relative overflow-hidden bg-[#131B2F] rounded-[1.5rem] p-6 lg:p-8 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10">
+              {/* Inner Box Glow */}
+              <div className="absolute top-[-50%] right-[-10%] w-[200px] h-[200px] bg-[#ECAB00]/20 rounded-full blur-[50px] pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-5">
+                  <Award className="text-[#ECAB00]" size={24} />
+                  <p className="text-[12px] md:text-[13px] text-[#ECAB00] uppercase font-black tracking-[0.2em]">
+                    Preparation for Global Exams
+                  </p>
+                </div>
+                
+                {/* Logos Grid */}
+                <div className="flex flex-wrap gap-3">
+                  {globalPartners.map((partner, i) => (
+                    <div
+                      key={i}
+                      className="flex items-center justify-center bg-white px-4 py-3 rounded-xl shadow-sm hover:shadow-[0_5px_15px_rgba(236,171,0,0.2)] transition-all duration-300 hover:-translate-y-1 group cursor-default"
+                      title={partner.name}
                     >
-                      {partner.name}
-                    </span>
-                  </div>
-                ))}
+                      <img 
+                        src={partner.url} 
+                        alt={partner.name} 
+                        className="h-5 md:h-6 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" 
+                        loading="lazy"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Button */}
-            <button
-              className="mt-5 bg-[#FF5A1F] hover:bg-[#E54D16] text-white text-[16px] px-10 py-5 rounded-full transition-all duration-300 flex items-center gap-3 shadow-xl shadow-orange-500/20 group border-none cursor-pointer"
-              style={{ ...satoshi, fontWeight: 600 }}
-            >
-              View Sample Certificates{' '}
-              <Download size={18} className="group-hover:translate-y-1 transition-transform" />
-            </button>
+            
           </motion.div>
 
-          {/* Right: Certificates */}
-          <div className="relative flex justify-center lg:justify-end">
-            {/* Background Glow */}
-            <div className="absolute w-[500px] h-[500px] bg-orange-50 rounded-full blur-[100px] -z-10" />
+          {/* ── RIGHT: FLOATING CERTIFICATES ── */}
+          <div className="relative flex justify-center lg:justify-end mt-12 lg:mt-0">
+            {/* Center Background Glow for certificates */}
+            <div className="absolute w-[400px] h-[400px] bg-[#2563eb]/20 rounded-full blur-[80px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
-            <div className="flex flex-col sm:flex-row gap-8 relative z-10">
-              {/* Diploma Card */}
+            <div className="flex flex-col sm:flex-row gap-6 md:gap-8 relative z-10 w-full max-w-[600px]">
+              
+              {/* Diploma Card (Floats Up & Down) */}
               <motion.div
-                whileHover={{ y: -10 }}
-                className="bg-white p-4 rounded-[2rem] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] border border-gray-100 w-full md:w-72"
+                animate={{ y: [0, -15, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                className="bg-white p-3 md:p-4 rounded-[1.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-white/10 w-full sm:w-1/2 z-20 group transform rotate-[-2deg] hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500"
               >
-                <div className="overflow-hidden rounded-[1.2rem] border border-gray-100 bg-[#fdfdfd] p-1">
+                <div className="overflow-hidden rounded-xl border border-gray-100 bg-[#fdfdfd] p-1 shadow-inner relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0F1C]/5 to-transparent pointer-events-none" />
                   <img
                     src="https://www.operatingmedia.com/wp-content/uploads/2024/06/OM-Certificate-New-724x1024.png"
-                    alt="Certificate 1"
-                    className="w-full h-auto"
+                    alt="Diploma Certificate"
+                    className="w-full h-auto object-cover rounded-lg"
+                    loading="lazy"
                   />
                 </div>
-                <div className="mt-4 px-2">
-                  <p
-                    className="text-[10px] uppercase text-gray-400 mb-1"
-                    style={{ ...satoshi, fontWeight: 900, letterSpacing: '0.2em' }}
-                  >
+                <div className="mt-4 px-2 pb-2 text-center">
+                  <p className="text-[10px] md:text-[11px] uppercase text-[#2563eb] font-bold tracking-[0.2em] mb-1">
                     Outcome 01
                   </p>
-                  <p
-                    className="text-[#212121] text-sm"
-                    style={{ ...satoshi, fontWeight: 700 }}
-                  >
+                  <p className="text-[#0f172a] text-[15px] md:text-[16px] font-black">
                     Professional Diploma
                   </p>
                 </div>
               </motion.div>
 
-              {/* Master's Card */}
+              {/* Master's Card (Floats Down & Up - delayed) */}
               <motion.div
-                whileHover={{ y: -10 }}
-                className="bg-white p-4 rounded-[2rem] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] border border-gray-100 w-full md:w-72 md:mt-16"
+                animate={{ y: [0, 15, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }}
+                className="bg-white p-3 md:p-4 rounded-[1.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-white/10 w-full sm:w-1/2 sm:mt-16 z-10 group transform rotate-[3deg] hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500"
               >
-                <div className="overflow-hidden rounded-[1.2rem] border border-gray-100 bg-[#fdfdfd] p-1">
+                <div className="overflow-hidden rounded-xl border border-gray-100 bg-[#fdfdfd] p-1 shadow-inner relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#ECAB00]/10 to-transparent pointer-events-none" />
                   <img
                     src="https://www.operatingmedia.com/wp-content/uploads/2024/06/Om-Certificate-Masters-724x1024.png"
-                    alt="Certificate 2"
-                    className="w-full h-auto"
+                    alt="Master's Certificate"
+                    className="w-full h-auto object-cover rounded-lg"
+                    loading="lazy"
                   />
                 </div>
-                <div className="mt-4 px-2">
-                  <p
-                    className="text-[10px] uppercase text-gray-400 mb-1"
-                    style={{ ...satoshi, fontWeight: 900, letterSpacing: '0.2em' }}
-                  >
+                <div className="mt-4 px-2 pb-2 text-center">
+                  <p className="text-[10px] md:text-[11px] uppercase text-[#ECAB00] font-bold tracking-[0.2em] mb-1">
                     Outcome 02
                   </p>
-                  <p
-                    className="text-[#212121] text-sm"
-                    style={{ ...satoshi, fontWeight: 700 }}
-                  >
+                  <p className="text-[#0f172a] text-[15px] md:text-[16px] font-black">
                     Master's Designation
                   </p>
                 </div>
               </motion.div>
+
             </div>
           </div>
         </div>
 
-        {/* 2. REFINED BOTTOM BANNER */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative w-full bg-[#FF5A1F] rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row items-center justify-between shadow-2xl shadow-orange-500/20 group py-4 px-8 md:px-12"
-        >
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/5 to-transparent z-0 pointer-events-none" />
-
-          <div className="flex items-center gap-6 z-10">
-            <img
-              src="https://www.operatingmedia.com/wp-content/uploads/2025/05/smiling-cheerfully-casually-pointing-copy-space-side-feeling-happy-satisfied.webp"
-              className="h-20 md:h-28 w-auto hidden sm:block drop-shadow-xl brightness-110 -mb-6 transition-all duration-700 group-hover:scale-105"
-              alt="Success Students"
-            />
-            <h3
-              className="text-white text-[20px] md:text-[28px] tracking-tight leading-none"
-              style={{ ...satoshi, fontWeight: 700 }}
-            >
-              Begin Your{' '}
-              <span className="text-yellow-300" style={{ ...satoshi, fontWeight: 900 }}>
-                Success Story
-              </span>{' '}
-              Today
-            </h3>
-          </div>
-
-          <div className="mt-3 md:mt-0 z-8">
-            <button
-              className="bg-white hover:bg-yellow-300 text-[#FF5A1F] text-[14px] uppercase px-8 py-3 rounded-full transition-all duration-300 flex items-center gap-2 shadow-lg group active:scale-95 border-none cursor-pointer"
-              style={{ ...satoshi, fontWeight: 700, letterSpacing: '0.1em' }}
-            >
-              Apply Now
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          {/* Decorative circle */}
-          <div className="absolute right-[-10px] top-[-10px] w-24 h-24 border border-white/10 rounded-full scale-150 pointer-events-none" />
-        </motion.div>
-
       </div>
+
+      {/* ── Custom Pulse Animation ── */}
+      <style>{`
+        .animate-pulse-slow { 
+          animation: pulseGlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.1); }
+        }
+      `}</style>
     </section>
   );
-};
-
-export default CertificationSection;
+}

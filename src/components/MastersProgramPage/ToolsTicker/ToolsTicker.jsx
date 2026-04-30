@@ -1,14 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download } from 'lucide-react';
-
-// ─────────────────────────────────────────────────────────────────────────────
-// SETUP REQUIRED IN YOUR PROJECT:
-// index.html <head>:
-// <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap" rel="stylesheet">
-// ─────────────────────────────────────────────────────────────────────────────
-
-const satoshi = { fontFamily: "'Satoshi', sans-serif" };
 
 // ── AI TOOLS ──
 const aiTools = [
@@ -66,120 +57,119 @@ const dmTools = [
   { name: "Google Analytics", src: "/images/Group-145.png" },
 ];
 
-const LogoCard = ({ tool, index }) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    transition={{ delay: index * 0.01 }}
-    viewport={{ once: true }}
-    className="bg-white border-r border-b border-gray-100 flex items-center justify-center p-4 h-[65px] md:h-[90px] group hover:bg-gray-50 transition-colors"
-  >
+// Balance tools into two rows for sliders
+const row1Tools = [...aiTools, ...dmTools.slice(0, 12)];
+const row2Tools = [...dmTools.slice(12)];
+
+// ── Single Logo Card Component ──
+const LogoCard = ({ tool }) => (
+  <div className="w-[140px] md:w-[180px] h-[70px] md:h-[85px] shrink-0 bg-white border border-gray-200 rounded-2xl flex items-center justify-center p-4 shadow-sm hover:shadow-[0_10px_20px_-10px_rgba(37,99,235,0.2)] hover:border-[#2563eb]/40 transition-all duration-300 group">
     <img
       src={tool.src}
       alt={tool.name}
-      className="max-w-full max-h-[25px] md:max-h-[35px] object-contain transition-all duration-300 group-hover:scale-110"
+      // Removed grayscale filter, logo is full color normally. Kept hover scale for effect.
+      className="max-w-full max-h-[30px] md:max-h-[40px] object-contain transition-all duration-300 group-hover:scale-110"
       loading="lazy"
     />
-  </motion.div>
+  </div>
 );
 
+// ── MAIN EXPORT COMPONENT ──
 const ToolsTicker = () => {
   return (
-    <section
-      className="relative w-full py-13 bg-[#FAFAFA]"
-      style={satoshi}
-    >
-      {/* Background Grid Pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.25] pointer-events-none"
-        style={{ backgroundImage: `radial-gradient(#000 1px, transparent 1px)`, backgroundSize: '30px 30px' }}
-      />
+    <section className="relative w-full py-10 md:py-[40px] lg:py-[50px] bg-[#fcfaf2] font-['Satoshi',sans-serif] overflow-hidden">
+      
+      {/* Subtle Glow behind the slider (Background Lines removed as requested) */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#ECAB00]/10 blur-[100px] pointer-events-none z-0" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto px-0">
 
-        {/* ── Standard Centered Header ── */}
-        <div className="text-center mb-16">
-          <h2
-            className="font-black text-gray-950 mb-4 tracking-tight"
-            style={{ ...satoshi, fontSize: 'clamp(24px, 4vw, 40px)' }}
+        {/* ── HEADER ── */}
+        <div className="text-center mb-8 md:mb-10 px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            Master <span className="text-[#F26522]">120+ Industry</span> Leading Tools
-          </h2>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+              <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+              <span className="font-bold text-[11px] md:text-xs text-[#2563eb] uppercase tracking-[0.2em]">
+                Premium Access
+              </span>
+            </div>
 
-          {/* Brand Signature Underline */}
-          <div className="flex flex-col items-center gap-1 mb-6">
-            <div className="h-[2px] w-54 bg-[#F26522] rounded-full" />
-            <div className="flex gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
+            <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-4">
+              Master <span className="relative inline-block text-[#ECAB00]">
+                120+ Industry
+                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                </svg>
+              </span> Leading Tools
+            </h2>
+
+            <p className="font-medium text-[16px] md:text-[18px] text-gray-500 max-w-2xl mx-auto leading-relaxed">
+              Get hands-on experience with the exact software stack used by top global agencies and AI-driven companies.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* ── INFINITE SLIDERS ── */}
+        <div className="flex flex-col gap-4 md:gap-5 mask-edges">
+          
+          {/* Slider 1: Moves Left */}
+          <div className="flex overflow-hidden relative">
+            <div className="flex gap-4 md:gap-5 animate-marquee-left w-max">
+              {[...row1Tools, ...row1Tools].map((tool, idx) => (
+                <LogoCard key={`row1-${idx}`} tool={tool} />
+              ))}
             </div>
           </div>
 
-          <p
-            className="text-gray-500 font-medium max-w-2xl mx-auto leading-relaxed"
-            style={{ ...satoshi, fontSize: 'clamp(16px, 2vw, 18px)' }}
-          >
-            Get hands-on experience with the exact software stack used by top global agencies and AI-driven companies.
-          </p>
-        </div>
-
-        {/* ── Tools Library Grid ── */}
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden">
-
-          {/* AI Sub-Header */}
-          <div className="bg-gray-50 px-8 py-4 border-b border-gray-100 flex items-center justify-between">
-            <span
-              className="font-black uppercase text-[#F26522]"
-              style={{ ...satoshi, fontSize: 12, letterSpacing: '0.2em' }}
-            >
-              Section 01: AI Powered Tools
-            </span>
+          {/* Slider 2: Moves Right */}
+          <div className="flex overflow-hidden relative">
+            <div className="flex gap-4 md:gap-5 animate-marquee-right w-max">
+              {[...row2Tools, ...row2Tools].map((tool, idx) => (
+                <LogoCard key={`row2-${idx}`} tool={tool} />
+              ))}
+            </div>
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 border-l border-t border-gray-100">
-            {aiTools.map((tool, idx) => (
-              <LogoCard key={`ai-${idx}`} tool={tool} index={idx} />
-            ))}
-          </div>
-
-          {/* Marketing Sub-Header */}
-          <div className="bg-gray-50 px-8 py-4 border-b border-t border-gray-100 flex items-center justify-between mt-0">
-            <span
-              className="font-black uppercase text-[#F26522]"
-              style={{ ...satoshi, fontSize: 12, letterSpacing: '0.2em' }}
-            >
-              Section 02: Digital Marketing Stack
-            </span>
-          </div>
-
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 border-l border-t border-gray-100">
-            {dmTools.map((tool, idx) => (
-              <LogoCard key={`dm-${idx}`} tool={tool} index={idx} />
-            ))}
-          </div>
-        </div>
-
-        {/* ── Professional CTA ── */}
-        <div className="mt-10 flex flex-col items-center gap-4">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="bg-[#F26522] text-white font-black px-7 py-3.5 rounded-lg shadow-[0_10px_30px_rgba(242,101,34,0.3)] flex items-center gap-3 hover:bg-gray-950 transition-all duration-300 group border-none cursor-pointer"
-            style={{ ...satoshi, fontSize: 15, letterSpacing: '0.05em' }}
-          >
-            <Download size={20} className="group-hover:translate-y-0.5 transition-transform" />
-            DOWNLOAD COMPLETE TOOLS SYLLABUS
-          </motion.button>
-          <p
-            className="text-gray-400 font-bold uppercase"
-            style={{ ...satoshi, fontSize: 11, letterSpacing: '0.18em' }}
-          >
-            Updated for 2025 Industry Standards
-          </p>
         </div>
 
       </div>
+
+      {/* ── CUSTOM ANIMATIONS ── */}
+      <style>{`
+        .mask-edges {
+          -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        @keyframes scrollLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+
+        .animate-marquee-left {
+          animation: scrollLeft 40s linear infinite;
+        }
+
+        .animate-marquee-right {
+          animation: scrollRight 45s linear infinite; /* Slightly different speed */
+        }
+
+        /* Pause on Hover */
+        .animate-marquee-left:hover, .animate-marquee-right:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 };
