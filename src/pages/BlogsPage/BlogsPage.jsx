@@ -28,6 +28,17 @@ function useInView(threshold = 0.06) {
     return [ref, inView];
 }
 
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener("resize", check);
+        return () => window.removeEventListener("resize", check);
+    }, []);
+    return isMobile;
+}
+
 const CATEGORY_COLORS = {
     "SEO": "#F59E0B",
     "PPC": "#ECAB00",
@@ -41,7 +52,6 @@ function categoryColor(cat) {
     return CATEGORY_COLORS[cat] || "#ECAB00";
 }
 
-/* ── Cover placeholder (when no real image) ─────────────────── */
 function CoverPlaceholder({ category, height = 260 }) {
     const color = categoryColor(category);
     return (
@@ -52,16 +62,14 @@ function CoverPlaceholder({ category, height = 260 }) {
             display: "flex", alignItems: "center", justifyContent: "center",
             position: "relative", overflow: "hidden",
         }}>
-            {/* Big faded category text */}
             <span style={{
                 fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
-                fontSize: Math.min(height / 2.5, 80),
+                fontSize: Math.min(typeof height === "number" ? height / 2.5 : 80, 80),
                 color: `${color}18`, letterSpacing: "-0.04em",
                 userSelect: "none", position: "absolute",
             }}>
                 {category.toUpperCase()}
             </span>
-            {/* Category pill */}
             <span style={{
                 position: "absolute", bottom: 16, left: 16,
                 fontFamily: "'Satoshi', sans-serif", fontWeight: 800,
@@ -76,10 +84,10 @@ function CoverPlaceholder({ category, height = 260 }) {
     );
 }
 
-/* ── Featured card ──────────────────────────────────────────── */
 function FeaturedCard({ blog }) {
     const [hovered, setHovered] = useState(false);
     const [ref, inView] = useInView(0.04);
+    const isMobile = useIsMobile();
     const color = categoryColor(blog.category);
 
     return (
@@ -90,7 +98,7 @@ function FeaturedCard({ blog }) {
                 onMouseLeave={() => setHovered(false)}
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
+                    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
                     borderRadius: 24, overflow: "hidden",
                     border: `1.5px solid ${hovered ? color + "50" : "#ece9e2"}`,
                     background: "#fff",
@@ -101,21 +109,20 @@ function FeaturedCard({ blog }) {
                     transitionProperty: "opacity, transform, border-color, box-shadow",
                     transitionDuration: "0.65s, 0.65s, 0.3s, 0.3s",
                     transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
-                    minHeight: 340,
+                    minHeight: isMobile ? "auto" : 340,
                 }}
             >
-                {/* Left: cover */}
-                <div style={{ position: "relative", overflow: "hidden", background: `${color}10` }}>
+                {/* Cover */}
+                <div style={{ position: "relative", overflow: "hidden", background: `${color}10`, minHeight: isMobile ? 220 : "auto" }}>
                     {blog.cover ? (
                         <img
                             src={blog.cover}
                             alt={blog.title}
-                            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", minHeight: isMobile ? 220 : 340 }}
                         />
                     ) : (
-                        <CoverPlaceholder category={blog.category} height="100%" />
+                        <CoverPlaceholder category={blog.category} height={isMobile ? 220 : "100%"} />
                     )}
-                    {/* Featured badge */}
                     <span style={{
                         position: "absolute", top: 18, left: 18, zIndex: 5,
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
@@ -127,9 +134,9 @@ function FeaturedCard({ blog }) {
                     </span>
                 </div>
 
-                {/* Right: text */}
+                {/* Text */}
                 <div style={{
-                    padding: "40px 40px",
+                    padding: isMobile ? "28px 24px" : "40px 40px",
                     display: "flex", flexDirection: "column", justifyContent: "center", gap: 16,
                 }}>
                     <span style={{
@@ -144,7 +151,7 @@ function FeaturedCard({ blog }) {
 
                     <h2 style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
-                        fontSize: "clamp(1.3rem, 2vw, 1.9rem)",
+                        fontSize: isMobile ? "1.3rem" : "clamp(1.3rem, 2vw, 1.9rem)",
                         color: "#0f172a", letterSpacing: "-0.03em",
                         lineHeight: 1.2, margin: 0,
                     }}>
@@ -154,6 +161,8 @@ function FeaturedCard({ blog }) {
                     <p style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 500,
                         fontSize: 14, color: "#6b7280", lineHeight: 1.75, margin: 0,
+                        display: "-webkit-box", WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical", overflow: "hidden",
                     }}>
                         {blog.excerpt}
                     </p>
@@ -192,7 +201,6 @@ function FeaturedCard({ blog }) {
     );
 }
 
-/* ── Regular card ───────────────────────────────────────────── */
 function BlogCard({ blog, index }) {
     const [hovered, setHovered] = useState(false);
     const [ref, inView] = useInView(0.06);
@@ -217,9 +225,9 @@ function BlogCard({ blog, index }) {
                     transitionDelay: `${index * 60}ms`,
                     transitionTimingFunction: "cubic-bezier(0.16,1,0.3,1)",
                     display: "flex", flexDirection: "column",
+                    height: "100%",
                 }}
             >
-                {/* Cover */}
                 {blog.cover ? (
                     <img
                         src={blog.cover}
@@ -230,26 +238,21 @@ function BlogCard({ blog, index }) {
                     <CoverPlaceholder category={blog.category} height={180} />
                 )}
 
-                {/* Body */}
                 <div style={{ padding: "22px 24px 26px", display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                     <h3 style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: 16, color: "#0f172a", letterSpacing: "-0.025em",
                         lineHeight: 1.35, margin: 0,
-                        display: "-webkit-box",
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
+                        display: "-webkit-box", WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical", overflow: "hidden",
                     }}>
                         {blog.title}
                     </h3>
                     <p style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 500,
                         fontSize: 13, color: "#6b7280", lineHeight: 1.7, margin: 0,
-                        display: "-webkit-box",
-                        WebkitLineClamp: 3,
-                        WebkitBoxOrient: "vertical",
-                        overflow: "hidden",
+                        display: "-webkit-box", WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical", overflow: "hidden",
                     }}>
                         {blog.excerpt}
                     </p>
@@ -286,7 +289,6 @@ function BlogCard({ blog, index }) {
     );
 }
 
-/* ── Hero ───────────────────────────────────────────────────── */
 function BlogsHero() {
     const [mounted, setMounted] = useState(false);
     useEffect(() => { setTimeout(() => setMounted(true), 80); }, []);
@@ -294,7 +296,7 @@ function BlogsHero() {
     return (
         <section style={{
             position: "relative", background: "#080C18",
-            overflow: "hidden", padding: "96px 40px 88px",
+            overflow: "hidden", padding: "96px 24px 88px",
         }}>
             <div style={{
                 position: "absolute", inset: 0, pointerEvents: "none",
@@ -358,7 +360,6 @@ function BlogsHero() {
     );
 }
 
-/* ── Main ───────────────────────────────────────────────────── */
 export default function BlogsPage() {
     useFonts();
     const [activeCategory, setActiveCategory] = useState("All");
@@ -371,25 +372,33 @@ export default function BlogsPage() {
     return (
         <>
             <style>{`
-        * { box-sizing: border-box; }
-        .cat-btn {
-          font-family: 'Satoshi', sans-serif; font-weight: 700; font-size: 13px;
-          padding: 9px 20px; border-radius: 100px;
-          border: 1.5px solid #ece9e2; background: #fff; color: #6b7280;
-          cursor: pointer; transition: all 0.2s; white-space: nowrap;
-        }
-        .cat-btn:hover { border-color: #ECAB00; color: #ECAB00; }
-        .cat-btn.active { background: #ECAB00; color: #fff; border-color: #ECAB00; box-shadow: 0 4px 16px rgba(255,107,0,0.28); }
-      `}</style>
+                * { box-sizing: border-box; }
+                .cat-btn {
+                    font-family: 'Satoshi', sans-serif; font-weight: 700; font-size: 13px;
+                    padding: 9px 20px; border-radius: 100px;
+                    border: 1.5px solid #ece9e2; background: #fff; color: #6b7280;
+                    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+                    -webkit-tap-highlight-color: transparent;
+                }
+                .cat-btn:hover { border-color: #ECAB00; color: #ECAB00; }
+                .cat-btn.active { background: #ECAB00; color: #fff; border-color: #ECAB00; box-shadow: 0 4px 16px rgba(255,107,0,0.28); }
+
+                @media (max-width: 767px) {
+                    .blogs-filter-row { flex-direction: column !important; align-items: flex-start !important; }
+                    .blogs-filter-scroll { overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap !important; }
+                    .blogs-filter-scroll::-webkit-scrollbar { display: none; }
+                }
+            `}</style>
 
             <main style={{ fontFamily: "'Satoshi', sans-serif", background: "#FAFAF8", minHeight: "100vh" }}>
                 <BlogsHero />
 
-                <div style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 24px 80px" }}>
+                <div style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 16px 80px" }}>
 
                     {/* Filter row */}
                     <div
                         ref={headerRef}
+                        className="blogs-filter-row"
                         style={{
                             display: "flex", alignItems: "center", justifyContent: "space-between",
                             flexWrap: "wrap", gap: 14, marginBottom: 44,
@@ -397,7 +406,7 @@ export default function BlogsPage() {
                             transition: "opacity 0.6s ease, transform 0.6s ease",
                         }}
                     >
-                        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                        <div className="blogs-filter-scroll" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                             {categories.map(cat => (
                                 <button key={cat} className={`cat-btn${activeCategory === cat ? " active" : ""}`} onClick={() => setActiveCategory(cat)}>
                                     {cat}
@@ -425,9 +434,9 @@ export default function BlogsPage() {
                     {rest.length > 0 && (
                         <div style={{
                             display: "grid",
-                            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
-                            gap: 20,
-                            alignItems: "stretch",  // ← this makes all cards same height
+                            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
+                            gap: 16,
+                            alignItems: "stretch",
                         }}>
                             {rest.map((blog, i) => <BlogCard key={blog.slug} blog={blog} index={i} />)}
                         </div>
