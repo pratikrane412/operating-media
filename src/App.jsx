@@ -11,11 +11,13 @@ import Homepage from './pages/Homepage/Homepage.jsx';
 import MastersProgram from './pages/MastersProgram/MastersProgram.jsx';
 import PlacementsPage from './pages/PlacementsPage/PlacementsPage.jsx';
 import Reviewspage from './pages/Reviewspage/Reviewspage.jsx';
-import TrainersPage from "./pages/TrainersPage/TrainersPage";
+// import TrainersPage from "./pages/TrainersPage/TrainersPage";
+import TestimonialsPage from './pages/TestimonialsPage/TestimonialsPage.jsx';
+import Trainer from './pages/Trainer/Trainer.jsx';
 import BlogsPage from './pages/BlogsPage/BlogsPage.jsx';
 import HireFromUsPage from './pages/HireFromUsPage/HireFromUsPage.jsx';
 import ContactPage from './pages/ContactPage/ContactPage.jsx';
-import AboutUsPage from './pages/AboutUsPage/AboutUsPage.jsx';
+import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import CaseStudiesPage from './pages/CaseStudiesPage/CaseStudiesPage.jsx';
 
 
@@ -33,8 +35,8 @@ function App() {
         <Route path="/advance-diploma" element={<AdvanceProgram />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
-        <Route path="/about/testimonials" element={<Reviewspage />} />
-        <Route path="/about/mentors" element={<TrainersPage />} />
+        <Route path="/about/testimonials" element={<TestimonialsPage />} />
+        <Route path="/about/mentors" element={<Trainer />} />
 
 
 
@@ -45,7 +47,7 @@ function App() {
          <Route path="/placement/hire" element={<HireFromUsPage />} />
 
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/about-us" element={<AboutUsPage />} />
+        <Route path="/about-us" element={<AboutUs/>} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
 
         
