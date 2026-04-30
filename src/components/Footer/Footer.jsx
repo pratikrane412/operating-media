@@ -32,34 +32,140 @@ const Footer = () => {
   ];
 
   const locations = [
-    "Vashi", "Panvel", "Virar", "Mulund", "Dadar", 
-    "Bandra", "Kalyan", "Navi Mumbai", "Borivali", 
+    "Vashi", "Panvel", "Virar", "Mulund", "Dadar",
+    "Bandra", "Kalyan", "Navi Mumbai", "Borivali",
     "Andheri", "Thane"
   ];
 
   return (
     <footer className="w-full font-sans bg-[#171717] text-white" style={{ fontFamily: "'Satoshi', sans-serif" }}>
-      
-      {/* ── TOP SECTION: Main Footer Grid ── */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-20 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0 lg:divide-x divide-white/10">
-          
+
+      <style>{`
+        /* Golden glow pulse animation */
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.12; transform: scale(1); }
+          50%       { opacity: 0.22; transform: scale(1.08); }
+        }
+        .footer-glow {
+          animation: pulseGlow 5s ease-in-out infinite;
+        }
+
+        /* Course link hover */
+        .course-link { display: flex; align-items: center; gap: 8px; color: #9ca3af; transition: color 0.25s; text-decoration: none; }
+        .course-link:hover { color: #ffffff; }
+        .course-link .chevron-box {
+          width: 20px; height: 20px; border-radius: 5px;
+          border: 1.5px solid #374151;
+          display: flex; align-items: center; justify-content: center;
+          color: #4b5563;
+          transition: background 0.25s, border-color 0.25s, color 0.25s;
+          flex-shrink: 0;
+        }
+        .course-link:hover .chevron-box {
+          background: #ECAB00;
+          border-color: #ECAB00;
+          color: #0f172a;
+        }
+
+        /* Social icon hover */
+        .social-icon {
+          width: 40px; height: 40px; border-radius: 50%;
+          border: 1px solid #4b5563;
+          display: flex; align-items: center; justify-content: center;
+          color: #9ca3af;
+          transition: all 0.25s;
+          text-decoration: none;
+        }
+        .social-icon:hover {
+          border-color: #ECAB00;
+          background: rgba(236,171,0,0.12);
+          color: #ECAB00;
+          transform: translateY(-2px);
+        }
+
+        /* Contact link hover */
+        .contact-link { color: #9ca3af; text-decoration: none; font-size: 14px; transition: color 0.2s; display: block; }
+        .contact-link:hover { color: #ECAB00; }
+      `}</style>
+
+      {/* ── TOP SECTION ── */}
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 pt-20 pb-12 relative overflow-hidden">
+
+        {/* ── GOLDEN GLOW (same as stats section) ── */}
+        {/* Top-center large glow */}
+        <div
+          className="footer-glow pointer-events-none"
+          style={{
+            position: "absolute",
+            top: "-60px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "700px",
+            height: "340px",
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse at top, #ECAB00 0%, transparent 70%)",
+            filter: "blur(55px)",
+            opacity: 0.15,
+          }}
+        />
+        {/* Bottom-left subtle glow */}
+        <div
+          className="pointer-events-none"
+          style={{
+            position: "absolute",
+            bottom: "-40px",
+            left: "-60px",
+            width: "300px",
+            height: "300px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, #ECAB00 0%, transparent 70%)",
+            filter: "blur(70px)",
+            opacity: 0.06,
+          }}
+        />
+        {/* Bottom-right subtle glow */}
+        <div
+          className="pointer-events-none"
+          style={{
+            position: "absolute",
+            bottom: "0px",
+            right: "-40px",
+            width: "250px",
+            height: "250px",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, #ECAB00 0%, transparent 70%)",
+            filter: "blur(70px)",
+            opacity: 0.05,
+          }}
+        />
+
+        {/* Mesh grid overlay (same as stats) */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        {/* Grid columns */}
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0 lg:divide-x divide-white/10">
+
           {/* Column 1: Brand & About */}
           <div className="flex flex-col lg:pr-10">
-            {/* Custom SVG Logo representation */}
             <div className="mb-6 select-none">
               <h2 className="text-[26px] font-black leading-none tracking-wider text-white">OPERATING</h2>
               <h2 className="text-[26px] font-black leading-none tracking-[0.2em] text-transparent" style={{ WebkitTextStroke: '1px white' }}>MEDIA</h2>
               <p className="text-[10px] font-semibold tracking-widest mt-1 text-gray-400">digitize your career ®</p>
             </div>
-            
+
             <p className="text-gray-400 text-[14px] leading-[1.7] mb-8 pr-4">
               Operating Media is a leading digital marketing training institute focused on practical learning, live projects, and industry-relevant skills. We help students and professionals build successful careers in the digital world.
             </p>
 
             <div className="flex items-center gap-3">
               {[FbIcon, InstaIcon, XIcon, LinkedInIcon].map((Icon, idx) => (
-                <a key={idx} href="#" className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-300 hover:text-white hover:border-[#FBBF24] hover:bg-[#FBBF24]/10 transition-all duration-300">
+                <a key={idx} href="#" className="social-icon">
                   <Icon />
                 </a>
               ))}
@@ -68,12 +174,14 @@ const Footer = () => {
 
           {/* Column 2: Our Courses */}
           <div className="flex flex-col lg:px-10">
-            <h3 className="text-[#FBBF24] text-[20px] font-bold mb-6 tracking-wide">Our Courses</h3>
+            <h3 className="text-[#ECAB00] text-[20px] font-bold mb-6 tracking-wide">Our Courses</h3>
             <ul className="space-y-4">
               {courses.map((course, idx) => (
                 <li key={idx}>
-                  <a href="#" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300">
-                    <span className="text-gray-500 group-hover:text-[#FBBF24] transition-colors"><IconChevron /></span>
+                  <a href="#" className="course-link">
+                    <span className="chevron-box">
+                      <IconChevron />
+                    </span>
                     <span className="text-[15px]">{course}</span>
                   </a>
                 </li>
@@ -83,14 +191,14 @@ const Footer = () => {
 
           {/* Column 3: Details */}
           <div className="flex flex-col lg:px-10">
-            <h3 className="text-[#FBBF24] text-[20px] font-bold mb-6 tracking-wide">Details</h3>
-            
+            <h3 className="text-[#ECAB00] text-[20px] font-bold mb-6 tracking-wide">Details</h3>
+
             <div className="flex items-start gap-4 mb-8">
               <div className="text-gray-400 mt-1"><IconPhone /></div>
               <div>
                 <p className="text-white font-bold text-[16px] mb-1">Phone</p>
-                <a href="tel:+917700022882" className="block text-gray-400 text-[14px] hover:text-[#FBBF24]">+91 7700022882</a>
-                <a href="tel:+919326474007" className="block text-gray-400 text-[14px] hover:text-[#FBBF24]">+91 9326474007</a>
+                <a href="tel:+917700022882" className="contact-link">+91 7700022882</a>
+                <a href="tel:+919326474007" className="contact-link">+91 9326474007</a>
               </div>
             </div>
 
@@ -98,21 +206,21 @@ const Footer = () => {
               <div className="text-gray-400 mt-1"><IconMail /></div>
               <div>
                 <p className="text-white font-bold text-[16px] mb-1">Email us</p>
-                <a href="mailto:contact@operatingmedia.com" className="block text-gray-400 text-[14px] hover:text-[#FBBF24]">contact@operatingmedia.com</a>
+                <a href="mailto:contact@operatingmedia.com" className="contact-link">contact@operatingmedia.com</a>
               </div>
             </div>
           </div>
 
           {/* Column 4: Location */}
           <div className="flex flex-col lg:pl-10">
-            <h3 className="text-[#FBBF24] text-[20px] font-bold mb-6 tracking-wide">Location</h3>
-            
+            <h3 className="text-[#ECAB00] text-[20px] font-bold mb-6 tracking-wide">Location</h3>
+
             <div className="flex items-start gap-3 mb-6">
               <div className="text-gray-400 mt-1 flex-shrink-0"><IconMap /></div>
               <div>
                 <p className="text-white font-bold text-[16px] mb-1">Andheri Center</p>
                 <p className="text-gray-400 text-[14px] leading-relaxed pr-2">
-                  Office No. 2, Chandra Niwas CHS, Off Old Police Lane Andheri East, Mumbai - 400069<br/>
+                  Office No. 2, Chandra Niwas CHS, Off Old Police Lane Andheri East, Mumbai - 400069<br />
                   2 mins walk from Andheri Station and Metro Station
                 </p>
               </div>
@@ -123,7 +231,6 @@ const Footer = () => {
               <div>
                 <p className="text-white font-bold text-[16px] mb-1">Borivali Center</p>
                 <p className="text-gray-400 text-[14px] leading-relaxed pr-2">
-                  Office No. 2, Chandra Niwas CHS, Off Old Police Lane Andheri East, Mumbai - 400069<br/>
                   705 Gold Crest Business Center, Opposite Manubhai Jewellers, LT Road, Borivali West. Mumbai - 400092
                 </p>
               </div>
@@ -134,33 +241,11 @@ const Footer = () => {
       </div>
 
       {/* ── COPYRIGHT BAR ── */}
-      <div className="w-full border-t border-white/10 py-6 text-center">
+      <div className="w-full border-t border-white/10 py-6 text-center relative z-10">
         <p className="text-gray-400 text-[14px]">
           Operating Media©2026. All Rights
         </p>
       </div>
-
-      {/* ── BOTTOM SECTION: Global Courses (HIDDEN ON MOBILE: hidden md:block) ── */}
-      {/* <div className="hidden md:block w-full bg-[#121212] py-16 px-6 relative">
-        <div className="max-w-[1200px] mx-auto text-center">
-          <h2 className="text-[28px] md:text-[36px] font-bold text-white mb-8">
-            Digital Marketing Courses <span className="text-[#FBBF24]">Across The World</span>
-          </h2>
-          
-          <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-3 text-gray-300 text-[14px] md:text-[15px] leading-loose">
-            {locations.map((loc, index) => (
-              <React.Fragment key={index}>
-                <a href="#" className="hover:text-white hover:underline transition-all">
-                  Digital Marketing Courses in {loc}
-                </a>
-                {index !== locations.length - 1 && (
-                  <span className="text-gray-600 mx-1 px-1">|</span>
-                )}
-              </React.Fragment>
-            ))}
-          </div>
-        </div>
-      </div> */}
 
     </footer>
   );
