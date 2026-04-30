@@ -20,6 +20,9 @@ import HireFromUsPage from './pages/HireFromUsPage/HireFromUsPage.jsx';
 import ContactPage from './pages/ContactPage/ContactPage.jsx';
 import AboutUs from './pages/AboutUs/AboutUs.jsx';
 import CaseStudiesPage from './pages/CaseStudiesPage/CaseStudiesPage.jsx';
+import UpcomingBatches from './pages/UpcomingBatches/UpcomingBatches.jsx'
+import Faq from './pages/Faq/Faq.jsx'
+import Gallery from './pages/Gallery/Gallery.jsx'
 
 
 
@@ -51,6 +54,9 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/upcoming-batches" element={<UpcomingBatches />} />
+        <Route path="/faq" element={< Faq/>} />
+        <Route path="/gallery" element={<Gallery />} />
 
 
 

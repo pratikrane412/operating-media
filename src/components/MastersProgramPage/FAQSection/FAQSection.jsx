@@ -1,9 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, ArrowUpRight } from "lucide-react";
+import { Plus, Minus, ArrowUpRight, MessageCircleQuestion } from "lucide-react";
 
-const satoshi = { fontFamily: "'Satoshi', sans-serif" };
-
+// ─── DATA ─────────────────────────────────────────────────────────────────────
 const faqs = [
   {
     q: "What is digital marketing?",
@@ -55,125 +54,137 @@ const faqs = [
   },
 ];
 
+// ─── MAIN EXPORT COMPONENT ────────────────────────────────────────────────────
 export default function FAQSection() {
-  const [open, setOpen] = useState(0);
+  // Set to null so NO toggle is open by default
+  const [open, setOpen] = useState(null);
+
+  const toggleFaq = (index) => {
+    // If clicking the currently open FAQ, close it. Otherwise open the new one (closes others)
+    setOpen(open === index ? null : index);
+  };
 
   return (
-    <>
-      <style>{`
-        .faq-item { border-bottom: 1px solid #EBEBEB; }
-        .faq-item:last-child { border-bottom: none; }
-      `}</style>
+    <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#fcfaf2] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-white overflow-hidden">
+      
+      {/* ── Subtle Background Glow ── */}
+      <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#ECAB00]/10 blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
 
-      <section
-        className="faq-wrap w-full py-10 md:py-10 px-4"
-        style={{ background: "#FAFAF8", ...satoshi }}
-      >
-        <div className="max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-[1400px] mx-auto">
 
-          {/* ── Header ── */}
-          <div className="mb-12 md:mb-16 text-left">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="h-[2px] w-6 rounded-full bg-orange-500" />
-              <span
-                className="text-[10px] uppercase text-orange-500"
-                style={{ ...satoshi, fontWeight: 600, letterSpacing: '0.3em' }}
-              >
-                Got questions?
+        {/* ── HEADER ── */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6">
+              <MessageCircleQuestion size={16} className="text-[#2563eb]" />
+              <span className="font-bold text-[11px] md:text-xs text-[#2563eb] uppercase tracking-[0.2em]">
+                Got Questions?
               </span>
             </div>
 
-            <h2
-              className="text-3xl md:text-4xl text-gray-900 tracking-tight leading-tight mb-3"
-              style={{ ...satoshi, fontWeight: 900 }}
-            >
-              Everything you need to know
+            {/* Heading (Max 46px on Desktop) */}
+            <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-4">
+              Everything you <span className="relative inline-block text-[#ECAB00]">
+                need to know
+                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                </svg>
+              </span>
             </h2>
 
-            <p
-              className="text-gray-400 text-[15px] md:text-[16px] leading-relaxed max-w-sm"
-              style={{ ...satoshi, fontWeight: 400 }}
-            >
+            <p className="font-medium text-[16px] md:text-[18px] text-gray-500 max-w-xl mx-auto leading-relaxed">
               From admissions to placement — all your questions answered in one place.
             </p>
-          </div>
+          </motion.div>
+        </div>
 
-          {/* ── FAQ List ── */}
-          <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-            {faqs.map((item, i) => (
-              <div key={i} className="faq-item">
+        {/* ── 2-COLUMN FAQ GRID ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 items-start">
+          {faqs.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div 
+                key={i} 
+                className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 border 
+                  ${isOpen ? 'border-[#2563eb] shadow-[0_10px_30px_-10px_rgba(37,99,235,0.15)]' : 'border-gray-200 shadow-sm hover:border-[#2563eb]/30 hover:shadow-md'}`}
+              >
                 <button
-                  onClick={() => setOpen(open === i ? -1 : i)}
-                  className="w-full flex items-start justify-between gap-2 px-3 py-2 md:px-4 md:py-4 text-left group border-none bg-transparent cursor-pointer"
-                  style={satoshi}
+                  onClick={() => toggleFaq(i)}
+                  className="w-full flex items-start justify-between gap-4 px-5 py-5 md:px-6 md:py-6 text-left group focus:outline-none"
                 >
                   <span
-                    className={`text-[16px] md:text-[18px] leading-snug transition-colors duration-200 ${open === i ? "text-orange-500" : "text-gray-900 group-hover:text-orange-400"
-                      }`}
-                    style={{ ...satoshi, fontWeight: 600 }}
+                    className={`text-[16px] md:text-[18px] font-bold leading-snug transition-colors duration-300 ${
+                      isOpen ? "text-[#2563eb]" : "text-[#0f172a] group-hover:text-[#2563eb]"
+                    }`}
                   >
                     {item.q}
                   </span>
                   <span
-                    className={`shrink-0 mt-0.5 w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${open === i
-                      ? "bg-orange-500 text-white rotate-0"
-                      : "bg-gray-100 text-gray-400 group-hover:bg-orange-50 group-hover:text-orange-400"
-                      }`}
+                    className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isOpen
+                        ? "bg-[#2563eb] text-white rotate-180"
+                        : "bg-blue-50 text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white"
+                    }`}
                   >
-                    {open === i ? <Minus size={14} /> : <Plus size={14} />}
+                    {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </span>
                 </button>
 
                 <AnimatePresence initial={false}>
-                  {open === i && (
+                  {isOpen && (
                     <motion.div
-                      key="answer"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: "easeInOut" }}
+                      transition={{ duration: 0.35, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div
-                        className="px-6 pb-6 md:px-8 md:pb-7 text-gray-500 text-[15px] md:text-[16px] leading-relaxed"
-                        style={{ ...satoshi, fontWeight: 400 }}
-                      >
+                      <div className="px-5 md:px-6 pb-6 pt-0 text-gray-600 text-[15px] md:text-[16px] font-medium leading-relaxed">
+                        <div className="w-full h-px bg-gray-100 mb-4" /> {/* Divider line */}
                         {item.a}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
-            ))}
-          </div>
-
-          {/* ── Bottom CTA ── */}
-          <div className="mt-8 md:mt-10 rounded-3xl p-6 md:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 border border-orange-100 bg-orange-50">
-            <div>
-              <p
-                className="text-gray-900 text-[17px] md:text-[19px] mb-1"
-                style={{ ...satoshi, fontWeight: 700 }}
-              >
-                Still have questions?
-              </p>
-              <p
-                className="text-gray-400 text-[14px] md:text-[15px]"
-                style={{ ...satoshi, fontWeight: 400 }}
-              >
-                Our team is ready to help you plan your next step.
-              </p>
-            </div>
-            <button
-              className="shrink-0 flex items-center gap-2 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white text-[15px] px-7 py-4 rounded-2xl transition-all duration-200 shadow-md shadow-orange-200 border-none cursor-pointer"
-              style={{ ...satoshi, fontWeight: 600 }}
-            >
-              Speak to an Expert
-              <ArrowUpRight size={16} />
-            </button>
-          </div>
-
+            );
+          })}
         </div>
-      </section>
-    </>
+
+        {/* ── BOTTOM CTA (Dark Premium Box) ── */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-12 md:mt-16 bg-[#0f172a] rounded-[2rem] p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-[0_20px_40px_-10px_rgba(15,23,42,0.3)] relative overflow-hidden"
+        >
+          {/* Subtle Glow inside the dark box */}
+          <div className="absolute top-[-50%] right-[-10%] w-[200px] h-[200px] bg-[#ECAB00]/20 rounded-full blur-[50px] pointer-events-none" />
+
+          <div className="text-center sm:text-left relative z-10">
+            <h3 className="text-white text-[22px] md:text-[26px] font-black leading-tight mb-2">
+              Still have questions?
+            </h3>
+            <p className="text-gray-400 font-medium text-[15px] md:text-[16px]">
+              Our team is ready to help you plan your next step.
+            </p>
+          </div>
+
+          <button className="relative z-10 shrink-0 flex items-center justify-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0f172a] font-black text-[15px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group">
+            Speak to an Expert
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </button>
+        </motion.div>
+
+      </div>
+    </section>
   );
 }

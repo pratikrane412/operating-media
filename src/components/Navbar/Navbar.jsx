@@ -176,7 +176,6 @@ const Navbar = () => {
                 >
                   {[
                     { label: "Hire from us", to: "/placement/hire" },
-                    { label: "Openings", to: "/placement/openings" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -205,10 +204,9 @@ const Navbar = () => {
                   className="absolute left-0 mt-3 w-52 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                 >
                   {[
-                    { label: "Upcoming Batches", to: "/information/batches" },
-                    { label: "Gallery", to: "/information/gallery" },
-                    { label: "FAQ", to: "/information/faq" },
-                    { label: "SEO Tools", to: "/information/seo-tools" },
+                    { label: "Upcoming Batches", to: "/upcoming-batches" },
+                    { label: "Gallery", to: "/gallery" },
+                    { label: "FAQ", to: "/faq" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -293,7 +291,6 @@ const Navbar = () => {
               <MobileAccordion label="Placement">
                 {[
                   { label: "Hire from us", to: "/placement/hire" },
-                  { label: "Openings", to: "/placement/openings" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}
@@ -309,10 +306,9 @@ const Navbar = () => {
 
               <MobileAccordion label="Information">
                 {[
-                  { label: "Upcoming Batches", to: "/information/batches" },
-                  { label: "Gallery", to: "/information/gallery" },
-                  { label: "FAQ", to: "/information/faq" },
-                  { label: "SEO Tools", to: "/information/seo-tools" },
+                  { label: "Upcoming Batches", to: "/upcoming-batches" },
+                  { label: "Gallery", to: "/gallery" },
+                  { label: "FAQ", to: "/faq" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}

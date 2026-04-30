@@ -1,6 +1,7 @@
 import React from "react";
 // Change the end of this line from PlacementsHeroSection to PlacementHeroSection
 import HeroSection from "../../components/MastersProgramPage/HeroSection/HeroSection";
+import ChoosePath from "../../components/MastersProgramPage/ChoosePath/ChoosePath";
 import TransformationSection from "../../components/MastersProgramPage/TransformationSection/TransformationSection";;
 import SyllabusSection from "../../components/MastersProgramPage/SyllabusSection/SyllabusSection";
 import WhyUsSection from "../../components/MastersProgramPage/WhyUsSection/WhyUsSection";
@@ -22,18 +23,19 @@ const MastersProgram = () => {
   return (
     <main>
       <HeroSection/>
-      
+      <ChoosePath />
       <TransformationSection />
       <SyllabusSection />
+      <CounselorCTA />
       <WhyUsSection />
       <ToolsTicker />
       <TrainersSection />
-      <PlacementPartners />
-      <CounselorCTA />
+      {/* <PlacementPartners /> */}
+      
 
       <StudentReviews />
       <CertificationSection />
-      <LMSSection />
+      {/* <LMSSection /> */}
       <FAQSection />
       
      
