@@ -106,7 +106,15 @@ function FeaturedCard({ blog }) {
             >
                 {/* Left: cover */}
                 <div style={{ position: "relative", overflow: "hidden", background: `${color}10` }}>
-                    <CoverPlaceholder category={blog.category} height="100%" />
+                    {blog.cover ? (
+                        <img
+                            src={blog.cover}
+                            alt={blog.title}
+                            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                        />
+                    ) : (
+                        <CoverPlaceholder category={blog.category} height="100%" />
+                    )}
                     {/* Featured badge */}
                     <span style={{
                         position: "absolute", top: 18, left: 18, zIndex: 5,
@@ -212,7 +220,15 @@ function BlogCard({ blog, index }) {
                 }}
             >
                 {/* Cover */}
-                <CoverPlaceholder category={blog.category} height={180} />
+                {blog.cover ? (
+                    <img
+                        src={blog.cover}
+                        alt={blog.title}
+                        style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }}
+                    />
+                ) : (
+                    <CoverPlaceholder category={blog.category} height={180} />
+                )}
 
                 {/* Body */}
                 <div style={{ padding: "22px 24px 26px", display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
@@ -220,12 +236,20 @@ function BlogCard({ blog, index }) {
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: 16, color: "#0f172a", letterSpacing: "-0.025em",
                         lineHeight: 1.35, margin: 0,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
                     }}>
                         {blog.title}
                     </h3>
                     <p style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 500,
-                        fontSize: 13, color: "#6b7280", lineHeight: 1.7, margin: 0, flex: 1,
+                        fontSize: 13, color: "#6b7280", lineHeight: 1.7, margin: 0,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
                     }}>
                         {blog.excerpt}
                     </p>
@@ -399,7 +423,12 @@ export default function BlogsPage() {
 
                     {/* Grid */}
                     {rest.length > 0 && (
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: 20, alignItems: "start" }}>
+                        <div style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
+                            gap: 20,
+                            alignItems: "stretch",  // ← this makes all cards same height
+                        }}>
                             {rest.map((blog, i) => <BlogCard key={blog.slug} blog={blog} index={i} />)}
                         </div>
                     )}

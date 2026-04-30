@@ -410,7 +410,16 @@ export default function BlogPostPage() {
                                 transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1)",
                             }}>
                                 {/* Cover */}
-                                <CoverPlaceholder category={post.category} height={380} />
+                                {post.cover ? (
+                                    <img
+                                        src={post.cover}
+                                        alt={post.title}
+                                        style={{ width: "100%", height: 400, objectFit: "cover", display: "block" }}
+                                        onError={e => { e.target.style.display = "none"; }}
+                                    />
+                                ) : (
+                                    <CoverPlaceholder category={post.category} height={380} />
+                                )}
 
                                 {/* Meta row */}
                                 <div style={{ padding: "28px 36px 0", display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
