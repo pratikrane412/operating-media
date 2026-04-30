@@ -145,7 +145,7 @@ export default function AboutSectionPremium() {
   return (
     <section
       ref={rootRef}
-      className="relative w-full bg-[#FAFCFF] overflow-hidden selection:bg-[#ecab00] selection:text-white"
+      className="relative w-full bg-[#fcfaf2] overflow-hidden selection:bg-[#ecab00] selection:text-white"
       style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
       {/* ── Background Ambient Glows ── */}

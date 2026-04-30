@@ -140,8 +140,8 @@ const Footer = () => {
         </p>
       </div>
 
-      {/* ── BOTTOM SECTION: Global Courses ── */}
-      <div className="w-full bg-[#121212] py-16 px-6 relative">
+      {/* ── BOTTOM SECTION: Global Courses (HIDDEN ON MOBILE: hidden md:block) ── */}
+      <div className="hidden md:block w-full bg-[#121212] py-16 px-6 relative">
         <div className="max-w-[1200px] mx-auto text-center">
           <h2 className="text-[28px] md:text-[36px] font-bold text-white mb-8">
             Digital Marketing Courses <span className="text-[#FBBF24]">Across The World</span>

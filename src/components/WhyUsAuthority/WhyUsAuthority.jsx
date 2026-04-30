@@ -65,11 +65,11 @@ export default function WhyUsAuthority() {
 
   return (
     <section 
-      // Changed to solid bg-white, completely clean background
-      className="relative w-full overflow-hidden bg-white py-12 lg:py-16 selection:bg-[#ecab00] selection:text-white"
+      // Background explicitly set to #FCFAF2 with correct tailwind syntax
+      className="relative w-full overflow-hidden bg-[#FCFAF2] py-12 lg:py-16 selection:bg-[#ecab00] selection:text-[#0f172a]"
       style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
-      {/* ── Removed the line grid here. Kept only subtle glow ── */}
+      {/* ── Subtle glow to match theme ── */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden flex justify-center z-0">
         <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-[#ecab00]/10 to-transparent blur-[100px]" />
       </div>
@@ -97,7 +97,7 @@ export default function WhyUsAuthority() {
 
             {/* Overlapping Secondary Image */}
             <motion.div 
-              className="absolute right-0 bottom-0 w-[55%] h-[55%] rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white z-20"
+              className="absolute right-0 bottom-0 w-[55%] h-[55%] rounded-3xl overflow-hidden shadow-2xl border-[6px] border-[#FCFAF2] z-20"
               {...scaleIn(0.2)}
             >
               <img 
@@ -186,7 +186,7 @@ export default function WhyUsAuthority() {
 
             {/* Bottom Actions (ISO + CTA) */}
             <motion.div 
-              className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 pt-8 border-t border-gray-100"
+              className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 pt-8 border-t border-gray-200/60"
               {...fadeUp(0.6)}
             >
               {/* Primary Button */}

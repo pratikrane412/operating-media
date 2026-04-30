@@ -75,7 +75,7 @@ export default function AlumniPlacement() {
 
   return (
     <section 
-      className="bg-[#FAFCFF] pt-16 pb-20 overflow-hidden font-sans selection:bg-[#ecab00] selection:text-[#0f172a]"
+      className="bg-[#fcfaf2] pt-16 pb-20 overflow-hidden font-sans selection:bg-[#ecab00] selection:text-[#0f172a]"
       style={{ fontFamily: "'Satoshi', sans-serif" }}
     >
       {/* ── Background Subtle Grid ── */}
