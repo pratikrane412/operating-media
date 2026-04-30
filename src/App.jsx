@@ -33,8 +33,8 @@ function App() {
         <Route path="/advance-diploma" element={<AdvanceProgram />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
-        <Route path="/reviews" element={<Reviewspage />} />
-        <Route path="/trainers" element={<TrainersPage />} />
+        <Route path="/about/testimonials" element={<Reviewspage />} />
+        <Route path="/about/mentors" element={<TrainersPage />} />
 
 
 
@@ -42,7 +42,7 @@ function App() {
         <Route path="/blogs" element={<BlogsPage />} />
 
 
-         <Route path="/hire" element={<HireFromUsPage />} />
+         <Route path="/placement/hire" element={<HireFromUsPage />} />
 
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about-us" element={<AboutUsPage />} />
