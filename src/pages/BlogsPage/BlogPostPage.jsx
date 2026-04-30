@@ -29,7 +29,7 @@ const CATEGORY_COLORS = {
     "SEO": "#F59E0B", "PPC": "#ECAB00", "Social Media": "#EC4899",
     "Analytics": "#7C3AED", "E-Commerce": "#10B981", "AI & Automation": "#0EA5E9",
 };
-function catColor(cat) { return CATEGORY_COLORS[cat] || "#FF6B00"; }
+function catColor(cat) { return CATEGORY_COLORS[cat] || "#ECAB00"; }
 
 /* ── Reading progress ───────────────────────────────────────── */
 function ReadingProgress() {
@@ -45,7 +45,7 @@ function ReadingProgress() {
     }, []);
     return (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 9999, height: 3, background: "rgba(255,107,0,0.12)", pointerEvents: "none" }}>
-            <div style={{ height: "100%", background: "linear-gradient(to right,#FF6B00,#ECAB00)", width: `${p}%`, transition: "width 0.08s linear", borderRadius: "0 2px 2px 0" }} />
+            <div style={{ height: "100%", background: "linear-gradient(to right,#ECAB00,#ECAB00)", width: `${p}%`, transition: "width 0.08s linear", borderRadius: "0 2px 2px 0" }} />
         </div>
     );
 }
@@ -163,17 +163,17 @@ function SidebarSearch() {
                         fontFamily: "'Satoshi', sans-serif", fontSize: 13, fontWeight: 500, color: "#0f172a",
                         outline: "none",
                     }}
-                    onFocus={e => e.target.style.borderColor = "#FF6B00"}
+                    onFocus={e => e.target.style.borderColor = "#ECAB00"}
                     onBlur={e => e.target.style.borderColor = "#E8E4DC"}
                 />
                 <button style={{
                     width: 40, height: 40, borderRadius: 10, flexShrink: 0,
-                    background: "#FF6B00", border: "none", cursor: "pointer",
+                    background: "#ECAB00", border: "none", cursor: "pointer",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     transition: "background 0.2s",
                 }}
                     onMouseEnter={e => e.currentTarget.style.background = "#ea580c"}
-                    onMouseLeave={e => e.currentTarget.style.background = "#FF6B00"}
+                    onMouseLeave={e => e.currentTarget.style.background = "#ECAB00"}
                 >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -242,7 +242,7 @@ function CommentSection() {
                             fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                             fontSize: 13, letterSpacing: "0.08em", textTransform: "uppercase",
                             padding: "14px 32px", borderRadius: 12, border: "none", cursor: "pointer",
-                            background: "linear-gradient(135deg,#FF6B00,#ea580c)",
+                            background: "linear-gradient(135deg,#ECAB00,#ea580c)",
                             color: "#fff", boxShadow: "0 6px 20px rgba(255,107,0,0.28)",
                             transition: "transform 0.2s, box-shadow 0.2s",
                         }}
@@ -342,7 +342,7 @@ export default function BlogPostPage() {
         return (
             <main style={{ fontFamily: "'Satoshi', sans-serif", background: "#F3F4F6", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 20 }}>
                 <h1 style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 48, color: "#0f172a", margin: 0 }}>Post not found</h1>
-                <Link to="/blogs" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: 15, color: "#FF6B00", textDecoration: "none", padding: "12px 24px", borderRadius: 12, background: "rgba(255,107,0,0.08)", border: "1px solid rgba(255,107,0,0.2)" }}>
+                <Link to="/blogs" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 700, fontSize: 15, color: "#ECAB00", textDecoration: "none", padding: "12px 24px", borderRadius: 12, background: "rgba(255,107,0,0.08)", border: "1px solid rgba(255,107,0,0.2)" }}>
                     ← Back to Blog
                 </Link>
             </main>
@@ -363,10 +363,10 @@ export default function BlogPostPage() {
         .blog-prose em { font-style: italic; color: #4b5563; }
         .blog-prose ul, .blog-prose ol { margin: 0 0 1.35em; padding-left: 1.5em; }
         .blog-prose li { font-family: 'Satoshi', sans-serif; margin-bottom: 0.5em; }
-        .blog-prose a { color: #FF6B00; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid rgba(255,107,0,0.3); }
-        .blog-prose a:hover { border-color: #FF6B00; }
-        .blog-prose blockquote { border-left: 3px solid #FF6B00; padding: 14px 22px; margin: 2em 0; background: rgba(255,107,0,0.04); border-radius: 0 12px 12px 0; font-style: italic; font-weight: 500; color: #4b5563; }
-        .blog-prose code { font-size: 13px; background: #f5f0e8; padding: 2px 7px; border-radius: 5px; font-family: monospace; color: #FF6B00; }
+        .blog-prose a { color: #ECAB00; font-weight: 700; text-decoration: none; border-bottom: 1.5px solid rgba(255,107,0,0.3); }
+        .blog-prose a:hover { border-color: #ECAB00; }
+        .blog-prose blockquote { border-left: 3px solid #ECAB00; padding: 14px 22px; margin: 2em 0; background: rgba(255,107,0,0.04); border-radius: 0 12px 12px 0; font-style: italic; font-weight: 500; color: #4b5563; }
+        .blog-prose code { font-size: 13px; background: #f5f0e8; padding: 2px 7px; border-radius: 5px; font-family: monospace; color: #ECAB00; }
         .ci {
           width: 100%; background: #F7F6F3; border: 1.5px solid #E8E4DC;
           border-radius: 12px; padding: 13px 16px;
@@ -376,7 +376,7 @@ export default function BlogPostPage() {
           appearance: none; display: block;
         }
         .ci::placeholder { color: #b0a898; }
-        .ci:focus { border-color: #FF6B00; background: #fff; box-shadow: 0 0 0 3px rgba(255,107,0,0.08); }
+        .ci:focus { border-color: #ECAB00; background: #fff; box-shadow: 0 0 0 3px rgba(255,107,0,0.08); }
         .latest-item:hover { opacity: 0.75; }
         .cat-item:hover { background: #faf7f2; }
       `}</style>
@@ -386,13 +386,66 @@ export default function BlogPostPage() {
             <main style={{ fontFamily: "'Satoshi', sans-serif", background: "#F3F4F6", minHeight: "100vh" }}>
 
                 {/* ── Breadcrumb bar ── */}
-                <div style={{ background: "#fff", borderBottom: "1px solid #ece9e2", padding: "0 24px" }}>
-                    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "12px 0", display: "flex", alignItems: "center", gap: 8 }}>
-                        <Link to="/" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 13, color: "#9ca3af", textDecoration: "none" }}>Home</Link>
-                        <span style={{ color: "#d1c9b8", fontSize: 13 }}>›</span>
-                        <Link to="/blogs" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 13, color: "#9ca3af", textDecoration: "none" }}>Blogs</Link>
-                        <span style={{ color: "#d1c9b8", fontSize: 13 }}>›</span>
-                        <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 13, color: "#374151" }}>{post.title}</span>
+                {/* ── Breadcrumb bar ── */}
+                <div style={{
+                    position: "relative",
+                    overflow: "hidden",
+                    minHeight: 160,
+                    display: "flex",
+                    alignItems: "center",
+                    background: "linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #1a2e4a 100%)",
+                }}>
+                    {/* Background image with blue overlay — replace URL with your own image */}
+                    <div style={{
+                        position: "absolute", inset: 0,
+                        backgroundImage: "url('https://www.operatingmedia.com/wp-content/uploads/2026/04/Article-1000-x-500-px-27.png')",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        opacity: 0.25,
+                    }} />
+
+                    {/* Blue tint overlay */}
+                    <div style={{
+                        position: "absolute", inset: 0,
+                        background: "linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,58,95,0.80) 100%)",
+                    }} />
+
+                    {/* Content */}
+                    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 40px", position: "relative", zIndex: 10, width: "100%" }}>
+                        {/* Breadcrumb links */}
+                        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                            <Link to="/" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.2s" }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#fff"}
+                                onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.55)"}
+                            >
+                                Home
+                            </Link>
+                            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 16 }}>/</span>
+                            <Link to="/blogs" style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 14, color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.2s" }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#fff"}
+                                onMouseLeave={e => e.currentTarget.style.color = "rgba(255,255,255,0.55)"}
+                            >
+                                Blogs
+                            </Link>
+                            <span style={{ color: "rgba(255,255,255,0.3)", fontSize: 16 }}>/</span>
+                            <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 600, fontSize: 14, color: "#fff" }}>
+                                {post.category}
+                            </span>
+                        </div>
+
+                        {/* Big page title */}
+                        <h1 style={{
+                            fontFamily: "'Satoshi', sans-serif",
+                            fontWeight: 900,
+                            fontSize: "clamp(1.6rem, 3.5vw, 2.6rem)",
+                            color: "#fff",
+                            letterSpacing: "-0.03em",
+                            lineHeight: 1.15,
+                            margin: 0,
+                            maxWidth: 700,
+                        }}>
+                            {post.title}
+                        </h1>
                     </div>
                 </div>
 
@@ -504,7 +557,7 @@ export default function BlogPostPage() {
                             >
                                 <div style={{ position: "absolute", top: "-50%", right: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,107,0,0.12) 0%,transparent 70%)", pointerEvents: "none" }} />
                                 <div style={{ position: "relative", zIndex: 1 }}>
-                                    <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.35em", color: "#FF6B00", margin: "0 0 10px" }}>✦ Learn from the best</p>
+                                    <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 10, textTransform: "uppercase", letterSpacing: "0.35em", color: "#ECAB00", margin: "0 0 10px" }}>✦ Learn from the best</p>
                                     <h3 style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: "clamp(1.1rem,2.5vw,1.65rem)", color: "#fff", letterSpacing: "-0.03em", margin: "0 0 8px", lineHeight: 1.2 }}>
                                         Want to learn digital marketing?
                                     </h3>
@@ -516,7 +569,7 @@ export default function BlogPostPage() {
                                     display: "inline-flex", alignItems: "center", gap: 8,
                                     fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 14,
                                     padding: "14px 28px", borderRadius: 100,
-                                    background: "linear-gradient(135deg,#FF6B00,#ea580c)",
+                                    background: "linear-gradient(135deg,#ECAB00,#ea580c)",
                                     color: "#fff", textDecoration: "none", whiteSpace: "nowrap",
                                     boxShadow: "0 8px 24px rgba(255,107,0,0.3)", flexShrink: 0,
                                     position: "relative", zIndex: 1, transition: "transform 0.2s",

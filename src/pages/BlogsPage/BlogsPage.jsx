@@ -38,7 +38,7 @@ const CATEGORY_COLORS = {
 };
 
 function categoryColor(cat) {
-    return CATEGORY_COLORS[cat] || "#FF6B00";
+    return CATEGORY_COLORS[cat] || "#ECAB00";
 }
 
 /* ── Cover placeholder (when no real image) ─────────────────── */
@@ -120,7 +120,7 @@ function FeaturedCard({ blog }) {
                         position: "absolute", top: 18, left: 18, zIndex: 5,
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: 9, letterSpacing: "0.25em", textTransform: "uppercase",
-                        color: "#fff", background: "#FF6B00",
+                        color: "#fff", background: "#ECAB00",
                         padding: "6px 14px", borderRadius: 100,
                     }}>
                         ✦ Featured
@@ -314,8 +314,8 @@ function BlogsHero() {
                     opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(16px)",
                     transition: "all 0.6s ease 0.1s",
                 }}>
-                    <span style={{ display: "block", width: 28, height: 1.5, background: "#FF6B00", borderRadius: 2 }} />
-                    <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 11, letterSpacing: "0.35em", textTransform: "uppercase", color: "#FF6B00" }}>
+                    <span style={{ display: "block", width: 28, height: 1.5, background: "#ECAB00", borderRadius: 2 }} />
+                    <span style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 11, letterSpacing: "0.35em", textTransform: "uppercase", color: "#ECAB00" }}>
                         Operating Media Blog
                     </span>
                 </div>
@@ -336,7 +336,7 @@ function BlogsHero() {
                     <h1 style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: "clamp(2.4rem, 5.5vw, 4.8rem)",
-                        color: "#FF6B00", letterSpacing: "-0.04em", lineHeight: 1.08, margin: 0,
+                        color: "#ECAB00", letterSpacing: "-0.04em", lineHeight: 1.08, margin: 0,
                         transform: mounted ? "translateY(0)" : "translateY(110%)",
                         opacity: mounted ? 1 : 0,
                         transition: "transform 0.85s cubic-bezier(0.16,1,0.3,1) 0.32s, opacity 0.85s ease 0.32s",
@@ -378,8 +378,8 @@ export default function BlogsPage() {
           border: 1.5px solid #ece9e2; background: #fff; color: #6b7280;
           cursor: pointer; transition: all 0.2s; white-space: nowrap;
         }
-        .cat-btn:hover { border-color: #FF6B00; color: #FF6B00; }
-        .cat-btn.active { background: #FF6B00; color: #fff; border-color: #FF6B00; box-shadow: 0 4px 16px rgba(255,107,0,0.28); }
+        .cat-btn:hover { border-color: #ECAB00; color: #ECAB00; }
+        .cat-btn.active { background: #ECAB00; color: #fff; border-color: #ECAB00; box-shadow: 0 4px 16px rgba(255,107,0,0.28); }
       `}</style>
 
             <main style={{ fontFamily: "'Satoshi', sans-serif", background: "#FAFAF8", minHeight: "100vh" }}>
