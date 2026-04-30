@@ -324,7 +324,7 @@ function BlogsHero() {
                     <h1 style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: "clamp(2.4rem, 5.5vw, 4.8rem)",
-                        color: "#fff", letterSpacing: "-0.04em", lineHeight: 1.08, margin: 0,
+                        color: "#fff", letterSpacing: "-0.04em", lineHeight: 1.28, margin: 0,
                         transform: mounted ? "translateY(0)" : "translateY(110%)",
                         opacity: mounted ? 1 : 0,
                         transition: "transform 0.85s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 0.85s ease 0.2s",
@@ -336,7 +336,7 @@ function BlogsHero() {
                     <h1 style={{
                         fontFamily: "'Satoshi', sans-serif", fontWeight: 900,
                         fontSize: "clamp(2.4rem, 5.5vw, 4.8rem)",
-                        color: "#ECAB00", letterSpacing: "-0.04em", lineHeight: 1.08, margin: 0,
+                        color: "#ECAB00", letterSpacing: "-0.04em", lineHeight: 1.28, margin: 0,
                         transform: mounted ? "translateY(0)" : "translateY(110%)",
                         opacity: mounted ? 1 : 0,
                         transition: "transform 0.85s cubic-bezier(0.16,1,0.3,1) 0.32s, opacity 0.85s ease 0.32s",
