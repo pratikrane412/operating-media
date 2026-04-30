@@ -4,6 +4,8 @@ import { ChevronLeft, ChevronRight, GraduationCap, Linkedin } from "lucide-react
 
 // ── Shared Image & Base Data ──
 const DEFAULT_IMAGE = "/images/Harsh-Ibraine.webp";
+const NEEL_IMAGE = "/images/neel.png";
+const RAHUL_IMAGE = "/images/rahul.png";
 
 // Add up to 8 mentors here.
 const MENTORS = [
@@ -12,8 +14,8 @@ const MENTORS = [
   { name: "Hemant Mane", role: "Performance Marketing Lead", img: DEFAULT_IMAGE },
   { name: "Zahid Shaikh", role: "Social Media Specialist", img: DEFAULT_IMAGE },
   { name: "Pooja Sharma", role: "Content Strategy Head", img: DEFAULT_IMAGE },
-  { name: "Rahul Verma", role: "E-Commerce Expert", img: DEFAULT_IMAGE },
-  { name: "Amit Singh", role: "Analytics Lead", img: DEFAULT_IMAGE },
+  { name: "Neelkamal Mukharjee", role: "E-Commerce Expert", img: NEEL_IMAGE },
+  { name: "Rahul Shinde", role: "Analytics Lead", img: RAHUL_IMAGE },
   { name: "Sneha Patil", role: "Brand Manager", img: DEFAULT_IMAGE },
 ];
 
