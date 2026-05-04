@@ -5,12 +5,12 @@ const certFeatures = [
     {
         icon: <Award size={22} />,
         title: "Operating Media Certificate",
-        desc: "Receive an industry-recognised diploma certificate upon successful completion of the Google Ads & PPC course.",
+        desc: "Receive an industry-recognised diploma certificate upon successful completion of the Google Analytics course.",
     },
     {
         icon: <ShieldCheck size={22} />,
-        title: "Pay Per Click Certification",
-        desc: "Get fully prepared for and supported through the official Google Ads global certification exam.",
+        title: "Google Analytics Certification",
+        desc: "Get fully prepared for and supported through the official Google Analytics global certification exam.",
     },
     {
         icon: <BookOpen size={22} />,
@@ -24,7 +24,7 @@ const certFeatures = [
     },
 ];
 
-export default function PPCCertification() {
+export default function GACertification() {
     return (
         <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#FAFCFF] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-white overflow-hidden">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />

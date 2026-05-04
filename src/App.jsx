@@ -26,6 +26,7 @@ import UpcomingBatches from './pages/UpcomingBatches/UpcomingBatches.jsx'
 import Faq from './pages/Faq/Faq.jsx'
 import Gallery from './pages/Gallery/Gallery.jsx'
 import PayPerClick from './pages/PayPerClick/PayPerClick.jsx';
+import GoogleAnalytics from './pages/GoogleAnalytics/GoogleAnalytics.jsx';
 
 
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/courses/advance-diploma-in-digital-marketing/" element={<AdvanceDiploma />} />
         <Route path="/courses/diploma-in-digital-marketing/" element={<DiplomaPage />} />
         <Route path="/courses/pay-per-click-course/" element={<PayPerClick />} />
+        <Route path="/courses/google-analytics-course/" element={<GoogleAnalytics />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
         <Route path="/about/testimonials" element={<TestimonialsPage />} />

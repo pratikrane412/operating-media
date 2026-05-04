@@ -108,10 +108,10 @@ const Navbar = () => {
                         >
                           {[
                             { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
-                            { label: "Google Analytics Course (GA4)", to: "/ga4" },
-                            { label: "WordPress Development Course", to: "/wordpress" },
-                            { label: "Social Media Optimization Course", to: "/smo" },
-                            { label: "Search Engine Optimization Course", to: "/seo" },
+                            { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-course/" },
+                            { label: "WordPress Development Course", to: "/courses/wordpress-development-course/" },
+                            { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-course/" },
+                            { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-course/" },
                           ].map((item, i) => (
                             <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                               {item.label}
@@ -260,10 +260,10 @@ const Navbar = () => {
                 <MobileAccordion label="Certification Courses" color="#ECAB00" sub>
                   {[
                     { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
-                    { label: "Google Analytics Course (GA4)", to: "/ga4" },
-                    { label: "WordPress Development Course", to: "/wordpress" },
-                    { label: "Social Media Optimization Course", to: "/smo" },
-                    { label: "Search Engine Optimization Course", to: "/seo" },
+                    { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-course/" },
+                    { label: "WordPress Development Course", to: "/courses/wordpress-development-course/" },
+                    { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-course/" },
+                    { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-course/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                       {item.label}
