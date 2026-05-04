@@ -6,17 +6,23 @@ import { ChevronLeft, ChevronRight, GraduationCap, Linkedin } from "lucide-react
 const DEFAULT_IMAGE = "/images/Harsh-Ibraine.webp";
 const NEEL_IMAGE = "/images/neel.png";
 const RAHUL_IMAGE = "/images/rahul.png";
+const RAHULS_IMAGE = "/images/rahuls.png";
+const VIKRAM_IMAGE = "/images/vikram.png";
+const SHRADDHA_IMAGE = "/images/shraddha.png";
+const HEMANT_IMAGE = "/images/hemant.png";
+const ZAHID_IMAGE = "/images/zahid.png";
+
 
 // Add up to 8 mentors here.
 const MENTORS = [
-  { name: "Shraddha Rane", role: "Digital Marketing Expert", img: DEFAULT_IMAGE },
+  { name: "Shraddha Rane", role: "Digital Marketing Expert", img: SHRADDHA_IMAGE },
   { name: "Harsh Pareek", role: "SEO & Growth Strategist", img: DEFAULT_IMAGE },
-  { name: "Hemant Mane", role: "Performance Marketing Lead", img: DEFAULT_IMAGE },
-  { name: "Zahid Shaikh", role: "Social Media Specialist", img: DEFAULT_IMAGE },
-  { name: "Pooja Sharma", role: "Content Strategy Head", img: DEFAULT_IMAGE },
+  { name: "Hemant Mane", role: "Performance Marketing Lead", img: HEMANT_IMAGE },
+  { name: "Zahid Shaikh", role: "Social Media Specialist", img: ZAHID_IMAGE },
+  { name: "Rahul Singh", role: "Content Strategy Head", img: RAHULS_IMAGE },
   { name: "Neelkamal Mukharjee", role: "E-Commerce Expert", img: NEEL_IMAGE },
   { name: "Rahul Shinde", role: "Analytics Lead", img: RAHUL_IMAGE },
-  { name: "Sneha Patil", role: "Brand Manager", img: DEFAULT_IMAGE },
+  { name: "Vikram Kamble", role: "Brand Manager", img: VIKRAM_IMAGE },
 ];
 
 // ── Ultra-Premium Full-Bleed Card Component ──
