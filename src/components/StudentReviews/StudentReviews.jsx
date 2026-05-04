@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react"; // Added for premium 5-star rating
+import { Star } from "lucide-react";
 
 const S = { fontFamily: "'Satoshi', sans-serif" };
 
@@ -37,12 +37,14 @@ const REVIEWS = [
   },
 ];
 
-// Doubling the array to create a seamless infinite loop
-const doubledReviews = [...REVIEWS, ...REVIEWS];
+// Triple so the seamless loop always has enough cards visible
+const loopedReviews = [...REVIEWS, ...REVIEWS, ...REVIEWS];
 
-// Custom Premium Quote Icon
 const QuoteIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-12 h-12 fill-[#ecab00] opacity-20 transition-opacity duration-300 group-hover:opacity-40">
+  <svg
+    viewBox="0 0 24 24"
+    className="w-10 h-10 fill-[#ecab00] opacity-15 group-hover:opacity-35 transition-opacity duration-300"
+  >
     <path d="M9 10.5C9 12.433 7.433 14 5.5 14C3.567 14 2 12.433 2 10.5C2 7.462 4.462 5 7.5 5V7C5.567 7 4 8.567 4 10.5C4 10.776 4.045 11.036 4.126 11.284C4.524 10.822 5.163 10.5 5.866 10.5H9ZM20 10.5C20 12.433 18.433 14 16.5 14C14.567 14 13 12.433 13 10.5C13 7.462 15.462 5 18.5 5V7C16.567 7 15 8.567 15 10.5C15 10.776 15.045 11.036 15.126 11.284C15.524 10.822 16.163 10.5 16.866 10.5H20Z" />
   </svg>
 );
@@ -50,32 +52,30 @@ const QuoteIcon = () => (
 function ReviewCard({ review }) {
   return (
     <div
-      className="shrink-0 flex flex-col justify-between bg-white rounded-[2rem] p-7 md:p-8 border border-gray-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_-15px_rgba(236,171,0,0.2)] hover:border-[#ecab00]/30 hover:-translate-y-2 transition-all duration-500 relative w-[300px] md:w-[360px] h-[320px] md:h-[340px] group cursor-default overflow-hidden"
+      className="shrink-0 flex flex-col bg-white rounded-[2rem] p-7 md:p-8 shadow-[0_8px_30px_-8px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_48px_-12px_rgba(236,171,0,0.18)] hover:-translate-y-2 transition-all duration-500 relative w-[300px] md:w-[360px] group cursor-default"
       style={S}
     >
-      {/* Background Subtle Glow on Hover */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#ecab00]/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Subtle hover glow overlay */}
+      <div className="absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#ecab00]/4 via-transparent to-transparent pointer-events-none" />
 
-      {/* Top Section: Stars & Quote Icon */}
-      <div className="relative z-10 flex items-start justify-between mb-6">
+      {/* Stars + Quote icon */}
+      <div className="relative z-10 flex items-center justify-between mb-5">
         <div className="flex gap-1">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} size={16} className="fill-[#ecab00] text-[#ecab00]" />
+            <Star key={i} size={15} className="fill-[#ecab00] text-[#ecab00]" />
           ))}
         </div>
-        <div className="absolute -top-2 -right-2">
-          <QuoteIcon />
-        </div>
+        <QuoteIcon />
       </div>
 
-      {/* Review Text */}
-      <p className="relative z-10 font-medium text-[15px] md:text-[16px] text-gray-600 leading-relaxed line-clamp-5 flex-1 italic">
+      {/* Review text — no fixed height, no line-clamp, no overflow */}
+      <p className="relative z-10 font-medium text-[14px] md:text-[15px] text-gray-500 leading-[1.8] italic flex-1 mb-7">
         "{review.text}"
       </p>
 
-      {/* Bottom Section: User Profile */}
-      <div className="relative z-10 flex items-center gap-4 mt-6 pt-6 border-t border-gray-50 group-hover:border-[#ecab00]/20 transition-colors duration-300">
-        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-gray-100 group-hover:border-[#ecab00] transition-colors duration-300 shadow-sm shrink-0">
+      {/* Author — no border-t, just visual separation via spacing */}
+      <div className="relative z-10 flex items-center gap-3.5">
+        <div className="w-11 h-11 rounded-full overflow-hidden ring-2 ring-gray-100 group-hover:ring-[#ecab00]/30 transition-all duration-300 shrink-0">
           <img
             src={review.img}
             alt={review.name}
@@ -83,11 +83,9 @@ function ReviewCard({ review }) {
             onError={(e) => { e.currentTarget.style.display = "none"; }}
           />
         </div>
-        <div className="flex flex-col">
-          <h3 className="font-bold text-[16px] text-[#0A0F1C] leading-tight">
-            {review.name}
-          </h3>
-          <p className="font-semibold text-[12px] text-[#ecab00] uppercase tracking-wide mt-0.5">
+        <div>
+          <h3 className="font-black text-[15px] text-[#0f172a] leading-tight">{review.name}</h3>
+          <p className="font-bold text-[11px] text-[#ecab00] uppercase tracking-widest mt-0.5">
             {review.role}
           </p>
         </div>
@@ -97,8 +95,6 @@ function ReviewCard({ review }) {
 }
 
 export default function StudentReviews() {
-  
-  // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
@@ -110,87 +106,82 @@ export default function StudentReviews() {
   }, []);
 
   return (
-    <section className="relative w-full py-16 lg:py-24 bg-[#FCFAF2] overflow-hidden selection:bg-[#ecab00] selection:text-[#0A0F1C]" style={S}>
-      
-      {/* ── Subtle Background Line Shade (Matches Theme) ── */}
+    <section
+      className="relative w-full py-16 lg:py-24 bg-[#FCFAF2] overflow-hidden selection:bg-[#ecab00] selection:text-[#0f172a]"
+      style={S}
+    >
+      {/* Subtle grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000004_1px,transparent_1px),linear-gradient(to_bottom,#00000004_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-      
-      {/* ── Glow Orbs ── */}
-      <div className="absolute top-0 right-[10%] w-[400px] h-[400px] rounded-full bg-[#ecab00]/10 blur-[120px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-0 left-[5%] w-[400px] h-[400px] rounded-full bg-[#0A0F1C]/5 blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-0">
-        
-        {/* ── Header ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mb-12 lg:mb-16 px-6"
-        >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ecab00]/30 bg-[#ecab00]/10 backdrop-blur-md mb-6 shadow-sm">
-            <span className="h-2 w-2 rounded-full bg-[#ecab00] animate-pulse" />
-            <span className="font-bold text-[11px] md:text-[12px] uppercase tracking-[0.15em] text-[#ecab00]">
-              Testimonials
-            </span>
+      {/* Glow orbs */}
+      <div className="absolute top-0 right-[10%] w-[500px] h-[500px] rounded-full bg-[#ecab00]/8 blur-[130px] pointer-events-none" />
+      <div className="absolute bottom-0 left-[5%] w-[400px] h-[400px] rounded-full bg-[#0f172a]/4 blur-[120px] pointer-events-none" />
+
+      {/* ── Header ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="text-center mb-12 lg:mb-16 px-6 relative z-10"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#ecab00]/30 bg-[#ecab00]/10 mb-6">
+          <span className="h-2 w-2 rounded-full bg-[#ecab00] animate-pulse" />
+          <span className="font-bold text-[11px] uppercase tracking-[0.18em] text-[#ecab00]">
+            Testimonials
+          </span>
+        </div>
+
+        <h2 className="font-black text-[2rem] sm:text-[2.6rem] lg:text-[46px] leading-[1.1] tracking-tight text-[#0f172a]">
+          Experiences That Inspire{' '}
+          <span className="relative inline-block text-[#ecab00]">
+            Confidence
+            <svg
+              className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ecab00]/35"
+              viewBox="0 0 100 10"
+              preserveAspectRatio="none"
+            >
+              <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+            </svg>
+          </span>
+        </h2>
+      </motion.div>
+
+      {/* ── Marquee ── */}
+      <div className="relative w-full">
+
+        {/* Left fade mask */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-r from-[#FCFAF2] to-transparent z-10 pointer-events-none" />
+        {/* Right fade mask */}
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-48 bg-gradient-to-l from-[#FCFAF2] to-transparent z-10 pointer-events-none" />
+
+        {/*
+          overflow-hidden is on this inner wrapper only, with py-6 padding
+          so the hover lift (translate-y) is never clipped by the edge.
+        */}
+        <div className="overflow-hidden py-6">
+          <div className="flex w-max gap-6 md:gap-7 px-6 marquee-track hover:[animation-play-state:paused]">
+            {loopedReviews.map((review, i) => (
+              <ReviewCard key={i} review={review} />
+            ))}
           </div>
-
-          {/* Heading - Exactly 46px on desktop */}
-          <h2 className="font-black text-[2.2rem] sm:text-[2.8rem] lg:text-[46px] leading-[1.1] tracking-tight text-[#0A0F1C]">
-            Experiences That Inspire <span className="text-[#ecab00] relative inline-block">Confidence</span>
-          </h2>
-        </motion.div>
-
-        {/* ── Infinite Marquee Viewport ── */}
-        <div className="w-full relative py-6">
-          
-          {/* Edge Fade Masks tailored to #FCFAF2 background */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-r from-[#FCFAF2] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-40 bg-gradient-to-l from-[#FCFAF2] to-transparent z-10 pointer-events-none" />
-
-          {/* The Track (Pauses on Hover) */}
-          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-            
-            <div className="flex gap-5 md:gap-8 px-2.5 md:px-4">
-              {doubledReviews.map((review, i) => (
-                <ReviewCard key={`first-${i}`} review={review} />
-              ))}
-            </div>
-            
-            {/* Render a second exact copy to keep the scroll loop seamless */}
-            <div className="flex gap-5 md:gap-8 px-2.5 md:px-4">
-              {doubledReviews.map((review, i) => (
-                <ReviewCard key={`second-${i}`} review={review} />
-              ))}
-            </div>
-
-          </div>
-
         </div>
 
       </div>
 
-      {/* ── Custom Infinite Scroll Animation CSS ── */}
       <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-50%); }
+        @keyframes marqueeScroll {
+          0%   { transform: translateX(0); }
+          /* Scroll exactly 1/3 of the total width (one full set of REVIEWS) */
+          100% { transform: translateX(calc(-100% / 3)); }
         }
-        /* Base desktop scroll speed */
-        .animate-marquee {
-          animation: marquee 50s linear infinite; 
+        .marquee-track {
+          animation: marqueeScroll 45s linear infinite;
         }
-        /* Slower on mobile to make it readable */
         @media (max-width: 768px) {
-          .animate-marquee { animation-duration: 35s; }
-        }
-        .animate-pulse-slow {
-          animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+          .marquee-track { animation-duration: 30s; }
         }
       `}</style>
-
     </section>
   );
 }
