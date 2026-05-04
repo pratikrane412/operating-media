@@ -1,0 +1,246 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Globe, TrendingUp, Zap, ShieldCheck, Users, Star, Search } from 'lucide-react';
+import DownloadBrochure from '../Navbar/DownloadBrochure';
+
+const highlights = [
+    "On-Page Optimization",
+    "Off-Page Optimization",
+    "Keyword Research",
+    "Backlink Building",
+    "SEO Audit",
+    "Google Search Console",
+    "Technical SEO",
+    "Webmaster Tools",
+];
+
+export default function SEOHeroSection() {
+    const [show, setShow] = useState(false);
+    const [activeIdx, setActiveIdx] = useState(0);
+
+    useEffect(() => {
+        const t = setTimeout(() => setShow(true), 100);
+        return () => clearTimeout(t);
+    }, []);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setActiveIdx(prev => (prev + 1) % highlights.length);
+        }, 2000);
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (!document.querySelector('link[data-font="satoshi"]')) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.setAttribute("data-font", "satoshi");
+            link.href = "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap";
+            document.head.appendChild(link);
+        }
+    }, []);
+
+    return (
+        <section className="relative w-full overflow-hidden bg-[#FAFCFF] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-white">
+
+            <div className="absolute inset-0 pointer-events-none z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+            <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[100px] animate-pulse-slow pointer-events-none z-0" />
+            <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
+
+            <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 py-10 md:py-[50px] lg:py-[60px]">
+                <div className="grid lg:grid-cols-[1fr_500px] gap-16 items-center">
+
+                    {/* LEFT COLUMN */}
+                    <div className="flex flex-col items-start">
+
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-8 transition-all duration-700 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+                            <span className="font-bold text-[11px] md:text-xs text-[#2563eb] uppercase tracking-[0.2em]">
+                                Certification Course · Mumbai
+                            </span>
+                        </div>
+
+                        <h1 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-6">
+                            <div className={`transition-all duration-700 delay-100 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                Search Engine
+                            </div>
+                            <div className={`transition-all duration-700 delay-200 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <span className="relative inline-block text-[#ECAB00]">
+                                    Optimization
+                                    <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/30 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div className={`transition-all duration-700 delay-300 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <span className="text-[#2563eb]">Certification</span> Course.
+                            </div>
+                        </h1>
+
+                        <p className={`text-[16px] md:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[500px] mb-6 transition-all duration-700 delay-400 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            Rank higher on Google with <span className="font-bold text-[#ECAB00]">hands-on SEO training</span> — keyword research, on-page, off-page, technical SEO and audits taught by practising SEO professionals.
+                        </p>
+
+                        <div className={`flex items-center gap-3 mb-10 transition-all duration-700 delay-450 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <span className="text-[13px] font-bold text-gray-400 uppercase tracking-widest shrink-0">You'll master:</span>
+                            <div className="overflow-hidden h-8 flex items-center bg-blue-50 border border-blue-100 rounded-full px-4">
+                                <span key={activeIdx} className="text-[14px] font-black text-[#2563eb] ticker-fade">
+                                    {highlights[activeIdx]}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-12 transition-all duration-700 delay-500 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <Link to="/contact" className="w-full sm:w-auto">
+                                <button className="group relative w-full flex items-center justify-center gap-3 bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-[15px] overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(236,171,0,0.5)] hover:-translate-y-1">
+                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Apply Now — ₹9,000
+                                        <ArrowRight size={18} className="transform transition-transform duration-300 group-hover:translate-x-1.5" />
+                                    </span>
+                                </button>
+                            </Link>
+                            <div className="w-full sm:w-auto">
+                                <div className="w-full sm:w-auto border-2 border-[#2563eb] text-[#2563eb] rounded-xl flex items-center justify-center font-bold overflow-hidden transition-all duration-300 hover:bg-[#2563eb] hover:text-white cursor-pointer">
+                                    <DownloadBrochure />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 transition-all duration-700 delay-600 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className="flex items-center gap-3">
+                                <div className="flex -space-x-1">
+                                    {[...Array(5)].map((_, i) => (
+                                        <Star key={i} size={16} className="text-[#ECAB00] fill-[#ECAB00]" />
+                                    ))}
+                                </div>
+                                <span className="font-bold text-[15px] text-[#0f172a]">3,500+ Alumni</span>
+                            </div>
+                            <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gray-300" />
+                            <div className="flex items-center gap-2">
+                                <Users size={18} className="text-[#2563eb]" />
+                                <span className="font-medium text-[15px] text-gray-500">Placed at 250+ companies</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* RIGHT COLUMN */}
+                    <div className={`relative transition-all duration-1000 delay-300 ease-out ${show ? 'opacity-100 lg:translate-x-0 scale-100' : 'opacity-0 lg:translate-x-12 scale-95'}`}>
+
+                        <div className="relative z-10 bg-white rounded-[2rem] p-3 border border-gray-100 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] hero-float">
+                            <div className="rounded-[1.5rem] overflow-hidden relative group">
+                                <div className="absolute inset-0 bg-black/5 mix-blend-overlay group-hover:opacity-0 transition-opacity duration-500 z-10 pointer-events-none" />
+                                <img
+                                    src="https://www.operatingmedia.com/wp-content/uploads/2025/09/WhatsApp-Image-2025-09-13-at-15.04.48-1-1.png"
+                                    alt="SEO Course Mumbai"
+                                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                />
+                            </div>
+
+                            <div className="px-2 py-6 grid grid-cols-3 divide-x divide-gray-100">
+                                {[{ v: '15+', l: 'Topics' }, { v: '20+', l: 'Tools' }, { v: 'Max 10', l: 'Students' }].map((s, i) => (
+                                    <div key={i} className="flex flex-col items-center">
+                                        <span className="font-black text-2xl text-[#0f172a] leading-none mb-1">{s.v}</span>
+                                        <span className="font-bold text-[10px] text-[#2563eb] uppercase tracking-widest">{s.l}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="px-3 pb-4 space-y-2">
+                                {[
+                                    { icon: <Globe size={14} />, label: 'Branches', value: 'Andheri & Borivali' },
+                                    { icon: <Zap size={14} />, label: 'Mode', value: 'Classroom / Online' },
+                                    { icon: <Users size={14} />, label: 'Batches', value: 'Weekdays & Weekends' },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-gray-50 border border-gray-100">
+                                        <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center text-[#2563eb]">
+                                            {item.icon}
+                                        </div>
+                                        <span className="text-[12px] font-bold text-gray-400 uppercase tracking-wide">{item.label}:</span>
+                                        <span className="text-[13px] font-black text-[#0f172a]">{item.value}</span>
+                                    </div>
+                                ))}
+                                <Link to="/contact" className="block pt-1">
+                                    <button className="group w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#ECAB00] text-white font-black text-[14px] hover:bg-[#0f172a] transition-all duration-300 hover:shadow-lg">
+                                        Enroll Now — ₹9,000
+                                        <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <div className="absolute -bottom-6 -left-6 z-20 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-gray-100 float-anim-1">
+                            <div className="flex items-center gap-3">
+                                <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-[#2563eb]">
+                                    <ShieldCheck size={20} />
+                                </div>
+                                <div>
+                                    <p className="font-bold text-sm text-[#0f172a] leading-tight">Google Certified</p>
+                                    <p className="font-medium text-xs text-gray-500">Industry Recognised</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="absolute -top-6 -right-6 z-20 bg-[#ECAB00] p-4 rounded-2xl shadow-[0_15px_30px_-10px_rgba(236,171,0,0.4)] float-anim-2">
+                            <div className="flex items-center gap-3">
+                                <Search size={24} className="text-white" />
+                                <div>
+                                    <p className="font-bold text-sm text-white leading-tight">₹9,000 Only</p>
+                                    <p className="font-medium text-xs text-white/90">Limited Seats</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* QUICK STATS STRIP */}
+            <div className="relative z-20 mx-6 lg:mx-14 max-w-[1400px] xl:mx-auto py-10 md:py-[50px] lg:py-[60px]">
+                <div className="bg-[#0f172a] rounded-2xl shadow-xl p-6 lg:p-8 flex flex-wrap lg:flex-nowrap justify-between gap-6 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-600/20">
+                    {[
+                        { icon: <Globe size={20} />, title: "Andheri & Borivali", sub: "On-Campus Training" },
+                        { icon: <TrendingUp size={20} />, title: "On-Page & Off-Page SEO", sub: "Practical Hands-On Training" },
+                        { icon: <ShieldCheck size={20} />, title: "Google Certification", sub: "Industry Recognised" },
+                        { icon: <Users size={20} />, title: "Max 10 Students", sub: "Personalised Batches" },
+                    ].map((s, i) => (
+                        <div key={i} className="flex items-center gap-4 flex-1 min-w-[200px]">
+                            <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
+                                {s.icon}
+                            </div>
+                            <div>
+                                <p className="font-bold text-[15px] text-white">{s.title}</p>
+                                <p className="font-medium text-[13px] text-blue-100">{s.sub}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <style>{`
+        .hero-float { animation: floatImage 6s ease-in-out infinite; }
+        .float-anim-1 { animation: floatBadge 5s ease-in-out infinite; animation-delay: 1s; }
+        .float-anim-2 { animation: floatBadge 6s ease-in-out infinite; animation-delay: 2.5s; }
+        .animate-pulse-slow { animation: pulseGlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .ticker-fade { animation: tickerFade 0.4s ease-in-out; }
+
+        @keyframes floatImage {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes floatBadge {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        @keyframes tickerFade {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+        </section>
+    );
+}

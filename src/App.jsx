@@ -29,6 +29,7 @@ import PayPerClick from './pages/PayPerClick/PayPerClick.jsx';
 import GoogleAnalytics from './pages/GoogleAnalytics/GoogleAnalytics.jsx';
 import WordPress from './pages/WordPress/WordPress.jsx';
 import SocialMediaOptimization from './pages/SocialMediaOptimization/SocialMediaOptimization.jsx';
+import SearchEngineOptimization from './pages/SearchEngineOptimization/SearchEngineOptimization.jsx';
 
 
 
@@ -48,6 +49,7 @@ function App() {
         <Route path="/courses/google-analytics-course/" element={<GoogleAnalytics />} />
         <Route path="/courses/wordpress-development-course/" element={<WordPress />} />
         <Route path="/courses/social-media-optimization-course/" element={<SocialMediaOptimization />} />
+        <Route path="/courses/search-engine-optimization-course/" element={<SearchEngineOptimization />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
         <Route path="/about/testimonials" element={<TestimonialsPage />} />
