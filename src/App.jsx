@@ -25,6 +25,7 @@ import CaseStudiesPage from './pages/CaseStudiesPage/CaseStudiesPage.jsx';
 import UpcomingBatches from './pages/UpcomingBatches/UpcomingBatches.jsx'
 import Faq from './pages/Faq/Faq.jsx'
 import Gallery from './pages/Gallery/Gallery.jsx'
+import PayPerClick from './pages/PayPerClick/PayPerClick.jsx';
 
 
 
@@ -40,6 +41,7 @@ function App() {
         <Route path="/courses/masters-program-in-digital-marketing/" element={<MastersProgram />} />
         <Route path="/courses/advance-diploma-in-digital-marketing/" element={<AdvanceDiploma />} />
         <Route path="/courses/diploma-in-digital-marketing/" element={<DiplomaPage />} />
+        <Route path="/courses/pay-per-click-course/" element={<PayPerClick />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
         <Route path="/about/testimonials" element={<TestimonialsPage />} />

@@ -107,7 +107,7 @@ const Navbar = () => {
                           className="absolute left-full top-0 ml-2 w-72 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                         >
                           {[
-                            { label: "Pay Per Click Course", to: "/ppc" },
+                            { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
                             { label: "Google Analytics Course (GA4)", to: "/ga4" },
                             { label: "WordPress Development Course", to: "/wordpress" },
                             { label: "Social Media Optimization Course", to: "/smo" },
@@ -259,7 +259,7 @@ const Navbar = () => {
                 ))}
                 <MobileAccordion label="Certification Courses" color="#ECAB00" sub>
                   {[
-                    { label: "Pay Per Click Course", to: "/ppc" },
+                    { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
                     { label: "Google Analytics Course (GA4)", to: "/ga4" },
                     { label: "WordPress Development Course", to: "/wordpress" },
                     { label: "Social Media Optimization Course", to: "/smo" },
