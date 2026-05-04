@@ -164,10 +164,12 @@ function CourseCard({ course, inView, index }) {
         {/* ── Buttons Section ── */}
         <div className="flex flex-col xl:flex-row gap-3 w-full mt-auto">
           {/* Primary Button */}
+          <a href="/contact">
           <button className="flex-1 w-full flex items-center justify-center gap-1.5 py-3.5 px-3 rounded-xl bg-[#FFB800] hover:bg-[#F5A500] text-gray-900 font-extrabold text-[14px] transition-all duration-300 active:scale-95 shadow-sm group/btn">
             <span className="whitespace-nowrap">Book Free Demo</span>
             <ArrowRight />
           </button>
+          </a>
           
           {/* Secondary Button */}
           <button className="flex-1 w-full flex items-center justify-center gap-1.5 py-3.5 px-3 rounded-xl bg-white border-2 border-[#FFB800] text-[#D97706] hover:bg-[#FFFBEB] font-extrabold text-[14px] transition-all duration-300 active:scale-95 group/btn">

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { User, Mail, ChevronDown, ArrowRight } from 'lucide-react';
 
 export default function CounselorCTA() {
-  
+
   // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
@@ -31,7 +31,7 @@ export default function CounselorCTA() {
 
   return (
     <section className="relative w-full bg-[#0A0F1C] overflow-hidden z-10 selection:bg-[#ecab00] selection:text-[#0A0F1C]" style={{ fontFamily: "'Satoshi', sans-serif" }}>
-      
+
       {/* ── Background Premium Effects ── */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#ecab00]/10 blur-[150px] pointer-events-none animate-pulse-slow" />
@@ -45,7 +45,7 @@ export default function CounselorCTA() {
 
         {/* ════ LEFT SIDE: FORM & CONTENT ════ */}
         <div className="w-full lg:w-[55%] flex flex-col justify-center pb-12 lg:pb-20 z-20">
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -66,21 +66,21 @@ export default function CounselorCTA() {
             </h2>
 
             {/* ── Form Container ── */}
-            <motion.form 
+            <motion.form
               variants={containerVariants}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
               className="flex flex-col gap-5 w-full max-w-xl"
             >
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 {/* Name Input */}
                 <motion.div variants={itemVariants} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#ecab00]/40 focus-within:border-[#ecab00] focus-within:bg-white/10 transition-all rounded-2xl px-5 py-4 flex items-center gap-3 group">
                   <User size={18} className="text-white/40 group-focus-within:text-[#ecab00] transition-colors" />
-                  <input 
-                    type="text" 
-                    placeholder="Enter Full Name" 
+                  <input
+                    type="text"
+                    placeholder="Enter Full Name"
                     className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                     required
                   />
@@ -91,9 +91,9 @@ export default function CounselorCTA() {
                   <span className="flex items-center gap-1.5 text-white/60 text-[15px] font-medium border-r border-white/10 pr-3 shrink-0 group-focus-within:text-white transition-colors">
                     🇮🇳 +91
                   </span>
-                  <input 
-                    type="tel" 
-                    placeholder="Phone Number" 
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
                     className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                     required
                   />
@@ -102,9 +102,9 @@ export default function CounselorCTA() {
                 {/* Email Input */}
                 <motion.div variants={itemVariants} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#ecab00]/40 focus-within:border-[#ecab00] focus-within:bg-white/10 transition-all rounded-2xl px-5 py-4 flex items-center gap-3 group">
                   <Mail size={18} className="text-white/40 group-focus-within:text-[#ecab00] transition-colors" />
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
+                  <input
+                    type="email"
+                    placeholder="Email Address"
                     className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                     required
                   />
@@ -135,14 +135,16 @@ export default function CounselorCTA() {
 
               {/* Submit Button */}
               <motion.div variants={itemVariants} className="mt-4">
-                <button
-                  type="button"
-                  className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden"
-                >
-                  <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
-                  <span className="relative z-10">Request A Quote</span>
-                  <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                </button>
+                <a href="/contact">
+                  <button
+                    type="button"
+                    className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden"
+                  >
+                    <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
+                    <span className="relative z-10">Request A Quote</span>
+                    <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </a>
               </motion.div>
 
             </motion.form>
@@ -166,16 +168,16 @@ export default function CounselorCTA() {
               // Uses width-full so it scales according to the wrapper size
               className="w-full h-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-20 relative pointer-events-auto"
             />
-            
+
             {/* Logo applied to shirt digitally (Uses Percentage width so it scales WITH the girl) */}
             <div className="absolute top-[48%] left-[45%] lg:top-[50%] lg:left-[45%] -translate-x-1/2 -translate-y-1/2 opacity-80 mix-blend-multiply pointer-events-none transform -rotate-3 z-30">
-              <img 
-                src="https://www.operatingmedia.com/wp-content/uploads/2023/07/OM-Logo.png" 
-                alt="" 
+              <img
+                src="https://www.operatingmedia.com/wp-content/uploads/2023/07/OM-Logo.png"
+                alt=""
                 className="w-[22%] grayscale-[20%] contrast-125"
               />
             </div>
-            
+
             {/* Dark Glow behind image to make it pop */}
             <div className="absolute bottom-0 right-0 w-full h-[50%] bg-gradient-to-t from-[#0A0F1C] to-transparent z-10 pointer-events-none" />
           </motion.div>

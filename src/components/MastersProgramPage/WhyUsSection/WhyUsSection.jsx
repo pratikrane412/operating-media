@@ -162,10 +162,12 @@ export default function WhyUsSection() {
             </button>
 
             {/* Secondary Button (Outline) */}
-            <button className="group flex items-center justify-center gap-2 font-bold text-white px-8 py-4 rounded-xl bg-transparent border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
-              Book Free Demo 
-              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
+            <a href="/contact">
+              <button className="group flex items-center justify-center gap-2 font-bold text-white px-8 py-4 rounded-xl bg-transparent border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
+                Book Free Demo 
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </a>
           </div>
         </motion.div>
 

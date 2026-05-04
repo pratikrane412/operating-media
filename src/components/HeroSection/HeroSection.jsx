@@ -71,6 +71,7 @@ export default function HeroUltra() {
           <div className={`flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto transition-all duration-700 delay-600 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             
             {/* Primary Button (Glow & Arrow Move) */}
+            <a href="/contact">
             <button className="group relative w-full sm:w-auto bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_#ECAB00] hover:-translate-y-1 active:scale-95">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -78,6 +79,7 @@ export default function HeroUltra() {
                 <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </span>
             </button>
+          </a>
 
             {/* Secondary Button (Sweep Fill) */}
             <button className="group relative w-full sm:w-auto border-2 border-[#2563eb] text-[#2563eb] px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 active:scale-95">

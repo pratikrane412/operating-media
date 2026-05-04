@@ -202,12 +202,14 @@ export default function EventsAndBatches() {
             <div className="flex flex-col sm:flex-row shrink-0 gap-4 w-full lg:w-auto">
               
               {/* Primary Button */}
-              <button className="group relative w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-[#ecab00] px-8 py-4 shadow-[0_10px_30px_rgba(236,171,0,0.4)] hover:shadow-[0_15px_40px_rgba(236,171,0,0.6)] active:scale-95 transition-all duration-300 overflow-hidden cursor-pointer">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shine" />
-                <Rocket size={18} className="text-[#0f172a] relative z-10" />
-                <span className="font-black text-[16px] text-[#0f172a] relative z-10">Book a Demo</span>
-                <ArrowUpRight size={18} className="text-[#0f172a] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform relative z-10" />
-              </button>
+              <a href="/contact">
+                <button className="group relative w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl bg-[#ecab00] px-8 py-4 shadow-[0_10px_30px_rgba(236,171,0,0.4)] hover:shadow-[0_15px_40px_rgba(236,171,0,0.6)] active:scale-95 transition-all duration-300 overflow-hidden cursor-pointer">
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-shine" />
+                  <Rocket size={18} className="text-[#0f172a] relative z-10" />
+                  <span className="font-black text-[16px] text-[#0f172a] relative z-10">Book a Demo</span>
+                  <ArrowUpRight size={18} className="text-[#0f172a] group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform relative z-10" />
+                </button>
+              </a>
               
               {/* Secondary Button */}
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border-2 border-white/20 px-8 py-4 text-white hover:border-[#ecab00] hover:bg-[#ecab00]/10 active:scale-95 transition-all duration-300 font-bold text-[16px] cursor-pointer">

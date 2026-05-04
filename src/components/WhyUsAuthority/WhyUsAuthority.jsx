@@ -190,10 +190,12 @@ export default function WhyUsAuthority() {
               {...fadeUp(0.6)}
             >
               {/* Primary Button */}
-              <button className="w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 h-[54px] rounded-xl bg-[#0f172a] text-white font-bold text-[15px] transition-all duration-300 hover:bg-[#ecab00] hover:text-[#0f172a] hover:shadow-[0_10px_20px_-10px_rgba(236,171,0,0.6)] active:scale-95 overflow-hidden">
-                <span className="relative z-10">Explore Courses</span>
-                <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <a href="/courses/masters-program-in-digital-marketing/">
+                <button className="w-full sm:w-auto group relative flex items-center justify-center gap-2 px-8 h-[54px] rounded-xl bg-[#0f172a] text-white font-bold text-[15px] transition-all duration-300 hover:bg-[#ecab00] hover:text-[#0f172a] hover:shadow-[0_10px_20px_-10px_rgba(236,171,0,0.6)] active:scale-95 overflow-hidden">
+                  <span className="relative z-10">Explore Courses</span>
+                  <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </a>
 
               {/* Premium ISO Indicator */}
               <div className="flex items-center gap-3 text-gray-500 bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-100">

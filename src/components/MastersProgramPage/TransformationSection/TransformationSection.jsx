@@ -478,13 +478,14 @@ export default function TransformationSection() {
 
               {/* ── CTA button ── */}
               <div className="px-6 pb-8">
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="group w-full flex items-center justify-center gap-3 py-4 rounded-xl cursor-pointer bg-[#ECAB00] hover:bg-[#0f172a] text-[#0f172a] hover:text-white text-[16px] font-black shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] hover:shadow-2xl transition-all duration-300"
-                >
-                  Book Free Demo Class
-                  <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" aria-hidden="true" />
-                </button>
+                <a href="/contact">
+                  <button
+                    className="group w-full flex items-center justify-center gap-3 py-4 rounded-xl cursor-pointer bg-[#ECAB00] hover:bg-[#0f172a] text-[#0f172a] hover:text-white text-[16px] font-black shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] hover:shadow-2xl transition-all duration-300"
+                  >
+                    Book Free Demo Class
+                    <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" aria-hidden="true" />
+                  </button>
+                </a>
 
                 <p className="text-[13px] font-medium text-gray-400 text-center mt-4">
                   No commitment &middot; Free of charge

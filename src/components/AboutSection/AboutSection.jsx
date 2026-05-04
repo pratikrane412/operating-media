@@ -193,11 +193,13 @@ export default function AboutSectionPremium() {
 
             {/* CTAs */}
             <div className={`flex flex-col sm:flex-row items-center gap-4 transition-all duration-700 delay-300 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+              <a href="/courses/masters-program-in-digital-marketing/">
               <button className="group relative w-full sm:w-auto h-[56px] px-8 rounded-2xl bg-[#ecab00] text-white font-bold text-[16px] overflow-hidden shadow-[0_8px_20px_-6px_rgba(236,171,0,0.6)] hover:-translate-y-1 hover:shadow-[0_15px_30px_-10px_rgba(236,171,0,0.8)] transition-all active:scale-[0.98] flex items-center justify-center gap-3">
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shine" />
                 <span className="relative z-10 text-[#0f172a] drop-shadow-sm">Explore Courses</span>
                 <span className="relative z-10 text-[#0f172a] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><IconArrow /></span>
               </button>
+              </a>
 
               <button className="group w-full sm:w-auto h-[56px] px-8 rounded-2xl bg-white border-2 border-gray-200 text-[#0f172a] font-bold text-[16px] hover:border-[#ecab00] hover:bg-[#ecab00]/5 transition-all active:scale-[0.98] flex items-center justify-center gap-3 shadow-sm">
                 <span className="w-8 h-8 rounded-full flex items-center justify-center bg-[#ecab00]/10 text-[#ecab00] group-hover:scale-110 group-hover:bg-[#ecab00] group-hover:text-white transition-all">

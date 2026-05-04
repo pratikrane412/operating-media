@@ -77,11 +77,13 @@ export default function CounselorCTA() {
                             </motion.div>
 
                             <motion.div variants={itemVariants} className="mt-4">
-                                <button type="button" className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden">
-                                    <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
-                                    <span className="relative z-10">Request A Quote</span>
-                                    <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                <a href="/contact">
+                                    <button type="button" className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden">
+                                        <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
+                                        <span className="relative z-10">Request A Quote</span>
+                                        <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                                    </button>
+                                </a>
                             </motion.div>
                         </motion.form>
                     </motion.div>

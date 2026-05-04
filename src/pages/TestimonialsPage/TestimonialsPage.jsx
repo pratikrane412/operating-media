@@ -572,7 +572,7 @@ function CTABanner() {
                 </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0, position: "relative", zIndex: 1 }}>
-                <a href="#" style={{
+                <a href="/contact" style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10,
                     background: "#ECAB00", color: "#0f172a",
                     fontWeight: 900, fontSize: 14,
