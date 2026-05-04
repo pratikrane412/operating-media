@@ -15,13 +15,13 @@ const ZAHID_IMAGE = "/images/zahid.png";
 
 // Add up to 8 mentors here.
 const MENTORS = [
-  { name: "Shraddha Rane", role: "Digital Marketing Expert", img: SHRADDHA_IMAGE },
   { name: "Harsh Pareek", role: "SEO & Growth Strategist", img: DEFAULT_IMAGE },
+  { name: "Shraddha Rane", role: "Digital Marketing Expert", img: SHRADDHA_IMAGE }, 
+  { name: "Neelkamal Mukharjee", role: "E-Commerce Expert", img: NEEL_IMAGE },
+  { name: "Rahul Shinde", role: "Analytics Lead", img: RAHUL_IMAGE },
   { name: "Hemant Mane", role: "Performance Marketing Lead", img: HEMANT_IMAGE },
   { name: "Zahid Shaikh", role: "Social Media Specialist", img: ZAHID_IMAGE },
   { name: "Rahul Singh", role: "Content Strategy Head", img: RAHULS_IMAGE },
-  { name: "Neelkamal Mukharjee", role: "E-Commerce Expert", img: NEEL_IMAGE },
-  { name: "Rahul Shinde", role: "Analytics Lead", img: RAHUL_IMAGE },
   { name: "Vikram Kamble", role: "Brand Manager", img: VIKRAM_IMAGE },
 ];
 

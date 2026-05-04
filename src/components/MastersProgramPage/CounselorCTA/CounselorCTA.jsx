@@ -37,10 +37,7 @@ export default function CounselorCTA() {
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#ecab00]/10 blur-[150px] pointer-events-none animate-pulse-slow" />
       <div className="absolute bottom-[-10%] right-[10%] w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[150px] pointer-events-none" />
 
-      {/* 
-        ── MAIN LAYOUT ── 
-        Changed to lg:items-end so the girl rests perfectly at the bottom
-      */}
+      {/* ── MAIN LAYOUT ── */}
       <div className="w-full max-w-[1300px] mx-auto px-6 sm:px-10 lg:px-12 pt-14 lg:pt-20 pb-0 flex flex-col lg:flex-row lg:items-end justify-between relative z-10">
 
         {/* ════ LEFT SIDE: FORM & CONTENT ════ */}
@@ -151,25 +148,23 @@ export default function CounselorCTA() {
           </motion.div>
         </div>
 
-        {/* ════ RIGHT SIDE: GIRL IMAGE (SIZE INCREASED) ════ */}
-        {/* Height restriction removed. Image wrapper made wider (120% to 140%) so she breaks out of the grid properly */}
-        <div className="w-full lg:w-[45%] flex items-end justify-center lg:justify-end z-10 pt-10 lg:pt-0 pointer-events-none">
+        {/* ════ RIGHT SIDE: GIRL IMAGE (HEIGHT INCREASED) ════ */}
+        <div className="w-full lg:w-[50%] flex items-end justify-center lg:justify-end z-10 pt-10 lg:pt-0 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
             viewport={{ once: true }}
-            // Making the width 130% on desktop to scale the image UP
             className="relative w-[90%] sm:w-[75%] lg:w-[130%] xl:w-[140%] flex items-end justify-center lg:justify-end origin-bottom lg:translate-x-8 xl:translate-x-12"
           >
             <img
               src="/images/op-img.png"
               alt="Student Counselor"
-              // Uses width-full so it scales according to the wrapper size
               className="w-full h-auto object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-20 relative pointer-events-auto"
+              style={{ transform: 'scale(1.4)', transformOrigin: 'bottom center' }}
             />
 
-            {/* Logo applied to shirt digitally (Uses Percentage width so it scales WITH the girl) */}
+            {/* Logo applied to shirt digitally */}
             <div className="absolute top-[48%] left-[45%] lg:top-[50%] lg:left-[45%] -translate-x-1/2 -translate-y-1/2 opacity-80 mix-blend-multiply pointer-events-none transform -rotate-3 z-30">
               <img
                 src="https://www.operatingmedia.com/wp-content/uploads/2023/07/OM-Logo.png"
@@ -178,7 +173,7 @@ export default function CounselorCTA() {
               />
             </div>
 
-            {/* Dark Glow behind image to make it pop */}
+            {/* Dark Glow behind image */}
             <div className="absolute bottom-0 right-0 w-full h-[50%] bg-gradient-to-t from-[#0A0F1C] to-transparent z-10 pointer-events-none" />
           </motion.div>
         </div>
