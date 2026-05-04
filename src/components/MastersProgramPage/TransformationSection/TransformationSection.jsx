@@ -320,7 +320,7 @@ export default function TransformationSection() {
     >
       {/* ── Background Grid & Glow (Matches previous sections) ── */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
-      
+
       <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[100px] animate-pulse-slow pointer-events-none z-0" />
       <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
 
@@ -328,7 +328,7 @@ export default function TransformationSection() {
         <div className="grid lg:grid-cols-[1fr_450px] gap-12 lg:gap-16 items-start">
 
           {/* ════════════════ LEFT COLUMN ════════════════ */}
-          <div>
+          <div className="flex flex-col">
 
             {/* Eyebrow Badge */}
             <motion.div
@@ -336,7 +336,7 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6 w-fit"
             >
               <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
               <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
@@ -345,22 +345,21 @@ export default function TransformationSection() {
               </span>
             </motion.div>
 
-            {/* Main Heading (46px Max) */}
+            {/* Main Heading — no forced <br/>, let text flow naturally */}
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="font-black text-[#0f172a] mb-6 leading-[1.1] tracking-tight text-[32px] md:text-[40px] lg:text-[46px]"
+              className="font-black text-[#0f172a] mb-5 leading-[1.1] tracking-tight text-[28px] md:text-[36px] lg:text-[40px]"
             >
-              From Beginner to<br />
+              Transform from a Beginner to a{' '}
               <span className="relative inline-block text-[#ECAB00]">
-                Digital Manager
-                {/* Underline effect */}
+                Digital Marketing Manager
                 <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
                 </svg>
-              </span><br />
+              </span>{' '}
               in 7 Months.
             </motion.h2>
 
@@ -370,10 +369,10 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.14 }}
-              className="text-[16px] md:text-[18px] font-medium text-gray-600 max-w-[500px] mb-10 leading-relaxed"
+              className="text-[15px] md:text-[16px] font-medium text-gray-600 max-w-[560px] mb-8 leading-relaxed"
             >
               This isn&apos;t a theory course — it&apos;s a{' '}
-              <span className="font-bold text-[#0f172a]">simulated agency experience</span>. You&apos;ll build, launch, and manage real digital campaigns before you ever graduate.
+              <span className="font-bold text-[#0f172a]">simulated agency experience</span>. Unlike traditional institutes that teach you definitions, Operating Media puts you in the driver's seat. You will build an e-commerce store from scratch, run live lead generation campaigns with actual budgets, and master the latest Generative AI tools (ChatGPT, Midjourney) to automate your workflow. 
             </motion.p>
 
             {/* Feature pills */}
@@ -382,7 +381,7 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap gap-3 mb-14"
+              className="flex flex-wrap gap-3 mb-8"
             >
               {PILLS.map((pill) => (
                 <FeaturePill key={pill.text} iconName={pill.iconName} text={pill.text} />
@@ -395,14 +394,14 @@ export default function TransformationSection() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.25 }}
-              className="flex items-center gap-3 font-bold text-[11px] text-[#ECAB00] uppercase tracking-[0.3em] mb-6"
+              className="flex items-center gap-3 font-bold text-[11px] text-[#ECAB00] uppercase tracking-[0.3em] mb-5"
             >
               <span className="h-[2px] w-8 bg-[#ECAB00]" />
               What You&apos;ll Walk Away With
             </motion.p>
 
             {/* Outcome cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 lg:mb-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {OUTCOMES.map((o) => (
                 <OutcomeCard key={o.title} {...o} />
               ))}
@@ -499,7 +498,7 @@ export default function TransformationSection() {
       </div>
 
       <BookDemoModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      
+
       {/* Keyframe additions */}
       <style>{`
         .animate-pulse-slow { animation: pulseGlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }

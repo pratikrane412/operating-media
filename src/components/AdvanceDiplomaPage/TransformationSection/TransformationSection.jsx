@@ -247,8 +247,8 @@ export default function TransformationSection() {
                         </motion.h2>
 
                         <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.14 }} className="text-[16px] md:text-[18px] font-medium text-gray-600 max-w-[500px] mb-10 leading-relaxed">
-                            This isn&apos;t a theory course — it&apos;s a{' '}
-                            <span className="font-bold text-[#0f172a]">revenue-focused execution program</span>. You&apos;ll master the Big 3 — Google Ads, Social Media &amp; SEO — and be job-ready before you graduate.
+                            Not everyone needs a 12-month master&apos;s degree. The Advanced Diploma is designed for{' '}
+                            <span className="font-bold text-[#0f172a]">action</span>. We have stripped away the theory and focused purely on the tools that generate revenue — you will learn how to rank websites (SEO), run profitable ads (PPC), and manage social media communities.
                         </motion.p>
 
                         <motion.div initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }} className="flex flex-wrap gap-3 mb-14">

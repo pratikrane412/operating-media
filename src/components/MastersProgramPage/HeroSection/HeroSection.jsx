@@ -72,13 +72,13 @@ export default function HeroSection() {
                     <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
                   </svg>
                 </span>
-                <span className="text-[#2563eb]"> &amp; AI.</span>
+                <span className="text-[#2563eb]"> &amp; AI-Driven Marketing.</span>
               </div>
             </h1>
 
             {/* Subtext */}
             <p className={`text-[16px] md:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[500px] mb-10 transition-all duration-700 delay-400 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              Don't just watch videos. Manage <span className="font-bold text-[#ECAB00]">real money</span> on Google &amp; Meta Ads — the only course in Mumbai where we fund your campaigns.
+              Don’t just watch videos. Manage <span className="font-bold text-[#ECAB00]">real money</span> on Google &amp; Meta Ads — The only course in Mumbai where we fund your ad campaigns for practical learning.
             </p>
 
             {/* Buttons */}

@@ -74,7 +74,7 @@ export default function HeroSection() {
 
                         {/* Subtext */}
                         <p className={`text-[16px] md:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[500px] mb-10 transition-all duration-700 delay-400 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                            The fast-track program for students &amp; business owners. Master the <span className="font-bold text-[#ECAB00]">'Big 3'</span> revenue drivers: Google Ads, Social Media &amp; SEO — no fluff, just execution.
+                            The fast-track program for students &amp; business owners. Master the <span className="font-bold text-[#ECAB00]">'Big 3'</span> revenue drivers: Google Ads, Social Media, and SEO along with 25 other modules. No fluff, just execution.
                         </p>
 
                         {/* Buttons */}
