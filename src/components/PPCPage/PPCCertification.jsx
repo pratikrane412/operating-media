@@ -1,190 +1,148 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ChevronDown, Download, Search, Youtube } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ShieldCheck, Award, BookOpen, BarChart2, Users2, MessageSquare, Calendar, ClipboardCheck } from 'lucide-react';
 
-const semTopics = [
-    "Understanding Google Ads",
-    "Different types of campaigns",
-    "Setting right targeting",
-    "Budget and bid optimization",
-    "Creating ads copies",
-    "Selecting right keywords",
-    "Campaign analysis and optimization",
-    "Creating ad extensions",
-    "Conversion tracking",
-    "Quality score optimization",
-    "Automated rules",
-    "Analysis and optimization",
-    "PPC reporting",
-    "Overview of SEM and its importance",
-    "Difference between SEO and SEM",
-    "Tools and techniques for keyword research",
-    "Selecting high-converting keywords",
-    "Setting up a Google Ads account",
-    "Understanding campaign structure (Campaigns, Ad Groups, Ads)",
-    "Writing compelling ad copy",
-    "Best practices for ad extensions",
-    "Manual vs. automated bidding",
-    "Choosing the right bidding strategy",
-    "Factors affecting Quality Score",
-    "Improving Ad Rank",
-    "Analyzing performance metrics (CTR, CPC, CPA)",
-    "A/B testing and ad optimization",
-    "Setting up remarketing campaigns",
-    "Designing effective display ads",
-    "Allocating and adjusting budgets",
-    "Using advanced features (Dynamic Search Ads, Ad Customizers)",
-    "Integrating SEM with other marketing channels",
+const globalPartners = [
+    { name: "Google Ads", url: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Google_Ads_logo.svg" },
+    { name: "Meta Blueprint", url: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" },
+    { name: "HubSpot", url: "https://upload.wikimedia.org/wikipedia/commons/3/3f/HubSpot_Logo.svg" },
+    { name: "Microsoft Ads", url: "https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" },
 ];
 
-const youtubeTopics = [
-    "YouTube Channel Creation & Setup",
-    "Setting Up Google Analytics",
-    "Linking YouTube Channel To Google Accounts",
-    "Installing Google Remarketing Pixel",
-    "Conversion Tracking — Track Your Funnel Correctly",
-    "Video Editing & YouTube Optimization",
-    "Growing Your Organic YouTube Reach with Paid Ads",
-    "Targeting & Audiences Deep Dive",
-    "Placement Targeting",
-    "Keyword Research for YouTube",
-    "Understanding Your Ideal Customer",
-    "Perfect Ad Formula",
-    "Creating Awesome Thumbnails",
-    "Where To Find Great Royalty-Free Audio",
-    "How To Create AI Style Video Ads",
-    "Setting up Retargeting Ads on YouTube",
-    "Setting Up An Audiences Campaign",
-    "Bidding Tips for YouTube",
-    "Scaling Up Your YouTube Campaigns",
-    "YouTube Ads For Local Businesses",
-    "Frequency Capping & Moments",
-    "Campaign Naming & Structure",
-    "Channel Audit",
-    "How To Spy On ALL Your Competitors' YouTube Ads",
+const lmsFeatures = [
+    { icon: <BarChart2 size={20} />, title: "Track Your Progress", desc: "Monitor your course completion, module status, and performance analytics." },
+    { icon: <Users2 size={20} />, title: "Student Forum", desc: "Participate in discussions, ask questions, and connect with peers." },
+    { icon: <BookOpen size={20} />, title: "Resource Library", desc: "Download notes, view reference materials, and stay updated with the latest digital marketing content." },
+    { icon: <MessageSquare size={20} />, title: "Feedback Section", desc: "Share your thoughts, reviews, and suggestions directly through the platform." },
+    { icon: <Calendar size={20} />, title: "Batch Schedule", desc: "View upcoming class schedules and batch start dates in advance." },
+    { icon: <ClipboardCheck size={20} />, title: "Attendance Tracking", desc: "Easily check your attendance records for each session." },
 ];
 
-const modules = [
-    {
-        id: "01",
-        title: "Search Engine Marketing (SEM)",
-        icon: <Search size={20} />,
-        desc: "Explore paid advertising on search engines like Google through SEM campaigns to increase website visibility and drive targeted traffic.",
-        topics: semTopics,
-    },
-    {
-        id: "02",
-        title: "YouTube Advertising",
-        icon: <Youtube size={20} />,
-        desc: "Understand how to leverage YouTube advertising to reach a vast audience through video content.",
-        topics: youtubeTopics,
-    },
-];
-
-function ModuleCard({ data, isOpen, onClick }) {
+export default function PPCCertification() {
     return (
-        <div className={`relative w-full rounded-2xl border transition-all duration-300 overflow-hidden bg-white ${isOpen ? 'border-[#ECAB00] shadow-[0_15px_30px_-10px_rgba(236,171,0,0.15)]' : 'border-gray-200 hover:border-[#ECAB00]/40 hover:shadow-md'}`}>
-            <button onClick={onClick} className="w-full flex items-center justify-between p-5 md:px-6 md:py-6 text-left focus:outline-none">
-                <div className="flex items-center gap-4 md:gap-5 w-full pr-4">
-                    <span className={`shrink-0 flex items-center justify-center w-12 h-12 rounded-xl text-[15px] font-black tracking-wide transition-colors duration-300 ${isOpen ? 'bg-[#ECAB00] text-[#0f172a] shadow-md' : 'bg-amber-50/70 text-[#ECAB00]'}`}>
-                        {data.icon}
-                    </span>
-                    <div className="flex flex-col">
-                        <div className="flex items-center gap-3 mb-1">
-                            <span className={`text-[11px] font-black uppercase tracking-widest ${isOpen ? 'text-[#ECAB00]' : 'text-gray-400'}`}>Module {data.id}</span>
-                        </div>
-                        <h3 className={`text-[18px] md:text-[21px] font-black leading-[1.25] transition-colors duration-300 ${isOpen ? 'text-[#ECAB00]' : 'text-[#0f172a]'}`}>
-                            {data.title}
-                        </h3>
-                    </div>
-                </div>
-                <div className="flex items-center gap-3 shrink-0">
-                    <span className="hidden md:flex items-center justify-center text-[13px] font-bold text-gray-500 bg-gray-50 border border-gray-100 px-3.5 py-1.5 rounded-full">
-                        {data.topics.length} topics
-                    </span>
-                    <div className={`w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${isOpen ? 'bg-[#ECAB00] text-[#0f172a]' : 'bg-gray-100 text-gray-400'}`}>
-                        <ChevronDown size={18} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }} />
-                    </div>
-                </div>
-            </button>
-
-            <AnimatePresence initial={false}>
-                {isOpen && (
-                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: "easeInOut" }} className="overflow-hidden">
-                        <div className="px-5 md:px-6 pb-6 pt-3 border-t border-gray-100">
-                            <p className="text-[15px] font-medium text-gray-500 mb-6 leading-relaxed">{data.desc}</p>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                                {data.topics.map((topic, i) => (
-                                    <li key={i} className="flex items-start gap-3">
-                                        <CheckCircle2 size={16} className="text-[#ECAB00] shrink-0 mt-0.5" />
-                                        <span className="text-[14px] font-medium text-gray-600 leading-snug">{topic}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-}
-
-export default function PPCSyllabus() {
-    const [openModules, setOpenModules] = useState([0]);
-
-    const toggleModule = (index) => {
-        if (openModules.includes(index)) {
-            setOpenModules(openModules.filter(i => i !== index));
-        } else {
-            setOpenModules([...openModules, index]);
-        }
-    };
-
-    return (
-        <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#fcfaf2] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-white overflow-hidden">
-            <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
-            <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[120px] pointer-events-none z-0" />
+        <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#0A0F1C] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-[#0A0F1C] overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none z-0" style={{ backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#ECAB00]/15 blur-[120px] pointer-events-none z-0" />
+            <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#2563eb]/15 blur-[120px] pointer-events-none z-0" />
 
             <div className="relative z-10 max-w-[1400px] mx-auto">
-                <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-100 mb-6">
-                        <span className="w-2 h-2 rounded-full bg-[#ECAB00] animate-ping absolute" />
-                        <span className="w-2 h-2 rounded-full bg-[#ECAB00] relative z-10" />
-                        <span className="font-bold text-[11px] md:text-xs text-[#ECAB00] uppercase tracking-[0.2em]">Google Ads Syllabus</span>
+
+                {/* --- CERTIFICATION --- */}
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20 lg:mb-28">
+                    <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2563eb]/15 border border-[#2563eb]/30 mb-6">
+                            <ShieldCheck size={16} className="text-[#3b82f6]" />
+                            <span className="font-bold text-[11px] text-[#3b82f6] uppercase tracking-[0.2em]">Industry Recognized</span>
+                        </div>
+                        <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-white leading-[1.1] tracking-tight mb-6">
+                            Certified by <br />
+                            <span className="relative inline-block text-[#ECAB00]">
+                                Operating Media.
+                                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                                </svg>
+                            </span>
+                        </h2>
+                        <div className="space-y-5 text-gray-300 text-[16px] md:text-[17px] font-medium leading-relaxed max-w-xl mb-10">
+                            <p>
+                                Upon completing the PPC course, you earn the Operating Media{' '}
+                                <span className="text-white font-bold">Google Ads Certification</span>{' '}
+                                — a credential highly regarded by digital agencies and top brands across India.
+                            </p>
+                            <p>
+                                Our curriculum prepares you for the{' '}
+                                <span className="text-white font-bold border-b-2 border-[#ECAB00]">Google Ads & YouTube Advertising exams</span>
+                                , making your profile stand out in every interview from Day 1.
+                            </p>
+                        </div>
+
+                        <div className="relative overflow-hidden bg-[#131B2F] rounded-[1.5rem] p-6 lg:p-8 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10">
+                            <div className="absolute top-[-50%] right-[-10%] w-[200px] h-[200px] bg-[#ECAB00]/20 rounded-full blur-[50px] pointer-events-none" />
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-5">
+                                    <Award className="text-[#ECAB00]" size={24} />
+                                    <p className="text-[12px] text-[#ECAB00] uppercase font-black tracking-[0.2em]">Preparation for Global Exams</p>
+                                </div>
+                                <div className="flex flex-wrap gap-3">
+                                    {globalPartners.map((partner, i) => (
+                                        <div key={i} className="flex items-center justify-center bg-white px-4 py-3 rounded-xl shadow-sm hover:shadow-[0_5px_15px_rgba(236,171,0,0.2)] transition-all duration-300 hover:-translate-y-1 group cursor-default" title={partner.name}>
+                                            <img src={partner.url} alt={partner.name} className="h-5 md:h-6 w-auto object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" loading="lazy" />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    {/* Floating Certificates */}
+                    <div className="relative flex justify-center lg:justify-end mt-12 lg:mt-0">
+                        <div className="absolute w-[400px] h-[400px] bg-[#ECAB00]/10 rounded-full blur-[80px] -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <div className="flex flex-col sm:flex-row gap-6 md:gap-8 relative z-10 w-full max-w-[600px]">
+                            <motion.div animate={{ y: [0, -15, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }} className="bg-white p-3 md:p-4 rounded-[1.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-white/10 w-full sm:w-1/2 z-20 group transform rotate-[-2deg] hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500">
+                                <div className="overflow-hidden rounded-xl border border-gray-100 bg-[#fdfdfd] p-1 shadow-inner relative">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#0A0F1C]/5 to-transparent pointer-events-none" />
+                                    <img src="https://www.operatingmedia.com/wp-content/uploads/2024/06/OM-Certificate-New-724x1024.png" alt="PPC Certificate" className="w-full h-auto object-cover rounded-lg" loading="lazy" />
+                                </div>
+                                <div className="mt-4 px-2 pb-2 text-center">
+                                    <p className="text-[10px] uppercase text-[#2563eb] font-bold tracking-[0.2em] mb-1">Outcome 01</p>
+                                    <p className="text-[#0f172a] text-[15px] font-black">PPC Certification</p>
+                                </div>
+                            </motion.div>
+                            <motion.div animate={{ y: [0, 15, 0] }} transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 }} className="bg-white p-3 md:p-4 rounded-[1.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border border-white/10 w-full sm:w-1/2 sm:mt-16 z-10 group transform rotate-[3deg] hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500">
+                                <div className="overflow-hidden rounded-xl border border-gray-100 bg-[#fdfdfd] p-1 shadow-inner relative">
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-[#ECAB00]/10 to-transparent pointer-events-none" />
+                                    <img src="https://www.operatingmedia.com/wp-content/uploads/2024/06/Om-Certificate-Masters-724x1024.png" alt="Google Certification" className="w-full h-auto object-cover rounded-lg" loading="lazy" />
+                                </div>
+                                <div className="mt-4 px-2 pb-2 text-center">
+                                    <p className="text-[10px] uppercase text-[#ECAB00] font-bold tracking-[0.2em] mb-1">Outcome 02</p>
+                                    <p className="text-[#0f172a] text-[15px] font-black">Google Certification</p>
+                                </div>
+                            </motion.div>
+                        </div>
                     </div>
-                    <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-6">
-                        Industry-Approved{' '}
-                        <span className="relative inline-block text-[#ECAB00]">
-                            Curriculum & 2 Modules
-                            <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
-                            </svg>
-                        </span>
-                    </h2>
-                    <p className="text-[16px] md:text-[18px] font-medium text-gray-600 leading-relaxed">
-                        From Google Ads fundamentals to advanced YouTube advertising — all execution-focused with real campaign practice.
-                    </p>
                 </div>
 
-                <div className="flex flex-col gap-5 max-w-4xl mx-auto">
-                    {modules.map((mod, index) => (
-                        <ModuleCard
-                            key={index}
-                            data={mod}
-                            isOpen={openModules.includes(index)}
-                            onClick={() => toggleModule(index)}
-                        />
-                    ))}
-                </div>
+                {/* --- LMS SECTION --- */}
+                <div className="border-t border-white/10 pt-16 lg:pt-20">
+                    <div className="text-center max-w-3xl mx-auto mb-12">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2563eb]/15 border border-[#2563eb]/30 mb-6">
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+                            <span className="font-bold text-[11px] text-[#3b82f6] uppercase tracking-[0.2em]">Student Dashboard</span>
+                        </div>
+                        <h2 className="font-black text-[28px] md:text-[36px] lg:text-[42px] text-white leading-[1.1] tracking-tight mb-4">
+                            Get Started with Our{' '}
+                            <span className="text-[#ECAB00]">Learning Management System</span>
+                        </h2>
+                        <p className="text-gray-400 text-[16px] md:text-[17px] font-medium leading-relaxed">
+                            Access your personalized student dashboard using your Student ID and password.
+                        </p>
+                    </div>
 
-                <div className="mt-14 flex flex-col items-center justify-center text-center">
-                    <p className="font-medium text-[16px] text-gray-500 mb-6">Want to see the complete curriculum and tools list?</p>
-                    <button className="group bg-[#0f172a] text-white hover:bg-[#ECAB00] hover:text-[#0f172a] transition-all duration-300 rounded-xl px-8 py-4 font-bold text-[15px] flex items-center gap-2 cursor-pointer shadow-lg active:scale-95">
-                        Download Full Syllabus
-                        <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
-                    </button>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {lmsFeatures.map((feature, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: i * 0.08 }}
+                                className="group bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#ECAB00]/30 hover:bg-white/8 transition-all duration-300"
+                            >
+                                <div className="w-12 h-12 rounded-xl bg-[#ECAB00]/10 flex items-center justify-center text-[#ECAB00] mb-4 group-hover:bg-[#ECAB00] group-hover:text-[#0A0F1C] transition-all duration-300">
+                                    {feature.icon}
+                                </div>
+                                <h4 className="font-black text-[17px] text-white mb-2">{feature.title}</h4>
+                                <p className="text-[14px] font-medium text-gray-400 leading-relaxed">{feature.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
+
+            <style>{`
+        .animate-pulse-slow { animation: pulseGlow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
+      `}</style>
         </section>
     );
 }
