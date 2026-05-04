@@ -1,4 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, CheckCircle2, Users, Star, ShieldCheck, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import AlumniPlacement from '../../components/AlumniPlacement/AlumniPlacement';
 
 function useFonts() {
     useEffect(() => {
@@ -12,56 +16,13 @@ function useFonts() {
     }, []);
 }
 
-function useInView(threshold = 0.08) {
-    const ref = useRef(null);
-    const [inView, setInView] = useState(false);
-    useEffect(() => {
-        const obs = new IntersectionObserver(
-            ([e]) => { if (e.isIntersecting) setInView(true); },
-            { threshold }
-        );
-        if (ref.current) obs.observe(ref.current);
-        return () => obs.disconnect();
-    }, []);
-    return [ref, inView];
-}
-
-function useIsMobile() {
-    const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 768);
-        check();
-        window.addEventListener("resize", check);
-        return () => window.removeEventListener("resize", check);
-    }, []);
-    return isMobile;
-}
-
-const LI = () => (
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-);
-
-const Arrow = ({ size = 16 }) => (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M7 17L17 7M17 7H7M17 7v10" />
-    </svg>
-);
-
-const Check = () => (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="20 6 9 17 4 12" />
-    </svg>
-);
-
 const trainers = [
     {
         name: "Shraddha Rane",
-        role: "Corporate Trainer & Digital Strategist",
+        role: "Corporate Trainer & Digital Marketing Expert",
         exp: "8+ Years",
         tag: "Gen-Z Favourite",
-        bio: "Shraddha designs programs that empower teams to reach their full potential. Known for innovative, collaborative sessions — she's become a go-to expert in digital marketing education.",
+        bio: "A dynamic and results-driven professional with a passion for corporate training and digital marketing. Shraddha designs and delivers engaging training programs that empower teams to reach their full potential. Her sessions foster a positive and collaborative learning environment — innovative, informative, and inspiring.",
         skills: ["Corporate Training", "Content Strategy", "Social Media", "Brand Building"],
         img: "/images/shraddha.png",
         linkedin: "https://www.linkedin.com/in/shraddha-rane-95025b128/",
@@ -73,7 +34,7 @@ const trainers = [
         role: "Digital Marketing Agency Owner",
         exp: "15+ Years",
         tag: "1000+ Campaigns",
-        bio: "A savvy strategist who turns small ideas into profitable businesses. Harsh runs an agency serving clients across 18+ countries — deep expertise in high-performance marketing.",
+        bio: "An out-and-out strategist when it comes to growing a small idea into a profitable business. Harsh has implemented his expertise in 1000+ successful campaigns for clients all over the globe. He runs Ibraine — a successful Digital Marketing Agency serving clients from over 18 countries.",
         skills: ["SEM & PPC", "Campaign Strategy", "Business Growth", "Global Marketing"],
         img: "/images/Harsh-Ibraine.webp",
         linkedin: "https://www.linkedin.com/in/pharsh88/",
@@ -85,7 +46,7 @@ const trainers = [
         role: "Digital Marketing Manager & Trainer",
         exp: "12+ Years",
         tag: "Technical Expert",
-        bio: "Passionate about helping businesses harness digital. Hemant focuses on deep technical implementation and data-driven growth strategies that deliver measurable results.",
+        bio: "Seasoned Digital Marketing Manager and Trainer with over a decade of experience crafting and executing successful digital marketing strategies. Passionate about helping individuals and businesses harness the power of digital to achieve their goals. Training students for the past 12 years.",
         skills: ["SEO & Analytics", "Technical Marketing", "Data Growth", "Training Design"],
         img: "/images/hemant.png",
         linkedin: "https://www.linkedin.com/in/hemantm26/",
@@ -96,8 +57,8 @@ const trainers = [
         name: "Rahul Singh",
         role: "Analytics & Data Specialist",
         exp: "12+ Years",
-        tag: "Data is his game",
-        bio: "The backbone of analytics at Operating Media. A software engineer by qualification, Rahul has worked with top Indian brands delivering high-performance analytics for multiple agencies.",
+        tag: "Data is His Game",
+        bio: "The backbone of the company. Data is his game and statistics his domain. A thorough professional with a keen eye on the smallest of details. A software engineer by qualification, Rahul has worked with most of the top brands in India delivering high-performance analytics for multiple agencies.",
         skills: ["Web Analytics", "Data Strategy", "Performance Marketing", "Reporting"],
         img: "/images/rahuls.png",
         linkedin: "https://www.linkedin.com/in/therahulsingh/",
@@ -109,7 +70,7 @@ const trainers = [
         role: "SEO & Internet Marketing Expert",
         exp: "14+ Years",
         tag: "SEO Authority",
-        bio: "A Strategic Internet Marketing Expert with 14+ years of online branding experience. Expert in ethical Google SEO, ranking websites to the top of Google and Bing.",
+        bio: "A Strategic Internet Marketing Expert and SEO Specialist with over 14 years of online branding experience. Expert in natural and ethical Google Search Engine Optimization. His expertise is in building websites and ranking them to the top of Google and Bing search engines.",
         skills: ["SEO Strategy", "Link Building", "Google Rankings", "Online Branding"],
         img: "/images/zahid.png",
         linkedin: "https://www.linkedin.com/in/zahid-shaikh/",
@@ -121,7 +82,7 @@ const trainers = [
         role: "Digital Marketing Coach & Mentor",
         exp: "8+ Years",
         tag: "Career Transformer",
-        bio: "Vikram empowers students with hands-on digital skills. He bridges the gap between theory and industry through practical sessions, 1:1 mentorship, and corporate training.",
+        bio: "A seasoned Digital Marketing Coach and Mentor specializing in empowering students and professionals with hands-on digital marketing skills. With 8+ years of experience, Vikram has helped dozens of aspirants build confidence in SEO, social media, content strategy, and performance advertising.",
         skills: ["SEO", "Social Media", "Content Strategy", "Performance Ads"],
         img: "/images/vikram.png",
         linkedin: "https://www.linkedin.com/in/vikram-kamble/",
@@ -133,7 +94,7 @@ const trainers = [
         role: "E-Commerce & Marketplace Specialist",
         exp: "10+ Years",
         tag: "Amazon Expert",
-        bio: "Neelkamal has built and scaled dozens of e-commerce brands from zero to revenue. His D2C expertise and marketplace strategy make him one of India's most sought-after educators.",
+        bio: "Neelkamal has built and scaled dozens of e-commerce brands from zero to revenue. His D2C expertise and marketplace strategy make him one of India's most sought-after educators in the e-commerce space — covering Amazon Ads, marketplace SEO, and direct-to-consumer growth.",
         skills: ["E-Commerce", "Amazon Ads", "D2C Growth", "Marketplace SEO"],
         img: "/images/neel.png",
         linkedin: "https://www.linkedin.com/",
@@ -145,7 +106,7 @@ const trainers = [
         role: "AI & Automation Marketing Lead",
         exp: "9+ Years",
         tag: "AI Pioneer",
-        bio: "Arjun is at the frontier of AI-powered marketing, helping brands integrate ChatGPT, automation, and ML into everyday campaigns. 50+ companies transformed across India and SEA.",
+        bio: "At the frontier of AI-powered marketing, helping brands integrate ChatGPT, automation, and machine learning into everyday campaigns. With 9+ years of experience, Rahul has transformed 50+ companies across India and Southeast Asia with cutting-edge growth hacking and AI-driven workflows.",
         skills: ["AI Marketing", "Automation", "ChatGPT Workflows", "Growth Hacking"],
         img: "/images/rahul.png",
         linkedin: "https://www.linkedin.com/",
@@ -154,640 +115,287 @@ const trainers = [
     },
 ];
 
+const whyPoints = [
+    "Complete professionals with actual experience in the field of Digital Marketing",
+    "Very amicable in nature and give 100% personalized focus on every student",
+    "Help in solving every doubt and query of a student",
+    "Teach and train students by applying very simple methods and approaches",
+    "Teach practically by assigning live projects to the students",
+    "Build the foundation of students strong by making them understand conventional theories of the field",
+];
+
 // ── HERO ──────────────────────────────────────────────────────
-function Hero() {
-    const [mounted, setMounted] = useState(false);
-    const isMobile = useIsMobile();
-    useEffect(() => { setTimeout(() => setMounted(true), 100); }, []);
+function TrainersHero() {
+    const [show, setShow] = useState(false);
+    useEffect(() => { const t = setTimeout(() => setShow(true), 100); return () => clearTimeout(t); }, []);
 
     return (
-        <section style={{
-            fontFamily: "'Satoshi', sans-serif",
-            position: "relative",
-            width: "100%",
-            minHeight: "100svh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#FAFCFF",
-            overflow: "hidden",
-        }}>
-            {/* Grid background */}
-            <div style={{
-                position: "absolute", inset: 0, pointerEvents: "none",
-                backgroundImage: "linear-gradient(to right, #80808012 1px, transparent 1px), linear-gradient(to bottom, #80808012 1px, transparent 1px)",
-                backgroundSize: "40px 40px",
-            }} />
+        <section className="relative w-full overflow-hidden bg-[#FAFCFF] font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-white">
+            <div className="absolute inset-0 pointer-events-none z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+            <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[100px] pointer-events-none z-0" />
+            <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
 
-            {/* Glow orbs */}
-            <div style={{
-                position: "absolute", top: "-20%", right: "-10%",
-                width: isMobile ? 300 : 600, height: isMobile ? 300 : 600,
-                borderRadius: "50%",
-                background: "radial-gradient(ellipse, rgba(236,171,0,0.18) 0%, rgba(251,146,60,0.10) 60%, transparent 100%)",
-                filter: "blur(80px)", animation: "heroGlow 8s cubic-bezier(0.4,0,0.6,1) infinite",
-                pointerEvents: "none",
-            }} />
-            <div style={{
-                position: "absolute", bottom: "-10%", left: "-10%",
-                width: isMobile ? 280 : 500, height: isMobile ? 280 : 500,
-                borderRadius: "50%",
-                background: "radial-gradient(ellipse, rgba(37,99,235,0.08) 0%, transparent 70%)",
-                filter: "blur(80px)", pointerEvents: "none",
-            }} />
+            <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 py-16 md:py-24 lg:py-28">
+                <div className="grid lg:grid-cols-[1fr_480px] gap-16 items-center">
 
-            {/* Main layout */}
-            <div style={{
-                position: "relative", zIndex: 10,
-                width: "100%", maxWidth: 1400,
-                margin: "0 auto",
-                padding: isMobile ? "72px 20px 56px" : "80px 24px",
-                display: "grid",
-                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-                gap: isMobile ? 40 : 48,
-                alignItems: "center",
-            }}>
-
-                {/* ── LEFT: Text ── */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-
-                    {/* Badge */}
-                    <div style={{
-                        display: "inline-flex", alignItems: "center", gap: 8,
-                        padding: "8px 16px", borderRadius: 100,
-                        background: "rgba(37,99,235,0.07)", border: "1px solid rgba(37,99,235,0.15)",
-                        marginBottom: 20,
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(20px)",
-                        transition: "opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s",
-                    }}>
-                        <span style={{
-                            width: 8, height: 8, borderRadius: "50%", background: "#2563eb",
-                            boxShadow: "0 0 0 3px rgba(37,99,235,0.2)",
-                            animation: "heroPing 1.5s ease-in-out infinite",
-                            display: "inline-block",
-                        }} />
-                        <span style={{ fontSize: isMobile ? 11 : 13, fontWeight: 700, color: "#2563eb", textTransform: "uppercase", letterSpacing: "0.12em" }}>
-                            #1 Digital Marketing Academy
-                        </span>
-                    </div>
-
-                    {/* Heading */}
-                    <h1 style={{ fontSize: isMobile ? "clamp(32px, 9vw, 44px)" : "clamp(36px, 5vw, 56px)", fontWeight: 900, color: "#0f172a", lineHeight: 1.1, margin: "0 0 8px" }}>
-                        <div style={{ overflow: "hidden", paddingBottom: 4 }}>
-                            <div style={{
-                                transform: mounted ? "translateY(0)" : "translateY(100%)",
-                                opacity: mounted ? 1 : 0,
-                                transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s, opacity 0.7s ease 0.2s",
-                            }}>
-                                Learn From{" "}
-                                <span style={{ color: "#ECAB00" }}>Real</span>
-                            </div>
+                    {/* LEFT */}
+                    <div className="flex flex-col items-start">
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-8 transition-all duration-700 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+                            <span className="font-bold text-[11px] md:text-xs text-[#2563eb] uppercase tracking-[0.2em]">Meet Our Mentors</span>
                         </div>
-                        <div style={{ overflow: "hidden", paddingBottom: 4 }}>
-                            <div style={{
-                                transform: mounted ? "translateY(0)" : "translateY(100%)",
-                                opacity: mounted ? 1 : 0,
-                                transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s, opacity 0.7s ease 0.3s",
-                            }}>
-                                Industry Experts
+
+                        <h1 className="font-black text-[36px] md:text-[48px] lg:text-[58px] text-[#0f172a] leading-[1.05] tracking-tight mb-6">
+                            <div className={`transition-all duration-700 delay-100 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                The Best
                             </div>
-                        </div>
-                        <div style={{ overflow: "hidden", paddingBottom: 4 }}>
-                            <div style={{
-                                transform: mounted ? "translateY(0)" : "translateY(100%)",
-                                opacity: mounted ? 1 : 0,
-                                transition: "transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s, opacity 0.7s ease 0.4s",
-                            }}>
-                                <span style={{ position: "relative", display: "inline-block", color: "#2563eb" }}>
-                                    Who Actually Do It.
-                                    <span style={{
-                                        position: "absolute", bottom: -6, left: 0,
-                                        height: 6, borderRadius: 100, background: "#ECAB00",
-                                        width: mounted ? "100%" : "0%",
-                                        transition: "width 1s cubic-bezier(0.16,1,0.3,1) 0.8s",
-                                        display: "block",
-                                    }} />
+                            <div className={`transition-all duration-700 delay-200 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <span className="relative inline-block text-[#ECAB00]">
+                                    Instructors
+                                    <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/30 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                                    </svg>
                                 </span>
                             </div>
+                            <div className={`transition-all duration-700 delay-300 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                                <span className="text-[#2563eb]">Available</span> in the City.
+                            </div>
+                        </h1>
+
+                        <p className={`text-[16px] md:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[520px] mb-10 transition-all duration-700 delay-400 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            Not lecturers reading off slides — our <span className="font-bold text-[#0f172a]">8 trainers are agency owners, campaign runners, and brand builders</span> who teach what they live every single day.
+                        </p>
+
+                        <div className={`flex flex-col sm:flex-row gap-4 mb-10 transition-all duration-700 delay-500 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <Link to="/contact">
+                                <button className="group relative flex items-center gap-3 bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-[15px] overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(236,171,0,0.5)] hover:-translate-y-1">
+                                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+                                    <span className="relative z-10 flex items-center gap-2">
+                                        Book a Demo
+                                        <ArrowRight size={18} className="transform transition-transform duration-300 group-hover:translate-x-1.5" />
+                                    </span>
+                                </button>
+                            </Link>
                         </div>
-                    </h1>
 
-                    {/* Subtext */}
-                    <p style={{
-                        fontSize: isMobile ? 15 : 17, fontWeight: 500, color: "#6b7280",
-                        lineHeight: 1.75, maxWidth: 480, margin: "20px 0 28px",
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(20px)",
-                        transition: "opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s",
-                    }}>
-                        Not lecturers reading off slides — our 8 trainers are{" "}
-                        <strong style={{ color: "#0f172a", fontWeight: 700 }}>agency owners, campaign runners, and brand builders</strong>{" "}
-                        who teach what they live every day.
-                    </p>
-
-                    {/* Buttons */}
-                    <div style={{
-                        display: "flex", gap: 12, flexWrap: "wrap",
-                        alignItems: "center", width: isMobile ? "100%" : "auto",
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(20px)",
-                        transition: "opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s",
-                    }}>
-                        <a href="#" className="tp-btn-primary" style={{ flex: isMobile ? "1 1 auto" : "0 0 auto", justifyContent: "center", minHeight: 52 }}>
-                            Book a Demo
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                        <a href="#" className="tp-btn-secondary" style={{ flex: isMobile ? "1 1 auto" : "0 0 auto", justifyContent: "center", minHeight: 52 }}>
-                            Download Brochure
-                        </a>
+                        <div className={`flex items-center gap-6 transition-all duration-700 delay-600 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className="flex items-center gap-2">
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} size={16} className="fill-[#ECAB00] text-[#ECAB00]" />
+                                ))}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Users size={16} className="text-[#2563eb]" />
+                                <span className="font-bold text-[15px] text-[#0f172a]">11,000+ Students Trained</span>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Avatar rating row */}
-                    <div style={{
-                        display: "flex", alignItems: "center", gap: 14, marginTop: 28,
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(20px)",
-                        transition: "opacity 0.7s ease 0.7s, transform 0.7s ease 0.7s",
-                    }}>
-                        <div style={{ display: "flex" }}>
-                            {[11, 12, 13, 14].map((n, i) => (
-                                <div key={i} style={{
-                                    width: isMobile ? 34 : 38, height: isMobile ? 34 : 38,
-                                    borderRadius: "50%", border: "2px solid #fff",
-                                    marginLeft: i === 0 ? 0 : -10, overflow: "hidden",
-                                    background: "#e5e7eb", boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                                }}>
-                                    <img src={`https://i.pravatar.cc/100?img=${n}`} alt="student" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                                </div>
-                            ))}
-                        </div>
-                        <div>
-                            <div style={{ fontSize: 13, color: "#ECAB00", letterSpacing: 2 }}>★★★★★</div>
-                            <div style={{ fontSize: 12, fontWeight: 700, color: "#374151" }}>30,000+ happy learners</div>
+                    {/* RIGHT — dark faculty preview card */}
+                    <div className={`transition-all duration-1000 delay-300 ease-out ${show ? 'opacity-100 lg:translate-x-0 scale-100' : 'opacity-0 lg:translate-x-12 scale-95'}`}>
+                        <div className="bg-[#0f172a] rounded-[2rem] p-8 border border-white/5 shadow-[0_30px_60px_-15px_rgba(15,23,42,0.3)]">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="h-[2px] w-8 bg-[#ECAB00]" />
+                                <p className="text-[11px] font-bold text-[#ECAB00] uppercase tracking-[0.3em]">Faculty Roster 2025</p>
+                            </div>
+                            <div className="flex flex-col divide-y divide-white/5">
+                                {trainers.slice(0, 4).map((t, i) => (
+                                    <div key={i} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                                        <div
+                                            className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-[13px] shrink-0"
+                                            style={{ background: `${t.accent}25`, color: t.accent, border: `1.5px solid ${t.accent}50` }}
+                                        >
+                                            {t.name.split(" ").map(w => w[0]).join("")}
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="font-bold text-[14px] text-white leading-tight truncate">{t.name}</p>
+                                            <p className="font-medium text-[11px] text-gray-500 mt-0.5 truncate">{t.role}</p>
+                                        </div>
+                                        <span
+                                            className="text-[10px] font-black px-3 py-1 rounded-full shrink-0"
+                                            style={{ background: `${t.accent}18`, color: t.accent, border: `1px solid ${t.accent}35` }}
+                                        >
+                                            {t.exp}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
+                                <span className="text-[13px] font-medium text-gray-400">+4 more expert trainers</span>
+                                <span className="text-[12px] font-bold text-[#ECAB00]">See all below ↓</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                {/* ── RIGHT: Floating stat cards — hidden on mobile ── */}
-                {!isMobile && (
-                    <div style={{
-                        position: "relative", height: 560,
-                        display: "flex", alignItems: "center", justifyContent: "center",
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateX(0)" : "translateX(40px)",
-                        transition: "opacity 1s ease 0.3s, transform 1s ease 0.3s",
-                    }}>
-                        {/* Central visual block */}
-                        <div style={{
-                            width: "80%", maxWidth: 400,
-                            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)",
-                            borderRadius: 28, overflow: "hidden",
-                            boxShadow: "0 32px 80px rgba(15,23,42,0.18)",
-                            padding: 36, position: "relative",
-                        }}>
-                            <div style={{
-                                position: "absolute", inset: 0, pointerEvents: "none",
-                                backgroundImage: "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
-                                backgroundSize: "24px 24px",
-                            }} />
-                            <div style={{ position: "relative", zIndex: 2 }}>
-                                <div style={{ fontSize: 12, fontWeight: 700, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.2em", marginBottom: 20 }}>Faculty Roster 2025</div>
-                                {[
-                                    { name: "Harsh Pareek", role: "Agency Owner", exp: "15+ Yrs", color: "#ECAB00" },
-                                    { name: "Zahid Shaikh", role: "SEO Authority", exp: "14+ Yrs", color: "#10B981" },
-                                    { name: "Rahul Singh", role: "Data Specialist", exp: "12+ Yrs", color: "#7C3AED" },
-                                ].map((t, i) => (
-                                    <div key={i} style={{
-                                        display: "flex", alignItems: "center", gap: 12,
-                                        padding: "12px 0",
-                                        borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none",
-                                    }}>
-                                        <div style={{
-                                            width: 38, height: 38, borderRadius: 10,
-                                            background: `${t.color}25`, border: `1.5px solid ${t.color}50`,
-                                            display: "flex", alignItems: "center", justifyContent: "center",
-                                            fontSize: 14, fontWeight: 900, color: t.color, flexShrink: 0,
-                                        }}>
-                                            {t.name.split(" ").map(w => w[0]).join("")}
-                                        </div>
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ fontSize: 13, fontWeight: 700, color: "#fff", lineHeight: 1.2 }}>{t.name}</div>
-                                            <div style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{t.role}</div>
-                                        </div>
-                                        <span style={{
-                                            fontSize: 10, fontWeight: 900, color: t.color,
-                                            background: `${t.color}18`, border: `1px solid ${t.color}30`,
-                                            padding: "3px 9px", borderRadius: 100,
-                                        }}>{t.exp}</span>
-                                    </div>
-                                ))}
-                                <div style={{ marginTop: 20, padding: "12px 16px", background: "rgba(236,171,0,0.1)", borderRadius: 12, border: "1px solid rgba(236,171,0,0.2)", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                                    <span style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.7)" }}>+5 more experts</span>
-                                    <span style={{ fontSize: 12, fontWeight: 700, color: "#ECAB00" }}>View All →</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating stat cards */}
-                        <div style={{
-                            position: "absolute", top: "8%", right: "-4%",
-                            background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)",
-                            border: "1px solid rgba(255,255,255,0.6)",
-                            borderRadius: 18, padding: "16px 20px",
-                            boxShadow: "0 16px 40px rgba(15,23,42,0.1)",
-                            animation: "float1 5s ease-in-out infinite",
-                        }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#fef3c7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>🏆</div>
-                                <div>
-                                    <div style={{ fontSize: 22, fontWeight: 900, color: "#0f172a", lineHeight: 1 }}>400+</div>
-                                    <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", marginTop: 3 }}>Hiring Partners</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style={{
-                            position: "absolute", bottom: "10%", left: "-4%",
-                            background: "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)",
-                            border: "1px solid rgba(255,255,255,0.6)",
-                            borderRadius: 18, padding: "16px 20px",
-                            boxShadow: "0 16px 40px rgba(15,23,42,0.1)",
-                            animation: "float2 6s ease-in-out infinite",
-                        }}>
-                            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "#ecfdf5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>🎓</div>
-                                <div>
-                                    <div style={{ fontSize: 22, fontWeight: 900, color: "#0f172a", lineHeight: 1 }}>80+</div>
-                                    <div style={{ fontSize: 11, fontWeight: 600, color: "#9ca3af", marginTop: 3 }}>Yrs Combined Exp.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {[
-                            { icon: "https://cdn-icons-png.flaticon.com/512/300/300221.png", top: "38%", left: "2%", delay: "0s" },
-                            { icon: "https://cdn-icons-png.flaticon.com/512/2111/2111463.png", top: "3%", left: "28%", delay: "-1.5s" },
-                        ].map((ic, i) => (
-                            <div key={i} style={{
-                                position: "absolute", top: ic.top, left: ic.left,
-                                width: 48, height: 48, borderRadius: 14,
-                                background: "rgba(255,255,255,0.85)", backdropFilter: "blur(8px)",
-                                border: "1px solid rgba(255,255,255,0.6)",
-                                boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-                                display: "flex", alignItems: "center", justifyContent: "center",
-                                padding: 10,
-                                animation: `float1 ${5 + i}s ease-in-out infinite`,
-                                animationDelay: ic.delay,
-                            }}>
-                                <img src={ic.icon} alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {/* ── MOBILE: Compact stat strip (replaces right panel) ── */}
-                {isMobile && (
-                    <div style={{
-                        display: "grid", gridTemplateColumns: "1fr 1fr",
-                        gap: 12,
-                        opacity: mounted ? 1 : 0, transform: mounted ? "translateY(0)" : "translateY(20px)",
-                        transition: "opacity 0.7s ease 0.8s, transform 0.7s ease 0.8s",
-                    }}>
-                        {[
-                            { emoji: "🏆", val: "400+", label: "Hiring Partners" },
-                            { emoji: "🎓", val: "80+", label: "Yrs Combined Exp." },
-                            { emoji: "📊", val: "1000+", label: "Campaigns Run" },
-                            { emoji: "🌍", val: "18+", label: "Countries Served" },
-                        ].map((s, i) => (
-                            <div key={i} style={{
-                                background: "rgba(255,255,255,0.85)", backdropFilter: "blur(12px)",
-                                border: "1px solid rgba(255,255,255,0.6)",
-                                borderRadius: 16, padding: "16px 14px",
-                                boxShadow: "0 4px 20px rgba(15,23,42,0.07)",
-                                display: "flex", alignItems: "center", gap: 10,
-                            }}>
-                                <div style={{ fontSize: 22, lineHeight: 1 }}>{s.emoji}</div>
-                                <div>
-                                    <div style={{ fontSize: 18, fontWeight: 900, color: "#0f172a", lineHeight: 1 }}>{s.val}</div>
-                                    <div style={{ fontSize: 10, fontWeight: 600, color: "#9ca3af", marginTop: 3 }}>{s.label}</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
             </div>
 
-            <style>{`
-        @keyframes heroPing {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.4); }
-          50% { box-shadow: 0 0 0 6px rgba(37,99,235,0); }
-        }
-        @keyframes heroGlow {
-          0%, 100% { opacity: 0.6; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.08); }
-        }
-        @keyframes float1 {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-12px) rotate(1deg); }
-        }
-        @keyframes float2 {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-16px) rotate(-1deg); }
-        }
-        .tp-btn-primary {
-          display: inline-flex; align-items: center; gap: 8px;
-          background: #ECAB00; color: #fff; font-weight: 700;
-          font-size: 15px; padding: 14px 24px; border-radius: 14px;
-          text-decoration: none;
-          box-shadow: 0 8px 24px rgba(236,171,0,0.35);
-          transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-          font-family: 'Satoshi', sans-serif; position: relative; overflow: hidden;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .tp-btn-primary:hover { background: #d49a00; transform: translateY(-2px); box-shadow: 0 14px 32px rgba(236,171,0,0.45); }
-        .tp-btn-primary:active { transform: scale(0.97); }
-        .tp-btn-secondary {
-          display: inline-flex; align-items: center; gap: 8px;
-          border: 2px solid #2563eb; color: #2563eb; font-weight: 700;
-          font-size: 15px; padding: 12px 24px; border-radius: 14px;
-          text-decoration: none; transition: background 0.3s, color 0.3s, transform 0.2s;
-          font-family: 'Satoshi', sans-serif;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .tp-btn-secondary:hover { background: #2563eb; color: #fff; transform: translateY(-1px); }
-        .tp-btn-secondary:active { transform: scale(0.97); }
-        .tp-li-btn {
-          flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
-          display: flex; align-items: center; justify-content: center;
-          border: 1px solid #e5e7eb; color: #9ca3af;
-          text-decoration: none; transition: all 0.2s;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .tp-li-btn:hover { border-color: #0077b5; color: #0077b5; background: #f0f8ff; }
-        .tp-why-card {
-          background: #fff; border: 1px solid #f0ede6; border-radius: 16px;
-          padding: 24px 20px; cursor: default;
-          transition: border-color 0.25s, box-shadow 0.25s, opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1);
-        }
-        .tp-why-card:hover { border-color: #ECAB00; box-shadow: 0 4px 20px rgba(236,171,0,0.1); }
-        .tp-cta-primary {
-          display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-          background: #ECAB00; color: #0f172a; font-weight: 900; font-size: 15px;
-          padding: 16px 32px; border-radius: 100px; text-decoration: none;
-          box-shadow: 0 8px 24px rgba(236,171,0,0.3);
-          transition: transform 0.2s, box-shadow 0.2s; white-space: nowrap;
-          font-family: 'Satoshi', sans-serif;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .tp-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(236,171,0,0.4); }
-        .tp-cta-primary:active { transform: scale(0.97); }
-        .tp-cta-secondary {
-          display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-          border: 1.5px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7);
-          font-weight: 700; font-size: 15px; padding: 15px 32px; border-radius: 100px;
-          text-decoration: none; transition: border-color 0.2s, color 0.2s; white-space: nowrap;
-          font-family: 'Satoshi', sans-serif;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .tp-cta-secondary:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
-      `}</style>
+            {/* Stats strip */}
+            <div className="relative z-20 mx-6 lg:mx-14 max-w-[1400px] xl:mx-auto pb-16">
+                <div className="bg-[#0f172a] rounded-2xl shadow-xl p-6 lg:p-8 flex flex-wrap lg:flex-nowrap justify-between gap-6">
+                    {[
+                        { icon: <Globe size={20} />, title: "8 Expert Trainers", sub: "Active Industry Professionals" },
+                        { icon: <ShieldCheck size={20} />, title: "57+ Years Combined", sub: "Real-World Experience" },
+                        { icon: <Users size={20} />, title: "1000+ Campaigns", sub: "Run Across 18 Countries" },
+                        { icon: <Star size={20} />, title: "11,000+ Students", sub: "Successfully Placed" },
+                    ].map((s, i) => (
+                        <div key={i} className="flex items-center gap-4 flex-1 min-w-[200px]">
+                            <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">
+                                {s.icon}
+                            </div>
+                            <div>
+                                <p className="font-bold text-[15px] text-white">{s.title}</p>
+                                <p className="font-medium text-[13px] text-blue-100">{s.sub}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </section>
     );
 }
 
-function SkillChip({ skill, accentColor }) {
-    const [hovered, setHovered] = useState(false);
-    return (
-        <span
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            style={{
-                fontSize: 11, fontWeight: 700,
-                padding: "5px 12px", borderRadius: 100,
-                display: "inline-block", cursor: "default", userSelect: "none",
-                transition: "background 0.15s, color 0.15s, border-color 0.15s",
-                background: hovered ? accentColor : "#f9f7f3",
-                color: hovered ? "#fff" : "#374151",
-                border: `1px solid ${hovered ? accentColor : "#ede9e0"}`,
-            }}
-        >
-            {skill}
-        </span>
-    );
-}
-
+// ── TRAINER CARD ──────────────────────────────────────────────
 function TrainerCard({ trainer, index }) {
-    const [ref, inView] = useInView(0.08);
-    const isMobile = useIsMobile();
-
     return (
-        <div
-            ref={ref}
-            style={{
-                opacity: inView ? 1 : 0,
-                transform: inView ? "translateY(0) scale(1)" : "translateY(52px) scale(0.97)",
-                transition: `opacity 0.65s ease ${index * 60}ms, transform 0.65s cubic-bezier(0.16,1,0.3,1) ${index * 60}ms`,
-                borderRadius: 20,
-                overflow: "hidden",
-                border: "1px solid #ede9e0",
-                background: "#fff",
-                boxShadow: "0 2px 20px rgba(0,0,0,0.06)",
-                width: "100%",
-            }}
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.08 }}
+            className="bg-white rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 overflow-hidden group"
         >
-            <div style={{
-                display: "flex",
-                flexDirection: isMobile ? "column" : (index % 2 === 0 ? "row" : "row-reverse"),
-                minHeight: isMobile ? "auto" : 280,
-            }}>
-                {/* ── Photo Panel ── */}
-                <div style={{
-                    position: "relative",
-                    flexShrink: 0,
-                    width: isMobile ? "100%" : "36%",
-                    height: isMobile ? 200 : "auto",
-                    overflow: "hidden",
-                    background: "#f5f0e8",
-                }}>
-                    {/* Blobs */}
-                    <div style={{
-                        position: "absolute", bottom: -40, right: -40,
-                        width: 180, height: 180, borderRadius: "50%",
-                        opacity: 0.25, filter: "blur(36px)",
-                        background: trainer.accent, pointerEvents: "none",
-                    }} />
-                    <div style={{
-                        position: "absolute", top: -32, left: -32,
-                        width: 120, height: 120, borderRadius: "50%",
-                        opacity: 0.12, filter: "blur(28px)",
-                        background: trainer.accent, pointerEvents: "none",
-                    }} />
+            <div className="flex flex-col md:flex-row">
+                {/* Photo panel */}
+                <div
+                    className="relative md:w-[220px] lg:w-[260px] shrink-0 h-[220px] md:h-auto overflow-hidden"
+                    style={{ background: '#f8f4ee' }}
+                >
+                    <div className="absolute bottom-[-30px] right-[-30px] w-[160px] h-[160px] rounded-full blur-[40px] pointer-events-none opacity-30" style={{ background: trainer.accent }} />
+                    <div className="absolute top-[-20px] left-[-20px] w-[100px] h-[100px] rounded-full blur-[30px] pointer-events-none opacity-15" style={{ background: trainer.accent }} />
 
-                    {/* Image */}
                     <img
                         src={trainer.img}
                         alt={trainer.name}
-                        style={{
-                            position: "absolute", inset: 0,
-                            width: "100%", height: "100%",
-                            objectFit: "cover", objectPosition: "top",
-                            display: "block",
-                        }}
+                        className="absolute inset-0 w-full h-full object-cover object-top"
                     />
 
-                    {/* Gradient fade */}
-                    <div style={{
-                        position: "absolute", bottom: 0, left: 0, right: 0,
-                        height: isMobile ? 80 : 100, zIndex: 2,
-                        background: `linear-gradient(to top, #f5f0e8DD, transparent)`,
-                        pointerEvents: "none",
-                    }} />
-
-                    {/* Accent bar */}
-                    <div style={{
-                        position: "absolute",
-                        [isMobile ? "bottom" : (index % 2 === 0 ? "left" : "right")]: 0,
-                        [isMobile ? "left" : "top"]: 0,
-                        [isMobile ? "right" : "bottom"]: 0,
-                        [isMobile ? "height" : "width"]: 4,
-                        zIndex: 3,
-                        background: trainer.accent,
-                    }} />
-
-                    {/* Exp badge */}
-                    <span style={{
-                        position: "absolute", bottom: 12, left: 12, zIndex: 4,
-                        background: "#fff", color: "#0f172a",
-                        fontSize: 10, fontWeight: 900,
-                        textTransform: "uppercase", letterSpacing: "0.08em",
-                        padding: "5px 12px", borderRadius: 100,
-                        border: `1.5px solid ${trainer.accent}`,
-                        boxShadow: "0 2px 10px rgba(0,0,0,0.10)",
-                    }}>
-                        {trainer.exp}
-                    </span>
+                    {/* Accent bar — left on desktop, bottom on mobile */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 hidden md:block" style={{ background: trainer.accent }} />
+                    <div className="absolute bottom-0 left-0 right-0 h-1 md:hidden" style={{ background: trainer.accent }} />
 
                     {/* Number watermark */}
-                    <span style={{
-                        position: "absolute", top: 8, right: 10, zIndex: 4,
-                        fontSize: 48, fontWeight: 900,
-                        color: "rgba(15,23,42,0.06)", lineHeight: 1,
-                        userSelect: "none", pointerEvents: "none",
-                    }}>
+                    <span className="absolute top-3 right-4 font-black text-[48px] leading-none pointer-events-none select-none text-[#0f172a]/5">
                         {trainer.num}
+                    </span>
+
+                    {/* Exp badge */}
+                    <span
+                        className="absolute bottom-3 left-3 text-[10px] font-black uppercase tracking-wider px-3 py-1.5 rounded-full bg-white shadow-md"
+                        style={{ border: `1.5px solid ${trainer.accent}`, color: '#0f172a' }}
+                    >
+                        {trainer.exp}
                     </span>
                 </div>
 
-                {/* ── Info Panel ── */}
-                <div style={{
-                    flex: 1,
-                    padding: isMobile ? "20px 18px 22px" : "28px 28px",
-                    display: "flex", flexDirection: "column",
-                    justifyContent: "center", gap: 14,
-                }}>
-                    {/* Name + role + LinkedIn */}
-                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{
-                                fontSize: isMobile ? 17 : 20, fontWeight: 900, color: "#0f172a",
-                                margin: 0, lineHeight: 1.2,
-                            }}>
+                {/* Info panel */}
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-center gap-4">
+                    {/* Name + LinkedIn */}
+                    <div className="flex items-start justify-between gap-4">
+                        <div>
+                            <h3 className="font-black text-[20px] md:text-[22px] text-[#0f172a] leading-tight mb-1">
                                 {trainer.name}
                             </h3>
-                            <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 5 }}>
-                                <span style={{
-                                    width: 6, height: 6, borderRadius: "50%",
-                                    flexShrink: 0, background: trainer.accent,
-                                }} />
-                                <p style={{ fontSize: 11, fontWeight: 500, color: "#9ca3af", margin: 0 }}>
-                                    {trainer.role}
-                                </p>
+                            <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: trainer.accent }} />
+                                <p className="text-[12px] font-bold text-gray-400 uppercase tracking-wide">{trainer.role}</p>
                             </div>
                         </div>
-                        <a href={trainer.linkedin} target="_blank" rel="noopener noreferrer" className="tp-li-btn">
-                            <LI />
+                        <a
+                            href={trainer.linkedin}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-400 hover:border-[#0077b5] hover:text-[#0077b5] hover:bg-blue-50 transition-all duration-200 shrink-0"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
                         </a>
                     </div>
 
                     {/* Bio */}
-                    <p style={{ fontSize: isMobile ? 12.5 : 13, color: "#6b7280", lineHeight: 1.7, margin: 0, fontWeight: 500 }}>
+                    <p className="text-[14px] md:text-[15px] text-gray-500 leading-[1.8] font-medium">
                         {trainer.bio}
                     </p>
 
                     {/* Skills */}
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    <div className="flex flex-wrap gap-2">
                         {trainer.skills.map((s, i) => (
-                            <SkillChip key={i} skill={s} accentColor={trainer.accent} />
+                            <span
+                                key={i}
+                                className="text-[11px] font-bold px-3 py-1.5 rounded-full border border-gray-100 bg-gray-50 text-gray-600 hover:text-white transition-all duration-200 cursor-default"
+                                style={{}}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.background = trainer.accent;
+                                    e.currentTarget.style.color = '#fff';
+                                    e.currentTarget.style.borderColor = trainer.accent;
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.background = '';
+                                    e.currentTarget.style.color = '';
+                                    e.currentTarget.style.borderColor = '';
+                                }}
+                            >
+                                {s}
+                            </span>
                         ))}
                     </div>
 
                     {/* Tag */}
                     <div>
-                        <span style={{
-                            display: "inline-flex", alignItems: "center",
-                            fontSize: 10, fontWeight: 700,
-                            textTransform: "uppercase", letterSpacing: "0.1em",
-                            padding: "4px 12px", borderRadius: 100,
-                            background: `${trainer.accent}18`,
-                            color: trainer.accent,
-                            border: `1px solid ${trainer.accent}35`,
-                        }}>
+                        <span
+                            className="inline-flex items-center text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full"
+                            style={{ background: `${trainer.accent}15`, color: trainer.accent, border: `1px solid ${trainer.accent}30` }}
+                        >
                             {trainer.tag}
                         </span>
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
-// ── ROSTER SECTION ────────────────────────────────────────────
+// ── ROSTER GRID ───────────────────────────────────────────────
 function RosterGrid() {
-    const [ref, inView] = useInView(0.05);
-    const isMobile = useIsMobile();
-
     return (
-        <section style={{
-            fontFamily: "'Satoshi', sans-serif",
-            background: "#FAFAF8",
-            padding: isMobile ? "56px 16px" : "80px 32px",
-            borderTop: "1px solid #f0ede6",
-        }}>
-            <div style={{ maxWidth: 1320, margin: "0 auto" }}>
-                {/* Header */}
-                <div
-                    ref={ref}
-                    style={{
-                        marginBottom: isMobile ? 32 : 48,
-                        opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(16px)",
-                        transition: "opacity 0.6s ease, transform 0.6s ease",
-                    }}
-                >
-                    <p style={{ fontSize: 11, fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.3em", color: "#ECAB00", margin: "0 0 10px" }}>
-                        ✦ Our Faculty
-                    </p>
-                    <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-                        <h2 style={{ fontSize: isMobile ? "clamp(24px, 7vw, 32px)" : "clamp(26px, 3.5vw, 40px)", fontWeight: 900, color: "#0f172a", margin: 0, lineHeight: 1.1, fontFamily: "'Satoshi', sans-serif" }}>
-                            08 Industry Experts.
-                            <br />
-                            <span style={{ color: "#9ca3af", fontWeight: 700 }}>Zero theoretical baggage.</span>
-                        </h2>
-                        {!isMobile && (
-                            <p style={{ fontSize: 14, fontWeight: 500, color: "#9ca3af", maxWidth: 260, textAlign: "right", lineHeight: 1.65, margin: 0 }}>
-                                Every trainer is actively working in the industry. Real experience, real results.
-                            </p>
-                        )}
+        <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#fcfaf2] font-['Satoshi',sans-serif] overflow-hidden">
+            <div className="absolute top-[20%] left-[-10%] w-[500px] h-[500px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
+            <div className="absolute bottom-[10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#ECAB00]/10 blur-[120px] pointer-events-none z-0" />
+
+            <div className="relative z-10 max-w-[1400px] mx-auto">
+                <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-100 mb-6">
+                        <span className="w-2 h-2 rounded-full bg-[#ECAB00] animate-ping absolute" />
+                        <span className="w-2 h-2 rounded-full bg-[#ECAB00] relative z-10" />
+                        <span className="font-bold text-[11px] md:text-xs text-[#ECAB00] uppercase tracking-[0.2em]">Our Faculty</span>
                     </div>
-                    {isMobile && (
-                        <p style={{ fontSize: 13, fontWeight: 500, color: "#9ca3af", lineHeight: 1.65, margin: "12px 0 0" }}>
-                            Every trainer is actively working in the industry. Real experience, real results.
-                        </p>
-                    )}
+                    <h2 className="font-black text-[32px] md:text-[40px] lg:text-[46px] text-[#0f172a] leading-[1.1] tracking-tight mb-6">
+                        08 Industry Experts.{' '}
+                        <span className="relative inline-block text-[#ECAB00]">
+                            Zero
+                            <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                            </svg>
+                        </span>{' '}
+                        Theoretical Baggage.
+                    </h2>
+                    <p className="text-[16px] md:text-[18px] font-medium text-gray-600 leading-relaxed">
+                        Every trainer is actively working in the industry — bringing this week's insights directly into the classroom.
+                    </p>
                 </div>
 
-                {/* Cards */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(min(100%, 520px), 1fr))",
-                    gap: isMobile ? 14 : 16,
-                }}>
+                <div className="flex flex-col gap-6">
                     {trainers.map((trainer, i) => (
                         <TrainerCard key={i} trainer={trainer} index={i} />
                     ))}
@@ -797,298 +405,117 @@ function RosterGrid() {
     );
 }
 
-// ── WHY SECTION ───────────────────────────────────────────────
-const differentiators = [
-    { num: "01", title: "Real Campaigns, Real Results", desc: "Every trainer has personally managed live campaigns with real budgets. What they teach, they've done — for actual brands with actual stakes.", icon: "📈" },
-    { num: "02", title: "Industry-Active, Not Retired", desc: "Our trainers aren't ex-practitioners. They're currently working professionals who bring this week's insights into the classroom.", icon: "⚡" },
-    { num: "03", title: "15+ Years Average Experience", desc: "Collectively over 90 years of combined digital marketing experience. That's not a number — that's pattern recognition money can't buy.", icon: "🏆" },
-    { num: "04", title: "Mentorship Beyond the Classroom", desc: "Sessions don't end when the clock does. Our trainers are accessible for career guidance, portfolio reviews, and real-world problem solving.", icon: "🤝" },
-    { num: "05", title: "18+ Country Client Exposure", desc: "Global campaigns. Local nuance. Our trainers have worked across markets and bring a cross-cultural strategic perspective to every lesson.", icon: "🌍" },
-    { num: "06", title: "Curriculum Built from Failures", desc: "The most valuable lessons come from what went wrong. Our trainers openly share mistakes, pivots, and hard-won learnings you won't find in any textbook.", icon: "🔥" },
-];
-
-function WhyItem({ item, index }) {
-    const [ref, inView] = useInView(0.1);
-    const isMobile = useIsMobile();
-
-    if (isMobile) {
-        return (
-            <div
-                ref={ref}
-                style={{
-                    opacity: inView ? 1 : 0,
-                    transform: inView ? "translateY(0)" : "translateY(24px)",
-                    transition: `opacity 0.6s ease ${index * 70}ms, transform 0.6s ease ${index * 70}ms`,
-                    display: "flex", alignItems: "flex-start", gap: 14,
-                    padding: "18px 0",
-                    borderBottom: "1px solid #f0ede6",
-                }}
-            >
-                {/* Number + icon stacked */}
-                <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 4, paddingTop: 2 }}>
-                    <span style={{
-                        fontSize: 10, fontWeight: 900,
-                        color: "#d1c9b8", letterSpacing: "0.1em",
-                        fontFamily: "'Satoshi', sans-serif",
-                    }}>{item.num}</span>
-                    <span style={{
-                        fontSize: 22, lineHeight: 1,
-                        padding: "7px 8px",
-                        background: "#ECAB0010",
-                        borderRadius: 10,
-                        border: "1px solid #ECAB0025",
-                    }}>{item.icon}</span>
-                </div>
-
-                {/* Left accent line */}
-                <div style={{
-                    flexShrink: 0, width: 2, alignSelf: "stretch",
-                    background: inView ? "linear-gradient(to bottom, #ECAB00, #ECAB0020)" : "transparent",
-                    borderRadius: 2,
-                    transition: `background 0.8s ease ${index * 70 + 200}ms`,
-                }} />
-
-                {/* Content */}
-                <div style={{ flex: 1 }}>
-                    <h3 style={{ fontSize: 15, fontWeight: 800, color: "#0f172a", margin: "0 0 6px", lineHeight: 1.3, fontFamily: "'Satoshi', sans-serif" }}>
-                        {item.title}
-                    </h3>
-                    <p style={{ fontSize: 13, color: "#6b7280", lineHeight: 1.7, margin: 0, fontWeight: 500 }}>
-                        {item.desc}
-                    </p>
-                </div>
-            </div>
-        );
-    }
-
-    const isEven = index % 2 === 0;
-    return (
-        <div
-            ref={ref}
-            style={{
-                display: "flex",
-                flexDirection: isEven ? "row" : "row-reverse",
-                alignItems: "flex-start",
-                gap: 0,
-                opacity: inView ? 1 : 0,
-                transform: inView ? "translateX(0)" : isEven ? "translateX(-40px)" : "translateX(40px)",
-                transition: `opacity 0.7s ease ${index * 90}ms, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${index * 90}ms`,
-            }}
-        >
-            <div style={{
-                flexShrink: 0, width: 100,
-                display: "flex", flexDirection: "column",
-                alignItems: isEven ? "flex-end" : "flex-start",
-                paddingTop: 4,
-            }}>
-                <span style={{
-                    fontSize: 64, fontWeight: 900, lineHeight: 1,
-                    color: "transparent",
-                    WebkitTextStroke: "1.5px #ECAB0040",
-                    userSelect: "none", fontFamily: "'Satoshi', sans-serif",
-                }}>{item.num}</span>
-            </div>
-            <div style={{
-                flexShrink: 0, width: 1, alignSelf: "stretch",
-                background: inView ? "linear-gradient(to bottom, #ECAB00, #ECAB0020)" : "transparent",
-                margin: isEven ? "0 28px 0 16px" : "0 16px 0 28px",
-                transition: `background 0.8s ease ${index * 90 + 200}ms`,
-            }} />
-            <div style={{ flex: 1, paddingBottom: 8 }}>
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-                    <span style={{ fontSize: 18, lineHeight: 1, padding: "6px 8px", background: "#ECAB0010", borderRadius: 10, border: "1px solid #ECAB0025" }}>{item.icon}</span>
-                    <h3 style={{ fontSize: 17, fontWeight: 800, color: "#0f172a", margin: 0, lineHeight: 1.2, fontFamily: "'Satoshi', sans-serif", letterSpacing: "-0.01em" }}>
-                        {item.title}
-                    </h3>
-                </div>
-                <p style={{ fontSize: 13.5, color: "#6b7280", lineHeight: 1.75, margin: 0, fontWeight: 500, maxWidth: 420 }}>
-                    {item.desc}
-                </p>
-            </div>
-        </div>
-    );
-}
-
+// ── WHY OUR TRAINERS ──────────────────────────────────────────
 function WhyOurTrainers() {
-    const [headerRef, headerInView] = useInView(0.1);
-    const isMobile = useIsMobile();
-
     return (
-        <section style={{
-            fontFamily: "'Satoshi', sans-serif",
-            background: "#FAFAF8",
-            padding: isMobile ? "56px 16px 64px" : "90px 32px 100px",
-            position: "relative",
-            overflow: "hidden",
-            borderTop: "1px solid #f0ede6",
-        }}>
-            <div style={{
-                position: "absolute", inset: 0,
-                backgroundImage: `radial-gradient(circle, #00000008 1px, transparent 1px)`,
-                backgroundSize: "28px 28px",
-                pointerEvents: "none",
-            }} />
-            <div style={{
-                position: "absolute", top: -120, right: -80,
-                width: 500, height: 500, borderRadius: "50%",
-                background: "radial-gradient(circle, #ECAB0010 0%, transparent 70%)",
-                pointerEvents: "none",
-            }} />
+        <section className="relative w-full bg-[#FAFCFF] font-['Satoshi',sans-serif] overflow-hidden">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none z-0" />
+            <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#ECAB00]/8 blur-[120px] pointer-events-none z-0" />
 
-            <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 1 }}>
+            <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-14 py-10 md:py-[50px] lg:py-[60px]">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-                {/* Header */}
-                <div
-                    ref={headerRef}
-                    style={{
-                        marginBottom: isMobile ? 32 : 72,
-                        opacity: headerInView ? 1 : 0,
-                        transform: headerInView ? "none" : "translateY(20px)",
-                        transition: "opacity 0.7s ease, transform 0.7s ease",
-                    }}
-                >
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                        <span style={{ display: "inline-block", width: 24, height: 1.5, background: "#ECAB00", borderRadius: 2 }} />
-                        <p style={{ fontSize: 10, fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.35em", color: "#ECAB00", margin: 0 }}>
-                            What sets them apart
-                        </p>
-                    </div>
-                    <h2 style={{
-                        fontSize: isMobile ? "clamp(26px, 7.5vw, 36px)" : "clamp(30px, 4vw, 48px)",
-                        fontWeight: 900, color: "#0f172a",
-                        margin: "0 0 14px", lineHeight: 1.05,
-                        fontFamily: "'Satoshi', sans-serif",
-                        letterSpacing: "-0.02em",
-                    }}>
-                        Not just teachers.{" "}
-                        <span style={{ color: "#ECAB00", position: "relative", display: "inline-block" }}>
-                            Practitioners.
-                            <span style={{
-                                position: "absolute", bottom: -4, left: 0, right: 0,
-                                height: 2, background: "linear-gradient(to right, #ECAB00, transparent)", borderRadius: 2,
-                            }} />
-                        </span>
-                    </h2>
-                    <p style={{ fontSize: isMobile ? 14 : 15, fontWeight: 500, color: "#6b7280", lineHeight: 1.7, margin: 0, maxWidth: 460 }}>
-                        The difference between a good course and a career-changing one is who teaches it.
-                    </p>
-                </div>
+                    {/* LEFT */}
+                    <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 mb-6">
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] animate-ping absolute" />
+                            <span className="w-2 h-2 rounded-full bg-[#2563eb] relative z-10" />
+                            <span className="font-bold text-[11px] text-[#2563eb] uppercase tracking-[0.2em]">What Sets Them Apart</span>
+                        </div>
 
-                {/* Items */}
-                <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 0 : 40 }}>
-                    {differentiators.map((d, i) => (
-                        <WhyItem key={i} item={d} index={i} />
-                    ))}
-                </div>
+                        <h2 className="font-black text-[28px] md:text-[36px] lg:text-[42px] text-[#0f172a] leading-[1.15] tracking-tight mb-6">
+                            Not Just Teachers.{' '}
+                            <span className="relative inline-block text-[#ECAB00]">
+                                Practitioners.
+                                <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                                </svg>
+                            </span>
+                        </h2>
 
-                {/* Bottom rule */}
-                <div style={{ marginTop: isMobile ? 40 : 72, height: 1, background: "linear-gradient(to right, transparent, #ECAB0060, transparent)" }} />
+                        <div className="space-y-4 text-gray-600 text-[16px] font-medium leading-relaxed mb-8">
+                            <p>
+                                When the question of faculty arises, we don't believe in just claiming that we have only the best. Our faculty encompasses a group of <span className="font-bold text-[#0f172a]">normal people blessed with astounding potential and experience</span>.
+                            </p>
+                            <p>
+                                Our faculty has the power to make students learn the appropriate applications of Digital Marketing — with <span className="font-bold text-[#ECAB00]">inimitable attributes</span> that set them apart from any other institute in the city.
+                            </p>
+                        </div>
 
-                {/* Bottom stat strip */}
-                <div style={{
-                    marginTop: isMobile ? 28 : 40,
-                    display: "grid",
-                    gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
-                    gap: isMobile ? 20 : 24,
-                }}>
-                    {[
-                        { val: "90+", label: "Years combined experience" },
-                        { val: "18+", label: "Countries served" },
-                        { val: "11K+", label: "Students trained" },
-                        { val: "1000+", label: "Live campaigns managed" },
-                    ].map((s, i) => {
-                        const [sRef, sInView] = useInView(0.1);
-                        return (
-                            <div
-                                key={i}
-                                ref={sRef}
-                                style={{
-                                    opacity: sInView ? 1 : 0,
-                                    transform: sInView ? "translateY(0)" : "translateY(16px)",
-                                    transition: `opacity 0.6s ease ${i * 100}ms, transform 0.6s ease ${i * 100}ms`,
-                                    textAlign: "center",
-                                }}
-                            >
-                                <p style={{
-                                    fontSize: isMobile ? 26 : 32, fontWeight: 900, color: "#ECAB00",
-                                    margin: "0 0 4px", lineHeight: 1,
-                                    fontFamily: "'Satoshi', sans-serif",
-                                }}>{s.val}</p>
-                                <p style={{
-                                    fontSize: 10, fontWeight: 600,
-                                    color: "#9ca3af", textTransform: "uppercase",
-                                    letterSpacing: "0.08em", margin: 0,
-                                }}>{s.label}</p>
+                        <Link to="/contact">
+                            <button className="group flex items-center gap-2 bg-[#0f172a] text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-[#ECAB00] hover:text-[#0f172a] transition-all duration-300 shadow-md hover:shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)]">
+                                Book a Free Demo
+                                <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />
+                            </button>
+                        </Link>
+                    </motion.div>
+
+                    {/* RIGHT — dark why points card */}
+                    <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
+                        <div className="bg-[#0f172a] rounded-[2rem] p-8 lg:p-10 border border-white/5 shadow-[0_30px_60px_-15px_rgba(15,23,42,0.25)]">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="h-[2px] w-8 bg-[#ECAB00]" />
+                                <p className="text-[11px] font-bold text-[#ECAB00] uppercase tracking-[0.3em]">Faculty Attributes</p>
                             </div>
-                        );
-                    })}
+                            <h3 className="font-black text-[20px] md:text-[22px] text-white leading-tight mb-8">
+                                What Makes Our Trainers Different
+                            </h3>
+                            <ul className="flex flex-col gap-4">
+                                {whyPoints.map((pt, i) => (
+                                    <li key={i} className="flex items-start gap-3">
+                                        <CheckCircle2 size={18} className="text-[#ECAB00] shrink-0 mt-0.5" />
+                                        <span className="text-[14px] font-medium text-gray-300 leading-snug">{pt}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
     );
 }
 
-// ── CTA SECTION ───────────────────────────────────────────────
-function CTA() {
-    const [ref, inView] = useInView(0.2);
-    const isMobile = useIsMobile();
-
+// ── CTA ───────────────────────────────────────────────────────
+function TrainersCTA() {
     return (
-        <section style={{
-            fontFamily: "'Satoshi', sans-serif",
-            background: "#0f172a",
-            padding: isMobile ? "56px 20px" : "80px 32px",
-        }}>
-            <div
-                ref={ref}
-                style={{
-                    maxWidth: 1320, margin: "0 auto",
-                    display: "flex", flexWrap: "wrap",
-                    gap: isMobile ? 32 : 48,
-                    alignItems: "center", justifyContent: "space-between",
-                    opacity: inView ? 1 : 0, transform: inView ? "none" : "translateY(20px)",
-                    transition: "opacity 0.7s ease, transform 0.7s ease",
-                }}
-            >
-                {/* Left */}
-                <div style={{ maxWidth: 540, flex: 1 }}>
-                    <p style={{ fontSize: 11, fontWeight: 900, textTransform: "uppercase", letterSpacing: "0.3em", color: "#ECAB00", margin: "0 0 14px" }}>
-                        ✦ Your next move
-                    </p>
-                    <h2 style={{
-                        fontSize: isMobile ? "clamp(24px, 7vw, 32px)" : "clamp(26px, 3.5vw, 44px)",
-                        fontWeight: 900, color: "#fff", margin: "0 0 12px", lineHeight: 1.1,
-                        fontFamily: "'Satoshi', sans-serif",
-                    }}>
-                        Sit with our trainers.
-                        <br />
-                        <em style={{ fontStyle: "italic", color: "rgba(255,255,255,0.45)" }}>Feel the difference.</em>
-                    </h2>
-                    <p style={{ fontSize: isMobile ? 14 : 16, fontWeight: 500, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, margin: "0 0 24px" }}>
-                        One free demo class. No pressure, no pitch — just complete clarity on your next step.
-                    </p>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 10 : 20 }}>
-                        {["100% Free", "No obligation", "Live session", "Expert trainer"].map((item, i) => (
-                            <div key={i} style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                                <span style={{ color: "#ECAB00" }}><Check /></span>
-                                <span style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.55)" }}>{item}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+        <section className="relative w-full py-10 md:py-[50px] lg:py-[60px] px-6 lg:px-14 bg-[#fcfaf2] font-['Satoshi',sans-serif] overflow-hidden">
+            <div className="max-w-[1400px] mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-[#0f172a] rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-[0_20px_40px_-10px_rgba(15,23,42,0.3)]"
+                >
+                    <div className="absolute top-[-40%] right-[-5%] w-[300px] h-[300px] bg-[#ECAB00]/15 rounded-full blur-[60px] pointer-events-none" />
+                    <div className="absolute top-[-50%] left-[-10%] w-[300px] h-[300px] bg-[#2563eb]/20 rounded-full blur-[80px] pointer-events-none" />
 
-                {/* Buttons */}
-                <div style={{
-                    display: "flex", flexDirection: "column", gap: 12, flexShrink: 0,
-                    width: isMobile ? "100%" : "auto",
-                }}>
-                    <a href="#" className="tp-cta-primary" style={{ width: isMobile ? "100%" : "auto" }}>
-                        Book Free Demo Class <Arrow size={16} />
-                    </a>
-                    <a href="#" className="tp-cta-secondary" style={{ width: isMobile ? "100%" : "auto" }}>
-                        Download Brochure
-                    </a>
-                </div>
+                    <div className="text-center md:text-left relative z-10">
+                        <p className="text-[11px] font-bold text-[#ECAB00] uppercase tracking-[0.3em] mb-2">Your Next Move</p>
+                        <h3 className="text-white text-[24px] md:text-[32px] font-black leading-tight mb-2">
+                            Sit with our trainers.{' '}
+                            <span className="relative inline-block text-[#ECAB00]">
+                                Feel the difference.
+                                <svg className="absolute w-full h-[8px] -bottom-1 left-0 text-[#ECAB00]/40" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                    <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
+                                </svg>
+                            </span>
+                        </h3>
+                        <p className="text-gray-400 font-medium text-[15px] md:text-[16px]">
+                            One free demo class. No pressure, no pitch — just complete clarity on your next step.
+                        </p>
+                    </div>
+
+                    <div className="relative z-10 shrink-0">
+                        <Link to="/contact">
+                            <button className="flex items-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0f172a] font-black text-[15px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group">
+                                Book Free Demo Class
+                                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                            </button>
+                        </Link>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
@@ -1098,11 +525,12 @@ function CTA() {
 export default function TrainersPage() {
     useFonts();
     return (
-        <main style={{ fontFamily: "'Satoshi', sans-serif" }}>
-            <Hero />
+        <main className="font-['Satoshi',sans-serif]">
+            <TrainersHero />
             <RosterGrid />
             <WhyOurTrainers />
-            <CTA />
+            <TrainersCTA />
+            <AlumniPlacement/>
         </main>
     );
 }
