@@ -5,10 +5,12 @@ import TopHeader from './components/TopHeader/TopHeader';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import LocationsSection from './components/LocationsSection/LocationsSection.jsx';
-import AdvanceProgram from './pages/AdvanceProgram/AdvanceProgram.jsx';
+
 
 import Homepage from './pages/Homepage/Homepage.jsx';
 import MastersProgram from './pages/MastersProgram/MastersProgram.jsx';
+import AdvanceDiploma from './pages/AdvanceProgram/AdvanceDiploma.jsx';
+import DiplomaPage from './pages/DiplomaPage/DiplomaPage.jsx';
 import PlacementsPage from './pages/PlacementsPage/PlacementsPage.jsx';
 import Reviewspage from './pages/Reviewspage/Reviewspage.jsx';
 // import TrainersPage from "./pages/TrainersPage/TrainersPage";
@@ -35,8 +37,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
 
-        <Route path="/masters-program" element={<MastersProgram />} />
-        <Route path="/advance-diploma" element={<AdvanceProgram />} />
+        <Route path="/courses/masters-program-in-digital-marketing/" element={<MastersProgram />} />
+        <Route path="/courses/advance-diploma-in-digital-marketing/" element={<AdvanceDiploma />} />
+        <Route path="/courses/diploma-in-digital-marketing/" element={<DiplomaPage />} />
 
         <Route path="/placements" element={<PlacementsPage />} />
         <Route path="/about/testimonials" element={<TestimonialsPage />} />

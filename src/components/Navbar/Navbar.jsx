@@ -77,9 +77,9 @@ const Navbar = () => {
                   className="absolute left-0 mt-3 w-80 bg-white rounded-xl shadow-xl overflow-visible !border !border-gray-100 outline-none [&>*:first-child]:rounded-t-xl [&>*:last-child]:rounded-b-xl"
                 >
                   {[
-                    { label: "Master's Program in Digital Marketing", to: "/masters-program" },
-                    { label: "Advance Diploma in Digital Marketing", to: "/advance-diploma" },
-                    { label: "Diploma in Digital Marketing", to: "/diploma" },
+                    { label: "Master's Program in Digital Marketing", to: "/courses/masters-program-in-digital-marketing/" },
+                    { label: "Advance Diploma in Digital Marketing", to: "/courses/advance-diploma-in-digital-marketing/" },
+                    { label: "Diploma in Digital Marketing", to: "/courses/diploma-in-digital-marketing/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-6 py-4 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -249,9 +249,9 @@ const Navbar = () => {
 
               <MobileAccordion label="Programs" color="#ECAB00">
                 {[
-                  { label: "Master's Program in Digital Marketing", to: "/masters-program" },
-                  { label: "Advance Diploma in Digital Marketing", to: "/advance-diploma" },
-                  { label: "Diploma in Digital Marketing", to: "/diploma" },
+                  { label: "Master's Program in Digital Marketing", to: "/courses/masters-program-in-digital-marketing/" },
+                  { label: "Advance Diploma in Digital Marketing", to: "/courses/advance-diploma-in-digital-marketing/" },
+                  { label: "Diploma in Digital Marketing", to: "/courses/diploma-in-digital-marketing/" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}
