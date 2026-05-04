@@ -9,8 +9,8 @@ const certFeatures = [
     },
     {
         icon: <ShieldCheck size={22} />,
-        title: "Google Certification",
-        desc: "Get fully prepared for and supported through the official Google certification exam alongside your SEO training.",
+        title: "SEO Certification",
+        desc: "Get fully prepared for and supported through the official SEO certification exam alongside your SEO training.",
     },
     {
         icon: <BookOpen size={22} />,
