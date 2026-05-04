@@ -36,7 +36,7 @@ export default function UpcomingBatchesStrip() {
           <nav className="flex items-center gap-2 text-[12px] md:text-[13px] font-bold text-gray-400 mb-4 uppercase tracking-widest">
             <a href="/" className="hover:text-white transition-colors">Home</a>
             <ChevronRight size={14} className="text-[#2563eb]" />
-            <a href="/courses" className="hover:text-white transition-colors">Courses</a>
+            <a href="/courses/masters-program-in-digital-marketing/" className="hover:text-white transition-colors">Courses</a>
             <ChevronRight size={14} className="text-[#2563eb]" />
             <span className="text-[#ECAB00]">Batches</span>
           </nav>
