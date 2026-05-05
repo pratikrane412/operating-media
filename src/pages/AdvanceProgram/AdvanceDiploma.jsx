@@ -13,6 +13,7 @@ import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CertificationSection from "../../components/AdvanceDiplomaPage/CertificationSection/CertificationSection";
 import FAQSection from "../../components/AdvanceDiplomaPage/FAQSection/FAQSection";
+import ProgramComparisonTable from "../../components/ProgramComparisonTable/ProgramComparisonTable";
 
 const AdvanceDiploma = () => {
 
@@ -66,6 +67,7 @@ const AdvanceDiploma = () => {
         <ChoosePath />
         <TransformationSection />
         <SyllabusSection />
+        <ProgramComparisonTable />
         <CounselorCTA />
         <WhyUsSection />
         <ToolsTicker />

@@ -16,6 +16,7 @@ import CertificationSection from "../../components/MastersProgramPage/Certificat
 import LMSSection from "../../components/MastersProgramPage/LMSSection/LMSSection";
 import FAQSection from "../../components/MastersProgramPage/FAQSection/FAQSection";
 import DownloadBrochure from "../../components/Navbar/DownloadBrochure";
+import ProgramComparisonTable from "../../components/ProgramComparisonTable/ProgramComparisonTable";
 
 const MastersProgram = () => {
 
@@ -69,6 +70,7 @@ const MastersProgram = () => {
         <ChoosePath />
         <TransformationSection />
         <SyllabusSection />
+        <ProgramComparisonTable />
         <CounselorCTA />
         <WhyUsSection />
         <ToolsTicker />

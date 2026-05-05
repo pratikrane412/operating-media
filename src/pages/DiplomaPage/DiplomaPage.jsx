@@ -13,6 +13,7 @@ import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CertificationSection from "../../components/DiplomaPage/CertificationSection/CertificationSection";
 import FAQSection from "../../components/DiplomaPage/FAQSection/FAQSection";
+import ProgramComparisonTable from "../../components/ProgramComparisonTable/ProgramComparisonTable";
 
 const DiplomaPage = () => {
 
@@ -63,6 +64,7 @@ const DiplomaPage = () => {
         <CourseSelection />
         <TransformationSection />
         <SyllabusSection />
+        <ProgramComparisonTable />
         <CounselorCTA />
         <WhyUsSection />
         <ToolsTicker />
