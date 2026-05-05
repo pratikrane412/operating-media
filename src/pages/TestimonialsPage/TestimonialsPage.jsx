@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { X, Play, Star, Quote } from "lucide-react";
 import { useModal } from "../../context/ModalContext";
+import { HelmetProvider } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
+
 
 // ── Font Loader ──
 function useFonts() {
@@ -33,22 +36,22 @@ function useInView(threshold = 0.08) {
 const SHORT_ID = "kl8XbbODq8M";
 
 const videos = [
-    { id: SHORT_ID, name: "Simran Kakwani",   role: "Placed at Dentsu",         thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Hemlata Dangi",    role: "SEO Manager, Agency",       thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Teena Dangi",      role: "Performance Marketer",      thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Aryan Pote",       role: "Google Ads Specialist",     thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Riya Sharma",      role: "Social Media Lead",         thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Karan Mehta",      role: "E-Commerce Manager",        thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Pooja Verma",      role: "Content Strategist",        thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Nikhil Desai",     role: "Digital Analyst",           thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Anjali Singh",     role: "Brand Manager",             thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Rahul Patil",      role: "Growth Hacker",             thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Meera Pillai",     role: "PPC Specialist",            thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Yash Agarwal",     role: "Analytics Lead",            thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Divya Nair",       role: "Social Media Manager",      thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Akash Tiwari",     role: "SEO Consultant",            thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Sneha Borse",      role: "Email Marketing Lead",      thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Varun Chaudhary",  role: "Campaign Manager",          thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Simran Kakwani", role: "Placed at Dentsu", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Hemlata Dangi", role: "SEO Manager, Agency", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Teena Dangi", role: "Performance Marketer", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Aryan Pote", role: "Google Ads Specialist", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Riya Sharma", role: "Social Media Lead", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Karan Mehta", role: "E-Commerce Manager", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Pooja Verma", role: "Content Strategist", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Nikhil Desai", role: "Digital Analyst", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Anjali Singh", role: "Brand Manager", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Rahul Patil", role: "Growth Hacker", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Meera Pillai", role: "PPC Specialist", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Yash Agarwal", role: "Analytics Lead", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Divya Nair", role: "Social Media Manager", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Akash Tiwari", role: "SEO Consultant", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Sneha Borse", role: "Email Marketing Lead", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
+    { id: SHORT_ID, name: "Varun Chaudhary", role: "Campaign Manager", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
 ].slice(0, 16);
 
 const textTestimonials = [
@@ -115,10 +118,10 @@ const textTestimonials = [
 ];
 
 const stats = [
-    { val: "16,000+", label: "Students Trained" },
-    { val: "96%",     label: "Placement Rate"   },
-    { val: "250+",    label: "Hiring Partners"  },
-    { val: "4.8★",   label: "Average Rating"   },
+    { val: "11,000+", label: "Students Trained" },
+    { val: "94%", label: "Placement Rate" },
+    { val: "400+", label: "Hiring Partners" },
+    { val: "4.9★", label: "Average Rating" },
 ];
 
 // ── Video Modal ──
@@ -259,7 +262,7 @@ function VideoCard({ video, index, onPlay }) {
                     border: "1px solid rgba(255,255,255,0.1)",
                 }}>
                     <svg viewBox="0 0 24 24" style={{ width: 11, height: 11, fill: "#ECAB00" }}>
-                        <path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.27l-1.2-.5 1.05-.93c1.3-1.17 1.72-2.96 1.12-4.53-.6-1.56-2.1-2.58-3.8-2.58H13.8c-1.5 0-2.9.8-3.5 2.15L8.03 8.7l1.2.5-1.05.93c-1.3 1.17-1.72 2.96-1.12 4.53.6 1.56 2.1 2.58 3.8 2.58h1.16c1.5 0 2.9-.8 3.5-2.15l2.26-4.7z"/>
+                        <path d="M10 14.65v-5.3L15 12l-5 2.65zm7.77-4.27l-1.2-.5 1.05-.93c1.3-1.17 1.72-2.96 1.12-4.53-.6-1.56-2.1-2.58-3.8-2.58H13.8c-1.5 0-2.9.8-3.5 2.15L8.03 8.7l1.2.5-1.05.93c-1.3 1.17-1.72 2.96-1.12 4.53.6 1.56 2.1 2.58 3.8 2.58h1.16c1.5 0 2.9-.8 3.5-2.15l2.26-4.7z" />
                     </svg>
                     <span style={{ fontSize: 8, fontWeight: 900, color: "#fff", letterSpacing: "0.12em" }}>SHORTS</span>
                 </div>
@@ -588,16 +591,16 @@ function CTABanner() {
                 >
                     Book Free Demo Class →
                 </a>
-                <button 
+                <button
                     onClick={openBrochureModal}
                     style={{
-                    display: "inline-flex", alignItems: "center", justifyContent: "center",
-                    border: "1.5px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)",
-                    fontWeight: 700, fontSize: 14,
-                    padding: "14px 34px", borderRadius: 100,
-                    textDecoration: "none", transition: "border-color 0.2s, color 0.2s",
-                    background: "transparent", cursor: "pointer",
-                }}
+                        display: "inline-flex", alignItems: "center", justifyContent: "center",
+                        border: "1.5px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)",
+                        fontWeight: 700, fontSize: 14,
+                        padding: "14px 34px", borderRadius: 100,
+                        textDecoration: "none", transition: "border-color 0.2s, color 0.2s",
+                        background: "transparent", cursor: "pointer",
+                    }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
                 >
@@ -609,29 +612,72 @@ function CTABanner() {
 }
 
 // ── ROOT ──
+import { Helmet } from "react-helmet-async";
+
 export default function TestimonialsPage() {
     useFonts();
     const [activeVideo, setActiveVideo] = useState(null);
 
     return (
         <>
+            {/* ✅ SEO Helmet (TOP PE hona chahiye) */}
+            <Helmet>
+                <title>Testimonials: See What Our Students Have to Say - Operating Media</title>
+                
+                <meta 
+                    name="description" 
+                    content="With over 11000 students trained in digital marketing course, we have some wonderful experiences shared by our alumni." 
+                />
+
+                <meta 
+                    name="keywords" 
+                    content="digital marketing testimonials, operating media reviews, student success stories, digital marketing course reviews" 
+                />
+
+                {/* ✅ Canonical */}
+                <link 
+                    rel="canonical" 
+                    href="https://www.operatingmedia.com/testimonials/" 
+                />
+            </Helmet>
+
+            {/* Styles */}
             <style>{`
                 * { box-sizing: border-box; }
                 body { margin: 0; }
-                @keyframes fadeIn  { from { opacity: 0 }                              to { opacity: 1 } }
-                @keyframes scaleIn { from { opacity: 0; transform: scale(0.92) translateY(30px) } to { opacity: 1; transform: scale(1) translateY(0) } }
+                @keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
+                @keyframes scaleIn { 
+                    from { opacity: 0; transform: scale(0.92) translateY(30px) } 
+                    to { opacity: 1; transform: scale(1) translateY(0) } 
+                }
                 ::-webkit-scrollbar { display: none; }
             `}</style>
 
-            <main style={{ fontFamily: "'Satoshi', sans-serif", background: "#FAFAF8", minHeight: "100vh" }}>
-                {/* Dot grid */}
+            <main 
+                style={{ 
+                    fontFamily: "'Satoshi', sans-serif", 
+                    background: "#FAFAF8", 
+                    minHeight: "100vh" 
+                }}
+            >
+                {/* Background Grid */}
                 <div style={{
-                    position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none",
+                    position: "fixed",
+                    inset: 0,
+                    zIndex: 0,
+                    pointerEvents: "none",
                     backgroundImage: "radial-gradient(circle, #00000007 1px, transparent 1px)",
                     backgroundSize: "28px 28px",
                 }} />
 
-                <div style={{ position: "relative", zIndex: 1, maxWidth: 1160, margin: "0 auto", padding: "0 32px 80px" }}>
+                {/* Content */}
+                <div style={{ 
+                    position: "relative", 
+                    zIndex: 1, 
+                    maxWidth: 1160, 
+                    margin: "0 auto", 
+                    padding: "0 32px 80px" 
+                }}>
                     <TestimonialsHero />
                     <StatsStrip />
                     <VideoGrid onPlay={setActiveVideo} />
@@ -640,7 +686,13 @@ export default function TestimonialsPage() {
                 </div>
             </main>
 
-            {activeVideo && <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />}
+            {/* Video Modal */}
+            {activeVideo && (
+                <VideoModal 
+                    video={activeVideo} 
+                    onClose={() => setActiveVideo(null)} 
+                />
+            )}
         </>
     );
 }
