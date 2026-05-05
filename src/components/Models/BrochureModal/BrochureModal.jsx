@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, User, Mail, Phone, MapPin, Sparkles } from "lucide-react";
 import { useModal } from "../../../context/ModalContext";
+import emailjs from "@emailjs/browser";
 
 const locations = ["Andheri", "Borivali", "Online"];
 
@@ -19,18 +20,44 @@ export default function BrochureModal() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.phone || !form.location) {
-      return;
+    if (!form.name || !form.email || !form.phone || !form.location) return;
+
+    const templateParams = {
+      user_name: form.name,
+      user_email: form.email,
+      user_phone: form.phone,
+      user_location: form.location,
+    };
+
+    try {
+      // Email 1: brochure sent to whoever filled the form
+      await emailjs.send(
+        "service_ujpmo0q",     // ← paste your Service ID here
+        "template_99mvsff",    // ← paste your Template 1 ID here
+        templateParams,
+        "A6giUtbZPDY6B9SGg"   // ← paste your Public Key here
+      );
+
+      // Email 2: lead details sent to your 3 team addresses
+      await emailjs.send(
+        "service_ujpmo0q",     // ← same Service ID
+        "template_xnf7fef",    // ← paste your Template 2 ID here
+        templateParams,
+        "A6giUtbZPDY6B9SGg"   // ← same Public Key
+      );
+
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+        closeBrochureModal();
+        setForm({ name: "", email: "", phone: "", location: "" });
+      }, 2500);
+
+    } catch (error) {
+      console.error("Email failed:", error);
     }
-    setSent(true);
-    // Simulate API call
-    setTimeout(() => {
-      setSent(false);
-      closeBrochureModal();
-      setForm({ name: "", email: "", phone: "", location: "" });
-    }, 2500);
   };
 
   if (!mounted) return null;
@@ -77,7 +104,7 @@ export default function BrochureModal() {
             <div className="relative p-8 md:p-10">
               {/* Header with Sparkle */}
               <div className="mb-8 relative">
-                
+
                 <h3 className="text-2xl font-black text-[#0f172a] tracking-tight leading-tight">
                   Download Our <br />
                   <span className="text-[#ECAB00]">Digital Brochure</span>
@@ -148,12 +175,11 @@ export default function BrochureModal() {
                   disabled={sent}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
-                  className={`relative mt-4 w-full py-4.5 rounded-2xl font-black text-white transition-all duration-500 overflow-hidden shadow-[0_20px_40px_-10px_rgba(236,171,0,0.3)] group ${
-                    sent ? "bg-green-500" : "bg-[#0f172a]"
-                  }`}
+                  className={`relative mt-4 w-full py-4.5 rounded-2xl font-black text-white transition-all duration-500 overflow-hidden shadow-[0_20px_40px_-10px_rgba(236,171,0,0.3)] group ${sent ? "bg-green-500" : "bg-[#0f172a]"
+                    }`}
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-[#ECAB00] to-[#FF6A00] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   <div className="relative flex items-center justify-center gap-3">
                     {sent ? (
                       <>
@@ -177,7 +203,7 @@ export default function BrochureModal() {
                 </button>
               </form>
 
-              
+
             </div>
           </motion.div>
         </>

@@ -11,11 +11,13 @@
 ## Project Structure
 - `src/components/`: Reusable, feature-specific UI components.
 - `src/pages/`: Top-level page components (e.g., Homepage, AboutUs, ContactPage).
+- `src/context/`: Global React Context providers for state management.
 - `src/assets/`: Static assets such as images and icons.
 
 ## Coding Conventions
 - **Component Style:** Use functional components and React Hooks.
 - **Styling:** Utilize Tailwind CSS utility classes for styling.
+- **State Management:** Use React Context (e.g., `ModalContext`) for global UI states like modals and popups.
 - **Linting:** Follow the existing ESLint rules (`npm run lint`). Ensure no lint warnings/errors are introduced when writing new code.
 - **Animations:** Use `framer-motion` for complex interactive animations and transitions.
 

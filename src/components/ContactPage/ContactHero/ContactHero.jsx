@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, MapPin, Mail, Phone, Clock, ChevronRight, User, ChevronDown, ArrowRight } from "lucide-react";
+import { ArrowUpRight, MapPin, Mail, Phone, Clock, User, ChevronDown, ArrowRight } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+// ── YOUR EMAILJS CREDENTIALS ──
+const EMAILJS_SERVICE_ID = "service_h6tdnuh";   // ← replace
+const EMAILJS_TEMPLATE_USER = "template_adrduww";  // ← Template 3 ID (auto-reply to user)
+const EMAILJS_TEMPLATE_TEAM = "template_tm7en9q";  // ← Template 4 ID (team notification)
+const EMAILJS_PUBLIC_KEY = "6nnnQ21cpn6nf4g7y";   // ← replace
 
 // ── DATA ──
 const campuses = [
@@ -54,11 +61,55 @@ const contactInfo = [
 export default function ContactHero() {
   const [activeTab, setActiveTab] = useState(0);
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
+  const nameRef = useRef('');
+  const phoneRef = useRef('');
+  const emailRef = useRef('');
+  const branchRef = useRef('');
+  const courseRef = useRef('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
+    setLoading(true);
+    setError(false);
+
+    const templateParams = {
+      user_name: nameRef.current,
+      user_email: emailRef.current,
+      user_phone: phoneRef.current,
+      user_branch: branchRef.current,
+      user_course: courseRef.current,
+    };
+
+    try {
+      // Auto-reply to user
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_USER,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      // Notification to your team
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_TEAM,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      setSent(true);
+      setTimeout(() => setSent(false), 3000);
+
+    } catch (err) {
+      console.error("Email failed:", err);
+      setError(true);
+      setTimeout(() => setError(false), 3000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -123,6 +174,7 @@ export default function ContactHero() {
                   <input
                     type="text"
                     placeholder="Full Name"
+                    onChange={(e) => nameRef.current = e.target.value}
                     className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-[15px] text-white placeholder-gray-500 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none"
                     required
                   />
@@ -137,6 +189,7 @@ export default function ContactHero() {
                   <input
                     type="tel"
                     placeholder="Phone Number"
+                    onChange={(e) => phoneRef.current = e.target.value}
                     className="w-full bg-transparent py-4 px-4 text-[15px] text-white placeholder-gray-500 outline-none"
                     required
                   />
@@ -150,6 +203,7 @@ export default function ContactHero() {
                   <input
                     type="email"
                     placeholder="Email Address"
+                    onChange={(e) => emailRef.current = e.target.value}
                     className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-[15px] text-white placeholder-gray-500 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none"
                     required
                   />
@@ -157,11 +211,14 @@ export default function ContactHero() {
 
                 {/* Branch */}
                 <div className="relative group">
-                  <select className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer">
+                  <select
+                    onChange={(e) => branchRef.current = e.target.value}
+                    className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer"
+                  >
                     <option value="">Select Branch</option>
-                    <option value="andheri">Andheri</option>
-                    <option value="borivali">Borivali</option>
-                    <option value="online">Online</option>
+                    <option value="Andheri">Andheri</option>
+                    <option value="Borivali">Borivali</option>
+                    <option value="Online">Online</option>
                   </select>
                   <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
                 </div>
@@ -169,25 +226,43 @@ export default function ContactHero() {
 
               {/* Course Interested */}
               <div className="relative group">
-                <select className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer">
+                <select
+                  onChange={(e) => courseRef.current = e.target.value}
+                  className="w-full bg-[#131B2F] border border-white/10 rounded-xl py-4 pl-4 pr-10 text-[15px] text-gray-400 focus:border-[#ECAB00] focus:ring-1 focus:ring-[#ECAB00] transition-all outline-none appearance-none cursor-pointer"
+                >
                   <option value="">Course Interested</option>
-                  <option value="masters">Master's Program in Digital Marketing</option>
-                  <option value="advance">Advance Diploma in Digital Marketing</option>
-                  <option value="diploma">Diploma in Digital Marketing</option>
-                  <option value="others">Others</option>
+                  <option value="Master's Program in Digital Marketing">Master's Program in Digital Marketing</option>
+                  <option value="Advance Diploma in Digital Marketing">Advance Diploma in Digital Marketing</option>
+                  <option value="Diploma in Digital Marketing">Diploma in Digital Marketing</option>
+                  <option value="Others">Others</option>
                 </select>
                 <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none" />
               </div>
 
-              {/* Submit */}
+              {/* Submit Button */}
               <button
                 type="submit"
-                className="mt-2 w-max flex items-center justify-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0A0F1C] font-black text-[15px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group"
+                disabled={loading}
+                className="mt-2 w-max flex items-center justify-center gap-2 bg-[#ECAB00] hover:bg-white text-[#0A0F1C] font-black text-[15px] px-8 py-4 rounded-xl transition-all duration-300 shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)] active:scale-95 group disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {sent
-                  ? "✓ Message Sent!"
-                  : <> Send Message <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" /> </>
-                }
+                {loading ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-[#0A0F1C]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                    </svg>
+                    Sending...
+                  </>
+                ) : sent ? (
+                  "✓ Message Sent!"
+                ) : error ? (
+                  "✗ Failed. Try again."
+                ) : (
+                  <>
+                    Send Message
+                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
               </button>
 
             </form>
@@ -302,8 +377,8 @@ export default function ContactHero() {
                 </div>
               </div>
 
-              <a
-                href={campuses[activeTab].directionsUrl}
+
+              <a href={campuses[activeTab].directionsUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-10 flex items-center gap-2 font-black text-[15px] text-[#2563eb] hover:text-[#0f172a] transition-colors group"
@@ -363,6 +438,6 @@ export default function ContactHero() {
           50% { opacity: 0.8; transform: scale(1.1); }
         }
       `}</style>
-    </main>
+    </main >
   );
 }

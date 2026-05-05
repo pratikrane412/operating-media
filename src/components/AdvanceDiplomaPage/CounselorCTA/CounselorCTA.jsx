@@ -1,10 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, ChevronDown, ArrowRight } from 'lucide-react';
+import emailjs from "@emailjs/browser";
+
+// ── YOUR EMAILJS CREDENTIALS (same as ContactHero) ──
+const EMAILJS_SERVICE_ID = "service_h6tdnuh";   // ← replace
+const EMAILJS_TEMPLATE_USER = "template_adrduww";  // ← Template 3 ID (user auto-reply)
+const EMAILJS_TEMPLATE_TEAM = "template_tm7en9q";  // ← Template 4 ID (team notification)
+const EMAILJS_PUBLIC_KEY = "6nnnQ21cpn6nf4g7y";   // ← replace
 
 export default function CounselorCTA() {
+    const [sent, setSent] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
-    // Inject Satoshi font dynamically
+    const nameRef = useRef('');
+    const phoneRef = useRef('');
+    const emailRef = useRef('');
+    const courseRef = useRef('');
+    const locationRef = useRef('');
+
     useEffect(() => {
         if (!document.querySelector('link[data-font="satoshi"]')) {
             const link = document.createElement("link");
@@ -15,7 +30,48 @@ export default function CounselorCTA() {
         }
     }, []);
 
-    // Animation variants for staggered form fields
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(false);
+
+        const templateParams = {
+            user_name: nameRef.current,
+            user_email: emailRef.current,
+            user_phone: phoneRef.current,
+            user_course: courseRef.current,
+            user_branch: locationRef.current,
+        };
+
+        try {
+            // Auto-reply to user
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_USER,
+                templateParams,
+                EMAILJS_PUBLIC_KEY
+            );
+
+            // Notification to your team
+            await emailjs.send(
+                EMAILJS_SERVICE_ID,
+                EMAILJS_TEMPLATE_TEAM,
+                templateParams,
+                EMAILJS_PUBLIC_KEY
+            );
+
+            setSent(true);
+            setTimeout(() => setSent(false), 3000);
+
+        } catch (err) {
+            console.error("Email failed:", err);
+            setError(true);
+            setTimeout(() => setError(false), 3000);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const containerVariants = {
         hidden: { opacity: 0 },
         show: {
@@ -64,6 +120,7 @@ export default function CounselorCTA() {
 
                         {/* ── Form Container ── */}
                         <motion.form
+                            onSubmit={handleSubmit}
                             variants={containerVariants}
                             initial="hidden"
                             whileInView="show"
@@ -78,6 +135,7 @@ export default function CounselorCTA() {
                                     <input
                                         type="text"
                                         placeholder="Enter Full Name"
+                                        onChange={(e) => nameRef.current = e.target.value}
                                         className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                                         required
                                     />
@@ -91,6 +149,7 @@ export default function CounselorCTA() {
                                     <input
                                         type="tel"
                                         placeholder="Phone Number"
+                                        onChange={(e) => phoneRef.current = e.target.value}
                                         className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                                         required
                                     />
@@ -102,6 +161,7 @@ export default function CounselorCTA() {
                                     <input
                                         type="email"
                                         placeholder="Email Address"
+                                        onChange={(e) => emailRef.current = e.target.value}
                                         className="bg-transparent outline-none w-full text-white text-[15px] placeholder:text-white/60 font-medium"
                                         required
                                     />
@@ -109,11 +169,15 @@ export default function CounselorCTA() {
 
                                 {/* Course Dropdown */}
                                 <motion.div variants={itemVariants} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#ecab00]/40 transition-all rounded-2xl px-5 py-4 flex items-center justify-between cursor-pointer group relative">
-                                    <select defaultValue="" className="bg-transparent outline-none w-full text-white/60 hover:text-white focus:text-white text-[15px] font-medium appearance-none cursor-pointer relative z-10 w-[110%]">
+                                    <select
+                                        defaultValue=""
+                                        onChange={(e) => courseRef.current = e.target.value}
+                                        className="bg-transparent outline-none w-full text-white/60 hover:text-white focus:text-white text-[15px] font-medium appearance-none cursor-pointer relative z-10 w-[110%]"
+                                    >
                                         <option value="" disabled hidden>Select Course</option>
-                                        <option value="diploma" className="text-black">Diploma in Digital Marketing</option>
-                                        <option value="advanced" className="text-black">Advanced Diploma</option>
-                                        <option value="master" className="text-black">Master's Program</option>
+                                        <option value="Diploma in Digital Marketing" className="text-black">Diploma in Digital Marketing</option>
+                                        <option value="Advanced Diploma in Digital Marketing" className="text-black">Advanced Diploma</option>
+                                        <option value="Master's Program in Digital Marketing" className="text-black">Master's Program</option>
                                     </select>
                                     <ChevronDown size={18} className="text-white/40 group-hover:text-[#ecab00] transition-colors absolute right-5 z-0" />
                                 </motion.div>
@@ -121,34 +185,54 @@ export default function CounselorCTA() {
 
                             {/* Location Dropdown (Full Width) */}
                             <motion.div variants={itemVariants} className="bg-white/5 backdrop-blur-md border border-white/10 hover:border-[#ecab00]/40 transition-all rounded-2xl px-5 py-4 flex items-center justify-between cursor-pointer group relative mt-1">
-                                <select defaultValue="" className="bg-transparent outline-none w-full text-white/60 hover:text-white focus:text-white text-[15px] font-medium appearance-none cursor-pointer relative z-10">
+                                <select
+                                    defaultValue=""
+                                    onChange={(e) => locationRef.current = e.target.value}
+                                    className="bg-transparent outline-none w-full text-white/60 hover:text-white focus:text-white text-[15px] font-medium appearance-none cursor-pointer relative z-10"
+                                >
                                     <option value="" disabled hidden>Select Preferred Location</option>
-                                    <option value="andheri" className="text-black">Andheri Campus</option>
-                                    <option value="borivali" className="text-black">Borivali Campus</option>
-                                    <option value="online" className="text-black">Online Batch</option>
+                                    <option value="Andheri Campus" className="text-black">Andheri Campus</option>
+                                    <option value="Borivali Campus" className="text-black">Borivali Campus</option>
+                                    <option value="Online Batch" className="text-black">Online Batch</option>
                                 </select>
                                 <ChevronDown size={18} className="text-white/40 group-hover:text-[#ecab00] transition-colors absolute right-5 z-0" />
                             </motion.div>
 
                             {/* Submit Button */}
                             <motion.div variants={itemVariants} className="mt-4">
-                                <a href="/contact">
-                                    <button
-                                        type="button"
-                                        className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden"
-                                    >
-                                        <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
-                                        <span className="relative z-10">Request A Quote</span>
-                                        <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
-                                    </button>
-                                </a>
+                                <button
+                                    type="submit"
+                                    disabled={loading}
+                                    className="group relative bg-[#ecab00] hover:bg-[#d99c00] text-[#0A0F1C] flex items-center justify-center gap-2 w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-[16px] shadow-[0_10px_30px_-10px_rgba(236,171,0,0.6)] hover:shadow-[0_15px_40px_-10px_rgba(236,171,0,0.8)] hover:-translate-y-1 active:scale-95 transition-all duration-300 overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                                >
+                                    <span className="absolute inset-0 w-full h-full bg-white/30 -translate-x-full group-hover:animate-shine" />
+
+                                    {loading ? (
+                                        <>
+                                            <svg className="animate-spin h-4 w-4 text-[#0A0F1C] relative z-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                                            </svg>
+                                            <span className="relative z-10">Sending...</span>
+                                        </>
+                                    ) : sent ? (
+                                        <span className="relative z-10">✓ Request Sent!</span>
+                                    ) : error ? (
+                                        <span className="relative z-10">✗ Failed. Try again.</span>
+                                    ) : (
+                                        <>
+                                            <span className="relative z-10">Request A Callback</span>
+                                            <ArrowRight size={18} strokeWidth={3} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                                        </>
+                                    )}
+                                </button>
                             </motion.div>
 
                         </motion.form>
                     </motion.div>
                 </div>
 
-                {/* ════ RIGHT SIDE: GIRL IMAGE (HEIGHT INCREASED) ════ */}
+                {/* ════ RIGHT SIDE: GIRL IMAGE ════ */}
                 <div className="w-full lg:w-[50%] flex items-end justify-center lg:justify-end z-10 pt-10 lg:pt-0 pointer-events-none">
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
@@ -164,7 +248,7 @@ export default function CounselorCTA() {
                             style={{ transform: 'scale(1.4)', transformOrigin: 'bottom center' }}
                         />
 
-                        {/* Logo applied to shirt digitally */}
+                        {/* Logo on shirt */}
                         <div className="absolute top-[48%] left-[45%] lg:top-[50%] lg:left-[45%] -translate-x-1/2 -translate-y-1/2 opacity-80 mix-blend-multiply pointer-events-none transform -rotate-3 z-30">
                             <img
                                 src="https://www.operatingmedia.com/wp-content/uploads/2023/07/OM-Logo.png"
@@ -180,14 +264,13 @@ export default function CounselorCTA() {
 
             </div>
 
-            {/* Custom Animation Style */}
             <style>{`
-        .animate-pulse-slow {
-          animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes shine { 100% { transform: translateX(100%); } }
-        .animate-shine { animation: shine 1.5s ease; }
-      `}</style>
+                .animate-pulse-slow {
+                    animation: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                }
+                @keyframes shine { 100% { transform: translateX(100%); } }
+                .animate-shine { animation: shine 1.5s ease; }
+            `}</style>
         </section>
     );
 }
