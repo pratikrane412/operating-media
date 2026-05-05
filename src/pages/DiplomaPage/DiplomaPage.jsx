@@ -3,7 +3,7 @@ import HeroSection from "../../components/DiplomaPage/HeroSection/HeroSection";
 import CourseSelection from "../../components/DiplomaPage/CourseSelection/CourseSelection";
 import TransformationSection from "../../components/DiplomaPage/TransformationSection/TransformationSection";
 import SyllabusSection from "../../components/DiplomaPage/SyllabusSection/SyllabusSection";
-import CounselorCTA from "../../components/DiplomaPage/CounselorCTA/CounselorCTA";
+import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 import WhyUsSection from "../../components/DiplomaPage/WhyUsSection/WhyUsSection";
 import ToolsTicker from "../../components/MastersProgramPage/ToolsTicker/ToolsTicker";
 import TrainersSection from "../../components/TrainersSection/TrainersSection";

@@ -9,7 +9,7 @@ import EventsAndBatches from '../../components/EventsAndBatches/EventsAndBatches
 import StatsCounter from '../../components/StatsCounter/StatsCounter.jsx';
 import InstitutionCampus from '../../components/MastersProgramPage/InstitutionCampus/InstitutionCampus.jsx';
 import AlumniPlacement from '../../components/AlumniPlacement/AlumniPlacement';
-import CounselorCTA from '../../components/MastersProgramPage/CounselorCTA/CounselorCTA.jsx';
+import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 import TrainersSection from '../../components/TrainersSection/TrainersSection';
 import LearningSection from '../../components/LearningSection/LearningSection';
 import HiringPartners from '../../components/HiringPartners/HiringPartners';

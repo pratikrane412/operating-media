@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronRight, Menu, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useModal } from "../../context/ModalContext";
 
 const MobileAccordion = ({ label, children, color, sub }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,7 @@ const MobileAccordion = ({ label, children, color, sub }) => {
 };
 
 const Navbar = () => {
+  const { openBrochureModal } = useModal();
   const [open, setOpen] = useState(false);
   const [certOpen, setCertOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
@@ -220,11 +222,12 @@ const Navbar = () => {
           <Link to="/blogs" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Blogs</Link>
           <Link to="/contact" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Contact</Link>
 
-          <Link to="/brochure">
-            <button className="bg-black text-white px-5 py-2.5 rounded-lg hover:bg-[#ECAB00] hover:text-black transition">
-              Download Brochure
-            </button>
-          </Link>
+          <button 
+            onClick={openBrochureModal}
+            className="bg-black text-white px-5 py-2.5 rounded-lg hover:bg-[#ECAB00] hover:text-black transition"
+          >
+            Download Brochure
+          </button>
         </div>
 
         {/* MOBILE ICON */}
@@ -322,11 +325,12 @@ const Navbar = () => {
               <Link to="/contact" onClick={closeMobile} className="px-3 py-3 font-semibold text-gray-800 hover:text-[#ECAB00] no-underline">Contact</Link>
 
               <div className="mt-3">
-                <Link to="/brochure" onClick={closeMobile}>
-                  <button className="w-full bg-[#ECAB00] text-black font-bold py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300">
-                    Download Brochure
-                  </button>
-                </Link>
+                <button 
+                  onClick={() => { openBrochureModal(); closeMobile(); }}
+                  className="w-full bg-[#ECAB00] text-black font-bold py-3 rounded-xl hover:bg-black hover:text-white transition-all duration-300"
+                >
+                  Download Brochure
+                </button>
               </div>
 
             </div>

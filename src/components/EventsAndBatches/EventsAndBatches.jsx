@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Rocket, ShieldCheck, ArrowUpRight, Sparkles, Clock } from 'lucide-react';
+import { useModal } from '../../context/ModalContext';
 
 const batches = [
   { type: 'Weekday', andheri: '12:00 PM – 2:00 PM', borivali: '08:00 AM – 09:30 AM' },
@@ -88,7 +89,7 @@ function BatchTable({ campus, dataKey, delay }) {
 }
 
 export default function EventsAndBatches() {
-  
+  const { openBrochureModal } = useModal();
   // Inject Satoshi font dynamically
   useEffect(() => {
     if (!document.querySelector('link[data-font="satoshi"]')) {
@@ -212,7 +213,10 @@ export default function EventsAndBatches() {
               </a>
               
               {/* Secondary Button */}
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border-2 border-white/20 px-8 py-4 text-white hover:border-[#ecab00] hover:bg-[#ecab00]/10 active:scale-95 transition-all duration-300 font-bold text-[16px] cursor-pointer">
+              <button 
+                onClick={openBrochureModal}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl border-2 border-white/20 px-8 py-4 text-white hover:border-[#ecab00] hover:bg-[#ecab00]/10 active:scale-95 transition-all duration-300 font-bold text-[16px] cursor-pointer"
+              >
                 Download Brochure
               </button>
 

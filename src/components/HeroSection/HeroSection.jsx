@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useModal } from "../../context/ModalContext";
 
 export default function HeroUltra() {
   const [mounted, setMounted] = useState(false);
+  const { openBrochureModal } = useModal();
 
   useEffect(() => {
     // Component mount hote hi animation trigger karne ke liye
@@ -82,7 +84,10 @@ export default function HeroUltra() {
           </a>
 
             {/* Secondary Button (Sweep Fill) */}
-            <button className="group relative w-full sm:w-auto border-2 border-[#2563eb] text-[#2563eb] px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 active:scale-95">
+            <button 
+              onClick={openBrochureModal}
+              className="group relative w-full sm:w-auto border-2 border-[#2563eb] text-[#2563eb] px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 active:scale-95"
+            >
               <div className="absolute inset-0 bg-[#2563eb] w-0 group-hover:w-full transition-all duration-300 ease-out" />
               <span className="relative z-10 flex items-center justify-center transition-colors duration-300 group-hover:text-white">
                 Download Brochure

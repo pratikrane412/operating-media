@@ -4,8 +4,8 @@ import ScrollToTop from './components/ScrollToTop/ScrollToTop'; //
 import TopHeader from './components/TopHeader/TopHeader';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import BrochureModal from './components/Models/BrochureModal/BrochureModal';
 import LocationsSection from './components/LocationsSection/LocationsSection.jsx';
-
 
 import Homepage from './pages/Homepage/Homepage.jsx';
 import MastersProgram from './pages/MastersProgram/MastersProgram.jsx';
@@ -76,6 +76,7 @@ function App() {
       </Routes>
       {/* <LocationsSection /> */}
       <Footer />
+      <BrochureModal />
     </div>
   );
 }

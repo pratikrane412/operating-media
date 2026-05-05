@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { X, Play, Star, Quote } from "lucide-react";
+import { useModal } from "../../context/ModalContext";
 
 // ── Font Loader ──
 function useFonts() {
@@ -542,6 +543,7 @@ function TextTestimonialsSection() {
 // ── CTA Banner ──
 function CTABanner() {
     const [ref, inView] = useInView(0.15);
+    const { openBrochureModal } = useModal();
     return (
         <div ref={ref} style={{
             borderRadius: 24,
@@ -586,18 +588,21 @@ function CTABanner() {
                 >
                     Book Free Demo Class →
                 </a>
-                <a href="#" style={{
+                <button 
+                    onClick={openBrochureModal}
+                    style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center",
                     border: "1.5px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.6)",
                     fontWeight: 700, fontSize: 14,
                     padding: "14px 34px", borderRadius: 100,
                     textDecoration: "none", transition: "border-color 0.2s, color 0.2s",
+                    background: "transparent", cursor: "pointer",
                 }}
                     onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "#fff"; }}
                     onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
                 >
                     Download Brochure
-                </a>
+                </button>
             </div>
         </div>
     );

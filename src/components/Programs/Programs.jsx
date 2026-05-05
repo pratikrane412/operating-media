@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useModal } from "../../context/ModalContext";
 
 // ── Icons (Pixel-Perfect) ─────────
 const ArrowRight = () => (
@@ -111,6 +112,7 @@ const COURSES = [
 
 // ── Course Card Component ──────────────────────────────────────
 function CourseCard({ course, inView, index }) {
+  const { openBrochureModal } = useModal();
   return (
     <div
       className={`group bg-white rounded-[2rem] border-[1px] transition-all duration-500 ease-out overflow-hidden flex flex-col shadow-sm transform hover:-translate-y-2
@@ -172,7 +174,10 @@ function CourseCard({ course, inView, index }) {
           </a>
           
           {/* Secondary Button */}
-          <button className="flex-1 w-full flex items-center justify-center gap-1.5 py-3.5 px-3 rounded-xl bg-white border-2 border-[#FFB800] text-[#D97706] hover:bg-[#FFFBEB] font-extrabold text-[14px] transition-all duration-300 active:scale-95 group/btn">
+          <button 
+            onClick={openBrochureModal}
+            className="flex-1 w-full flex items-center justify-center gap-1.5 py-3.5 px-3 rounded-xl bg-white border-2 border-[#FFB800] text-[#D97706] hover:bg-[#FFFBEB] font-extrabold text-[14px] transition-all duration-300 active:scale-95 group/btn"
+          >
             <span className="whitespace-nowrap">Download Brochure</span>
             <Download />
           </button>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, Linkedin, FileDown, Quote } from 'lucide-react';
+import { useModal } from '../../context/ModalContext';
 
 const BrandProjects = () => {
+  const { openBrochureModal } = useModal();
   const projects = [
     {
       student: "Diya Jain",
@@ -145,6 +147,7 @@ const BrandProjects = () => {
         {/* --- FOOTER BUTTON --- */}
         <div className="mt-24 flex justify-center">
           <motion.button
+            onClick={openBrochureModal}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-white text-[#f59f61] bg-[#f59f61] px-12 py-5 rounded-2xl font-black text-lg shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:bg-orange-500 hover:text-white transition-all flex items-center gap-4 group"

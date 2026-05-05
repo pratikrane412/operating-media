@@ -8,7 +8,7 @@ import WhyUsSection from "../../components/MastersProgramPage/WhyUsSection/WhyUs
 import ToolsTicker from "../../components/MastersProgramPage/ToolsTicker/ToolsTicker";
 import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import PlacementPartners from  "../../components/MastersProgramPage/PlacementPartners/PlacementPartners";
-import CounselorCTA from "../../components/MastersProgramPage/CounselorCTA/CounselorCTA";
+import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CertificationSection from "../../components/MastersProgramPage/CertificationSection/CertificationSection";
 import LMSSection from "../../components/MastersProgramPage/LMSSection/LMSSection";
