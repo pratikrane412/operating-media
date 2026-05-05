@@ -94,12 +94,15 @@ const BentoGridUnit = ({ images }) => (
 export default function InstitutionCampus() {
   // Stable Unsplash image links that won't break
   const images = [
-    { id: 1, url: "https://images.unsplash.com/photo-1523240715639-963c9ad08a6c?q=80&w=800&auto=format&fit=crop" },
-    { id: 2, url: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop" },
-    { id: 3, url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=600&auto=format&fit=crop" },
-    { id: 4, url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=600&auto=format&fit=crop" },
-    { id: 5, url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop" },
-    { id: 6, url: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800&auto=format&fit=crop" },
+    { id: 1, url: "/images/imag-1.webp" },
+    { id: 2, url: "/images/imag-2.webp" },
+    { id: 3, url: "/images/imag-3.webp" },
+    { id: 4, url: "/images/imag-4.webp" },
+    { id: 5, url: "/images/imag-5.webp" },
+    { id: 6, url: "/images/imag-6.webp" },
+    { id: 7, url: "/images/imag-7.webp" },
+    { id: 8, url: "/images/imag-8.webp" },
+    { id: 9, url: "/images/imag-9.webp" },
   ];
 
   // Inject Fonts Dynamically

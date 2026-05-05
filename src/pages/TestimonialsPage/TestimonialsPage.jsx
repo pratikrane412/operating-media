@@ -35,16 +35,28 @@ function useInView(threshold = 0.08) {
 // ── Data ──
 const SHORT_ID = "kl8XbbODq8M";
 
+
 const videos = [
-    { id: SHORT_ID, name: "Simran Kakwani", role: "Placed at Dentsu", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Hemlata Dangi", role: "SEO Manager, Agency", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Teena Dangi", role: "Performance Marketer", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Aryan Pote", role: "Google Ads Specialist", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Riya Sharma", role: "Social Media Lead", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Karan Mehta", role: "E-Commerce Manager", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Pooja Verma", role: "Content Strategist", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-    { id: SHORT_ID, name: "Nikhil Desai", role: "Digital Analyst", thumb: `https://i.ytimg.com/vi/${SHORT_ID}/hqdefault.jpg` },
-].slice(0, 8);
+  { id: "MFGeJ-_aYoQ", name: "Aryan Jain" },
+  { id: "7jMBE5Yrqgk", name: "Gauri" },
+  { id: "z5PQNWYtgs8", name: "Pranav" },
+  { id: "e86nFlOC7f8", name: "Javal Desai" },
+  { id: "ootRcNXIW9g", name: "Himanshi" },
+  { id: "Vy1Ei-US_r8", name: "Shantanu" },
+  { id: "GlvxX861O8Y", name: "Pooja Verma" },
+  { id: "LtZpNs7XiCc", name: "Haldi Padiyar" },
+  { id: "hAjwmJ-t82U", name: "Monali" },
+  { id: "ltYRY5hYgoM", name: "Bhavini" },
+  { id: "I2xj4eIsVP8", name: "Dhanshree" },
+  { id: "kl8XbbODq8M", name: "Haransh" },
+  { id: "oBM0j4dRM8E", name: "Sharanya" },
+  { id: "k6xWMghXaAA", name: "Aman" },
+  { id: "npF34n65GV8", name: "Prachi" },
+  { id: "eRqK9oHb7IQ", name: "Dakshna" },
+].map(v => ({
+  ...v,
+  thumb: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
+})).slice(0, 16);
 
 const textTestimonials = [
     {

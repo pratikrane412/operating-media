@@ -2,16 +2,28 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
-// ── Dummy Video Data ──
-// Yaha aap apne YouTube Short ka ID dale.
-// Abhi maine ek working ID dala hai taki aap check kar sako.
-const SHORT_ID_TO_REPEAT = 'kl8XbbODq8M'; 
-
-const videos = Array.from({ length: 15 }).map((_, index) => ({
-  id: SHORT_ID_TO_REPEAT,
-  name: `Student ${index + 1}`,
-  // Thumbnail ke liye YouTube ka official URL structure:
-  thumb: `https://i.ytimg.com/vi/${SHORT_ID_TO_REPEAT}/hqdefault.jpg`, 
+// ── Student Video Data ──
+// Yaha aap 'kl8XbbODq8M' ki jagah apne actual YouTube Short ke IDs daal de.
+const videos = [
+  { id: "MFGeJ-_aYoQ", name: "Aryan Jain" },
+  { id: "7jMBE5Yrqgk", name: "Gauri" },
+  { id: "z5PQNWYtgs8", name: "Pranav" },
+  { id: "e86nFlOC7f8", name: "Javal Desai" },
+  { id: "ootRcNXIW9g", name: "Himanshi" },
+  { id: "Vy1Ei-US_r8", name: "Shantanu" },
+  { id: "GlvxX861O8Y", name: "Pooja Verma" },
+  { id: "LtZpNs7XiCc", name: "Haldi Padiyar" },
+  { id: "hAjwmJ-t82U", name: "Monali" },
+  { id: "ltYRY5hYgoM", name: "Bhavini" },
+  { id: "I2xj4eIsVP8", name: "Dhanshree" },
+  { id: "kl8XbbODq8M", name: "Haransh" },
+  { id: "oBM0j4dRM8E", name: "Sharanya" },
+  { id: "k6xWMghXaAA", name: "Aman" },
+  { id: "npF34n65GV8", name: "Prachi" },
+  { id: "eRqK9oHb7IQ", name: "Dakshna" },
+].map(video => ({
+  ...video,
+  thumb: `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
 }));
 
 // ── Video Popup Modal (With Sound) ──

@@ -4,22 +4,22 @@ import { Camera, X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 
 // ─── GALLERY IMAGES DATA ──────────────────────────────────────────────────────
 const galleryImages = [
-  "https://www.operatingmedia.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-01-18-at-15.23.38-2.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-01-18-at-15.23.38-1.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/06/WhatsApp-Image-2024-01-18-at-15.11.22.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/06/3.jpg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/06/7.jpg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/07/2024-04-17.jpg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/07/6.jpg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-09-at-3.11.39-PM.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-03-at-12.08.33-1.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-05-at-16.11.39.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-23-at-13.52.16.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-03-at-12.08.33.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-09-at-3.11.42-PM-scaled.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2025/05/WhatsApp-Image-2024-12-21-at-01.24.55-2-1.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2025/05/WhatsApp-Image-2024-12-23-at-13.52.16-2.jpeg",
-  "https://www.operatingmedia.com/wp-content/uploads/2025/05/WhatsApp-Image-2025-04-18-at-13.21.48-2-1-scaled-e1747812226471.jpeg"
+  "/images/gallery-1.jpeg",
+  "/images/gallery-2.jpeg",
+  "/images/gallery-3.jpeg",
+  "/images/gallery-4.jpg",
+  "/images/gallery-5.jpg",
+  "/images/gallery-6.jpg",
+  "/images/gallery-7.jpg",
+  "/images/gallery-8.jpeg",
+  "/images/gallery-9.jpeg",
+  "/images/gallery-10.jpeg",
+  "/images/gallery-11.jpeg",
+  "/images/gallery-12.jpeg",
+  "/images/gallery-13.jpeg",
+  "/images/gallery-14.jpeg",
+  "/images/gallery-15.jpeg",
+  "/images/gallery-16.jpeg",
 ];
 
 export default function GallerySection() {

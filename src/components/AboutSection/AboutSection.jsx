@@ -231,7 +231,7 @@ export default function AboutSectionPremium() {
               
               <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_50px_-10px_rgba(15,23,42,0.2)] border border-white">
                 <div className="aspect-[16/10] overflow-hidden group">
-                  <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=85" alt="Classroom" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[10s] ease-linear" />
+                  <img src="/images/imag-2.webp" alt="Classroom" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[10s] ease-linear" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/90 via-[#0f172a]/20 to-transparent" />
                 </div>
 
