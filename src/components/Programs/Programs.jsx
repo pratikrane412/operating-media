@@ -56,7 +56,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "8 Months / 600 Hours",
+      "8 Months / 200 Hours",
       "120+ Tools Covered",
       "Advanced Strategy + Execution",
       "Placement Focused"
@@ -79,7 +79,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "4 Months / 400 Hours",
+      "4 Months / 110 Hours",
       "(AI) in Digital Marketing",
       "70+ Tools",
       "Hands-on Campaign"
@@ -102,7 +102,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "2-3 Months / 200 Hours",
+      "2-3 Months / 80 Hours",
       "Core Fundamentals",
       "Practical Basics",
       "Funnel Marketing"
