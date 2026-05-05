@@ -118,10 +118,10 @@ const textTestimonials = [
 ];
 
 const stats = [
-    { val: "11,000+", label: "Students Trained" },
-    { val: "94%", label: "Placement Rate" },
-    { val: "400+", label: "Hiring Partners" },
-    { val: "4.9★", label: "Average Rating" },
+    { val: "16,000+", label: "Students Trained" },
+    { val: "96%", label: "Placement Rate" },
+    { val: "2500+", label: "Hiring Partners" },
+    { val: "4.8★", label: "Average Rating" },
 ];
 
 // ── Video Modal ──
