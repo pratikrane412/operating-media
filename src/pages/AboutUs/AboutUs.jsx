@@ -3,6 +3,8 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Users, Star, Award, BookOpen, Target, TrendingUp, ShieldCheck, Globe } from 'lucide-react';
 import StudentReviews from '../../components/StudentReviews/StudentReviews.jsx';
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 // ── Font injection ──
 function useFonts() {
@@ -419,14 +421,69 @@ function AboutCTA() {
 // ── ROOT ──
 export default function AboutUs() {
     useFonts();
+
+    const location = useLocation();
+
+    // 🔥 Dynamic base URL
+    const baseUrl = window.location.origin;
+
+    // 🔥 Clean canonical
+    const cleanPath = location.pathname.replace(/\/$/, '') || '/';
+    const canonicalUrl = baseUrl + cleanPath;
+
     return (
-        <main className="font-['Satoshi',sans-serif]">
-            <AboutHero />
-            <WhoWeAre />
-            <Faculty />
-            <TrustedBrands />
-            <AboutCTA />
-            <StudentReviews />
-        </main>
+        <>
+            <Helmet>
+
+                {/* ✅ Primary SEO */}
+                <title>About Us - Operating Media</title>
+
+                <meta
+                    name="description"
+                    content="Operating Media is a leading digital marketing institute in mumbai. Since its inception in 2011, it have trained over 11000 students."
+                />
+
+                <meta
+                    name="keywords"
+                    content="about digital marketing institute Mumbai, Operating Media, marketing training institute, digital marketing trainers"
+                />
+
+                {/* ✅ Canonical */}
+                <link
+                    rel="canonical"
+                    href="https://www.operatingmedia.com/about-us/"
+                />
+
+                {/* ✅ Open Graph */}
+                <meta property="og:title" content="About Operating Media" />
+                <meta
+                    property="og:description"
+                    content="Know our journey, trainers & why 11,000+ students trust us."
+                />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:type" content="website" />
+
+                {/* ✅ Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="About Operating Media" />
+                <meta
+                    name="twitter:description"
+                    content="Explore our institute, trainers & student success stories."
+                />
+
+                {/* ✅ Robots */}
+                <meta name="robots" content="index, follow" />
+
+            </Helmet>
+
+            <main className="font-['Satoshi',sans-serif]">
+                <AboutHero />
+                <WhoWeAre />
+                <Faculty />
+                <TrustedBrands />
+                <AboutCTA />
+                <StudentReviews />
+            </main>
+        </>
     );
 }

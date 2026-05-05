@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Users, Star, ShieldCheck, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AlumniPlacement from '../../components/AlumniPlacement/AlumniPlacement';
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 function useFonts() {
     useEffect(() => {
@@ -17,6 +19,42 @@ function useFonts() {
 }
 
 const trainers = [
+   {
+        name: "Harsh Pareek",
+        role: "Digital Marketing Agency Owner",
+        exp: "15+ Years",
+        tag: "1000+ Campaigns",
+        bio: "An out-and-out strategist when it comes to growing a small idea into a profitable business. Harsh has implemented his expertise in 1000+ successful campaigns for clients all over the globe. He runs Ibraine — a successful Digital Marketing Agency serving clients from over 18 countries.",
+        skills: ["SEM & PPC", "Campaign Strategy", "Business Growth", "Global Marketing"],
+        img: "/images/Harsh-Ibraine.webp",
+        linkedin: "https://www.linkedin.com/in/pharsh88/",
+        accent: "#ECAB00",
+        num: "02",
+    },
+    {
+        name: "Neelkamal Mukharjee",
+        role: "E-Commerce & Marketplace Specialist",
+        exp: "10+ Years",
+        tag: "Amazon Expert",
+        bio: "Neelkamal has built and scaled dozens of e-commerce brands from zero to revenue. His D2C expertise and marketplace strategy make him one of India's most sought-after educators in the e-commerce space — covering Amazon Ads, marketplace SEO, and direct-to-consumer growth.",
+        skills: ["E-Commerce", "Amazon Ads", "D2C Growth", "Marketplace SEO"],
+        img: "/images/neel.png",
+        linkedin: "https://www.linkedin.com/",
+        accent: "#EC4899",
+        num: "07",
+    },
+    {
+        name: "Rahul Shinde",
+        role: "AI & Automation Marketing Lead",
+        exp: "9+ Years",
+        tag: "AI Pioneer",
+        bio: "At the frontier of AI-powered marketing, helping brands integrate ChatGPT, automation, and machine learning into everyday campaigns. With 9+ years of experience, Rahul has transformed 50+ companies across India and Southeast Asia with cutting-edge growth hacking and AI-driven workflows.",
+        skills: ["AI Marketing", "Automation", "ChatGPT Workflows", "Growth Hacking"],
+        img: "/images/rahul.png",
+        linkedin: "https://www.linkedin.com/",
+        accent: "#0EA5E9",
+        num: "08",
+    },
     {
         name: "Shraddha Rane",
         role: "Corporate Trainer & Digital Marketing Expert",
@@ -28,18 +66,6 @@ const trainers = [
         linkedin: "https://www.linkedin.com/in/shraddha-rane-95025b128/",
         accent: "#FF6B00",
         num: "01",
-    },
-    {
-        name: "Harsh Pareek",
-        role: "Digital Marketing Agency Owner",
-        exp: "15+ Years",
-        tag: "1000+ Campaigns",
-        bio: "An out-and-out strategist when it comes to growing a small idea into a profitable business. Harsh has implemented his expertise in 1000+ successful campaigns for clients all over the globe. He runs Ibraine — a successful Digital Marketing Agency serving clients from over 18 countries.",
-        skills: ["SEM & PPC", "Campaign Strategy", "Business Growth", "Global Marketing"],
-        img: "/images/Harsh-Ibraine.webp",
-        linkedin: "https://www.linkedin.com/in/pharsh88/",
-        accent: "#ECAB00",
-        num: "02",
     },
     {
         name: "Hemant Mane",
@@ -88,30 +114,6 @@ const trainers = [
         linkedin: "https://www.linkedin.com/in/vikram-kamble/",
         accent: "#059669",
         num: "06",
-    },
-    {
-        name: "Neelkamal Mukharjee",
-        role: "E-Commerce & Marketplace Specialist",
-        exp: "10+ Years",
-        tag: "Amazon Expert",
-        bio: "Neelkamal has built and scaled dozens of e-commerce brands from zero to revenue. His D2C expertise and marketplace strategy make him one of India's most sought-after educators in the e-commerce space — covering Amazon Ads, marketplace SEO, and direct-to-consumer growth.",
-        skills: ["E-Commerce", "Amazon Ads", "D2C Growth", "Marketplace SEO"],
-        img: "/images/neel.png",
-        linkedin: "https://www.linkedin.com/",
-        accent: "#EC4899",
-        num: "07",
-    },
-    {
-        name: "Rahul Shinde",
-        role: "AI & Automation Marketing Lead",
-        exp: "9+ Years",
-        tag: "AI Pioneer",
-        bio: "At the frontier of AI-powered marketing, helping brands integrate ChatGPT, automation, and machine learning into everyday campaigns. With 9+ years of experience, Rahul has transformed 50+ companies across India and Southeast Asia with cutting-edge growth hacking and AI-driven workflows.",
-        skills: ["AI Marketing", "Automation", "ChatGPT Workflows", "Growth Hacking"],
-        img: "/images/rahul.png",
-        linkedin: "https://www.linkedin.com/",
-        accent: "#0EA5E9",
-        num: "08",
     },
 ];
 
@@ -526,6 +528,32 @@ export default function TrainersPage() {
     useFonts();
     return (
         <main className="font-['Satoshi',sans-serif]">
+
+            <Helmet>
+                <title>Our Trainers - Operating Media</title>
+                
+                <meta 
+                    name="description" 
+                    content="Operating Media has the best digital marketing trainers in the industry with over 10 years of experience. Call 7700022882 for more details." 
+                />
+
+                <meta 
+                    name="keywords" 
+                    content="digital marketing trainers, marketing mentors Mumbai, SEO trainer, PPC expert, social media trainer, Operating Media trainers" 
+                />
+
+                <link
+                    rel="canonical"
+                    href="https://www.operatingmedia.com/our-trainers/"
+                />
+
+                <meta property="og:title" content="Top Digital Marketing Trainers | Operating Media" />
+                <meta property="og:description" content="Meet industry experts teaching real-world digital marketing skills with live campaigns." />
+                <meta property="og:type" content="website" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+            </Helmet>
+
             <TrainersHero />
             <RosterGrid />
             <WhyOurTrainers />

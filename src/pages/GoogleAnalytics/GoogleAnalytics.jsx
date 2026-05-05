@@ -1,11 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
-// ── Reused from AdvanceDiploma / PPC page ──
+// ── Reused ──
 import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 
-// ── Google Analytics-specific sections ──
+// ── GA-specific ──
 import GAHeroSection from "../../components/GoogleAnalyticsPage/GAHeroSection";
 import GAOverview from "../../components/GoogleAnalyticsPage/GAOverview";
 import GASyllabus from "../../components/GoogleAnalyticsPage/GASyllabus";
@@ -13,33 +15,70 @@ import GACertification from "../../components/GoogleAnalyticsPage/GACertificatio
 import GAFAQSection from "../../components/GoogleAnalyticsPage/GAFAQSection";
 
 const GoogleAnalytics = () => {
-    return (
-        <main>
-            {/* 1. Hero — unique to GA: rotating skill ticker, course info card, price display */}
-            <GAHeroSection />
 
-            {/* 2. Course Overview + Why Operating Media side-by-side */}
-            <GAOverview />
+  const location = useLocation();
 
-            {/* 3. Google Analytics Syllabus — GA4 accordion module */}
-            <GASyllabus />
+  // 🔥 Dynamic base URL
+  const baseUrl = window.location.origin;
 
-            {/* 4. Counselor CTA (reused) */}
-            <CounselorCTA />
+  // 🔥 Clean canonical URL
+  const cleanPath = location.pathname.replace(/\/$/, '') || '/';
+  const canonicalUrl = baseUrl + cleanPath;
 
-            {/* 5. Trainers Carousel (reused) */}
-            <TrainersSection />
+  return (
+    <>
+      <Helmet>
 
-            {/* 6. Student Reviews Marquee (reused) */}
-            <StudentReviews />
+        {/* ✅ Primary SEO */}
+        <title>Google Analytics Course, Classes & Training Andheri, Mumbai | Google Analytics Advanced Course - Operating Media</title>
 
-            {/* 7. Certification + LMS section */}
-            <GACertification />
+        <meta
+          name="description"
+          content="Operating Media provides complete Google Analytics Course, Classes & Training in Andheri, Mumbai. Call us at +91 7700022882 for more details."
+        />
 
-            {/* 8. FAQ Section */}
-            <GAFAQSection />
-        </main>
-    );
+        <meta
+          name="keywords"
+          content="Google Analytics course Mumbai, GA4 training, analytics course, web analytics training, data tracking course"
+        />
+
+        {/* ✅ Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* ✅ Open Graph */}
+        <meta property="og:title" content="Google Analytics Course | GA4 Training" />
+        <meta
+          property="og:description"
+          content="Master GA4, tracking, reporting & analytics with hands-on training."
+        />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+
+        {/* ✅ Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Google Analytics Course | GA4 Training" />
+        <meta
+          name="twitter:description"
+          content="Learn Google Analytics 4 with certification and practical training."
+        />
+
+        {/* ✅ Robots */}
+        <meta name="robots" content="index, follow" />
+
+      </Helmet>
+
+      <main>
+        <GAHeroSection />
+        <GAOverview />
+        <GASyllabus />
+        <CounselorCTA />
+        <TrainersSection />
+        <StudentReviews />
+        <GACertification />
+        <GAFAQSection />
+      </main>
+    </>
+  );
 };
 
 export default GoogleAnalytics;

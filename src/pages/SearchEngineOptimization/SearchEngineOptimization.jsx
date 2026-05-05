@@ -1,11 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
-// ── Reused from AdvanceDiploma / PPC page ──
+// ── Reused ──
 import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 
-// ── SEO-specific sections ──
+// ── SEO-specific ──
 import SEOHeroSection from "../../components/SEOPage/SEOHeroSection";
 import SEOOverview from "../../components/SEOPage/SEOOverview";
 import SEOSyllabus from "../../components/SEOPage/SEOSyllabus";
@@ -13,33 +15,70 @@ import SEOCertification from "../../components/SEOPage/SEOCertification";
 import SEOFAQSection from "../../components/SEOPage/SEOFAQSection";
 
 const SearchEngineOptimization = () => {
-    return (
-        <main>
-            {/* 1. Hero — rotating skill ticker, course info card, ₹9,000 price */}
-            <SEOHeroSection />
 
-            {/* 2. Course Overview + Why Operating Media side-by-side */}
-            <SEOOverview />
+  const location = useLocation();
 
-            {/* 3. SEO Syllabus — single accordion module (15 topics) */}
-            <SEOSyllabus />
+  // 🔥 Dynamic base URL
+  const baseUrl = window.location.origin;
 
-            {/* 4. Counselor CTA (reused) */}
-            <CounselorCTA />
+  // 🔥 Clean canonical URL
+  const cleanPath = location.pathname.replace(/\/$/, '') || '/';
+  const canonicalUrl = baseUrl + cleanPath;
 
-            {/* 5. Trainers Carousel (reused) */}
-            <TrainersSection />
+  return (
+    <>
+      <Helmet>
 
-            {/* 6. Student Reviews Marquee (reused) */}
-            <StudentReviews />
+        {/* ✅ Primary SEO */}
+        <title>Best Advanced Seo Learning Course & Training Online | SEO Certification Courses | SEO Training Institute, Courses & Classes Andheri - Operating Media</title>
 
-            {/* 7. Certification + LMS section */}
-            <SEOCertification />
+        <meta
+          name="description"
+          content="Operating Media is a trusted Search Engine Optimization (SEO) training institute in Mumbai and Andheri providing best advanced seo learning course & training online. Call us at +91 7700022882 for more details."
+        />
 
-            {/* 8. FAQ Section */}
-            <SEOFAQSection />
-        </main>
-    );
+        <meta
+          name="keywords"
+          content="SEO course Mumbai, search engine optimization training, on-page SEO, off-page SEO, technical SEO course"
+        />
+
+        {/* ✅ Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* ✅ Open Graph */}
+        <meta property="og:title" content="SEO Course | Search Engine Optimization Training" />
+        <meta
+          property="og:description"
+          content="Master SEO including on-page, off-page & technical SEO with hands-on training."
+        />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+
+        {/* ✅ Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="SEO Course | Search Engine Optimization Training" />
+        <meta
+          name="twitter:description"
+          content="Learn SEO with certification and practical training."
+        />
+
+        {/* ✅ Robots */}
+        <meta name="robots" content="index, follow" />
+
+      </Helmet>
+
+      <main>
+        <SEOHeroSection />
+        <SEOOverview />
+        <SEOSyllabus />
+        <CounselorCTA />
+        <TrainersSection />
+        <StudentReviews />
+        <SEOCertification />
+        <SEOFAQSection />
+      </main>
+    </>
+  );
 };
 
 export default SearchEngineOptimization;

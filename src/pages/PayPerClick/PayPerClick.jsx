@@ -1,11 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
-// ── Reused from AdvanceDiploma page ──
+// ── Reused ──
 import TrainersSection from "../../components/TrainersSection/TrainersSection";
 import StudentReviews from "../../components/StudentReviews/StudentReviews";
 import CounselorCTA from "../../components/AdvanceDiplomaPage/CounselorCTA/CounselorCTA";
 
-// ── PPC-specific sections ──
+// ── PPC-specific ──
 import PPCHeroSection from "../../components/PPCPage/PPCHeroSection";
 import PPCOverview from "../../components/PPCPage/PPCOverview";
 import PPCSyllabus from "../../components/PPCPage/PPCSyllabus";
@@ -13,33 +15,71 @@ import PPCCertification from "../../components/PPCPage/PPCCertification";
 import PPCFAQSection from "../../components/PPCPage/PPCFAQSection";
 
 const PayPerClick = () => {
-    return (
-        <main>
-            {/* 1. Dark Hero — unique to PPC: dark bg, price display, rotating skill ticker, course info card */}
-            <PPCHeroSection />
 
-            {/* 2. Course Overview + Why Operating Media side-by-side */}
-            <PPCOverview />
+  const location = useLocation();
 
-            {/* 3. Google Ads Syllabus — 2 accordion modules (SEM + YouTube) */}
-            <PPCSyllabus />
+  // 🔥 Dynamic base URL
+  const baseUrl = window.location.origin;
 
-            {/* 4. Counselor CTA (reused) */}
-            <CounselorCTA />
+  // 🔥 Clean canonical URL
+  const cleanPath = location.pathname.replace(/\/$/, '') || '/';
+  const canonicalUrl = baseUrl + cleanPath;
 
-            {/* 5. Trainers Carousel (reused) */}
-            <TrainersSection />
+  return (
+    <>
+      <Helmet>
 
-            {/* 6. Student Reviews Marquee (reused) */}
-            <StudentReviews />
+        {/* ✅ Primary SEO */}
+        <title>PPC Training, Courses & Classes Online Mumbai | Google Ads Training & Certification Course Online | Google Adwords Training Course, SEM Classes, Course & Training Andheri & Mumbai - Operating Media
+</title>
 
-            {/* 7. Certification + LMS section */}
-            <PPCCertification />
+        <meta
+          name="description"
+          content="Certified (PPC) Pay Per Click training course by Operating Media will help you grow your business exponentially. Call us at +917700022882."
+        />
 
-            {/* 8. FAQ Section */}
-            <PPCFAQSection />
-        </main>
-    );
+        <meta
+          name="keywords"
+          content="PPC course Mumbai, Google Ads training, pay per click course, SEM course, YouTube ads training"
+        />
+
+        {/* ✅ Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+
+        {/* ✅ Open Graph */}
+        <meta property="og:title" content="PPC Course | Google Ads Training" />
+        <meta
+          property="og:description"
+          content="Master PPC advertising including Search, Display & YouTube Ads with hands-on training."
+        />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
+
+        {/* ✅ Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="PPC Course | Google Ads Training" />
+        <meta
+          name="twitter:description"
+          content="Learn PPC, Google Ads & YouTube Ads with certification."
+        />
+
+        {/* ✅ Robots */}
+        <meta name="robots" content="index, follow" />
+
+      </Helmet>
+
+      <main>
+        <PPCHeroSection />
+        <PPCOverview />
+        <PPCSyllabus />
+        <CounselorCTA />
+        <TrainersSection />
+        <StudentReviews />
+        <PPCCertification />
+        <PPCFAQSection />
+      </main>
+    </>
+  );
 };
 
 export default PayPerClick;
