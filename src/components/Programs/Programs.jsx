@@ -56,10 +56,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
 
     features: [
-      "8 Months / 200 Hours",
       "120+ Tools Covered",
+      "Placement Focused",
       "Advanced Strategy + Execution",
-      "Placement Focused"
+      "Includes Gen-AI & Prompt Engineering"
     ]
   },
   {
@@ -79,10 +79,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
 
     features: [
-      "4 Months / 110 Hours",
-      "(AI) in Digital Marketing",
       "70+ Tools",
-      "Hands-on Campaign"
+      "Standard LMS Access",
+      "Hands-on Campaign Training",
+      "Core Digital Specialization"
     ]
   },
   {
@@ -102,10 +102,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
 
     features: [
-      "2-3 Months / 80 Hours",
-      "Core Fundamentals",
+      "40+ Tools",
       "Practical Basics",
-      "Funnel Marketing"
+      "Core Fundamentals",
+      "Industry Recognized Certification"
     ]
   }
 ];
