@@ -16,6 +16,7 @@ import HiringPartners from '../../components/HiringPartners/HiringPartners';
 import InfoSection from '../../components/InfoSection/InfoSection';
 import StudentReviews from '../../components/StudentReviews/StudentReviews.jsx';
 import InstitutionCampus from '../../components/MastersProgramPage/InstitutionCampus/InstitutionCampus.jsx';
+import CareerOutcomes from '../../components/CareerOutcomes/CareerOutcomes.jsx';
 
 const Homepage = () => {
 
@@ -34,14 +35,14 @@ const Homepage = () => {
         {/* ✅ Primary SEO */}
         <title>Digital Marketing Institute Mumbai, Digital Marketing Training & Courses Mumbai, SEO Training Institute, Courses & Classes Mumbai - Operating Media</title>
 
-        <meta 
-          name="description" 
-          content="Operating Media is a leading digital marketing training institute providing training in PPC, SEO, SMO and Google Analytics. Call us at +91 7700022882 for more information." 
+        <meta
+          name="description"
+          content="Operating Media is a leading digital marketing training institute providing training in PPC, SEO, SMO and Google Analytics. Call us at +91 7700022882 for more information."
         />
 
-        <meta 
-          name="keywords" 
-          content="digital marketing course Mumbai, SEO training, PPC course, social media marketing institute" 
+        <meta
+          name="keywords"
+          content="digital marketing course Mumbai, SEO training, PPC course, social media marketing institute"
         />
 
         {/* ✅ Canonical (auto page-wise) */}
@@ -67,6 +68,7 @@ const Homepage = () => {
         <Strpi />
         <AboutSection />
         <Programs />
+        <CareerOutcomes />
         <WhyUsAuthority />
         <EventsAndBatches />
         <AlumniPlacement />
