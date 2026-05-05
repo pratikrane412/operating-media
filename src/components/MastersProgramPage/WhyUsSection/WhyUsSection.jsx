@@ -110,7 +110,7 @@ export default function WhyUsSection() {
                 Mumbai's #1 Choice
                 {/* Gold Underline Effect */}
                 <svg className="absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent"/>
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="transparent" />
                 </svg>
               </span>
             </h2>
@@ -156,14 +156,15 @@ export default function WhyUsSection() {
 
           <div className="relative z-10 flex flex-col sm:flex-row gap-4 w-full lg:w-auto shrink-0">
             {/* Primary Button (Gold) */}
-            <button className="group flex items-center justify-center gap-2 font-black text-[#0f172a] px-8 py-4 rounded-xl bg-[#ECAB00] hover:bg-white hover:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.4)] transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
-              Get 1:1 Career Counseling 
-            </button>
-
+            <a href="/contact-us/">
+              <button className="group flex items-center justify-center gap-2 font-black text-[#0f172a] px-8 py-4 rounded-xl bg-[#ECAB00] hover:bg-white hover:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.4)] transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
+                Get 1:1 Career Counseling
+              </button>
+            </a>
             {/* Secondary Button (Outline) */}
             <a href="/contact-us/">
               <button className="group flex items-center justify-center gap-2 font-bold text-white px-8 py-4 rounded-xl bg-transparent border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
-                Book Free Demo 
+                Book Free Demo
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </a>
