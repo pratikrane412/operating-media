@@ -419,7 +419,7 @@ export default function ContactHero() {
               </span>
             </p>
             <p className="font-medium text-[16px] text-gray-400">
-              Join 11,000+ students who've built careers through Operating Media.
+              Join 16,000+ students who've built careers through Operating Media.
             </p>
           </div>
 

@@ -142,7 +142,7 @@ export default function StatsSection() {
         >
           <span className="h-[2px] w-10 bg-gradient-to-r from-transparent to-orange-400 rounded-full" />
           <span className="font-bold text-[12px] uppercase tracking-[0.2em] text-orange-600 text-center">
-            Trusted by 11,000+ Professionals Across India
+            Trusted by 16,000+ Professionals Across India
           </span>
           <span className="h-[2px] w-10 bg-gradient-to-l from-transparent to-orange-400 rounded-full" />
         </motion.div>

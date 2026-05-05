@@ -8,22 +8,22 @@ const ReviewsHero = () => {
     {
       id: 1,
       quote: "I got a chance to improve on teamwork",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80"
+      image: "https://www.operatingmedia.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: 2,
       quote: "Trainers at iBraine are very friendly and always ready to help.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
+      image: "https://www.operatingmedia.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: 3,
       quote: "The training is so well-structured and practical.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80"
+      image: "https://www.operatingmedia.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80"
     },
     {
       id: 4,
       quote: "Best decision for my digital marketing career.",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
+      image: "https://www.operatingmedia.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80"
     }
   ];
 

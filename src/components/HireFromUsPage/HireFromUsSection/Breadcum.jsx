@@ -9,7 +9,7 @@ export default function HireFromUsStrip() {
       {/* ── 1. BACKGROUND IMAGE & OVERLAYS ── */}
       {/* Corporate/Hiring themed background image */}
       <img
-        src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=1600&q=80"
+        src="/images/1001.png"
         alt="Corporate professionals in a meeting"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-50"
       />

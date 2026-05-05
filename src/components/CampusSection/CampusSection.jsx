@@ -18,7 +18,7 @@ const campuses = [
     stripActive: 'border-orange-400 bg-orange-50',
     stripChevron: 'text-orange-500',
     accent: '#f6a85a',
-    img: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=85',
+    img: 'https://www.operatingmedia.com/photo-1524178232363-1fb2b075b655?w=1200&q=85',
     highlight: 'Our flagship campus with state-of-the-art labs, dedicated mentorship bays, and a rooftop break zone.',
   },
   {
@@ -36,7 +36,7 @@ const campuses = [
     stripActive: 'border-orange-400 bg-orange-50',
     stripChevron: 'text-orange-500',
     accent: '#f6a85a',
-    img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1200&q=85',
+    img: 'https://www.operatingmedia.com/photo-1580582932707-520aed937b7b?w=1200&q=85',
     highlight: 'A focused learning hub in the heart of Borivali with fast internet, live project rooms, and placement support.',
   },
   {
@@ -54,7 +54,7 @@ const campuses = [
     stripActive: 'border-orange-400 bg-orange-50',
     stripChevron: 'text-orange-500',
     accent: '#f6a85a',
-    img: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=85',
+    img: 'https://www.operatingmedia.com/photo-1593642632559-0c6d3fc62b89?w=1200&q=85',
     highlight: 'Real-time instructor-led sessions, recorded replays, live Q&A, and a dedicated Slack community.',
   },
 ];

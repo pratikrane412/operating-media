@@ -481,7 +481,7 @@ export default function BlogPostPage() {
                                         Want to learn digital marketing?
                                     </h3>
                                     <p style={{ fontFamily: "'Satoshi', sans-serif", fontWeight: 500, fontSize: 13, color: "rgba(255,255,255,0.4)", margin: 0, lineHeight: 1.7 }}>
-                                        Join 11,000+ students trained by the same experts who write these articles.
+                                        Join 16,000+ students trained by the same experts who write these articles.
                                     </p>
                                 </div>
                                 <a href="/contact-us/" style={{

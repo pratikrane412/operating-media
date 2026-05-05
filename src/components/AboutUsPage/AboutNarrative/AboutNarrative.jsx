@@ -109,7 +109,7 @@ function ParallaxImage({ src, alt, className = "" }) {
         className="w-full h-[115%] object-cover scale-105"
         onError={(e) => {
           e.target.src =
-            "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80";
+            "https://www.operatingmedia.com/photo-1522202176988-66273c2fd55f?w=1200&q=80";
         }}
       />
     </div>
@@ -121,7 +121,7 @@ function ParallaxImage({ src, alt, className = "" }) {
 ───────────────────────────────────────────── */
 const TICKS = [
   "Est. 2011",
-  "11,000+ Students",
+  "16,000+ Students",
   "98% Placement Rate",
   "250+ Hiring Partners",
   "Google Certified",
@@ -180,19 +180,19 @@ const TESTIMONIALS = [
     name: "Priya Sharma",
     role: "Performance Marketer @ Accenture",
     text: "Operating Media didn't just teach me digital marketing — it gave me the confidence to run ₹1 crore campaigns from day one.",
-    img: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=80&h=80&fit=crop&crop=face",
+    img: "https://www.operatingmedia.com/photo-1494790108755-2616b612b47c?w=80&h=80&fit=crop&crop=face",
   },
   {
     name: "Rohan Mehta",
     role: "SEO Lead @ InfiDigit",
     text: "The live project model is unmatched. I had 3 real campaigns in my portfolio before I even graduated.",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
+    img: "https://www.operatingmedia.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
   },
   {
     name: "Sneha Patel",
     role: "Social Media Manager @ Jio Studios",
     text: "Within 45 days of completing the MBA program I had two job offers. The placement team is incredible.",
-    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
+    img: "https://www.operatingmedia.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
   },
 ];
 
@@ -402,7 +402,7 @@ export default function AboutNarrative() {
         >
           {[
             { label: "Established", value: "2011" },
-            { label: "Students Trained", value: "11,000+" },
+            { label: "Students Trained", value: "16,000+" },
             { label: "Placement Rate", value: "98%" },
           ].map(({ label, value }) => (
             <div key={label}>

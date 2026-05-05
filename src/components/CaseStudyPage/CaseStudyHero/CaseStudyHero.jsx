@@ -50,7 +50,7 @@ const CaseStudyHero = () => {
           {/* Central Image Container */}
           <div className="relative z-10 w-[420px] h-[520px] rounded-[40px] overflow-hidden shadow-2xl border-[10px] border-white/20">
             <img 
-              src="https://images.unsplash.com/photo-1544717305-27a734ef1904?q=80&w=2070&auto=format&fit=crop" 
+              src="https://www.operatingmedia.com/photo-1544717305-27a734ef1904?q=80&w=2070&auto=format&fit=crop" 
               alt="Student" 
               className="w-full h-full object-cover"
             />

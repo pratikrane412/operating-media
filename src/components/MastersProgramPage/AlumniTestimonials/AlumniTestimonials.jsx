@@ -110,7 +110,7 @@ const AlumniTestimonials = () => {
                  <Quote className="text-[#1E3B8A]" size={32} />
               </div>
               <div className="text-start">
-                 <p className="text-[#212121] font-semibold text-[20px] tracking-tight">Joined by 11,000+ Success Stories</p>
+                 <p className="text-[#212121] font-semibold text-[20px] tracking-tight">Joined by 16,000+ Success Stories</p>
                  <p className="text-[#808080] font-medium text-[15px]">The most trusted name in Mumbai's Digital Marketing ecosystem.</p>
               </div>
            </div>

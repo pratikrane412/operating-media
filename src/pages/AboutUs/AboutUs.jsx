@@ -102,7 +102,7 @@ function AboutHero() {
                         </h1>
 
                         <p className={`text-[16px] md:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[520px] mb-10 transition-all duration-700 delay-300 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                            One in Top 5 Institutes Since 14 Years — training <span className="font-bold text-[#0f172a]">11,000+ students</span> with one mission: genuine job-readiness, not just a certificate.
+                            One in Top 5 Institutes Since 14 Years — training <span className="font-bold text-[#0f172a]">16,000+ students</span> with one mission: genuine job-readiness, not just a certificate.
                         </p>
 
                         <div className={`flex flex-col sm:flex-row gap-4 transition-all duration-700 delay-400 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -400,7 +400,7 @@ function AboutCTA() {
                             </span>
                         </h3>
                         <p className="text-gray-400 font-medium text-[15px] md:text-[16px]">
-                            Join 11,000+ students who've built careers through Operating Media.
+                            Join 16,000+ students who've built careers through Operating Media.
                         </p>
                     </div>
 
@@ -458,7 +458,7 @@ export default function AboutUs() {
                 <meta property="og:title" content="About Operating Media" />
                 <meta
                     property="og:description"
-                    content="Know our journey, trainers & why 11,000+ students trust us."
+                    content="Know our journey, trainers & why 16,000+ students trust us."
                 />
                 <meta property="og:url" content={canonicalUrl} />
                 <meta property="og:type" content="website" />

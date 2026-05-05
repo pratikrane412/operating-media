@@ -9,7 +9,7 @@ export default function FAQStrip() {
       {/* ── 1. BACKGROUND IMAGE & OVERLAYS ── */}
       {/* Help/Discussion themed background image */}
       <img
-        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80"
+        src="/images/1001.png"
         alt="People discussing queries"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-50"
       />

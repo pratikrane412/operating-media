@@ -189,7 +189,7 @@ function TrainersHero() {
                             </div>
                             <div className="flex items-center gap-2">
                                 <Users size={16} className="text-[#2563eb]" />
-                                <span className="font-bold text-[15px] text-[#0f172a]">11,000+ Students Trained</span>
+                                <span className="font-bold text-[15px] text-[#0f172a]">16,000+ Students Trained</span>
                             </div>
                         </div>
                     </div>
@@ -239,7 +239,7 @@ function TrainersHero() {
                         { icon: <Globe size={20} />, title: "8 Expert Trainers", sub: "Active Industry Professionals" },
                         { icon: <ShieldCheck size={20} />, title: "57+ Years Combined", sub: "Real-World Experience" },
                         { icon: <Users size={20} />, title: "1000+ Campaigns", sub: "Run Across 18 Countries" },
-                        { icon: <Star size={20} />, title: "11,000+ Students", sub: "Successfully Placed" },
+                        { icon: <Star size={20} />, title: "16,000+ Students", sub: "Successfully Placed" },
                     ].map((s, i) => (
                         <div key={i} className="flex items-center gap-4 flex-1 min-w-[200px]">
                             <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white backdrop-blur-sm">

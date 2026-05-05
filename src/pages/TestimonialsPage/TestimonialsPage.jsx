@@ -122,7 +122,7 @@ const textTestimonials = [
 ];
 
 const stats = [
-    { val: "11,000+", label: "Students Trained" },
+    { val: "16,000+", label: "Students Trained" },
     { val: "96%", label: "Placement Rate" },
     { val: "250+", label: "Hiring Partners" },
     { val: "4.8★", label: "Average Rating" },
@@ -401,7 +401,7 @@ function TestimonialsHero() {
                     transition: "opacity 0.65s ease 0.35s, transform 0.65s ease 0.35s",
                 }}
             >
-                11,000+ students trained. Placed at India's top agencies and brands. These are their stories — unscripted.
+                16,000+ students trained. Placed at India's top agencies and brands. These are their stories — unscripted.
             </p>
         </div>
     );
@@ -475,7 +475,7 @@ function CTABanner() {
                     <span className="text-[#ECAB00]">success story.</span>
                 </h3>
                 <p className="text-[14px] font-medium text-white/45 leading-relaxed m-0">
-                    One free demo. No pressure. Just see why 11,000+ chose us.
+                    One free demo. No pressure. Just see why 16,000+ chose us.
                 </p>
             </div>
 

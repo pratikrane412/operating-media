@@ -170,7 +170,7 @@ export default function PlacementHero() {
               className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80"
+                src="https://www.operatingmedia.com/photo-1531746020798-e6953c6e8e04?w=400&q=80"
                 alt="Student"
                 className="w-full h-full object-cover"
               />
@@ -184,7 +184,7 @@ export default function PlacementHero() {
               className="absolute left-0 bottom-10 w-44 h-44 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl"
             >
               <img
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&q=80"
+                src="https://www.operatingmedia.com/photo-1522202176988-66273c2fd55f?w=300&q=80"
                 alt="Student studying"
                 className="w-full h-full object-cover"
               />

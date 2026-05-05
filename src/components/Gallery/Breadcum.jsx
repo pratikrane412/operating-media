@@ -9,7 +9,7 @@ export default function GalleryStrip() {
       {/* ── 1. BACKGROUND IMAGE & OVERLAYS ── */}
       {/* Event/Workshop themed background image */}
       <img
-        src="https://images.unsplash.com/photo-1540317580384-e5d43867caa6?auto=format&fit=crop&w=1600&q=80"
+        src="/images/1001.png"
         alt="Students and events at Operating Media"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-50"
       />

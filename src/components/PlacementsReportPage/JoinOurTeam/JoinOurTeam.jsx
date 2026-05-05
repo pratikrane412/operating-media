@@ -30,7 +30,7 @@ const JoinOurTeam = () => {
       {/* --- 1. HERO HEADER WITH TEAM BACKGROUND --- */}
       <div className="relative h-[500px] flex items-center justify-center overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&q=80" 
+          src="https://www.operatingmedia.com/photo-1522071820081-009f0129c71c?w=1600&q=80" 
           className="absolute inset-0 w-full h-full object-cover"
           alt="Team Background"
         />

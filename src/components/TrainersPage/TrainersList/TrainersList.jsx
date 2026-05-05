@@ -291,7 +291,7 @@ export default function TrainersList() {
                 Ready to learn from experts?
               </p>
               <p className="text-gray-400 text-[13px] md:text-[14px]">
-                Join 11,000+ students already trained by this team.
+                Join 16,000+ students already trained by this team.
               </p>
             </div>
             <motion.button

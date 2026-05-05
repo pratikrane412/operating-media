@@ -9,7 +9,7 @@ export default function ContactUsStrip() {
       {/* ── 1. BACKGROUND IMAGE & OVERLAYS ── */}
       {/* Contact-themed background image (Replace with your office/support image if needed) */}
       <img
-        src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1600&q=80"
+        src="/images/1001.png"
         alt="Team working in office"
         className="absolute inset-0 w-full h-full object-cover object-center opacity-50"
       />

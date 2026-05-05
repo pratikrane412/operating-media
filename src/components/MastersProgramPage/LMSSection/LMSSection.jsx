@@ -20,7 +20,7 @@ const LMSSection = () => {
 
   const features = [
     { title: "Progress Tracker", desc: "Real-time analytics on module completion.", icon: <BarChart3 size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/image-437-1.png" },
-    { title: "Student Forum", desc: "Collaborate with 11,000+ peers.", icon: <MessageSquare size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/image-438.png" },
+    { title: "Student Forum", desc: "Collaborate with 16,000+ peers.", icon: <MessageSquare size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/image-438.png" },
     { title: "Resource Vault", desc: "Notes and 120+ premium tools.", icon: <Library size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/lms.png" },
     { title: "Smart Schedule", desc: "Never miss a live agency session.", icon: <Calendar size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/image-441.png" },
     { title: "Attendance", desc: "Verified logs for certification.", icon: <UserCheck size={16} />, img: "https://www.operatingmedia.com/wp-content/uploads/2025/06/image-439.png" },

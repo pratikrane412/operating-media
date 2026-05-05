@@ -33,7 +33,7 @@ const PlacementsHeroSection = () => {
             </h2>
 
             <p className="text-slate-500 text-lg font-medium leading-relaxed mb-12">
-              A placement record audited by global agencies. 11,000+ students transitioned into elite roles.
+              A placement record audited by global agencies. 16,000+ students transitioned into elite roles.
             </p>
           </div>
 
@@ -58,7 +58,7 @@ const PlacementsHeroSection = () => {
                 className="relative rounded-[40px] overflow-hidden aspect-[4/5] shadow-2xl border-4 border-white"
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600" 
+                  src="https://www.operatingmedia.com/photo-1494790108377-be9c29b29330?w=600" 
                   className="w-full h-full object-cover" 
                   alt="Simran"
                 />
@@ -71,7 +71,7 @@ const PlacementsHeroSection = () => {
 
               <div className="relative rounded-[35px] overflow-hidden aspect-square bg-slate-50 shadow-lg border-2 border-white translate-x-4">
                  <img 
-                   src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600" 
+                   src="https://www.operatingmedia.com/photo-1573496359142-b8d87734a5a2?w=600" 
                    className="w-full h-full object-cover" 
                    alt="Meta Alum"
                  />
@@ -85,7 +85,7 @@ const PlacementsHeroSection = () => {
             <div className="space-y-5 -translate-y-8">
               <div className="relative rounded-[40px] overflow-hidden aspect-[4/4.5] bg-slate-50 shadow-xl border-2 border-white">
                  <img 
-                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600" 
+                   src="https://www.operatingmedia.com/photo-1507003211169-0a1dd7228f2d?w=600" 
                    className="w-full h-full object-cover" 
                    alt="Google Alum"
                  />
@@ -96,7 +96,7 @@ const PlacementsHeroSection = () => {
 
               <div className="relative rounded-[35px] overflow-hidden aspect-[4/5] bg-slate-50 shadow-xl border-2 border-white -translate-x-4">
                  <img 
-                   src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600" 
+                   src="https://www.operatingmedia.com/photo-1539571696357-5a69c17a67c6?w=600" 
                    className="w-full h-full object-cover" 
                    alt="Amazon Alum"
                  />
