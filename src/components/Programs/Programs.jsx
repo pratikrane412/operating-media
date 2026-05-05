@@ -56,7 +56,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
+      "8 Months / 200 Hours",
       "(AI) in Digital Marketing",
       "Shopify Shop Creation",
       "Funnel Marketing"
@@ -79,7 +79,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
+      "4 Months / 200 Hours",
       "(AI) in Digital Marketing",
       "Shopify Shop Creation",
       "Funnel Marketing"
@@ -102,7 +102,7 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
+      "2-3 Months / 200 Hours",
       "(AI) in Digital Marketing",
       "Shopify Shop Creation",
       "Funnel Marketing"
@@ -166,7 +166,7 @@ function CourseCard({ course, inView, index }) {
         {/* ── Buttons Section ── */}
         <div className="flex flex-col xl:flex-row gap-3 w-full mt-auto">
           {/* Primary Button */}
-          <a href="/contact">
+          <a href="/contact-us/">
           <button className="flex-1 w-full flex items-center justify-center gap-1.5 py-3.5 px-3 rounded-xl bg-[#FFB800] hover:bg-[#F5A500] text-gray-900 font-extrabold text-[14px] transition-all duration-300 active:scale-95 shadow-sm group/btn">
             <span className="whitespace-nowrap">Book Free Demo</span>
             <ArrowRight />

@@ -26,13 +26,13 @@ export default function FullWidthInstituteStats() {
     },
     {
       id: 2,
-      num: "400",
+      num: "250",
       symbol: "+",
       text: "Top corporate hiring partners"
     },
     {
       id: 3,
-      num: "10",
+      num: "15",
       symbol: "+",
       text: "Years of educational expertise!"
     }

@@ -14,8 +14,8 @@ const perks = [
 ];
 
 const stats = [
-  { icon: <Users size={20} />, value: "3,500+", label: "Trained Alumni" },
-  { icon: <Briefcase size={20} />, value: "200+", label: "Hiring Partners" },
+  { icon: <Users size={20} />, value: "16000+", label: "Trained Alumni" },
+  { icon: <Briefcase size={20} />, value: "250+", label: "Hiring Partners" },
   { icon: <Star size={20} />, value: "0 Cost", label: "To You" },
 ];
 

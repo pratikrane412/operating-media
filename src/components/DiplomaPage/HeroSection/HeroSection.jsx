@@ -78,7 +78,7 @@ export default function HeroSection() {
 
                         {/* Buttons */}
                         <div className={`flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-12 transition-all duration-700 delay-500 ease-out ${show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                            <Link to="/contact" className="w-full sm:w-auto">
+                            <Link to="/contact-us/" className="w-full sm:w-auto">
                                 <button className="group relative w-full flex items-center justify-center gap-3 bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-[15px] overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(236,171,0,0.5)] hover:-translate-y-1">
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
                                     <span className="relative z-10 flex items-center gap-2">
@@ -102,12 +102,12 @@ export default function HeroSection() {
                                         <Star key={i} size={16} className="text-[#ECAB00] fill-[#ECAB00]" />
                                     ))}
                                 </div>
-                                <span className="font-bold text-[15px] text-[#0f172a]">3,500+ Alumni</span>
+                                <span className="font-bold text-[15px] text-[#0f172a]">16,000+ Alumni</span>
                             </div>
                             <span className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gray-300" />
                             <div className="flex items-center gap-2">
                                 <Users size={18} className="text-[#2563eb]" />
-                                <span className="font-medium text-[15px] text-gray-500">Placed at 200+ companies</span>
+                                <span className="font-medium text-[15px] text-gray-500">Placed at 250+ companies</span>
                             </div>
                         </div>
 

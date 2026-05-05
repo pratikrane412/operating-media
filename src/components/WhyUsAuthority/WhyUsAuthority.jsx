@@ -35,7 +35,7 @@ const REASONS = [
     Icon: Trophy,
   },
   {
-    title: "1,600+ Students Trained",
+    title: "16000+ Students Trained",
     desc: "A growing network of placed professionals working at top agencies across India.",
     Icon: Users2,
   },
@@ -45,7 +45,7 @@ const REASONS = [
     Icon: CheckCircle2,
   },
   {
-    title: "400+ Hiring Partners",
+    title: "250+ Hiring Partners",
     desc: "Direct access to full-time roles and internships through our active recruiter network.",
     Icon: Briefcase,
   },
@@ -112,7 +112,7 @@ export default function WhyUsAuthority() {
               className="absolute top-8 -right-4 sm:-right-8 lg:-right-10 z-30 bg-white/90 backdrop-blur-xl p-4 sm:p-5 rounded-2xl shadow-xl border border-gray-100 animate-float"
               {...fadeLeft(0.4)}
             >
-              <p className="font-black text-[28px] sm:text-[32px] text-[#0f172a] leading-none">89<span className="text-[#ecab00]">%</span></p>
+              <p className="font-black text-[28px] sm:text-[32px] text-[#0f172a] leading-none">96<span className="text-[#ecab00]">%</span></p>
               <p className="font-bold text-[10px] sm:text-[11px] uppercase tracking-widest text-gray-500 mt-1">Placement Rate</p>
             </motion.div>
 

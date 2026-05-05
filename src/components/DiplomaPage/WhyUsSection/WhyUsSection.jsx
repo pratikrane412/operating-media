@@ -24,7 +24,7 @@ const FEATURES = [
     {
         Icon: Briefcase,
         title: '100% Placement Assistance',
-        desc: 'Dedicated career support, interview prep, and direct referrals to 200+ hiring partners across agencies and brands.',
+        desc: 'Dedicated career support, interview prep, and direct referrals to 250+ hiring partners across agencies and brands.',
     },
     {
         Icon: Zap,
@@ -112,7 +112,7 @@ export default function WhyUsSection() {
                         <button className="group flex items-center justify-center gap-2 font-black text-[#0f172a] px-8 py-4 rounded-xl bg-[#ECAB00] hover:bg-white hover:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.4)] transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
                             Download Syllabus <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
                         </button>
-                        <a href="/contact">
+                        <a href="/contact-us/">
                             <button className="group flex items-center justify-center gap-2 font-bold text-white px-8 py-4 rounded-xl bg-transparent border border-white/20 hover:bg-white/10 hover:border-white/40 transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
                                 Book Free Demo <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                             </button>

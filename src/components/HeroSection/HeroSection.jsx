@@ -73,7 +73,7 @@ export default function HeroUltra() {
           <div className={`flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto transition-all duration-700 delay-600 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             
             {/* Primary Button (Glow & Arrow Move) */}
-            <a href="/contact">
+            <a href="/contact-us/">
             <button className="group relative w-full sm:w-auto bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_#ECAB00] hover:-translate-y-1 active:scale-95">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 flex items-center justify-center gap-2">
@@ -141,7 +141,7 @@ export default function HeroUltra() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               </div>
               <div>
-                <strong className="block text-2xl font-black text-gray-900 leading-none">10+</strong>
+                <strong className="block text-2xl font-black text-gray-900 leading-none">15+</strong>
                 <span className="text-sm font-semibold text-gray-500">Years Experience</span>
               </div>
             </div>
@@ -154,7 +154,7 @@ export default function HeroUltra() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
               </div>
               <div>
-                <strong className="block text-2xl font-black text-gray-900 leading-none">400+</strong>
+                <strong className="block text-2xl font-black text-gray-900 leading-none">250+</strong>
                 <span className="text-sm font-semibold text-gray-500">Hiring Partners</span>
               </div>
             </div>

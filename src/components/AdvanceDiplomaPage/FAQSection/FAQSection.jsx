@@ -17,7 +17,7 @@ const faqs = [
     },
     {
         q: "How is the Advanced Diploma different from the Master's Program?",
-        a: "The Advanced Diploma is a 4-month fast-track (500+ hours, 70+ tools) focused purely on execution and revenue-driving channels. The Master's Program is a 7-month deep-dive (200+ hours, 120+ tools) that also includes business strategy, P&L management, and entrepreneurship modules.",
+        a: "The Advanced Diploma is a 4-month fast-track (500+ hours, 70+ tools) focused purely on execution and revenue-driving channels. The Master's Program is a 7-month deep-dive (250+ hours, 120+ tools) that also includes business strategy, P&L management, and entrepreneurship modules.",
     },
     {
         q: "What tools will I learn during the course?",

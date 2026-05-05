@@ -145,7 +145,7 @@ export default function HiringPartners() {
             </h2>
 
             <p className="font-medium text-[16px] md:text-[18px] text-gray-600 leading-relaxed max-w-lg">
-              Join 11,000+ successful alumni placed at India's leading agencies, global brands, and fastest-growing startups.
+              Join 16,000+ successful alumni placed at India's leading agencies, global brands, and fastest-growing startups.
             </p>
           </FadeUp>
 
@@ -157,9 +157,9 @@ export default function HiringPartners() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#ecab00]/5 to-transparent opacity-50" />
 
               {[
-                { value: "400+", label: "Hiring Partners" },
-                { value: "11k+", label: "Alumni Placed" },
-                { value: "89%", label: "Placement Rate" },
+                { value: "250+", label: "Hiring Partners" },
+                { value: "16k+", label: "Alumni Placed" },
+                { value: "96%", label: "Placement Rate" },
               ].map((stat, idx) => (
                 <div key={stat.label} className={`relative z-10 flex flex-col text-center ${idx !== 2 ? 'sm:border-r border-gray-100 sm:pr-12' : ''}`}>
                   <span className="font-black text-[32px] md:text-[38px] leading-none tracking-tight text-[#ecab00] mb-2 drop-shadow-sm">

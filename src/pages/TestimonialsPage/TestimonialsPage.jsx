@@ -115,10 +115,10 @@ const textTestimonials = [
 ];
 
 const stats = [
-    { val: "11,000+", label: "Students Trained" },
-    { val: "94%",     label: "Placement Rate"   },
-    { val: "400+",    label: "Hiring Partners"  },
-    { val: "4.9★",   label: "Average Rating"   },
+    { val: "16,000+", label: "Students Trained" },
+    { val: "96%",     label: "Placement Rate"   },
+    { val: "250+",    label: "Hiring Partners"  },
+    { val: "4.8★",   label: "Average Rating"   },
 ];
 
 // ── Video Modal ──
@@ -574,7 +574,7 @@ function CTABanner() {
                 </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, flexShrink: 0, position: "relative", zIndex: 1 }}>
-                <a href="/contact" style={{
+                <a href="/contact-us/" style={{
                     display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10,
                     background: "#ECAB00", color: "#0f172a",
                     fontWeight: 900, fontSize: 14,

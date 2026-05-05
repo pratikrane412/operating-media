@@ -33,7 +33,7 @@ const faqs = [
     },
     {
         q: "Do you offer job placement assistance?",
-        a: "Yes — 100% placement assistance is included. This covers resume building, mock interviews, LinkedIn profile optimization, and direct introductions to our network of 200+ hiring partners spanning agencies, startups, and established brands.",
+        a: "Yes — 100% placement assistance is included. This covers resume building, mock interviews, LinkedIn profile optimization, and direct introductions to our network of 250+ hiring partners spanning agencies, startups, and established brands.",
     },
     {
         q: "What is the batch size?",

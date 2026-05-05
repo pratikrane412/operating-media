@@ -57,7 +57,7 @@ export default function SEOOverview() {
                             </p>
                         </div>
 
-                        <Link to="/contact">
+                        <Link to="/contact-us/">
                             <button className="group flex items-center gap-2 bg-[#0f172a] text-white px-8 py-4 rounded-xl font-bold text-[15px] hover:bg-[#ECAB00] hover:text-[#0f172a] transition-all duration-300 shadow-md hover:shadow-[0_10px_20px_-10px_rgba(236,171,0,0.5)]">
                                 Start Your SEO Journey
                                 <ArrowRight size={18} className="group-hover:translate-x-1.5 transition-transform" />

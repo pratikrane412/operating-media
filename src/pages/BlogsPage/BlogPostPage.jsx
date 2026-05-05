@@ -484,7 +484,7 @@ export default function BlogPostPage() {
                                         Join 11,000+ students trained by the same experts who write these articles.
                                     </p>
                                 </div>
-                                <a href="/contact" style={{
+                                <a href="/contact-us/" style={{
                                     display: "inline-flex", alignItems: "center", gap: 8,
                                     fontFamily: "'Satoshi', sans-serif", fontWeight: 900, fontSize: 14,
                                     padding: "14px 28px", borderRadius: 100,
