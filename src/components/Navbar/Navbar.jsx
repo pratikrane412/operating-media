@@ -109,11 +109,11 @@ const Navbar = () => {
                           className="absolute left-full top-0 ml-2 w-72 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                         >
                           {[
-                            { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
-                            { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-course/" },
-                            { label: "WordPress Development Course", to: "/courses/wordpress-development-course/" },
-                            { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-course/" },
-                            { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-course/" },
+                            { label: "Pay Per Click Course", to: "/courses/pay-per-click-management-courses/" },
+                            { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-courses/" },
+                            { label: "WordPress Development Course", to: "/courses/wordpress-courses/" },
+                            { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-courses/" },
+                            { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-courses/" },
                           ].map((item, i) => (
                             <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                               {item.label}
@@ -148,9 +148,9 @@ const Navbar = () => {
                   className="absolute left-0 mt-3 w-52 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                 >
                   {[
-                    { label: "Our Institute", to: "/about-us" },
-                    { label: "Mentors", to: "/about/mentors" },
-                    { label: "Testimonials", to: "/about/testimonials" },
+                    { label: "Our Institute", to: "/about-us/" },
+                    { label: "Mentors", to: "/our-trainers/" },
+                    { label: "Testimonials", to: "/testimonials/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -177,7 +177,7 @@ const Navbar = () => {
                   className="absolute left-0 mt-3 w-48 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                 >
                   {[
-                    { label: "Hire from us", to: "/placement/hire" },
+                    { label: "Hire from us", to: "/hire-from-us/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -206,9 +206,9 @@ const Navbar = () => {
                   className="absolute left-0 mt-3 w-52 bg-white rounded-xl shadow-xl z-50 !border !border-gray-100 outline-none overflow-hidden"
                 >
                   {[
-                    { label: "Upcoming Batches", to: "/upcoming-batches" },
-                    { label: "Gallery", to: "/gallery" },
-                    { label: "FAQ", to: "/faq" },
+                    { label: "Upcoming Batches", to: "/upcoming-batches/" },
+                    { label: "Gallery", to: "/gallery/" },
+                    { label: "FAQ", to: "/frequently-asked-questions/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} className="block px-5 py-3 hover:bg-gray-50 cursor-pointer text-gray-800 no-underline">
                       {item.label}
@@ -219,8 +219,8 @@ const Navbar = () => {
             </AnimatePresence>
           </div>
 
-          <Link to="/blogs" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Blogs</Link>
-          <Link to="/contact" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Contact</Link>
+          <Link to="/blogs/" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Blogs</Link>
+          <Link to="/contact-us/" className="text-gray-800 no-underline hover:text-[#ECAB00] transition-colors">Contact</Link>
 
           <button 
             onClick={openBrochureModal}
@@ -263,11 +263,11 @@ const Navbar = () => {
                 ))}
                 <MobileAccordion label="Certification Courses" color="#ECAB00" sub>
                   {[
-                    { label: "Pay Per Click Course", to: "/courses/pay-per-click-course/" },
-                    { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-course/" },
-                    { label: "WordPress Development Course", to: "/courses/wordpress-development-course/" },
-                    { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-course/" },
-                    { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-course/" },
+                    { label: "Pay Per Click Course", to: "/courses/pay-per-click-management-courses/" },
+                    { label: "Google Analytics Course (GA4)", to: "/courses/google-analytics-courses/" },
+                    { label: "WordPress Development Course", to: "/courses/wordpress-courses/" },
+                    { label: "Social Media Optimization Course", to: "/courses/social-media-optimization-courses/" },
+                    { label: "Search Engine Optimization Course", to: "/courses/search-engine-optimization-courses/" },
                   ].map((item, i) => (
                     <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                       {item.label}
@@ -280,9 +280,9 @@ const Navbar = () => {
 
               <MobileAccordion label="About Us">
                 {[
-                  { label: "Our Institute", to: "/about-us" },
-                  { label: "Mentors", to: "/about/mentors" },
-                  { label: "Testimonials", to: "/about/testimonials" },
+                  { label: "Our Institute", to: "/about-us/" },
+                  { label: "Mentors", to: "/our-trainers/" },
+                  { label: "Testimonials", to: "/testimonials/" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}
@@ -294,7 +294,7 @@ const Navbar = () => {
 
               <MobileAccordion label="Placement">
                 {[
-                  { label: "Hire from us", to: "/placement/hire" },
+                  { label: "Hire from us", to: "/hire-from-us/" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}
@@ -310,9 +310,9 @@ const Navbar = () => {
 
               <MobileAccordion label="Information">
                 {[
-                  { label: "Upcoming Batches", to: "/upcoming-batches" },
-                  { label: "Gallery", to: "/gallery" },
-                  { label: "FAQ", to: "/faq" },
+                  { label: "Upcoming Batches", to: "/upcoming-batches/" },
+                  { label: "Gallery", to: "/gallery/" },
+                  { label: "FAQ", to: "/frequently-asked-questions/" },
                 ].map((item, i) => (
                   <Link key={i} to={item.to} onClick={closeMobile} className="block px-3 py-2.5 text-sm text-gray-700 hover:text-[#ECAB00] hover:bg-gray-50 rounded-lg no-underline">
                     {item.label}
@@ -322,8 +322,8 @@ const Navbar = () => {
 
               <div className="h-px bg-gray-100 my-1" />
 
-              <Link to="/blogs" onClick={closeMobile} className="px-3 py-3 font-semibold text-gray-800 hover:text-[#ECAB00] no-underline">Blogs</Link>
-              <Link to="/contact" onClick={closeMobile} className="px-3 py-3 font-semibold text-gray-800 hover:text-[#ECAB00] no-underline">Contact</Link>
+              <Link to="/blogs/" onClick={closeMobile} className="px-3 py-3 font-semibold text-gray-800 hover:text-[#ECAB00] no-underline">Blogs</Link>
+              <Link to="/contact-us/" onClick={closeMobile} className="px-3 py-3 font-semibold text-gray-800 hover:text-[#ECAB00] no-underline">Contact</Link>
 
               <div className="mt-3">
                 <button 

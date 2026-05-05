@@ -45,31 +45,31 @@ function App() {
         <Route path="/courses/masters-program-in-digital-marketing/" element={<MastersProgram />} />
         <Route path="/courses/advance-diploma-in-digital-marketing/" element={<AdvanceDiploma />} />
         <Route path="/courses/diploma-in-digital-marketing/" element={<DiplomaPage />} />
-        <Route path="/courses/pay-per-click-course/" element={<PayPerClick />} />
-        <Route path="/courses/google-analytics-course/" element={<GoogleAnalytics />} />
-        <Route path="/courses/wordpress-development-course/" element={<WordPress />} />
-        <Route path="/courses/social-media-optimization-course/" element={<SocialMediaOptimization />} />
-        <Route path="/courses/search-engine-optimization-course/" element={<SearchEngineOptimization />} />
+        <Route path="/courses/pay-per-click-management-courses/" element={<PayPerClick />} />
+        <Route path="/courses/google-analytics-courses/" element={<GoogleAnalytics />} />
+        <Route path="/courses/wordpress-courses/" element={<WordPress />} />
+        <Route path="/courses/social-media-optimization-courses/" element={<SocialMediaOptimization />} />
+        <Route path="/courses/search-engine-optimization-courses/" element={<SearchEngineOptimization />} />
 
-        <Route path="/placements" element={<PlacementsPage />} />
-        <Route path="/about/testimonials" element={<TestimonialsPage />} />
-        <Route path="/about/mentors" element={<Trainer />} />
-
-
+        {/* <Route path="/placements" element={<PlacementsPage />} /> */}
+        <Route path="/testimonials/" element={<TestimonialsPage />} />
+        <Route path="/our-trainers/" element={<Trainer />} />
 
 
-        <Route path="/blogs" element={<BlogsPage />} />
-        <Route path="/blogs/:slug" element={<BlogPostPage />} />
 
 
-        <Route path="/placement/hire" element={<HireFromUsPage />} />
+        <Route path="/blogs/" element={<BlogsPage />} />
+        <Route path="/blogs/:slug/" element={<BlogPostPage />} />
 
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/case-studies" element={<CaseStudiesPage />} />
-        <Route path="/upcoming-batches" element={<UpcomingBatches />} />
-        <Route path="/faq" element={< Faq/>} />
-        <Route path="/gallery" element={<Gallery />} />
+
+        <Route path="/hire-from-us/" element={<HireFromUsPage />} />
+
+        <Route path="/contact-us/" element={<ContactPage />} />
+        <Route path="/about-us/" element={<AboutUs />} />
+        {/* <Route path="/case-studies" element={<CaseStudiesPage />} /> */}
+        <Route path="/upcoming-batches/" element={<UpcomingBatches />} />
+        <Route path="/frequently-asked-questions/" element={< Faq/>} />
+        <Route path="/gallery/" element={<Gallery />} />
 
 
 

@@ -66,7 +66,7 @@ export default function HeroUltra() {
           </h1>
 
           <p className={`text-[16px] sm:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[480px] mb-10 transition-all duration-700 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            Join 30,000+ students community who transformed their careers with advanced digital marketing courses.
+            Join 16000+ students community who transformed their careers with advanced digital marketing courses.
           </p>
 
           {/* Action Buttons */}
@@ -106,7 +106,7 @@ export default function HeroUltra() {
             </div>
             <div className="flex flex-col">
               <div className="flex text-[#ECAB00] text-sm">★★★★★</div>
-              <span className="text-sm font-bold text-gray-700">30,000+ happy learners</span>
+              <span className="text-sm font-bold text-gray-700">16000+ happy learners</span>
             </div>
           </div>
         </div>

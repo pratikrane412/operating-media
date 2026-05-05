@@ -20,7 +20,7 @@ export default function FullWidthInstituteStats() {
   const statsData = [
     {
       id: 1,
-      num: "30,000",
+      num: "16000",
       symbol: "+",
       text: "Happy students trained & placed!"
     },
