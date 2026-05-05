@@ -42,7 +42,7 @@ const COURSES = [
   {
     id: "masters",
     title: "Master's in Digital Marketing",
-    desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
+    desc: "Best for: Career switch, freshers, job seekers.",
     image: "/images/master-cource.png",
     badgeText: "Master's",
 
@@ -65,7 +65,7 @@ const COURSES = [
   {
     id: "advanced",
     title: "Advanced Diploma in Digital Marketing",
-    desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
+    desc: "Best for: Skill upgrade, working professionals",
     image: "/images/advance-cource.png",
     badgeText: "Advance Diploma",
 
@@ -88,7 +88,7 @@ const COURSES = [
   {
     id: "diploma",
     title: "Diploma in Digital Marketing",
-    desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
+    desc: "Best for: Beginners exploring digital marketing",
     image: "/images/diploma-cource.png",
     badgeText: "Diploma",
 
@@ -217,10 +217,10 @@ export default function CoursesSection() {
 
           <div className={`lg:w-[60%] transition-all duration-[800ms] ease-out ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
             <h2 className="font-black text-[32px] md:text-[38px] lg:text-[46px] leading-[1.15] tracking-tight text-[#0F172A]">
-              Master Digital Marketing <br className="hidden md:block" />
-              Through Hands-On <br className="hidden md:block" />
-              <span className="relative inline-block text-[#ECAB00]">
-                Practical Training.
+              Choose the Right Program  <br className="hidden md:block" />
+              for Your 
+               <span className="relative inline-block text-[#ECAB00]">
+               &nbsp; Career Goal
                 {/* Blue Animated Underline Effect */}
                 <svg className={`absolute w-full h-[10px] -bottom-1 left-0 text-[#ECAB00]/30 transition-all duration-1000 ease-out delay-500 ${inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}`} viewBox="0 0 100 20" preserveAspectRatio="none" style={{ transformOrigin: 'left' }}>
                   <path d="M0 15 Q 50 0 100 15" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
