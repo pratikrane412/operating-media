@@ -224,9 +224,10 @@ const Navbar = () => {
 
           <button 
             onClick={openBrochureModal}
-            className="bg-black text-white px-5 py-2.5 rounded-lg hover:bg-[#ECAB00] hover:text-black transition"
+            className="group relative bg-[#0f172a] text-white px-6 py-2.5 rounded-xl font-bold hover:shadow-[0_10px_20px_rgba(236,171,0,0.2)] transition-all duration-300 active:scale-95 overflow-hidden"
           >
-            Download Brochure
+            <div className="absolute inset-0 bg-[#ECAB00] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
+            <span className="relative z-10 group-hover:text-[#0f172a] transition-colors">Download Brochure</span>
           </button>
         </div>
 
