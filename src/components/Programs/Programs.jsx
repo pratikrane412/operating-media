@@ -56,10 +56,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
-      "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
-      "Funnel Marketing"
+      "120+ Tools Covered",
+      "Placement Focused",
+      "Advanced Strategy + Execution",
+      "Includes Gen-AI & Prompt Engineering"
     ]
   },
   {
@@ -79,10 +79,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
-      "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
-      "Funnel Marketing"
+      "70+ Tools",
+      "Standard LMS Access",
+      "Hands-on Campaign Training",
+      "Core Digital Specialization"
     ]
   },
   {
@@ -102,10 +102,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "7 Months / 200 Hours",
-      "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
-      "Funnel Marketing"
+      "40+ Tools",
+      "Practical Basics",
+      "Core Fundamentals",
+      "Industry Recognized Certification"
     ]
   }
 ];
