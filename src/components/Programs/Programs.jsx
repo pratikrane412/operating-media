@@ -43,7 +43,7 @@ const COURSES = [
     id: "masters",
     title: "Master's in Digital Marketing",
     desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
-    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=80",
+    image: "/images/master-cource.png",
     badgeText: "Master's",
     
     // Updated Tag Colors
@@ -66,7 +66,7 @@ const COURSES = [
     id: "advanced",
     title: "Advanced Diploma in Digital Marketing",
     desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: "/images/advance-cource.png",
     badgeText: "Advance Diploma",
     
     // Updated Tag Colors
@@ -89,7 +89,7 @@ const COURSES = [
     id: "diploma",
     title: "Diploma in Digital Marketing",
     desc: "Kickstart your digital career with hands-on training in SEO, Google Ads, social media marketing, and real-world projects.",
-    image: "https://images.unsplash.com/photo-1555421689-491a97ff2040?w=800&q=80",
+    image: "/images/diploma-cource.png",
     badgeText: "Diploma",
     
     // Updated Tag Colors
