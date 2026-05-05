@@ -56,10 +56,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "8 Months / 200 Hours",
-      "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
-      "Funnel Marketing"
+      "8 Months / 600 Hours",
+      "120+ Tools Covered",
+      "Advanced Strategy + Execution",
+      "Placement Focused"
     ]
   },
   {
@@ -79,10 +79,10 @@ const COURSES = [
     titleColor: "text-[#0F172A]", // Set to Black
     
     features: [
-      "4 Months / 200 Hours",
+      "4 Months / 400 Hours",
       "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
-      "Funnel Marketing"
+      "70+ Tools",
+      "Hands-on Campaign"
     ]
   },
   {
@@ -103,8 +103,8 @@ const COURSES = [
     
     features: [
       "2-3 Months / 200 Hours",
-      "(AI) in Digital Marketing",
-      "Shopify Shop Creation",
+      "Core Fundamentals",
+      "Practical Basics",
       "Funnel Marketing"
     ]
   }

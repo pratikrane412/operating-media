@@ -157,8 +157,7 @@ export default function WhyUsSection() {
           <div className="relative z-10 flex flex-col sm:flex-row gap-4 w-full lg:w-auto shrink-0">
             {/* Primary Button (Gold) */}
             <button className="group flex items-center justify-center gap-2 font-black text-[#0f172a] px-8 py-4 rounded-xl bg-[#ECAB00] hover:bg-white hover:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.4)] transition-all duration-300 cursor-pointer active:scale-95 text-[16px]">
-              Download Syllabus 
-              <Download size={18} className="group-hover:-translate-y-1 transition-transform" />
+              Get 1:1 Career Counseling 
             </button>
 
             {/* Secondary Button (Outline) */}
