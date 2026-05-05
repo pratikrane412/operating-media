@@ -7,7 +7,7 @@ export default function FullWidthInstituteStats() {
     // Animation trigger on mount
     setTimeout(() => setMounted(true), 100);
 
-    // Inject Satoshi Font (Aapka original font)
+    // Inject Satoshi Font
     if (!document.querySelector('link[data-font="satoshi"]')) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
@@ -17,24 +17,32 @@ export default function FullWidthInstituteStats() {
     }
   }, []);
 
-  const statsData = [
+  // 5 Key Features Data
+  const featuresData = [
     {
-      id: 1,
-      num: "30,000",
-      symbol: "+",
-      text: "Happy students trained & placed!"
+      icon: "🎯",
+      title: "Micro Batches (10 – 12 Students Only)",
+      desc: "Get personal attention (not crowded classrooms)"
     },
     {
-      id: 2,
-      num: "400",
-      symbol: "+",
-      text: "Top corporate hiring partners"
+      icon: "🧠",
+      title: "Industry Expert Trainers (12+ Years Experience)",
+      desc: "Learn what actually works in real jobs"
     },
     {
-      id: 3,
-      num: "10",
-      symbol: "+",
-      text: "Years of educational expertise!"
+      icon: "🛠",
+      title: "100% Practical Training",
+      desc: "No theory overload—only real execution"
+    },
+    {
+      icon: "📈",
+      title: "Placement Assistance + Interview Training",
+      desc: "Resume + mock interviews included"
+    },
+    {
+      icon: "🔁",
+      title: "LMS Access + Backup Lectures",
+      desc: "Never miss a concept"
     }
   ];
 
@@ -59,33 +67,34 @@ export default function FullWidthInstituteStats() {
         {/* --- TOP HEADING SECTION --- */}
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-12">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-white leading-tight mb-3">
-            India's Premium <span className="text-[#ECAB00]">Digital Marketing</span> Institute
+            Why 16,000+ <span className="text-[#ECAB00]">Students</span> Trust Operating Media
           </h2>
           <p className="text-[14px] sm:text-[15px] md:text-[16px] text-white/70 font-medium leading-relaxed max-w-2xl mx-auto">
             Join our community of students who transformed their careers with advanced AI-powered courses, expert-led training, and guaranteed placement support.
           </p>
         </div>
 
-        {/* --- STATS GRID SECTION --- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border-t border-white/10 pt-8 md:pt-10">
-          {statsData.map((stat, index) => (
+        {/* --- 5 KEY FEATURES SECTION --- */}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6 mt-8 md:mt-10">
+          {featuresData.map((feature, index) => (
             <div 
-              key={stat.id}
-              className={`group relative flex flex-col items-center text-center py-6 md:py-2
-                /* Divider Lines: Mobile pe horizontal, Desktop pe vertical */
-                ${index !== 2 ? 'border-b md:border-b-0 md:border-r border-white/10' : ''} 
-              `}
+              key={index}
+              className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] flex items-start gap-4 p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] hover:border-[#ECAB00]/50 hover:-translate-y-1 transition-all duration-300 group cursor-default"
             >
-              {/* Number & Symbol */}
-              <h3 className="font-black text-[44px] md:text-[52px] text-[#ECAB00] leading-none mb-3 flex items-center transform transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1 group-hover:drop-shadow-[0_0_20px_rgba(236,171,0,0.5)] cursor-default">
-                {stat.num}
-                <span className="ml-1">{stat.symbol}</span>
-              </h3>
+              {/* Icon */}
+              <div className="text-2xl md:text-3xl shrink-0 group-hover:scale-110 transition-transform duration-300 drop-shadow-md">
+                {feature.icon}
+              </div>
               
-              {/* Description */}
-              <p className="font-medium text-[14px] md:text-[15px] text-white/80 max-w-[180px] transition-colors duration-300 group-hover:text-white">
-                {stat.text}
-              </p>
+              {/* Text */}
+              <div className="flex flex-col text-left">
+                <h4 className="text-white font-bold text-[15px] md:text-[16px] leading-snug mb-1.5 group-hover:text-[#ECAB00] transition-colors duration-300">
+                  {feature.title}
+                </h4>
+                <p className="text-white/60 text-[13px] md:text-[14px] leading-relaxed font-medium">
+                  {feature.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

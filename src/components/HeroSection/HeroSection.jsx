@@ -46,18 +46,18 @@ export default function HeroUltra() {
           <h1 className="text-[40px] sm:text-[56px] lg:text-[56px] font-black leading-[1.1] text-[#0f172a] mb-6">
             <div className="overflow-hidden pb-1">
               <div className={`transition-all duration-700 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[100%]'}`}>
-                Your <span className="text-[#ECAB00]">AI-Powered</span>
+               Become a <span className="text-[#ECAB00]">Job-Ready</span>  Digital
               </div>
             </div>
             <div className="overflow-hidden pb-1">
               <div className={`transition-all duration-700 delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[100%]'}`}>
-                Digital Marketing
+                Marketer in 
               </div>
             </div>
             <div className="overflow-hidden pb-1">
               <div className={`transition-all duration-700 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[100%]'}`}>
-                Career <span className="relative inline-block text-[#2563eb]">
-                  Starts Here
+                <span className="relative inline-block text-[#2563eb]">
+                 4–8 Months 
                   {/* Expanding Underline */}
                   <span className={`absolute -bottom-2 left-0 h-[6px] bg-[#ECAB00] rounded-full transition-all duration-1000 delay-700 ease-out ${mounted ? 'w-full' : 'w-0'}`} />
                 </span>
@@ -66,7 +66,12 @@ export default function HeroUltra() {
           </h1>
 
           <p className={`text-[16px] sm:text-[18px] text-gray-600 font-medium leading-relaxed max-w-[480px] mb-10 transition-all duration-700 delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            Join 30,000+ students community who transformed their careers with advanced digital marketing courses.
+            With Mumbai’s Most Personalized Training (Only 8–10 Students per Batch) <br />
+✔ 100% Practical Training on Live Projects  <br />
+✔ 1:1 Mentorship with Industry Experts  <br />
+✔ 100% Placement Assistance  <br />
+✔ Flexible Batches (Weekday | Weekend | Sunday Only)
+
           </p>
 
           {/* Action Buttons */}
@@ -77,7 +82,7 @@ export default function HeroUltra() {
             <button className="group relative w-full sm:w-auto bg-[#ECAB00] text-white px-8 py-4 rounded-xl font-bold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_10px_30px_-10px_#ECAB00] hover:-translate-y-1 active:scale-95">
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 flex items-center justify-center gap-2">
-                Book a Demo 
+               Book Free Demo Class
                 <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </span>
             </button>
@@ -90,13 +95,13 @@ export default function HeroUltra() {
             >
               <div className="absolute inset-0 bg-[#2563eb] w-0 group-hover:w-full transition-all duration-300 ease-out" />
               <span className="relative z-10 flex items-center justify-center transition-colors duration-300 group-hover:text-white">
-                Download Brochure
+                Get 1:1 Career Counseling
               </span>
             </button>
           </div>
 
           {/* Rating Section */}
-          <div className={`mt-8 flex items-center gap-3 transition-all duration-700 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+          {/* <div className={`mt-8 flex items-center gap-3 transition-all duration-700 delay-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <div className="flex -space-x-2">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden shadow-sm">
@@ -108,7 +113,7 @@ export default function HeroUltra() {
               <div className="flex text-[#ECAB00] text-sm">★★★★★</div>
               <span className="text-sm font-bold text-gray-700">30,000+ happy learners</span>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* ── RIGHT COLUMN (IMAGE & FLOATING ELEMENTS) ── */}
