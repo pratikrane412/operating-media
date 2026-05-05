@@ -95,28 +95,33 @@ export default function HeroUltra() {
         </div>
 
         {/* ── RIGHT COLUMN — GIF ── */}
-        <div className={`relative w-full h-[500px] sm:h-[600px] lg:h-[700px] flex items-center justify-center transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 lg:translate-x-0' : 'opacity-0 lg:translate-x-10'}`}>
+        <div className={`relative w-full flex items-end justify-center transition-all duration-1000 delay-300 ${mounted ? 'opacity-100 lg:translate-x-0' : 'opacity-0 lg:translate-x-10'}`}>
 
-          {/* ── GIF — replace src with your actual GIF path ── */}
+          {/* ── Decorative background behind GIF ── */}
+          <div className="absolute inset-[6%] rounded-[50%] bg-gradient-to-br from-[#ECAB00]/12 via-blue-50/40 to-[#2563eb]/8 blur-[2px] z-0" />
+          <div className="absolute inset-[10%] rounded-[50%] border-2 border-dashed border-[#ECAB00]/25 z-0" />
+          <div className="absolute bottom-0 left-[15%] right-[15%] h-10 bg-[#0f172a]/8 blur-[20px] rounded-full z-0" />
+
+          {/* ── GIF — no height clipping ── */}
           <img
             src="/images/homegif.gif"
             alt="Digital Marketing Training at Operating Media"
-            className="relative z-10 w-[85%] max-w-[500px] h-auto object-contain drop-shadow-2xl"
+            className="relative z-10 w-full max-w-[520px] h-auto object-contain object-bottom"
           />
 
           {/* Floating Social Icons */}
-          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 top-[10%] left-[5%] float-anim delay-1">
+          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 top-8 left-4 float-anim delay-1">
             <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google" />
           </div>
-          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 top-[5%] right-[15%] float-anim delay-2">
+          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 top-4 right-14 float-anim delay-2">
             <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
           </div>
-          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 bottom-[20%] right-[5%] float-anim delay-3">
+          <div className="absolute z-20 w-12 h-12 sm:w-14 sm:h-14 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center p-2.5 bottom-32 right-4 float-anim delay-3">
             <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" />
           </div>
 
-          {/* Floating Stat Card 1 */}
-          <div className="absolute z-20 bottom-[5%] left-[0%] bg-white/90 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] float-anim delay-2">
+          {/* Floating Stat Card 1 — bottom left */}
+          <div className="absolute z-20 bottom-6 left-0 bg-white/90 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] float-anim delay-2">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-[#2563eb]">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
@@ -128,8 +133,8 @@ export default function HeroUltra() {
             </div>
           </div>
 
-          {/* Floating Stat Card 2 */}
-          <div className="absolute z-20 top-[35%] right-[-5%] sm:right-[-10%] bg-white/90 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] float-anim delay-1">
+          {/* Floating Stat Card 2 — mid right */}
+          <div className="absolute z-20 top-1/3 -right-4 sm:-right-10 bg-white/90 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] float-anim delay-1">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-[#ECAB00]">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
