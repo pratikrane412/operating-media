@@ -52,6 +52,14 @@ const faqs = [
     q: "Where are your campuses located?",
     a: "We have state-of-the-art training centres in Andheri West (Mumbai) and Borivali West. You can also join our live online batches.",
   },
+  {
+    q: "What happens if I exceed my course duration?",
+    a: `Each course has a fixed validity period. Students are required to complete their course within the specified duration:\n
+  Diploma: 4 Months
+  Advanced Diploma: 6 Months
+  Masters: 1 Year\n
+  If a student does not complete the course within the applicable duration, the course will expire (lapse) after the validity period ends, and access to the course/program may no longer be available.`,
+  },
 ];
 
 export default function FAQPage() {
@@ -64,25 +72,25 @@ export default function FAQPage() {
 
   return (
     <main className="w-full font-['Satoshi',sans-serif] selection:bg-[#ECAB00] selection:text-[#0f172a]">
-      
-    
+
+
 
       {/* ════════════ 2. FAQ CONTENT GRID ════════════ */}
       <section className="relative w-full py-12 md:py-[60px] px-6 lg:px-14 bg-[#fcfaf2] overflow-hidden">
-        
+
         {/* Subtle Background Glow for content area */}
         <div className="absolute top-[10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-[#ECAB00]/10 blur-[120px] pointer-events-none z-0" />
         <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-[#2563eb]/5 blur-[120px] pointer-events-none z-0" />
 
         <div className="relative z-10 max-w-[1400px] mx-auto">
-          
+
           {/* ── 2-Column FAQ Grid ── */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5 items-start">
             {faqs.map((item, i) => {
               const isOpen = open === i;
               return (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 border 
                     ${isOpen ? 'border-[#2563eb] shadow-[0_10px_30px_-10px_rgba(37,99,235,0.15)]' : 'border-gray-200 shadow-sm hover:border-[#2563eb]/30 hover:shadow-md'}`}
                 >
@@ -91,18 +99,16 @@ export default function FAQPage() {
                     className="w-full flex items-start justify-between gap-4 px-5 py-5 md:px-6 md:py-6 text-left group focus:outline-none"
                   >
                     <span
-                      className={`text-[16px] md:text-[18px] font-bold leading-snug transition-colors duration-300 ${
-                        isOpen ? "text-[#2563eb]" : "text-[#0f172a] group-hover:text-[#2563eb]"
-                      }`}
+                      className={`text-[16px] md:text-[18px] font-bold leading-snug transition-colors duration-300 ${isOpen ? "text-[#2563eb]" : "text-[#0f172a] group-hover:text-[#2563eb]"
+                        }`}
                     >
                       {item.q}
                     </span>
                     <span
-                      className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isOpen
-                          ? "bg-[#2563eb] text-white rotate-180"
-                          : "bg-blue-50 text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white"
-                      }`}
+                      className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
+                        ? "bg-[#2563eb] text-white rotate-180"
+                        : "bg-blue-50 text-[#2563eb] group-hover:bg-[#2563eb] group-hover:text-white"
+                        }`}
                     >
                       {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                     </span>
@@ -117,7 +123,7 @@ export default function FAQPage() {
                         transition={{ duration: 0.35, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 md:px-6 pb-6 pt-0 text-gray-600 text-[15px] md:text-[16px] font-medium leading-relaxed">
+                        <div className="px-5 md:px-6 pb-6 pt-0 text-gray-600 text-[15px] md:text-[16px] font-medium leading-relaxed whitespace-pre-line">
                           <div className="w-full h-px bg-gray-100 mb-4" /> {/* Divider line */}
                           {item.a}
                         </div>
@@ -129,7 +135,7 @@ export default function FAQPage() {
             })}
           </div>
 
-          
+
 
         </div>
       </section>
